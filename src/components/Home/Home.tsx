@@ -1,20 +1,24 @@
 import React from "react";
 import styled from "styled-components";
-import { SideBar } from "../SideBar/SideBar";
+import { MainContent } from "../MainContent/MainContent";
+import { NavSideBar } from "../NavSideBar/NavSideBar";
+import { UserSideBar } from "../UserSideBar/UserSideBar";
 
 export const Home = () => {
   return (
     <Container>
       <Content>
-        <SideBar />
+        <NavSideBar />
+        <MainContent />
+        <UserSideBar />
       </Content>
     </Container>
   );
 };
 
 const Container = styled.div`
-  width: 100vh;
   height: 100vh;
+  width: 100%;
 `;
 const Content = styled.div`
   display: flex;

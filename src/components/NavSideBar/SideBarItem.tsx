@@ -10,7 +10,7 @@ export const SideBarItem = ({ itemImg, itemName }: Props) => {
   return (
     <Container>
       <Content>
-        <img src={itemImg} />
+        <Img src={itemImg} />
         {itemName}
       </Content>
     </Container>
@@ -18,16 +18,24 @@ export const SideBarItem = ({ itemImg, itemName }: Props) => {
 };
 
 const Container = styled.div`
-  display: flex;
-  flex-direction: column;
   width: 100%;
   height: 100%;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  border-left: 5px solid transparent;
+  &:hover {
+    border-left: 5px solid orange;
+    cursor: pointer;
+  }
 `;
+
 const Content = styled.div`
   display: flex;
   align-items: center;
   justify-content: center;
-  width: 100%;
-  height: 100%;
-  font-weight: 30px;
+`;
+
+const Img = styled.img`
+  padding: 5px;
 `;
