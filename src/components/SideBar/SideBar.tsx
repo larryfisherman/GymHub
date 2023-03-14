@@ -6,7 +6,11 @@ export const SideBar = () => {
   return (
     <Nav>
       <Logo src="./svgs/logo.svg" />
-      <SideBarItem />
+      <SideBarItem itemImg="./svgs/home-gray-icon.svg" itemName="Home" />
+      <SideBarItem
+        itemImg="./svgs/diary-gray-icon.svg"
+        itemName="Workout Diary"
+      />
     </Nav>
   );
 };
@@ -14,8 +18,6 @@ export const SideBar = () => {
 const Nav = styled.nav`
   display: flex;
   flex-direction: column;
-  justify-content: space-between;
-  background-color: black;
   height: 100%;
   width: 30%;
 `;
