@@ -30,14 +30,7 @@ export const UserSideBar = () => {
         </BodyDataSection>
         <GoalsSection>
           <h3>Your goals</h3>
-
           <Goal title="Running" target="80km" progress={60} icon="test" />
-          <Goal
-            title="Boxing"
-            target="4 times a week"
-            progress={30}
-            icon="test"
-          />
           <Goal title="Cycling" target="66" progress={20} icon="test" />
         </GoalsSection>
         <ProgressSection></ProgressSection>

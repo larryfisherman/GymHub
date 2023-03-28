@@ -27,7 +27,7 @@ export const Goal = ({ title, target, progress, icon }: Props) => {
 };
 
 const Container = styled.div`
-  height: 100%;
+  height: 30%;
   width: 100%;
   background-color: grey;
   border-radius: 20px;
@@ -36,6 +36,8 @@ const Container = styled.div`
 
 const Content = styled.div`
   display: flex;
+  justify-content: space-between;
+  align-items: center;
 `;
 
 const Details = styled.div``;
