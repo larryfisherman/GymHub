@@ -32,7 +32,7 @@ export const NavSideBar = () => {
             itemImg="./svgs/settings-gray-icon.svg"
             itemName="Settings"
           />
-          <Link to="/login">
+          <Link to="/register">
             <SideBarItem
               itemImg="./svgs/logout-gray-icon.svg"
               itemName="Logout"

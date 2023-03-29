@@ -1,12 +1,10 @@
 import React, { useState } from "react";
 import styled from "styled-components";
 import axios from "axios";
-import { Link } from "react-router-dom";
 
-export const RegisterUser = () => {
+export const LoginUser = () => {
   const [emailValue, setEmailValue] = useState("");
   const [passwordValue, setPasswordValue] = useState("");
-
   return (
     <Container>
       <Content>
@@ -23,7 +21,7 @@ export const RegisterUser = () => {
         Confirm:
         <ConfirmButton
           onClick={() =>
-            axios.post("https://localhost:44390/api/user/register", {
+            axios.post("https://localhost:44390/api/user/login", {
               email: emailValue,
               password: passwordValue,
             })
@@ -31,9 +29,6 @@ export const RegisterUser = () => {
         >
           Log in!
         </ConfirmButton>
-        <Link to="/login">
-          <LoginDescription>Already have account? Sign in!</LoginDescription>
-        </Link>
       </Content>
     </Container>
   );
@@ -65,5 +60,3 @@ const PasswordInput = styled.input``;
 const ConfirmButton = styled.button`
   width: 10%;
 `;
-
-const LoginDescription = styled.p``;
