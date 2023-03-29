@@ -1,12 +1,9 @@
 import React from "react";
 import styled from "styled-components";
 import { SideBarItem } from "./SideBarItem";
+import { Link } from "react-router-dom";
 
-interface Props {
-  setShowRegisterUserPopup: React.Dispatch<React.SetStateAction<boolean>>;
-}
-
-export const NavSideBar = ({ setShowRegisterUserPopup }: Props) => {
+export const NavSideBar = () => {
   return (
     <Nav>
       <Logo src="./svgs/logo.svg" />
@@ -35,11 +32,12 @@ export const NavSideBar = ({ setShowRegisterUserPopup }: Props) => {
             itemImg="./svgs/settings-gray-icon.svg"
             itemName="Settings"
           />
-          <SideBarItem
-            itemImg="./svgs/logout-gray-icon.svg"
-            itemName="Logout"
-            onClick={() => setShowRegisterUserPopup(true)}
-          />
+          <Link to="/login">
+            <SideBarItem
+              itemImg="./svgs/logout-gray-icon.svg"
+              itemName="Logout"
+            />
+          </Link>
         </UserSection>
       </Content>
     </Nav>
