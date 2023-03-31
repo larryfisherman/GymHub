@@ -3,7 +3,11 @@ import styled from "styled-components";
 import { SideBarItem } from "./SideBarItem";
 import { Link } from "react-router-dom";
 
-export const NavSideBar = () => {
+interface Props {
+  setShowLoginPopup: any;
+}
+
+export const NavSideBar = ({ setShowLoginPopup }: Props) => {
   return (
     <Nav>
       <Logo src="./svgs/logo.svg" />
@@ -32,12 +36,11 @@ export const NavSideBar = () => {
             itemImg="./svgs/settings-gray-icon.svg"
             itemName="Settings"
           />
-          <Link to="/register">
-            <SideBarItem
-              itemImg="./svgs/logout-gray-icon.svg"
-              itemName="Logout"
-            />
-          </Link>
+          <SideBarItem
+            itemImg="./svgs/logout-gray-icon.svg"
+            itemName="Logout"
+            onClick={setShowLoginPopup}
+          />
         </UserSection>
       </Content>
     </Nav>

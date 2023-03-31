@@ -4,12 +4,13 @@ import styled from "styled-components";
 interface Props {
   itemImg: string;
   itemName: string;
+  onClick?: any;
 }
 
-export const SideBarItem = ({ itemImg, itemName }: Props) => {
+export const SideBarItem = ({ itemImg, itemName, onClick }: Props) => {
   return (
     <Container>
-      <Content>
+      <Content onClick={onClick}>
         <Img src={itemImg} />
         {itemName}
       </Content>

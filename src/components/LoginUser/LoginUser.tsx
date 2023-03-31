@@ -35,20 +35,28 @@ export const LoginUser = () => {
 };
 
 const Container = styled.div`
+  position: absolute;
+  right: 0;
+  left: 0;
+  top: 0;
+  bottom: 0;
+  margin: auto;
   width: 100%;
-  height: 100vh;
+  height: 100%;
   display: flex;
   justify-content: center;
   align-items: center;
+  background-color: rgba(0, 0, 0, 0.7);
 `;
 const Content = styled.div`
-  background-color: rgba(0, 0, 0, 0.5);
-  width: 50%;
+  background-color: white;
+  width: 30%;
   height: 80%;
   display: flex;
   flex-direction: column;
   align-items: center;
   justify-content: space-between;
+  border-radius: 2%;
   padding: 50px;
   & > input {
     width: 50%;
