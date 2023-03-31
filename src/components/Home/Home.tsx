@@ -7,16 +7,18 @@ import { LoginUser } from "../LoginUser/LoginUser";
 import { RegisterUser } from "../RegisterUser/RegisterUser";
 
 export const Home = () => {
-  const [showLoginPopup, setShowLoginPopup] = useState(false);
+  const [showRegisterPopup, setShowRegisterPopup] = useState(false);
 
   return (
     <>
       <Container>
         <Content>
-          <NavSideBar setShowLoginPopup={setShowLoginPopup} />
+          <NavSideBar setShowRegisterPopup={setShowRegisterPopup} />
           <MainContent />
           <UserSideBar />
-          {showLoginPopup && <RegisterUser />}
+          {showRegisterPopup && (
+            <RegisterUser setShowRegisterPopup={setShowRegisterPopup} />
+          )}
         </Content>
       </Container>
     </>

@@ -2,7 +2,11 @@ import React, { useState } from "react";
 import styled from "styled-components";
 import axios from "axios";
 
-export const RegisterUser = () => {
+interface Props {
+  setShowRegisterPopup: React.Dispatch<React.SetStateAction<boolean>>;
+}
+
+export const RegisterUser = ({ setShowRegisterPopup }: Props) => {
   const [emailValue, setEmailValue] = useState("");
   const [passwordValue, setPasswordValue] = useState("");
   const [fullNameValue, setFullNameValue] = useState("");
@@ -13,8 +17,11 @@ export const RegisterUser = () => {
     <Container>
       <Content>
         <UpperSection>
-          <Logo src="./svgs/logo.svg" /> <span>X</span>
+          <span onClick={() => setShowRegisterPopup(false)}>X</span>
+
+          <Logo src="./svgs/logo.svg" />
         </UpperSection>
+
         <h1>Create Account</h1>
         <FullNameInput
           value={fullNameValue}
@@ -52,38 +59,40 @@ export const RegisterUser = () => {
         >
           CREATE ACCOUNT
         </ConfirmButton>
-        <LoginDescription>
-          Already have account? <span>Log in!</span>
+        <LoginDescription
+          onClick={() => {
+            setShowRegisterPopup(false);
+          }}
+        >
+          Already have account?&nbsp;
+          <span>Log in!</span>
         </LoginDescription>
       </Content>
     </Container>
   );
 };
 
-const Logo = styled.img`
-  height: 20%;
-  padding: 25px;
-
-  &:hover {
-    cursor: pointer;
-  }
-`;
-
 const UpperSection = styled.div`
   display: flex;
+  flex-direction: column;
+  width: 100%;
 
   & > span {
-    display: flex;
-    justify-content: flex-end;
-  }
-
-  & > img {
-    height: 150%;
-    padding: 25px;
+    align-self: flex-end;
+    font-size: 24px;
+    font-weight: 300;
 
     &:hover {
       cursor: pointer;
     }
+  }
+`;
+
+const Logo = styled.img`
+  height: 6rem;
+
+  &:hover {
+    cursor: pointer;
   }
 `;
 
@@ -134,6 +143,9 @@ const Container = styled.div`
   justify-content: center;
   align-items: center;
   background-color: rgba(0, 0, 0, 0.7);
+
+  & > span {
+  }
 `;
 const Content = styled.div`
   background-color: white;
