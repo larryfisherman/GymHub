@@ -4,13 +4,16 @@ import axios from "axios";
 
 interface Props {
   setShowRegisterPopup: React.Dispatch<React.SetStateAction<boolean>>;
+  setShowLoginPopup: React.Dispatch<React.SetStateAction<boolean>>;
 }
 
-export const RegisterUser = ({ setShowRegisterPopup }: Props) => {
+export const RegisterUser = ({
+  setShowRegisterPopup,
+  setShowLoginPopup,
+}: Props) => {
   const [emailValue, setEmailValue] = useState("");
   const [passwordValue, setPasswordValue] = useState("");
   const [fullNameValue, setFullNameValue] = useState("");
-
   const [showPassword, setShowPassword] = useState(false);
 
   return (
@@ -62,6 +65,7 @@ export const RegisterUser = ({ setShowRegisterPopup }: Props) => {
         <LoginDescription
           onClick={() => {
             setShowRegisterPopup(false);
+            setShowLoginPopup(true);
           }}
         >
           Already have account?&nbsp;

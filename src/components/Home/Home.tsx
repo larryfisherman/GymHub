@@ -3,11 +3,12 @@ import styled from "styled-components";
 import { MainContent } from "../MainContent/MainContent";
 import { NavSideBar } from "../NavSideBar/NavSideBar";
 import { UserSideBar } from "../UserSideBar/UserSideBar";
-import { LoginUser } from "../LoginUser/LoginUser";
 import { RegisterUser } from "../RegisterUser/RegisterUser";
+import { LoginUser } from "../LoginUser/LoginUser";
 
 export const Home = () => {
   const [showRegisterPopup, setShowRegisterPopup] = useState(false);
+  const [showLoginPopup, setShowLoginPopup] = useState(false);
 
   return (
     <>
@@ -17,7 +18,13 @@ export const Home = () => {
           <MainContent />
           <UserSideBar />
           {showRegisterPopup && (
-            <RegisterUser setShowRegisterPopup={setShowRegisterPopup} />
+            <RegisterUser
+              setShowRegisterPopup={setShowRegisterPopup}
+              setShowLoginPopup={setShowLoginPopup}
+            />
+          )}
+          {showLoginPopup && (
+            <LoginUser setShowLoginPopup={setShowLoginPopup} />
           )}
         </Content>
       </Container>
