@@ -1,6 +1,6 @@
 import React, { useState } from "react";
 import styled from "styled-components";
-import { MainContent } from "../MainContent/MainContent";
+// import { MainContent } from "../MainContent/MainContent";
 import { NavSideBar } from "../NavSideBar/NavSideBar";
 import { UserSideBar } from "../UserSideBar/UserSideBar";
 import { RegisterUser } from "../RegisterUser/RegisterUser";
@@ -15,7 +15,7 @@ export const Home = () => {
       <Container>
         <Content>
           <NavSideBar setShowRegisterPopup={setShowRegisterPopup} />
-          <MainContent />
+          {/* <MainContent /> */}
           <UserSideBar />
           {showRegisterPopup && (
             <RegisterUser
