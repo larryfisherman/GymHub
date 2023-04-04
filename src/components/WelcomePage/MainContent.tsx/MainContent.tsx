@@ -12,7 +12,10 @@ export const MainContent = () => {
   );
 };
 
-const Container = styled.div``;
+const Container = styled.div`
+  height: 100%;
+`;
 const Content = styled.div`
+  height: 100%;
   display: flex;
 `;

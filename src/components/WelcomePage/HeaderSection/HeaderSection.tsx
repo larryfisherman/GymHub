@@ -40,13 +40,13 @@ const MainContent = styled.div`
 
 const Container = styled.div`
   width: 100%;
-  height: 50%;
+  height: 80%;
 `;
 
 const Content = styled.div`
   display: flex;
   flex-direction: column;
-  height: 90%;
+  height: 100%;
   background: url("./svgs/welcome-page.png") center center / cover;
 `;
 

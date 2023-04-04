@@ -7,21 +7,13 @@ interface Props {
   text: string;
 }
 
-export const UpperSectionItem = () => {
+export const UpperSectionItem = ({ icon, title, text }: Props) => {
   return (
     <Container>
       <Content>
-        {/* <Icon src={`./svgs/${icon}`} />
+        <Icon src={`./svgs/${icon}.svg`} />
         <Title>{title}</Title>
-        <Text>{text}</Text> */}
-        <Icon src={`./svgs/recipe-gray-icon.svg`} />
-        <Title>Recipes</Title>
-        <Text>
-          Lorem ipsum dolor sit amet consectetur adipisicing elit. Vel sint
-          voluptates, sapiente laudantium facere, aperiam ipsa animi quos, esse
-          ab quidem quisquam? Neque quaerat accusantium odio dicta deleniti
-          saepe recusandae.
-        </Text>
+        <Text>{text}</Text>
       </Content>
     </Container>
   );
@@ -34,8 +26,10 @@ const Container = styled.div`
 const Content = styled.div`
   display: flex;
   flex-direction: column;
+  justify-content: space-between;
   align-items: center;
-  padding: 0px 50px;
+  height: 100%;
+  padding: 30px 50px;
 `;
 
 const Icon = styled.img`
