@@ -23,10 +23,10 @@ const Container = styled.div`
   width: 100%;
   height: 100%;
 `;
+
 const Content = styled.div`
   display: flex;
   flex-direction: column;
-  justify-content: space-between;
   align-items: center;
   height: 100%;
   padding: 30px 50px;
@@ -34,6 +34,10 @@ const Content = styled.div`
 
 const Icon = styled.img`
   width: 10%;
+  margin-bottom: 20px;
 `;
-const Title = styled.p``;
+
+const Title = styled.b`
+  margin-bottom: 30px;
+`;
 const Text = styled.p``;

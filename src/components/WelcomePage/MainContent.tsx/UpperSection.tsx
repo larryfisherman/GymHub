@@ -28,6 +28,7 @@ export const UpperSection = () => {
 
 const Container = styled.div`
   height: 30%;
+  margin-bottom: 40px;
 `;
 const Content = styled.div`
   display: flex;
