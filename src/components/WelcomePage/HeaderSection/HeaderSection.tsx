@@ -5,7 +5,7 @@ export const HeaderSection = () => {
   return (
     <Container>
       <Content>
-        <Logo src="./svgs/logo.svg" />
+        <Logo src="./svgs/logo.svg" loading="lazy" />
         <MainContent>
           <h3>TRANSFORM YOUR BODY</h3>
           <h1>DOMINATE YOUR GOALS</h1>
@@ -40,7 +40,7 @@ const MainContent = styled.div`
 
 const Container = styled.div`
   width: 100%;
-  height: 80%;
+  height: 100%;
 `;
 
 const Content = styled.div`

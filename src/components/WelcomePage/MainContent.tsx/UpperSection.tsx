@@ -27,7 +27,7 @@ export const UpperSection = () => {
 };
 
 const Container = styled.div`
-  height: 30%;
+  height: 40%;
   margin-bottom: 40px;
 `;
 const Content = styled.div`

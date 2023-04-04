@@ -5,7 +5,7 @@ export const LowerSection = () => {
   return (
     <Content>
       <Item>
-        <Image src="./svgs/welcome-page-1.jpg" />
+        <Image src="./svgs/welcome-page-1.jpg" loading="lazy" />
         <Text>
           <Title>About Project</Title>
           <p>
@@ -34,10 +34,10 @@ export const LowerSection = () => {
             become the best version of yourself.
           </p>
         </Text>
-        <Image src="./svgs/welcome-page-3.jpg" />
+        <Image src="./svgs/welcome-page-3.jpg" loading="lazy" />
       </Item>
       <Item>
-        <Image src="./svgs/welcome-page-2.jpg" />
+        <Image src="./svgs/welcome-page-2.jpg" loading="lazy" />
         <Text>
           <Title>Partnership</Title>
           <p>
