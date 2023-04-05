@@ -1,31 +1,17 @@
-import React, { useState } from "react";
+import React from "react";
 import styled from "styled-components";
 // import { MainContent } from "../MainContent/MainContent";
 import { NavSideBar } from "../NavSideBar/NavSideBar";
 import { UserSideBar } from "../UserSideBar/UserSideBar";
-import { RegisterUser } from "../RegisterUser/RegisterUser";
-import { LoginUser } from "../LoginUser/LoginUser";
 
 export const Home = () => {
-  const [showRegisterPopup, setShowRegisterPopup] = useState(false);
-  const [showLoginPopup, setShowLoginPopup] = useState(false);
-
   return (
     <>
       <Container>
         <Content>
-          <NavSideBar setShowRegisterPopup={setShowRegisterPopup} />
+          <NavSideBar />
           {/* <MainContent /> */}
           <UserSideBar />
-          {showRegisterPopup && (
-            <RegisterUser
-              setShowRegisterPopup={setShowRegisterPopup}
-              setShowLoginPopup={setShowLoginPopup}
-            />
-          )}
-          {showLoginPopup && (
-            <LoginUser setShowLoginPopup={setShowLoginPopup} />
-          )}
         </Content>
       </Container>
     </>

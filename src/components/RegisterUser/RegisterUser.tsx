@@ -20,8 +20,10 @@ export const RegisterUser = ({
     <Container>
       <Content>
         <UpperSection>
-          <span onClick={() => setShowRegisterPopup(false)}>X</span>
-
+          <CrossIcon
+            src="./svgs/cross-icon.svg"
+            onClick={() => setShowRegisterPopup(false)}
+          />
           <Logo src="./svgs/logo.svg" />
         </UpperSection>
 
@@ -76,12 +78,16 @@ export const RegisterUser = ({
   );
 };
 
+const CrossIcon = styled.img`
+  width: 3%;
+`;
+
 const UpperSection = styled.div`
   display: flex;
   flex-direction: column;
   width: 100%;
 
-  & > span {
+  & > ${CrossIcon} {
     align-self: flex-end;
     font-size: 24px;
     font-weight: 300;
@@ -135,7 +141,7 @@ const PasswordInput = styled.input`
 `;
 
 const Container = styled.div`
-  position: absolute;
+  position: fixed;
   right: 0;
   left: 0;
   top: 0;
@@ -147,9 +153,6 @@ const Container = styled.div`
   justify-content: center;
   align-items: center;
   background-color: rgba(0, 0, 0, 0.7);
-
-  & > span {
-  }
 `;
 const Content = styled.div`
   background-color: white;

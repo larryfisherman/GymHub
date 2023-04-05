@@ -2,11 +2,7 @@ import React from "react";
 import styled from "styled-components";
 import { SideBarItem } from "./SideBarItem";
 
-interface Props {
-  setShowRegisterPopup: React.Dispatch<React.SetStateAction<boolean>>;
-}
-
-export const NavSideBar = ({ setShowRegisterPopup }: Props) => {
+export const NavSideBar = () => {
   return (
     <Nav>
       <Logo src="./svgs/logo.svg" />
@@ -38,7 +34,6 @@ export const NavSideBar = ({ setShowRegisterPopup }: Props) => {
           <SideBarItem
             itemImg="./svgs/logout-gray-icon.svg"
             itemName="Logout"
-            onClick={() => setShowRegisterPopup(true)}
           />
         </UserSection>
       </Content>

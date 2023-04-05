@@ -1,7 +1,11 @@
 import React from "react";
-import styled from "styled-components";
+import styled, { keyframes } from "styled-components";
 
-export const HeaderSection = () => {
+interface Props {
+  setShowRegisterPopup: any;
+}
+
+export const HeaderSection = ({ setShowRegisterPopup }: Props) => {
   return (
     <Container>
       <Content>
@@ -12,8 +16,11 @@ export const HeaderSection = () => {
           <p>
             Start now with <span>GymHub</span>
           </p>
-          <LoginButton>JOIN US</LoginButton>
+          <LoginButton onClick={() => setShowRegisterPopup(true)}>
+            JOIN US
+          </LoginButton>
         </MainContent>
+        <ScrollDownIcon src="./svgs/arrow-icon.svg" />
       </Content>
     </Container>
   );
@@ -40,7 +47,7 @@ const MainContent = styled.div`
 
 const Container = styled.div`
   width: 100%;
-  height: 100%;
+  height: 100vh;
 `;
 
 const Content = styled.div`
@@ -68,4 +75,20 @@ const LoginButton = styled.button`
 const Logo = styled.img`
   width: 15%;
   padding: 20px 30px;
+`;
+
+const ScrollDownIconAnimation = keyframes`
+  from {
+    top: 0px;
+  }
+
+  to {
+    top: 3px;
+  }
+`;
+
+const ScrollDownIcon = styled.img`
+  height: 5%;
+  // position: relative;
+  animation: ${ScrollDownIconAnimation} 0.5s linear infinite;
 `;

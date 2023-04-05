@@ -15,7 +15,10 @@ export const LoginUser = ({ setShowLoginPopup }: Props) => {
     <Container>
       <Content>
         <UpperSection>
-          <span onClick={() => setShowLoginPopup(false)}>X</span>
+          <CrossIcon
+            src="./svgs/cross-icon.svg"
+            onClick={() => setShowLoginPopup(false)}
+          />
           <Logo src="./svgs/logo.svg" />
         </UpperSection>
         <h1>Log In</h1>
@@ -55,12 +58,15 @@ export const LoginUser = ({ setShowLoginPopup }: Props) => {
   );
 };
 
+const CrossIcon = styled.img`
+  width: 3%;
+`;
 const UpperSection = styled.div`
   display: flex;
   flex-direction: column;
   width: 100%;
 
-  & > span {
+  & > ${CrossIcon} {
     align-self: flex-end;
     font-size: 24px;
     font-weight: 300;

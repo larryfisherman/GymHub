@@ -84,6 +84,7 @@ const Item = styled.div`
   display: flex;
   justify-content: space-between;
   width: 80%;
-  margin-bottom: 80px;
+  margin-bottom: 30px;
 `;
+
 const Title = styled.h1``;
