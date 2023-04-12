@@ -1,6 +1,7 @@
 import React, { useState } from "react";
 import styled from "styled-components";
 import axios from "axios";
+import { GoogleLogin } from "@react-oauth/google";
 
 interface Props {
   setShowRegisterPopup: React.Dispatch<React.SetStateAction<boolean>>;
@@ -26,8 +27,8 @@ export const RegisterUser = ({
           />
           <Logo src="./svgs/logo.svg" />
         </UpperSection>
-
         <h1>Create Account</h1>
+        <GoogleLogin onSuccess={() => console.log("success")} />
         <FullNameInput
           value={fullNameValue}
           onChange={(e) => setFullNameValue(e.target.value)}

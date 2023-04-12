@@ -120,7 +120,7 @@ const PasswordInput = styled.input`
 `;
 
 const Container = styled.div`
-  position: absolute;
+  position: fixed;
   right: 0;
   left: 0;
   top: 0;
