@@ -1,6 +1,7 @@
 import React from "react";
 import styled from "styled-components";
 import { SideBarItem } from "./SideBarItem";
+import { Link } from "react-router-dom";
 
 export const NavSideBar = () => {
   return (
@@ -9,10 +10,12 @@ export const NavSideBar = () => {
       <Content>
         <NavItems>
           <SideBarItem itemImg="./svgs/home-gray-icon.svg" itemName="Home" />
-          <SideBarItem
-            itemImg="./svgs/diary-gray-icon.svg"
-            itemName="Workout Diary"
-          />
+          <Link to="/workout-diary">
+            <SideBarItem
+              itemImg="./svgs/diary-gray-icon.svg"
+              itemName="Workout Diary"
+            />
+          </Link>
           <SideBarItem
             itemImg="./svgs/recipe-gray-icon.svg"
             itemName="Recipes"

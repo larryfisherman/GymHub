@@ -1,8 +1,9 @@
 import React from "react";
 import styled from "styled-components";
-// import { MainContent } from "../MainContent/MainContent";
-import { NavSideBar } from "../NavSideBar/NavSideBar";
-import { UserSideBar } from "../UserSideBar/UserSideBar";
+
+import { NavSideBar } from "./NavSideBar/NavSideBar";
+import { UserSideBar } from "./UserSideBar/UserSideBar";
+import { Main } from "./Main/Main";
 
 export const Home = () => {
   return (
@@ -10,7 +11,7 @@ export const Home = () => {
       <Container>
         <Content>
           <NavSideBar />
-          {/* <MainContent /> */}
+          <Main />
           <UserSideBar />
         </Content>
       </Container>
