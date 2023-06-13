@@ -10,12 +10,10 @@ export const NavSideBar = () => {
       <Content>
         <NavItems>
           <SideBarItem itemImg="./svgs/home-gray-icon.svg" itemName="Home" />
-          <Link to="/workout-diary">
-            <SideBarItem
-              itemImg="./svgs/diary-gray-icon.svg"
-              itemName="Workout Diary"
-            />
-          </Link>
+          <SideBarItem
+            itemImg="./svgs/diary-gray-icon.svg"
+            itemName="Workout Diary"
+          />
           <SideBarItem
             itemImg="./svgs/recipe-gray-icon.svg"
             itemName="Recipes"
@@ -46,7 +44,7 @@ export const NavSideBar = () => {
 
 const Nav = styled.nav`
   width: 20%;
-  height: 90%;
+  height: 100%;
   display: flex;
   flex-direction: column;
 `;
@@ -56,6 +54,7 @@ const Content = styled.div`
   flex-direction: column;
   height: 100%;
   justify-content: space-between;
+  padding: 20px 0px 20px 0px;
 `;
 
 const NavItems = styled.div`
@@ -65,7 +64,9 @@ const NavItems = styled.div`
 `;
 
 const UserSection = styled.div`
-  height: 10%;
+  display: flex;
+  flex-direction: column;
+  height: 20%;
 `;
 
 const Logo = styled.img`

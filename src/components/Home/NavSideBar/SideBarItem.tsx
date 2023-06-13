@@ -1,5 +1,6 @@
 import React from "react";
 import styled from "styled-components";
+import { Link } from "react-router-dom";
 
 interface Props {
   itemImg: string;
@@ -8,22 +9,25 @@ interface Props {
 
 export const SideBarItem = ({ itemImg, itemName }: Props) => {
   return (
-    <Container>
+    <StyledLink to="/">
       <Content>
         <Img src={itemImg} />
         {itemName}
       </Content>
-    </Container>
+    </StyledLink>
   );
 };
 
-const Container = styled.div`
+const StyledLink = styled(Link)`
   width: 100%;
   height: 100%;
   display: flex;
   align-items: center;
   justify-content: center;
   border-left: 5px solid transparent;
+  text-decoration: none;
+  color: black;
+
   &:hover {
     border-left: 5px solid orange;
     cursor: pointer;
