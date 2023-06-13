@@ -1,24 +1,24 @@
 import React from "react";
 import styled from "styled-components";
-import { Link } from "react-router-dom";
 
 interface Props {
   itemImg: string;
   itemName: string;
+  onClick?: any;
 }
 
-export const SideBarItem = ({ itemImg, itemName }: Props) => {
+export const SideBarItem = ({ itemImg, itemName, onClick }: Props) => {
   return (
-    <StyledLink to="/">
+    <Container onClick={onClick}>
       <Content>
         <Img src={itemImg} />
         {itemName}
       </Content>
-    </StyledLink>
+    </Container>
   );
 };
 
-const StyledLink = styled(Link)`
+const Container = styled.div`
   width: 100%;
   height: 100%;
   display: flex;

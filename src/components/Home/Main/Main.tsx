@@ -1,12 +1,21 @@
 import React from "react";
 import styled from "styled-components";
 
+import { Recipies } from "./Recipies/Recipies";
+
 import { WorkoutDiary } from "../../WorkoutDiary/WorkoutDiary";
 
-export const Main = () => {
+interface Props {
+  recipiesVisible: boolean;
+  workoutDiaryVisible: boolean;
+  exercisesVisible: boolean;
+  progressVisible: boolean;
+}
+
+export const Main = ({ recipiesVisible }: Props) => {
   return (
     <Container>
-      <Content></Content>
+      <Content>{recipiesVisible && <Recipies />}</Content>
     </Container>
   );
 };

@@ -1,9 +1,20 @@
 import React from "react";
 import styled from "styled-components";
 import { SideBarItem } from "./SideBarItem";
-import { Link } from "react-router-dom";
 
-export const NavSideBar = () => {
+interface Props {
+  setRecipiesVisible: any;
+  setWorkoutDiaryVisible: any;
+  setProgressVisible: any;
+  setExercisesVisible: any;
+}
+
+export const NavSideBar = ({
+  setRecipiesVisible,
+  setWorkoutDiaryVisible,
+  setExercisesVisible,
+  setProgressVisible,
+}: Props) => {
   return (
     <Nav>
       <Logo src="./svgs/logo.svg" />
@@ -13,18 +24,22 @@ export const NavSideBar = () => {
           <SideBarItem
             itemImg="./svgs/diary-gray-icon.svg"
             itemName="Workout Diary"
+            onClick={() => setWorkoutDiaryVisible(true)}
           />
           <SideBarItem
             itemImg="./svgs/recipe-gray-icon.svg"
             itemName="Recipes"
+            onClick={() => setRecipiesVisible(true)}
           />
           <SideBarItem
             itemImg="./svgs/excercise-gray-icon.svg"
             itemName="Exercises"
+            onClick={() => setExercisesVisible(true)}
           />
           <SideBarItem
             itemImg="./svgs/progress-gray-icon.svg"
             itemName="Progress"
+            onClick={() => setProgressVisible(true)}
           />
         </NavItems>
         <UserSection>
