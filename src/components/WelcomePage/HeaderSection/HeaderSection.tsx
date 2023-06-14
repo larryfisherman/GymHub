@@ -33,14 +33,26 @@ const MainContent = styled.div`
   align-items: center;
   justify-content: center;
   margin-top: 30px;
-  font-size: 46px;
   color: white;
+  font-size: 32px;
 
   & > p {
     font-size: 32px;
     font-weight: 600;
     & > span {
       color: orange;
+    }
+  }
+
+  @media (max-width: 768px) {
+    font-size: 0.9rem;
+
+    & > p {
+      font-size: 1.3rem;
+      font-weight: 600;
+      & > span {
+        color: orange;
+      }
     }
   }
 `;
@@ -75,6 +87,10 @@ const LoginButton = styled.button`
 const Logo = styled.img`
   width: 15%;
   padding: 20px 30px;
+
+  @media (max-width: 860px) {
+    display: none;
+  }
 `;
 
 const ScrollDownIconAnimation = keyframes`
@@ -88,7 +104,11 @@ const ScrollDownIconAnimation = keyframes`
 `;
 
 const ScrollDownIcon = styled.img`
-  height: 5%;
-  // position: relative;
+  height: 4rem;
+  margin-top: 3rem;
   animation: ${ScrollDownIconAnimation} 0.5s linear infinite;
+
+  @media (max-width: 768px) {
+    font-size: 2px;
+  }
 `;
