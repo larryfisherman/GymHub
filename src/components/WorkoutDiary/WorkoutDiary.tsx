@@ -2,13 +2,11 @@ import React from "react";
 import styled from "styled-components";
 
 import { Avatar } from "@material-ui/core";
-import { NavSideBar } from "../Home/NavSideBar/NavSideBar";
 
 export const WorkoutDiary = () => {
   return (
     <Container>
       <Content>
-        <NavSideBar />
         <MainSection>
           <Header>
             <span>

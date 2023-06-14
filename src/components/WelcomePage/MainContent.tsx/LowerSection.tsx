@@ -58,6 +58,10 @@ export const LowerSection = () => {
 const Image = styled.img`
   width: 45%;
   border-radius: 8px;
+
+  @media (max-width: 768px) {
+    display: none;
+  }
 `;
 const Text = styled.div`
   display: flex;
@@ -71,6 +75,10 @@ const Text = styled.div`
 
   & > p {
     margin-bottom: 40px;
+  }
+
+  @media (max-width: 768px) {
+    font-size: 0.5rem;
   }
 `;
 

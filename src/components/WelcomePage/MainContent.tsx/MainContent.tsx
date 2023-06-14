@@ -15,10 +15,11 @@ export const MainContent = () => {
 };
 
 const Container = styled.div`
-  height: 100vh;
+  height: 200vh;
 `;
 const Content = styled.div`
   height: 100%;
   display: flex;
   flex-direction: column;
+  justify-content: space-between;
 `;
