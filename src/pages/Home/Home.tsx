@@ -1,10 +1,7 @@
 import React, { useState } from "react";
 import styled from "styled-components";
-
-import { NavSideBar } from "./NavSideBar/NavSideBar";
-import { UserSideBar } from "./UserSideBar/UserSideBar";
+import { NavSideBar } from "../../components/NavSideBar/NavSideBar";
 import { Main } from "./Main/Main";
-import { WorkoutDiary } from "../WorkoutDiary/WorkoutDiary";
 
 export const Home = () => {
   const [tabToggle, setTabToggle] = useState(1);
@@ -15,7 +12,6 @@ export const Home = () => {
         <Content>
           <NavSideBar setTabToggle={setTabToggle} />
           <Main tabToggle={tabToggle} />
-          {/* <UserSideBar /> */}
         </Content>
       </Container>
     </>

@@ -1,6 +1,6 @@
 import React from "react";
-import { WorkoutDiary } from "../components/WorkoutDiary/WorkoutDiary";
-import { Recipes } from "../components/Recipes/Recipes";
+import { WorkoutDiary } from "../pages/Home/Tabs/WorkoutDiary/WorkoutDiary";
+import { Recipes } from "../pages/Home/Tabs/Recipes/Recipes";
 
 const tabs = [
   { id: 1 },

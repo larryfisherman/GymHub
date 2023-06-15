@@ -9,7 +9,7 @@ export const HeaderSection = ({ setShowRegisterPopup }: Props) => {
   return (
     <Container>
       <Content>
-        <Logo src="./svgs/logo.svg" loading="lazy" />
+        <Logo src="./assets/logo.svg" loading="lazy" />
         <MainContent>
           <h3>TRANSFORM YOUR BODY</h3>
           <h1>DOMINATE YOUR GOALS</h1>
@@ -20,7 +20,7 @@ export const HeaderSection = ({ setShowRegisterPopup }: Props) => {
             JOIN US
           </LoginButton>
         </MainContent>
-        <ScrollDownIcon src="./svgs/arrow-icon.svg" />
+        <ScrollDownIcon src="./assets/arrow-icon.svg" />
       </Content>
     </Container>
   );
@@ -66,7 +66,7 @@ const Content = styled.div`
   display: flex;
   flex-direction: column;
   height: 100%;
-  background: url("./svgs/welcome-page.png") center center / cover;
+  background: url("../../assets/welcome-page.png") center center / cover;
 `;
 
 const LoginButton = styled.button`

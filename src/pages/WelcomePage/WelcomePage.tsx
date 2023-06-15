@@ -1,9 +1,9 @@
 import React, { useState } from "react";
 import styled from "styled-components";
 import { HeaderSection } from "./HeaderSection/HeaderSection";
-import { MainContent } from "./MainContent.tsx/MainContent";
-import { LoginUser } from "../LoginUser/LoginUser";
-import { RegisterUser } from "../RegisterUser/RegisterUser";
+import { MainContent } from "./MainContent/MainContent";
+import { LoginUser } from "./LoginUser/LoginUser";
+import { RegisterUser } from "./RegisterUser/RegisterUser";
 
 export const WelcomePage = () => {
   const [showRegisterPopup, setShowRegisterPopup] = useState(false);

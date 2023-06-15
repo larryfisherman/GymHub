@@ -1,8 +1,6 @@
 import React from "react";
 import styled from "styled-components";
 
-import { Avatar } from "@material-ui/core";
-
 export const WorkoutDiary = () => {
   return (
     <Container>
@@ -39,19 +37,19 @@ const Content = styled.div`
   display: flex;
 `;
 
-const Header = styled.div`
-  display: flex;
-  justify-content: space-between;
-  align-items: center;
-`;
+// const Header = styled.div`
+//   display: flex;
+//   justify-content: space-between;
+//   align-items: center;
+// `;
 
-const ProfileSection = styled.div`
-  display: flex;
-  align-items: center;
-`;
+// const ProfileSection = styled.div`
+//   display: flex;
+//   align-items: center;
+// `;
 
-const ProfileSectionBottom = styled.div`
-  padding-left: 15px;
-`;
+// const ProfileSectionBottom = styled.div`
+//   padding-left: 15px;
+// `;
 
-const MainSection = styled.div``;
+// const MainSection = styled.div``;

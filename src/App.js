@@ -1,11 +1,11 @@
 import React from "react";
 import "./App.css";
 import { BrowserRouter as Router, Routes, Route } from "react-router-dom";
-import { RegisterUser } from "./components/RegisterUser/RegisterUser";
-import { LoginUser } from "./components/LoginUser/LoginUser";
-import { WelcomePage } from "./components/WelcomePage/WelcomePage";
-import { Home } from "./components/Home/Home";
-import { WorkoutDiary } from "./components/WorkoutDiary/WorkoutDiary";
+import { RegisterUser } from "./pages/WelcomePage/RegisterUser/RegisterUser";
+import { LoginUser } from "./pages/WelcomePage/LoginUser/LoginUser";
+import { WelcomePage } from "./pages/WelcomePage/WelcomePage";
+import { Home } from "./pages/Home/Home";
+import { WorkoutDiary } from "./pages/Home/Tabs/WorkoutDiary/WorkoutDiary";
 
 function App() {
   return (

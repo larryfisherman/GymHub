@@ -11,7 +11,7 @@ export const UpperSectionItem = ({ icon, title, text }: Props) => {
   return (
     <Container>
       <Content>
-        <Icon src={`./svgs/${icon}.svg`} />
+        <Icon src={`./assets/${icon}.svg`} />
         <Title>{title}</Title>
         <Text>{text}</Text>
       </Content>

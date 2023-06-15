@@ -9,42 +9,42 @@ interface Props {
 export const NavSideBar = ({ setTabToggle }: Props) => {
   return (
     <Nav>
-      <Logo src="./svgs/biceps-icon.svg" />
+      <Logo src="./assets/biceps-icon.svg" />
       <Content>
         <NavItems>
           <SideBarItem
-            itemImg="./svgs/home-gray-icon.svg"
+            itemImg="./assets/home-gray-icon.svg"
             itemName="Home"
             onClick={() => setTabToggle(1)}
           />
           <SideBarItem
-            itemImg="./svgs/diary-gray-icon.svg"
+            itemImg="./assets/diary-gray-icon.svg"
             itemName="Workout Diary"
             onClick={() => setTabToggle(2)}
           />
           <SideBarItem
-            itemImg="./svgs/recipe-gray-icon.svg"
+            itemImg="./assets/recipe-gray-icon.svg"
             itemName="Recipes"
             onClick={() => setTabToggle(3)}
           />
           <SideBarItem
-            itemImg="./svgs/excercise-gray-icon.svg"
+            itemImg="./assets/excercise-gray-icon.svg"
             itemName="Exercises"
             onClick={() => setTabToggle(4)}
           />
           <SideBarItem
-            itemImg="./svgs/progress-gray-icon.svg"
+            itemImg="./assets/progress-gray-icon.svg"
             itemName="Progress"
             onClick={() => setTabToggle(5)}
           />
         </NavItems>
         <UserSection>
           <SideBarItem
-            itemImg="./svgs/settings-gray-icon.svg"
+            itemImg="./assets/settings-gray-icon.svg"
             itemName="Settings"
           />
           <SideBarItem
-            itemImg="./svgs/logout-gray-icon.svg"
+            itemImg="./assets/logout-gray-icon.svg"
             itemName="Logout"
           />
         </UserSection>
