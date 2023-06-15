@@ -59,7 +59,7 @@ export const LoginUser = ({ setShowLoginPopup }: Props) => {
 };
 
 const CrossIcon = styled.img`
-  width: 3%;
+  width: 1rem;
 `;
 const UpperSection = styled.div`
   display: flex;
@@ -68,8 +68,6 @@ const UpperSection = styled.div`
 
   & > ${CrossIcon} {
     align-self: flex-end;
-    font-size: 24px;
-    font-weight: 300;
 
     &:hover {
       cursor: pointer;
@@ -79,10 +77,6 @@ const UpperSection = styled.div`
 
 const Logo = styled.img`
   height: 6rem;
-
-  &:hover {
-    cursor: pointer;
-  }
 `;
 
 const ShowPasswordIcon = styled.img`
@@ -107,34 +101,20 @@ const PasswordSection = styled.div`
       outline: none;
     }
   }
-`;
 
-const PasswordInput = styled.input`
-  border: hidden;
-  border-bottom: 1px solid black;
-  padding-bottom: 5px;
-
-  &:focus {
-    outline: none;
+  @media (max-width: 768px) {
+    width: 100%;
   }
 `;
 
 const Container = styled.div`
   position: fixed;
-  right: 0;
-  left: 0;
-  top: 0;
-  bottom: 0;
-  margin: auto;
   width: 100%;
   height: 100%;
   display: flex;
   justify-content: center;
   align-items: center;
   background-color: rgba(0, 0, 0, 0.7);
-
-  & > span {
-  }
 `;
 const Content = styled.div`
   background-color: white;
@@ -150,17 +130,34 @@ const Content = styled.div`
   & > input {
     width: 50%;
   }
+
+  @media (max-width: 768px) {
+    width: 100%;
+    height: 100%;
+    border-radius: 0;
+
+    & > input {
+      width: 100%;
+    }
+  }
 `;
 
 const EmailInput = styled.input`
   border: hidden;
   border-bottom: 1px solid black;
   padding-bottom: 5px;
+  width: 100%;
 
   &:focus {
     outline: none;
   }
+
+  @media (max-width: 768px) {
+    width: 100%;
+  }
 `;
+
+const PasswordInput = styled(EmailInput)``;
 
 const ConfirmButton = styled.button`
   letter-spacing: 3px;

@@ -12,7 +12,7 @@ export const SideBarItem = ({ itemImg, itemName, onClick }: Props) => {
     <Container onClick={onClick}>
       <Content>
         <Img src={itemImg} />
-        {itemName}
+        <span>{itemName}</span>
       </Content>
     </Container>
   );
@@ -38,6 +38,12 @@ const Content = styled.div`
   display: flex;
   align-items: center;
   justify-content: center;
+
+  @media (max-width: 768px) {
+    span {
+      display: none;
+    }
+  }
 `;
 
 const Img = styled.img`

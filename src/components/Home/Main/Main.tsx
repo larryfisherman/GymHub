@@ -1,27 +1,21 @@
 import React from "react";
 import styled from "styled-components";
-
-import { Recipies } from "./Recipies/Recipies";
-
-import { WorkoutDiary } from "../../WorkoutDiary/WorkoutDiary";
+import { useTab } from "../../../hooks/useTab";
 
 interface Props {
-  recipiesVisible: boolean;
-  workoutDiaryVisible: boolean;
-  exercisesVisible: boolean;
-  progressVisible: boolean;
+  tabToggle: any;
 }
 
-export const Main = ({ recipiesVisible }: Props) => {
+export const Main = ({ tabToggle }: Props) => {
   return (
     <Container>
-      <Content>{recipiesVisible && <Recipies />}</Content>
+      <Content>{useTab(tabToggle)}</Content>
     </Container>
   );
 };
 
 const Container = styled.div`
-  width: 60%;
+  width: 80%;
   background-color: grey;
 `;
 const Content = styled.div``;

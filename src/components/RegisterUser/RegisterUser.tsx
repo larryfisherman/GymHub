@@ -101,10 +101,6 @@ const UpperSection = styled.div`
 
 const Logo = styled.img`
   height: 6rem;
-
-  &:hover {
-    cursor: pointer;
-  }
 `;
 
 const ShowPasswordIcon = styled.img`
@@ -171,13 +167,6 @@ const FullNameInput = styled.input`
   border-bottom: 1px solid black;
   padding-bottom: 5px;
   width: 50%;
-
-  &:autofill {
-    background-color: orange;
-  }
-  &:-webkit-autofill {
-    background-color: orange;
-  }
 
   @media (max-width: 768px) {
     width: 100%;

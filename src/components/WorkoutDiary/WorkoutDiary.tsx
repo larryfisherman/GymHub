@@ -7,7 +7,7 @@ export const WorkoutDiary = () => {
   return (
     <Container>
       <Content>
-        <MainSection>
+        {/* <MainSection>
           <Header>
             <span>
               Let's Get To
@@ -23,7 +23,8 @@ export const WorkoutDiary = () => {
               </ProfileSectionBottom>
             </ProfileSection>
           </Header>
-        </MainSection>
+        </MainSection> */}
+        WORKOUT DIARY
       </Content>
     </Container>
   );
