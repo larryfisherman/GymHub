@@ -2,6 +2,12 @@ import React from "react";
 import styled from "styled-components";
 import { Workout } from "./Workout";
 
+interface WorkoutProps {
+  title: string;
+  favourite: boolean;
+  id: number;
+}
+
 export const WorkoutDiary = () => {
   const workouts = [
     {
@@ -26,8 +32,8 @@ export const WorkoutDiary = () => {
       <Content>
         <Title>MY WORKOUTS</Title>
         <Workouts>
-          {workouts.map(({ title, favourite }: any) => (
-            <Workout title={title} favourite={favourite} />
+          {workouts.map(({ title, favourite, id }: WorkoutProps) => (
+            <Workout key={id} title={title} favourite={favourite} />
           ))}
         </Workouts>
       </Content>

@@ -80,7 +80,7 @@ const HeartIcon = styled.img`
 const DescriptionSection = styled.div`
   display: flex;
   justify-content: space-between;
-  width: 25%;
+  width: 30%;
 
   span {
     font-size: 0.8rem;
@@ -94,7 +94,6 @@ const DescriptionSection = styled.div`
 const StartButton = styled.button`
   display: flex;
   margin-top: 5rem;
-  self-align: flex-end;
   width: 10rem;
   height: 5rem;
   justify-content: center;
@@ -107,5 +106,10 @@ const StartButton = styled.button`
 
   &:hover {
     cursor: pointer;
+  }
+
+  @media (max-width: 768px) {
+    margin-left: auto;
+    margin-right: auto;
   }
 `;
