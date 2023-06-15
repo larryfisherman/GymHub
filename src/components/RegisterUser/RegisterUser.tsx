@@ -80,7 +80,7 @@ export const RegisterUser = ({
 };
 
 const CrossIcon = styled.img`
-  width: 3%;
+  width: 1rem;
 `;
 
 const UpperSection = styled.div`
@@ -109,45 +109,38 @@ const Logo = styled.img`
 
 const ShowPasswordIcon = styled.img`
   border-bottom: 1px solid black;
-
   &:hover {
     cursor: pointer;
   }
 `;
 
 const PasswordSection = styled.div`
-  width: 50%;
   display: flex;
+  justify-content: center;
+  width: 50%;
 
   & > input {
+    position: relative;
     border: hidden;
     border-bottom: 1px solid black;
-    padding-bottom: 5px;
     width: 100%;
+
+    -webkit-autofill {
+      -webkit-text-fill-color: yellow !important;
+    }
 
     &:focus {
       outline: none;
     }
   }
-`;
 
-const PasswordInput = styled.input`
-  border: hidden;
-  border-bottom: 1px solid black;
-  padding-bottom: 5px;
-
-  &:focus {
-    outline: none;
+  @media (max-width: 768px) {
+    width: 100%;
   }
 `;
 
 const Container = styled.div`
   position: fixed;
-  right: 0;
-  left: 0;
-  top: 0;
-  bottom: 0;
-  margin: auto;
   width: 100%;
   height: 100%;
   display: flex;
@@ -166,8 +159,10 @@ const Content = styled.div`
   border-radius: 2%;
   padding: 50px;
 
-  & > input {
-    width: 50%;
+  @media (max-width: 768px) {
+    height: 100%;
+    width: 100%;
+    border-radius: 0;
   }
 `;
 
@@ -175,20 +170,23 @@ const FullNameInput = styled.input`
   border: hidden;
   border-bottom: 1px solid black;
   padding-bottom: 5px;
+  width: 50%;
 
-  &:focus {
-    outline: none;
+  &:autofill {
+    background-color: orange;
+  }
+  &:-webkit-autofill {
+    background-color: orange;
+  }
+
+  @media (max-width: 768px) {
+    width: 100%;
   }
 `;
-const EmailInput = styled.input`
-  border: hidden;
-  border-bottom: 1px solid black;
-  padding-bottom: 5px;
 
-  &:focus {
-    outline: none;
-  }
-`;
+const EmailInput = styled(FullNameInput)``;
+
+const PasswordInput = styled.input``;
 
 const ConfirmButton = styled.button`
   letter-spacing: 3px;
