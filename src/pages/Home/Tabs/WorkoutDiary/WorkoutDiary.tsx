@@ -1,28 +1,35 @@
 import React from "react";
 import styled from "styled-components";
+import { Workout } from "./Workout";
 
 export const WorkoutDiary = () => {
+  const workouts = [
+    {
+      id: 1,
+      title: "Legs & Deltoids",
+      favourite: true,
+    },
+    {
+      id: 2,
+      title: "Chest",
+      favourite: false,
+    },
+    {
+      id: 3,
+      title: "test",
+      favourite: false,
+    },
+  ];
+
   return (
     <Container>
       <Content>
-        {/* <MainSection>
-          <Header>
-            <span>
-              Let's Get To
-              <p>
-                <b>Workout Diary</b>
-              </p>
-            </span>
-            <ProfileSection>
-              <Avatar sizes="large" variant="square" />
-              <ProfileSectionBottom>
-                <h2>Albert Karkut</h2>
-                <span>Krakow, Poland</span>
-              </ProfileSectionBottom>
-            </ProfileSection>
-          </Header>
-        </MainSection> */}
-        WORKOUT DIARY
+        <Title>MY WORKOUTS</Title>
+        <Workouts>
+          {workouts.map(({ title, favourite }: any) => (
+            <Workout title={title} favourite={favourite} />
+          ))}
+        </Workouts>
       </Content>
     </Container>
   );
@@ -31,25 +38,19 @@ export const WorkoutDiary = () => {
 const Container = styled.div`
   width: 100%;
   height: 100%;
-  display: flex;
 `;
 const Content = styled.div`
   display: flex;
+  flex-direction: column;
+  width: 100%;
+  height: 100%;
+  padding: 30px;
 `;
 
-// const Header = styled.div`
-//   display: flex;
-//   justify-content: space-between;
-//   align-items: center;
-// `;
-
-// const ProfileSection = styled.div`
-//   display: flex;
-//   align-items: center;
-// `;
-
-// const ProfileSectionBottom = styled.div`
-//   padding-left: 15px;
-// `;
-
-// const MainSection = styled.div``;
+const Title = styled.div``;
+const Workouts = styled.div`
+  display: flex;
+  flex-wrap: wrap;
+  width: 100%;
+  height: 100%;
+`;

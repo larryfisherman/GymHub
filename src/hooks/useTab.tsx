@@ -1,6 +1,8 @@
 import React from "react";
 import { WorkoutDiary } from "../pages/Home/Tabs/WorkoutDiary/WorkoutDiary";
 import { Recipes } from "../pages/Home/Tabs/Recipes/Recipes";
+import { Exercises } from "../pages/Home/Tabs/Exercises/Exercises";
+import { Progress } from "../pages/Home/Tabs/Progress/Progress";
 
 const tabs = [
   { id: 1 },
@@ -14,11 +16,11 @@ const tabs = [
   },
   {
     id: 4,
-    // component: <Exercises/>
+    component: <Exercises />,
   },
   {
     id: 5,
-    // component: <Progress/>
+    component: <Progress />,
   },
 ];
 
