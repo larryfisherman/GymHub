@@ -24,7 +24,7 @@ const Container = styled.div`
   display: flex;
   align-items: center;
   justify-content: center;
-  border-left: 5px solid transparent;
+  // border-left: 5px solid transparent;
   text-decoration: none;
   color: black;
 

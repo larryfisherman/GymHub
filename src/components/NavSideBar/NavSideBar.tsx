@@ -54,7 +54,7 @@ export const NavSideBar = ({ setTabToggle }: Props) => {
 };
 
 const Nav = styled.nav`
-  width: 20%;
+  width: 13%;
   height: 100%;
   display: flex;
   flex-direction: column;
