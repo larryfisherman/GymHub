@@ -95,7 +95,6 @@ const GoalsSection = styled.div`
   display: flex;
   flex-direction: column;
   justify-content: space-between;
-  // overflow-y: scroll;
 `;
 
 const ProgressSection = styled.div``;

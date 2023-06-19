@@ -17,7 +17,7 @@ export const Main = ({ tabToggle }: Props) => {
 const Container = styled.div`
   height: 100%;
   width: 87%;
-  background-color: grey;
+  background-color: lightgrey;
   overflow-y: scroll;
 `;
 const Content = styled.div``;

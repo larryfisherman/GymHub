@@ -12,22 +12,27 @@ interface Props {
 export const Recipe = ({ title, description, kcal, time, image }: Props) => {
   return (
     <Container>
-      <Image src={image} />
       <Content>
+        {/* <Image src={image} /> */}
         <Title>{title}</Title>
         <Description>{description}</Description>
         <CaloriesAndTimeSection>
-          {kcal} kcal {time} minutes
+          <Calories>{kcal} kcal</Calories>
+          <Time>{time} minutes</Time>
         </CaloriesAndTimeSection>
-        <SeeMoreButton>See More</SeeMoreButton>
+        <SeeMoreButton>SEE MORE</SeeMoreButton>
       </Content>
     </Container>
   );
 };
 
+const Calories = styled.span`
+  color: orange;
+`;
+const Time = styled.span``;
+
 const Container = styled.div`
-  width: 45%;
-  height: 25rem;
+  width: 15%;
   display: flex;
   align-items: center;
 
@@ -38,17 +43,17 @@ const Container = styled.div`
 `;
 
 const Content = styled.div`
-  width: 80%;
-  height: 100%;
-  min-height: 20rem;
-  background-color: white;
   display: flex;
   flex-direction: column;
+  min-height: 20rem;
+  min-width: 20rem;
   padding: 1.875rem;
-  margin-top: 3rem;
   border-radius: 3%;
   align-items: center;
   justify-content: space-between;
+  background-color: rgb(21, 34, 56);
+  color: white;
+  overflow-x: wrap;
 
   @media (max-width: 768px) {
     width: 100%;
@@ -61,7 +66,7 @@ const Content = styled.div`
 const Title = styled.title`
   display: flex;
   justify-content: space-between;
-  font-size: 2rem;
+  font-size: 1rem;
   margin-bottom: 1rem;
 
   @media (max-width: 768px) {
@@ -79,7 +84,10 @@ const Title = styled.title`
 const Description = styled.span`
   display: flex;
   justify-content: space-between;
-  width: 80%;
+  width: 100%;
+  position: relative;
+  overflow-wrap: break-word;
+  font-size: 0.7rem;
 
   span {
     font-size: 0.8rem;
@@ -90,19 +98,23 @@ const Description = styled.span`
   }
 `;
 
-const CaloriesAndTimeSection = styled.div``;
+const CaloriesAndTimeSection = styled.div`
+  display: flex;
+  justify-content: space-between;
+  width: 12rem;
+`;
 
 const SeeMoreButton = styled.button`
   display: flex;
-  margin-top: 5rem;
-  width: 6rem;
-  height: 3rem;
+  margin-top: 1rem;
+  width: 7rem;
+  height: 2rem;
   justify-content: center;
   align-items: center;
   font-size: 1rem;
-  border-radius: 4%;
+  border-radius: 5%;
   border: none;
-  background-color: orange;
+  background-color: rgb(144, 238, 144);
   color: white;
 
   &:hover {
@@ -117,11 +129,10 @@ const SeeMoreButton = styled.button`
 
 const Image = styled.img`
   position: relative;
-  width: 12rem;
-  left: 8rem;
+  width: 10rem;
   border-radius: 50%;
   border: 1px solid black;
-  margin-right: 3rem;
+  z-index: 2;
 
   @media (max-width: 768px) {
     left: 0;

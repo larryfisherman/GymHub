@@ -17,6 +17,8 @@ export const RegisterUser = ({
   const [fullNameValue, setFullNameValue] = useState("");
   const [showPassword, setShowPassword] = useState(false);
 
+  // remember to change styling for laptops!
+
   return (
     <Container>
       <Content>
