@@ -2,67 +2,68 @@ import React from "react";
 import styled from "styled-components";
 
 interface Props {
+  image: string;
   title: string;
   description: string;
   kcal: number;
   time: number;
-  image: string;
 }
 
-export const Recipe = ({ title, description, kcal, time, image }: Props) => {
+export const ComplexSetsItem = ({
+  image,
+  title,
+  description,
+  kcal,
+  time,
+}: Props) => {
   return (
     <Container>
       <Image src={image} />
       <Content>
-        <Title>{title}</Title>
-        <Description>{description}</Description>
-        <CaloriesAndTimeSection>
-          <Calories>{kcal} kcal</Calories>
-          <Time>{time} minutes</Time>
-        </CaloriesAndTimeSection>
-        <SeeMoreButton>SEE MORE</SeeMoreButton>
+        <Content>
+          <Title>{title}</Title>
+          <Description>{description}</Description>
+          <CaloriesAndTimeSection>
+            <Calories>{kcal} kcal</Calories>
+            <Time>{time} minutes</Time>
+          </CaloriesAndTimeSection>
+          <SeeMoreButton>SEE MORE</SeeMoreButton>
+        </Content>
       </Content>
     </Container>
   );
 };
 
-const Calories = styled.span`
-  color: orange;
-`;
-const Time = styled.span``;
-
 const Container = styled.div`
-  width: 45%;
+  width: 100%;
+  height: 100%;
+  margin-bottom: 2rem;
   display: flex;
-  align-items: center;
-  margin-top: 1rem;
-
-  @media (max-width: 768px) {
-    width: 100%;
-    flex-direction: column;
-    margin-top: 0;
-  }
 `;
-
 const Content = styled.div`
+  width: 100%;
+  height: 100%;
   display: flex;
   flex-direction: column;
   justify-content: space-between;
   align-items: center;
-  min-height: 25rem;
-  min-width: 20rem;
   padding: 1.875rem;
-  border-radius: 3%;
   background-color: rgb(21, 34, 56);
   color: white;
+  border-radius: 3%;
+`;
+const Image = styled.img`
+  position: relative;
+  height: 12rem;
+  border-radius: 50%;
+  border: 1px solid black;
+  z-index: 2;
 
   @media (max-width: 768px) {
-    width: 100%;
-    justify-content: center;
-    align-items: center;
+    left: 0;
+    top: 5rem;
   }
 `;
-
 const Title = styled.title`
   display: flex;
   justify-content: space-between;
@@ -80,7 +81,6 @@ const Title = styled.title`
     }
   }
 `;
-
 const Description = styled.span`
   display: flex;
   justify-content: space-between;
@@ -98,7 +98,6 @@ const Description = styled.span`
     padding-left: 0;
   }
 `;
-
 const CaloriesAndTimeSection = styled.div`
   display: flex;
   justify-content: space-between;
@@ -109,8 +108,9 @@ const CaloriesAndTimeSection = styled.div`
     padding-left: 0;
   }
 `;
-
-const SeeMoreButton = styled.button`
+const Calories = styled.div``;
+const Time = styled.div``;
+const SeeMoreButton = styled.div`
   display: flex;
   margin-top: 1rem;
   width: 7rem;
@@ -130,19 +130,5 @@ const SeeMoreButton = styled.button`
   @media (max-width: 768px) {
     margin-left: auto;
     margin-right: auto;
-  }
-`;
-
-const Image = styled.img`
-  position: relative;
-  height: 12rem;
-  border-radius: 50%;
-  border: 1px solid black;
-  z-index: 2;
-  left: 6rem;
-
-  @media (max-width: 768px) {
-    left: 0;
-    top: 5rem;
   }
 `;

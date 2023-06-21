@@ -2,6 +2,7 @@ import React from "react";
 import styled from "styled-components";
 import { Recipe } from "./Recipe";
 import { CategoriesItem } from "./CategoriesItem";
+import { ComplexSets } from "./ComplexSets";
 
 export const Recipes = () => {
   const recpiesArray = [
@@ -24,14 +25,6 @@ export const Recipes = () => {
     },
     {
       id: 3,
-      title: "Beef Stir-Fry",
-      description: "A quick and easy meal that is high protein and fiber.",
-      kcal: 400,
-      time: 20,
-      image: "./assets/recipe-2.svg",
-    },
-    {
-      id: 4,
       title: "Beef Stir-Fry",
       description: "A quick and easy meal that is high protein and fiber.",
       kcal: 400,
@@ -66,6 +59,16 @@ export const Recipes = () => {
       title: "Meat dishes",
       image: "recipe-1",
     },
+    {
+      id: 6,
+      title: "Meat dishes",
+      image: "recipe-1",
+    },
+    {
+      id: 7,
+      title: "Meat dishes",
+      image: "recipe-1",
+    },
   ];
 
   return (
@@ -81,27 +84,47 @@ export const Recipes = () => {
           ))}
         </CategoriesSection>
         <Title>All items</Title>
-        <RecipesSection>
-          {recpiesArray.map((el) => (
-            <Recipe
-              key={el.id}
-              title={el.title}
-              description={el.description}
-              kcal={el.kcal}
-              time={el.time}
-              image={el.image}
-            />
-          ))}
-        </RecipesSection>
+        <AllItems>
+          <RecipesSection>
+            {recpiesArray.map((el) => (
+              <Recipe
+                key={el.id}
+                title={el.title}
+                description={el.description}
+                kcal={el.kcal}
+                time={el.time}
+                image={el.image}
+              />
+            ))}
+          </RecipesSection>
+          <ComplexSetsItems>
+            <ComplexSets />
+          </ComplexSetsItems>
+        </AllItems>
       </Content>
     </Container>
   );
 };
 
+const AllItems = styled.div`
+  width: 100%;
+  height: 100%;
+  display: flex;
+  justify-content: space-between;
+`;
+
+const ComplexSetsItems = styled.div`
+  display: flex;
+  flex-direction: column;
+  justify-content: space-between;
+  width: 35%;
+`;
+
 const Title = styled.title`
   display: flex;
   margin: 1rem;
   font-weight: 800;
+  font-size: 1.5rem;
 `;
 
 const Container = styled.div`
@@ -121,16 +144,44 @@ const TitleSection = styled.div`
   flex-direction: column;
   align-self: flex-start;
   font-weight: 700;
+  font-size: 1.5rem;
 `;
 const CategoriesSection = styled.div`
   display: flex;
+  width: 100%;
   justify-content: space-between;
   min-height: 13rem;
   align-items: flex-end;
   margin-bottom: 2rem;
+  overflow-x: scroll;
+
+  ::-webkit-scrollbar-thumb {
+  }
+
+  ::-webkit-scrollbar-thumb:hover {
+    color: black;
+  }
+
+  ::-webkit-scrollbar {
+    height: 10px;
+  }
+
+  ::-webkit-scrollbar-track {
+  }
 `;
 const RecipesSection = styled.div`
   display: flex;
   justify-content: space-between;
-  width: 40%;
+  width: 50%;
+  flex-wrap: wrap;
+
+  @media (max-width: 768px) {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    justify-content: center;
+    width: 100%;
+    margin-left: auto;
+    margin-right: auto;
+  }
 `;

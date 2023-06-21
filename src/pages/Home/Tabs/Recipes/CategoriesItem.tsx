@@ -21,6 +21,7 @@ const Container = styled.div`
   flex-direction: column;
   justify-content: space-between;
   align-items: center;
+  margin-right: 10px;
 `;
 const Content = styled.div`
   min-height: 8rem;
