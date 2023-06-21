@@ -91,7 +91,7 @@ const Logo = styled.img`
     cursor: pointer;
   }
 
-  @media(max-width: 768px) {
-    background-image
+  @media (max-width: 768px) {
+    width: 5.5rem;
   }
 `;

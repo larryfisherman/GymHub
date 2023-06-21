@@ -23,6 +23,7 @@ const Container = styled.div`
   align-items: center;
   margin-right: 10px;
 `;
+
 const Content = styled.div`
   min-height: 8rem;
   min-width: 11rem;
@@ -34,6 +35,7 @@ const Content = styled.div`
   border-radius: 5%;
   padding-bottom: 1rem;
 `;
+
 const Image = styled.img`
   position: relative;
   top: 3rem;

@@ -83,9 +83,9 @@ export const Recipes = () => {
             <CategoriesItem key={el.id} title={el.title} image={el.image} />
           ))}
         </CategoriesSection>
-        <Title>All items</Title>
         <AllItems>
           <RecipesSection>
+            <Title>All items</Title>
             {recpiesArray.map((el) => (
               <Recipe
                 key={el.id}
@@ -98,6 +98,7 @@ export const Recipes = () => {
             ))}
           </RecipesSection>
           <ComplexSetsItems>
+            <Title>Complex sets</Title>
             <ComplexSets />
           </ComplexSetsItems>
         </AllItems>
@@ -120,10 +121,9 @@ const Content = styled.div`
 `;
 
 const AllItems = styled.div`
-  width: 100%;
-  height: 100%;
   display: flex;
   justify-content: space-between;
+  flex-wrap: wrap;
   margin-right: 2rem;
 `;
 
@@ -132,6 +132,10 @@ const ComplexSetsItems = styled.div`
   flex-direction: column;
   justify-content: space-between;
   width: 35%;
+
+  @media (max-width: 768px) {
+    display: none;
+  }
 `;
 
 const Title = styled.title`
@@ -139,14 +143,15 @@ const Title = styled.title`
   margin: 1rem;
   font-weight: 800;
   font-size: 1.5rem;
+  width: 100%;
 `;
 
 const TitleSection = styled.div`
-  display: flex;
-  flex-direction: column;
-  align-self: flex-start;
   font-weight: 700;
   font-size: 1.5rem;
+  display: flex;
+  flex-direction: column;
+  align-items: flex-start;
 `;
 
 const CategoriesSection = styled.div`
@@ -179,7 +184,6 @@ const RecipesSection = styled.div`
   justify-content: space-between;
   width: 50%;
   flex-wrap: wrap;
-  left: -5rem;
 
   @media (max-width: 768px) {
     display: flex;
@@ -189,6 +193,5 @@ const RecipesSection = styled.div`
     width: 100%;
     margin-left: auto;
     margin-right: auto;
-    left: 0;
   }
 `;

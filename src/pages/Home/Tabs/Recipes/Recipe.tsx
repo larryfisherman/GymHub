@@ -36,11 +36,14 @@ const Container = styled.div`
   display: flex;
   align-items: center;
   margin-top: 1rem;
+  position: relative;
+  left: -5rem;
 
   @media (max-width: 768px) {
     width: 100%;
     flex-direction: column;
     margin-top: 0;
+    left: 0;
   }
 `;
 
