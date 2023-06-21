@@ -106,11 +106,25 @@ export const Recipes = () => {
   );
 };
 
+const Container = styled.div`
+  width: 100%;
+  height: 100%;
+`;
+
+const Content = styled.div`
+  height: 100%;
+  display: flex;
+  flex-direction: column;
+  justify-content: space-between;
+  padding: 30px;
+`;
+
 const AllItems = styled.div`
   width: 100%;
   height: 100%;
   display: flex;
   justify-content: space-between;
+  margin-right: 2rem;
 `;
 
 const ComplexSetsItems = styled.div`
@@ -127,18 +141,6 @@ const Title = styled.title`
   font-size: 1.5rem;
 `;
 
-const Container = styled.div`
-  width: 100%;
-  height: 100%;
-`;
-const Content = styled.div`
-  height: 100%;
-  display: flex;
-  flex-direction: column;
-  justify-content: space-between;
-  padding: 30px;
-`;
-
 const TitleSection = styled.div`
   display: flex;
   flex-direction: column;
@@ -146,6 +148,7 @@ const TitleSection = styled.div`
   font-weight: 700;
   font-size: 1.5rem;
 `;
+
 const CategoriesSection = styled.div`
   display: flex;
   width: 100%;
@@ -169,11 +172,14 @@ const CategoriesSection = styled.div`
   ::-webkit-scrollbar-track {
   }
 `;
+
 const RecipesSection = styled.div`
   display: flex;
+  position: relative;
   justify-content: space-between;
   width: 50%;
   flex-wrap: wrap;
+  left: -5rem;
 
   @media (max-width: 768px) {
     display: flex;
@@ -183,5 +189,6 @@ const RecipesSection = styled.div`
     width: 100%;
     margin-left: auto;
     margin-right: auto;
+    left: 0;
   }
 `;

@@ -20,15 +20,13 @@ export const ComplexSetsItem = ({
     <Container>
       <Image src={image} />
       <Content>
-        <Content>
-          <Title>{title}</Title>
-          <Description>{description}</Description>
-          <CaloriesAndTimeSection>
-            <Calories>{kcal} kcal</Calories>
-            <Time>{time} minutes</Time>
-          </CaloriesAndTimeSection>
-          <SeeMoreButton>SEE MORE</SeeMoreButton>
-        </Content>
+        <Title>{title}</Title>
+        <Description>{description}</Description>
+        <CaloriesAndTimeSection>
+          <Calories>{kcal} kcal</Calories>
+          <Time>{time} minutes</Time>
+        </CaloriesAndTimeSection>
+        <SeeMoreButton>SEE MORE</SeeMoreButton>
       </Content>
     </Container>
   );
@@ -37,12 +35,12 @@ export const ComplexSetsItem = ({
 const Container = styled.div`
   width: 100%;
   height: 100%;
-  margin-bottom: 2rem;
   display: flex;
+  align-items: center;
+  margin-top: 2rem;
 `;
+
 const Content = styled.div`
-  width: 100%;
-  height: 100%;
   display: flex;
   flex-direction: column;
   justify-content: space-between;
@@ -51,19 +49,25 @@ const Content = styled.div`
   background-color: rgb(21, 34, 56);
   color: white;
   border-radius: 3%;
+  min-height: 25rem;
+  min-width: 20rem;
+  padding: 1.875rem;
 `;
+
 const Image = styled.img`
   position: relative;
   height: 12rem;
   border-radius: 50%;
   border: 1px solid black;
   z-index: 2;
+  left: 6rem;
 
   @media (max-width: 768px) {
     left: 0;
     top: 5rem;
   }
 `;
+
 const Title = styled.title`
   display: flex;
   justify-content: space-between;
@@ -81,6 +85,7 @@ const Title = styled.title`
     }
   }
 `;
+
 const Description = styled.span`
   display: flex;
   justify-content: space-between;
@@ -98,6 +103,7 @@ const Description = styled.span`
     padding-left: 0;
   }
 `;
+
 const CaloriesAndTimeSection = styled.div`
   display: flex;
   justify-content: space-between;
@@ -108,8 +114,10 @@ const CaloriesAndTimeSection = styled.div`
     padding-left: 0;
   }
 `;
+
 const Calories = styled.div``;
 const Time = styled.div``;
+
 const SeeMoreButton = styled.div`
   display: flex;
   margin-top: 1rem;
