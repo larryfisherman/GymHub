@@ -18,7 +18,7 @@ export const ComplexSetsItem = ({
 }: Props) => {
   return (
     <Container>
-      <Image src={image} />
+      <Image src={image} loading="lazy" />
       <Content>
         <Title>{title}</Title>
         <Description>{description}</Description>

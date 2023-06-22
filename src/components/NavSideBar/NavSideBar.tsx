@@ -59,7 +59,7 @@ const Nav = styled.nav`
   display: flex;
   flex-direction: column;
   align-items: center;
-  font-size: 0.8rem;
+  font-size: 1rem;
 `;
 
 const Content = styled.div`

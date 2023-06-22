@@ -12,7 +12,7 @@ interface Props {
 export const Recipe = ({ title, description, kcal, time, image }: Props) => {
   return (
     <Container>
-      <Image src={image} />
+      <Image src={image} loading="lazy" />
       <Content>
         <Title>{title}</Title>
         <Description>{description}</Description>
