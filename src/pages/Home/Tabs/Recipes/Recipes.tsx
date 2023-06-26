@@ -15,6 +15,7 @@ export const Recipes = () => {
       .get("https://localhost:44390/api/recipes/")
       .then((res) => setRecipes(res.data));
   }, []);
+
   const categoriesItems = [
     {
       id: 1,
@@ -55,8 +56,8 @@ export const Recipes = () => {
 
   return (
     <Container>
-      {showAddRecipePopup && <AddNewRecipePopup />}
       <Content>
+        {showAddRecipePopup && <AddNewRecipePopup />}
         <TitleSection>
           <span>Your Delicious</span>
           <span>Recipes</span>
@@ -69,12 +70,6 @@ export const Recipes = () => {
         <AllItems>
           <RecipesSection>
             <Title>All items</Title>
-            <RecipePopup>
-              <Title>Add New Recipe</Title>
-              <AddRecipe onClick={() => setShowAddRecipePopup(true)}>
-                +
-              </AddRecipe>
-            </RecipePopup>
             {recipes &&
               recipes.map((el: any) => (
                 <Recipe
@@ -82,7 +77,7 @@ export const Recipes = () => {
                   title={el.title}
                   description={el.description}
                   kcal={el.kcal}
-                  time={el.time}
+                  time={el.timeToBeDone}
                   image={"./assets/recipe-1.svg"}
                 />
               ))}
@@ -100,10 +95,12 @@ export const Recipes = () => {
 const Container = styled.div`
   width: 100%;
   height: 100%;
+  display: flex;
 `;
 
 const Content = styled.div`
   height: 100%;
+  width: 100%;
   display: flex;
   flex-direction: column;
   justify-content: space-between;
@@ -174,9 +171,10 @@ const CategoriesSection = styled.div`
 const RecipesSection = styled.div`
   display: flex;
   position: relative;
-  justify-content: space-between;
-  width: 50%;
+  width: 65%;
   flex-wrap: wrap;
+  justify-content: center;
+  align-items: center;
 
   @media (max-width: 768px) {
     display: flex;
@@ -191,7 +189,8 @@ const RecipesSection = styled.div`
 
 const RecipePopup = styled.div`
   display: flex;
-  width: 45%;
+  position: relative;
+  width: 35%;
   flex-direction: column;
   align-items: center;
   min-height: 25rem;
@@ -199,6 +198,7 @@ const RecipePopup = styled.div`
   border-radius: 3%;
   background-color: rgb(21, 34, 56);
   color: white;
+  left: 6rem;
 
   @media (max-width: 768px) {
     width: 100%;

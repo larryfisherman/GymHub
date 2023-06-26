@@ -12,13 +12,13 @@ interface Props {
 export const Recipe = ({ title, description, kcal, time, image }: Props) => {
   return (
     <Container>
-      <Image src={image} loading="lazy" />
       <Content>
+        <Image src={image} loading="lazy" />
         <Title>{title}</Title>
         <Description>{description}</Description>
         <CaloriesAndTimeSection>
           <Calories>{kcal} kcal</Calories>
-          <Time>{time} minutes</Time>
+          <Time>{time ? ` ${time} minutes` : null}</Time>
         </CaloriesAndTimeSection>
         <SeeMoreButton>SEE MORE</SeeMoreButton>
       </Content>
@@ -32,11 +32,11 @@ const Calories = styled.span`
 const Time = styled.span``;
 
 const Container = styled.div`
-  width: 45%;
   display: flex;
+  width: 40%;
   align-items: center;
   margin-top: 1rem;
-  position: relative;
+  margin-bottom: 3rem;
 
   @media (max-width: 768px) {
     width: 100%;
@@ -50,6 +50,7 @@ const Content = styled.div`
   display: flex;
   flex-direction: column;
   justify-content: space-between;
+  flex-direction: column;
   align-items: center;
   min-height: 25rem;
   min-width: 20rem;
@@ -68,8 +69,8 @@ const Content = styled.div`
 const Title = styled.title`
   display: flex;
   justify-content: space-between;
-  font-size: 1rem;
-  margin-bottom: 1rem;
+  font-size: 1.5rem;
+  margin-bottom: 2rem;
 
   @media (max-width: 768px) {
     font-size: 1.2rem;
@@ -84,16 +85,9 @@ const Title = styled.title`
 `;
 
 const Description = styled.span`
-  display: flex;
-  justify-content: space-between;
-  width: 100%;
-  position: relative;
   overflow-wrap: break-word;
-  font-size: 0.7rem;
-  padding-left: 3.5rem;
-  span {
-    font-size: 0.8rem;
-  }
+  font-size: 1rem;
+  margin: 1rem;
 
   @media (max-width: 768px) {
     width: 80%;
@@ -103,10 +97,9 @@ const Description = styled.span`
 
 const CaloriesAndTimeSection = styled.div`
   display: flex;
-  justify-content: space-between;
-  width: 12rem;
-  padding-left: 2rem;
-
+  span {
+    margin-left: 1rem;
+  }
   @media (max-width: 768px) {
     padding-left: 0;
   }
@@ -141,7 +134,7 @@ const Image = styled.img`
   border-radius: 50%;
   border: 1px solid black;
   z-index: 2;
-  left: 6rem;
+  top: -4rem;
 
   @media (max-width: 768px) {
     left: 0;
