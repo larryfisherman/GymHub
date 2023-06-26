@@ -8,14 +8,12 @@ import { AddNewRecipePopup } from "./AddNewRecipePopup";
 
 export const Recipes = () => {
   const [recipes, setRecipes] = useState([]);
-  const [showAddRecipePopup, setShowAddRecipePopup] = useState(false);
 
   useEffect(() => {
     axios
       .get("https://localhost:44390/api/recipes/")
       .then((res) => setRecipes(res.data));
   }, []);
-
   const categoriesItems = [
     {
       id: 1,
@@ -57,7 +55,6 @@ export const Recipes = () => {
   return (
     <Container>
       <Content>
-        {showAddRecipePopup && <AddNewRecipePopup />}
         <TitleSection>
           <span>Your Delicious</span>
           <span>Recipes</span>
@@ -70,6 +67,10 @@ export const Recipes = () => {
         <AllItems>
           <RecipesSection>
             <Title>All items</Title>
+            <RecipePopup>
+              <Title>Add New Recipe</Title>
+              <AddRecipe>+</AddRecipe>
+            </RecipePopup>
             {recipes &&
               recipes.map((el: any) => (
                 <Recipe
@@ -77,7 +78,7 @@ export const Recipes = () => {
                   title={el.title}
                   description={el.description}
                   kcal={el.kcal}
-                  time={el.timeToBeDone}
+                  time={el.time}
                   image={"./assets/recipe-1.svg"}
                 />
               ))}
@@ -95,12 +96,10 @@ export const Recipes = () => {
 const Container = styled.div`
   width: 100%;
   height: 100%;
-  display: flex;
 `;
 
 const Content = styled.div`
   height: 100%;
-  width: 100%;
   display: flex;
   flex-direction: column;
   justify-content: space-between;
@@ -171,10 +170,9 @@ const CategoriesSection = styled.div`
 const RecipesSection = styled.div`
   display: flex;
   position: relative;
-  width: 65%;
+  justify-content: space-between;
+  width: 50%;
   flex-wrap: wrap;
-  justify-content: center;
-  align-items: center;
 
   @media (max-width: 768px) {
     display: flex;
@@ -189,16 +187,15 @@ const RecipesSection = styled.div`
 
 const RecipePopup = styled.div`
   display: flex;
-  position: relative;
-  width: 35%;
+  min-width: 20rem;
+  min-height: 25rem;
   flex-direction: column;
   align-items: center;
-  min-height: 25rem;
+  height: 16.25rem;
   padding: 2rem;
   border-radius: 3%;
   background-color: rgb(21, 34, 56);
   color: white;
-  left: 6rem;
 
   @media (max-width: 768px) {
     width: 100%;
@@ -216,8 +213,4 @@ const AddRecipe = styled.button`
   color: white;
   font-size: 2.5rem;
   margin-top: 3rem;
-
-  &:hover {
-    cursor: pointer;
-  }
 `;

@@ -58,6 +58,7 @@ const Content = styled.div`
   border-radius: 3%;
   background-color: rgb(21, 34, 56);
   color: white;
+  width: 30%;
 
   @media (max-width: 768px) {
     width: 100%;
@@ -88,10 +89,26 @@ const Description = styled.span`
   overflow-wrap: break-word;
   font-size: 1rem;
   margin: 1rem;
+  max-height: 5rem;
+  overflow-y: scroll;
 
   @media (max-width: 768px) {
     width: 80%;
     padding-left: 0;
+  }
+
+  ::-webkit-scrollbar-thumb {
+  }
+
+  ::-webkit-scrollbar-thumb:hover {
+    color: black;
+  }
+
+  ::-webkit-scrollbar {
+    height: 10px;
+  }
+
+  ::-webkit-scrollbar-track {
   }
 `;
 
@@ -135,9 +152,4 @@ const Image = styled.img`
   border: 1px solid black;
   z-index: 2;
   top: -4rem;
-
-  @media (max-width: 768px) {
-    left: 0;
-    top: 5rem;
-  }
 `;
