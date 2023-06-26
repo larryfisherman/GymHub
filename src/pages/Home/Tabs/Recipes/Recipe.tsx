@@ -52,13 +52,13 @@ const Content = styled.div`
   justify-content: space-between;
   flex-direction: column;
   align-items: center;
-  min-height: 25rem;
   min-width: 20rem;
   padding: 1.875rem;
   border-radius: 3%;
   background-color: rgb(21, 34, 56);
   color: white;
   width: 30%;
+  max-height: 28rem;
 
   @media (max-width: 768px) {
     width: 100%;
@@ -97,19 +97,9 @@ const Description = styled.span`
     padding-left: 0;
   }
 
-  ::-webkit-scrollbar-thumb {
-  }
-
-  ::-webkit-scrollbar-thumb:hover {
-    color: black;
-  }
-
   ::-webkit-scrollbar {
     height: 10px;
-  }
 
-  ::-webkit-scrollbar-track {
-  }
 `;
 
 const CaloriesAndTimeSection = styled.div`

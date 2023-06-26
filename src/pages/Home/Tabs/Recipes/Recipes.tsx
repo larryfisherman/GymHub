@@ -78,7 +78,7 @@ export const Recipes = () => {
                   title={el.title}
                   description={el.description}
                   kcal={el.kcal}
-                  time={el.time}
+                  time={el.timeToBeDone}
                   image={"./assets/recipe-1.svg"}
                 />
               ))}
@@ -104,6 +104,10 @@ const Content = styled.div`
   flex-direction: column;
   justify-content: space-between;
   padding: 30px;
+
+  @media (max-width: 768px) {
+    padding: 10px;
+  }
 `;
 
 const AllItems = styled.div`
@@ -188,14 +192,15 @@ const RecipesSection = styled.div`
 const RecipePopup = styled.div`
   display: flex;
   min-width: 20rem;
-  min-height: 25rem;
+  height: 28rem;
+  padding: 2rem;
   flex-direction: column;
   align-items: center;
-  height: 16.25rem;
-  padding: 2rem;
   border-radius: 3%;
   background-color: rgb(21, 34, 56);
   color: white;
+  margin-bottom: 3rem;
+  margin-top: 1rem;
 
   @media (max-width: 768px) {
     width: 100%;
