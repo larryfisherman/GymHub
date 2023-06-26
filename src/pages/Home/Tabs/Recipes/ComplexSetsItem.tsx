@@ -37,7 +37,7 @@ const Container = styled.div`
   height: 100%;
   display: flex;
   align-items: center;
-  margin-top: 2rem;
+  margin-bottom: 2rem;
 `;
 
 const Content = styled.div`

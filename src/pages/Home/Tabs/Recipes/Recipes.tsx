@@ -1,38 +1,20 @@
-import React from "react";
+import React, { useEffect, useState } from "react";
+import axios from "axios";
 import styled from "styled-components";
 import { Recipe } from "./Recipe";
 import { CategoriesItem } from "./CategoriesItem";
 import { ComplexSets } from "./ComplexSets";
+import { AddNewRecipePopup } from "./AddNewRecipePopup";
 
 export const Recipes = () => {
-  const recpiesArray = [
-    {
-      id: 1,
-      title: "Grilled Chicken with Mixed Vegetables",
-      description:
-        "A lean protein and veggie-packed meal that is perfect for a post-workout dinner",
-      kcal: 400,
-      time: 20,
-      image: "./assets/recipe-1.svg",
-    },
-    {
-      id: 2,
-      title: "Beef Stir-Fry",
-      description: "A quick and easy meal that is high protein and fiber.",
-      kcal: 400,
-      time: 20,
-      image: "./assets/recipe-2.svg",
-    },
-    {
-      id: 3,
-      title: "Beef Stir-Fry",
-      description: "A quick and easy meal that is high protein and fiber.",
-      kcal: 400,
-      time: 20,
-      image: "./assets/recipe-2.svg",
-    },
-  ];
+  const [recipes, setRecipes] = useState([]);
+  const [showAddRecipePopup, setShowAddRecipePopup] = useState(false);
 
+  useEffect(() => {
+    axios
+      .get("https://localhost:44390/api/recipes/")
+      .then((res) => setRecipes(res.data));
+  }, []);
   const categoriesItems = [
     {
       id: 1,
@@ -73,6 +55,7 @@ export const Recipes = () => {
 
   return (
     <Container>
+      {showAddRecipePopup && <AddNewRecipePopup />}
       <Content>
         <TitleSection>
           <span>Your Delicious</span>
@@ -86,16 +69,23 @@ export const Recipes = () => {
         <AllItems>
           <RecipesSection>
             <Title>All items</Title>
-            {recpiesArray.map((el) => (
-              <Recipe
-                key={el.id}
-                title={el.title}
-                description={el.description}
-                kcal={el.kcal}
-                time={el.time}
-                image={el.image}
-              />
-            ))}
+            <RecipePopup>
+              <Title>Add New Recipe</Title>
+              <AddRecipe onClick={() => setShowAddRecipePopup(true)}>
+                +
+              </AddRecipe>
+            </RecipePopup>
+            {recipes &&
+              recipes.map((el: any) => (
+                <Recipe
+                  key={el.id}
+                  title={el.title}
+                  description={el.description}
+                  kcal={el.kcal}
+                  time={el.time}
+                  image={"./assets/recipe-1.svg"}
+                />
+              ))}
           </RecipesSection>
           <ComplexSetsItems>
             <Title>Complex sets</Title>
@@ -122,7 +112,9 @@ const Content = styled.div`
 
 const AllItems = styled.div`
   display: flex;
+  height: 100%;
   justify-content: space-between;
+  align-items: flex-start;
   flex-wrap: wrap;
   margin-right: 2rem;
 `;
@@ -130,6 +122,7 @@ const AllItems = styled.div`
 const ComplexSetsItems = styled.div`
   display: flex;
   flex-direction: column;
+  align-items: flex-start;
   justify-content: space-between;
   width: 35%;
 
@@ -193,5 +186,38 @@ const RecipesSection = styled.div`
     width: 100%;
     margin-left: auto;
     margin-right: auto;
+  }
+`;
+
+const RecipePopup = styled.div`
+  display: flex;
+  width: 45%;
+  flex-direction: column;
+  align-items: center;
+  min-height: 25rem;
+  padding: 2rem;
+  border-radius: 3%;
+  background-color: rgb(21, 34, 56);
+  color: white;
+
+  @media (max-width: 768px) {
+    width: 100%;
+    justify-content: center;
+    align-items: center;
+  }
+`;
+
+const AddRecipe = styled.button`
+  border-radius: 50%;
+  height: 10rem;
+  width: 10rem;
+  border: 2px solid black;
+  background-color: rgba(255, 255, 255, 0.5);
+  color: white;
+  font-size: 2.5rem;
+  margin-top: 3rem;
+
+  &:hover {
+    cursor: pointer;
   }
 `;

@@ -37,7 +37,6 @@ const Container = styled.div`
   align-items: center;
   margin-top: 1rem;
   position: relative;
-  left: -5rem;
 
   @media (max-width: 768px) {
     width: 100%;
