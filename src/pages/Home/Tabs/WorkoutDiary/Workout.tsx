@@ -4,9 +4,11 @@ import styled from "styled-components";
 interface Props {
   title: string;
   favourite: boolean;
+  timeToBeDone: number;
+  kcal: number;
 }
 
-export const Workout = ({ title, favourite }: Props) => {
+export const Workout = ({ title, favourite, timeToBeDone, kcal }: Props) => {
   return (
     <Container>
       <Content>
@@ -21,8 +23,8 @@ export const Workout = ({ title, favourite }: Props) => {
           />
         </TitleSection>
         <DescriptionSection>
-          <span>20 minut</span>
-          <span>400 kcal</span>
+          <span>{timeToBeDone ? `${timeToBeDone} minutes` : null}</span>
+          <span>{kcal ? `${kcal} kcal` : null}</span>
         </DescriptionSection>
         <StartButton>START</StartButton>
       </Content>
@@ -33,7 +35,6 @@ export const Workout = ({ title, favourite }: Props) => {
 const Container = styled.div`
   width: 50%;
   height: 100%;
-
   @media (max-width: 768px) {
     width: 100%;
   }
@@ -41,12 +42,14 @@ const Container = styled.div`
 const Content = styled.div`
   width: 80%;
   height: 100%;
+  color: white;
   background-color: white;
   display: flex;
   flex-direction: column;
   padding: 30px;
   margin-top: 3rem;
-  border-radius: 3%;
+  border-radius: 5%;
+  background: url("./assets/workout-4.svg") center center / cover;
 
   @media (max-width: 768px) {
     width: 100%;
@@ -80,7 +83,7 @@ const HeartIcon = styled.img`
 const DescriptionSection = styled.div`
   display: flex;
   justify-content: space-between;
-  width: 30%;
+  width: 25%;
 
   span {
     font-size: 0.8rem;

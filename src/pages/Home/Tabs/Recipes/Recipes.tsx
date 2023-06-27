@@ -8,6 +8,7 @@ import { AddNewRecipePopup } from "./AddNewRecipePopup";
 
 export const Recipes = () => {
   const [recipes, setRecipes] = useState([]);
+  const [showAddRecipePopup, setShowAddRecipePopup] = useState(false);
 
   useEffect(() => {
     axios
@@ -54,6 +55,7 @@ export const Recipes = () => {
 
   return (
     <Container>
+      {/* {showAddRecipePopup && <AddNewRecipePopup />} */}
       <Content>
         <TitleSection>
           <span>Your Delicious</span>
@@ -69,7 +71,9 @@ export const Recipes = () => {
             <Title>All items</Title>
             <RecipePopup>
               <Title>Add New Recipe</Title>
-              <AddRecipe>+</AddRecipe>
+              <AddRecipe onClick={() => setShowAddRecipePopup(true)}>
+                +
+              </AddRecipe>
             </RecipePopup>
             {recipes &&
               recipes.map((el: any) => (
@@ -156,18 +160,8 @@ const CategoriesSection = styled.div`
   margin-bottom: 2rem;
   overflow-x: scroll;
 
-  ::-webkit-scrollbar-thumb {
-  }
-
-  ::-webkit-scrollbar-thumb:hover {
-    color: black;
-  }
-
   ::-webkit-scrollbar {
     height: 10px;
-  }
-
-  ::-webkit-scrollbar-track {
   }
 `;
 
@@ -218,4 +212,8 @@ const AddRecipe = styled.button`
   color: white;
   font-size: 2.5rem;
   margin-top: 3rem;
+
+  &:hover {
+    cursor: pointer;
+  }
 `;

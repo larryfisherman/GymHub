@@ -10,7 +10,8 @@ export const AddNewRecipePopup = () => {
 };
 
 const Container = styled.div`
-  width: 60%;
+  position: absolute;
+  width: 100%;
   height: 100%;
   display: flex;
   background-color: rgba(255, 255, 255, 0.5);
@@ -20,7 +21,7 @@ const Container = styled.div`
 `;
 
 const Content = styled.div`
-  background-color: black;
-  width: 100%;
+  background-color: white;
+  width: 50%;
   height: 100%;
 `;
