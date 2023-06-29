@@ -7,6 +7,7 @@ interface Props {
   description: string;
   kcal: number;
   time: number;
+  color: string;
 }
 
 export const ComplexSetsItem = ({
@@ -15,11 +16,12 @@ export const ComplexSetsItem = ({
   description,
   kcal,
   time,
+  color,
 }: Props) => {
   return (
     <Container>
       <Image src={image} loading="lazy" />
-      <Content>
+      <Content style={{ backgroundColor: color }}>
         <Title>{title}</Title>
         <Description>{description}</Description>
         <CaloriesAndTimeSection>
@@ -71,7 +73,7 @@ const Image = styled.img`
 const Title = styled.title`
   display: flex;
   justify-content: space-between;
-  font-size: 1rem;
+  font-size: 1.5rem;
   margin-bottom: 1rem;
 
   @media (max-width: 768px) {
@@ -92,8 +94,14 @@ const Description = styled.span`
   width: 100%;
   position: relative;
   overflow-wrap: break-word;
-  font-size: 0.7rem;
-  padding-left: 3.5rem;
+  font-size: 1rem;
+  padding-left: 3.8rem;
+  overflow-y: scroll;
+
+  ::-webkit-scrollbar {
+    height: 10px;
+  }
+
   span {
     font-size: 0.8rem;
   }
@@ -121,14 +129,14 @@ const Time = styled.div``;
 const SeeMoreButton = styled.div`
   display: flex;
   margin-top: 1rem;
-  width: 7rem;
-  height: 2rem;
+  width: 10rem;
+  height: 4rem;
   justify-content: center;
   align-items: center;
-  font-size: 1rem;
+  font-size: 1.5rem;
   border-radius: 5%;
   border: none;
-  background-color: rgb(144, 238, 144);
+  background-color: rgb(21, 34, 56);
   color: white;
 
   &:hover {

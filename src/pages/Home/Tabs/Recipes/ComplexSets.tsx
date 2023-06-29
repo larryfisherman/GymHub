@@ -12,6 +12,7 @@ export const ComplexSets = () => {
       kcal: 400,
       time: 20,
       image: "./assets/recipe-1.svg",
+      color: "#846075",
     },
     {
       id: 2,
@@ -20,6 +21,7 @@ export const ComplexSets = () => {
       kcal: 400,
       time: 20,
       image: "./assets/recipe-2.svg",
+      color: "#A5C882",
     },
   ];
   return (
@@ -33,6 +35,7 @@ export const ComplexSets = () => {
             kcal={el.kcal}
             time={el.time}
             image={el.image}
+            color={el.color}
           />
         ))}
       </Content>

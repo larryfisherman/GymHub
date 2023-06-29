@@ -13,10 +13,10 @@ interface WorkoutProps {
 
 export const WorkoutDiary = () => {
   const [workouts, setWorkouts] = useState([]);
+  const [workoutData, setWorkoutData] = useState([]);
 
   useEffect(() => {
     axios.get("https://localhost:44390/api/workouts").then((res) => {
-      console.log(res.data);
       setWorkouts(res.data);
     });
   }, []);
@@ -26,12 +26,12 @@ export const WorkoutDiary = () => {
       <Content>
         <Title>MY WORKOUTS</Title>
         <Workouts>
-          <AddWorkout>
+          {/* <AddWorkout>
             <TitleSection>
               <span>Add Workout</span>
             </TitleSection>
             <AddWorkoutButton>+</AddWorkoutButton>
-          </AddWorkout>
+          </AddWorkout> */}
           {workouts.map(
             ({ title, favourite, id, timeToBeDone, kcal }: WorkoutProps) => (
               <Workout
@@ -40,6 +40,8 @@ export const WorkoutDiary = () => {
                 favourite={favourite}
                 kcal={kcal}
                 timeToBeDone={timeToBeDone}
+                workoutData={workoutData}
+                setWorkoutData={setWorkoutData}
               />
             )
           )}
@@ -50,10 +52,10 @@ export const WorkoutDiary = () => {
 };
 
 const AddWorkout = styled.div`
+  position: relative;
   width: 40%;
   height: 100%;
   color: white;
-  background-color: white;
   display: flex;
   flex-direction: column;
   padding: 30px;
@@ -91,6 +93,9 @@ const AddWorkoutButton = styled.button`
 const Container = styled.div`
   width: 100%;
   height: 100%;
+  display: flex;
+  justify-content: center;
+  align-items: center;
 `;
 const Content = styled.div`
   display: flex;
@@ -104,6 +109,6 @@ const Title = styled.div``;
 const Workouts = styled.div`
   display: flex;
   flex-wrap: wrap;
-  width: 100%;
-  height: 100%;
+  justify-content: center;
+  align-items: center;
 `;

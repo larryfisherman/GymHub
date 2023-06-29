@@ -59,6 +59,7 @@ const Content = styled.div`
   color: white;
   width: 30%;
   max-height: 28rem;
+  position: relative;
 
   @media (max-width: 768px) {
     width: 100%;
@@ -70,9 +71,9 @@ const Content = styled.div`
 const Title = styled.title`
   display: flex;
   justify-content: space-between;
+  position: relative;
   font-size: 1.5rem;
-  margin-bottom: 2rem;
-
+  top: -3rem;
   @media (max-width: 768px) {
     font-size: 1.2rem;
     width: 100%;
@@ -87,10 +88,12 @@ const Title = styled.title`
 
 const Description = styled.span`
   overflow-wrap: break-word;
-  font-size: 1rem;
-  margin: 1rem;
+  font-size: 0.8rem;
   max-height: 5rem;
+  min-height: 2rem;
   overflow-y: scroll;
+  position: relative;
+  top: -2rem;
 
   @media (max-width: 768px) {
     width: 80%;
@@ -99,7 +102,7 @@ const Description = styled.span`
 
   ::-webkit-scrollbar {
     height: 10px;
-
+  }
 `;
 
 const CaloriesAndTimeSection = styled.div`
@@ -115,11 +118,11 @@ const CaloriesAndTimeSection = styled.div`
 const SeeMoreButton = styled.button`
   display: flex;
   margin-top: 1rem;
-  width: 7rem;
-  height: 2rem;
+  min-width: 10rem;
+  min-height: 4rem;
   justify-content: center;
   align-items: center;
-  font-size: 1rem;
+  font-size: 1.5rem;
   border-radius: 5%;
   border: none;
   background-color: rgb(144, 238, 144);
@@ -137,7 +140,7 @@ const SeeMoreButton = styled.button`
 
 const Image = styled.img`
   position: relative;
-  height: 12rem;
+  min-height: 12rem;
   border-radius: 50%;
   border: 1px solid black;
   z-index: 2;

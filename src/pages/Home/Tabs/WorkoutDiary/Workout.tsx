@@ -6,9 +6,18 @@ interface Props {
   favourite: boolean;
   timeToBeDone: number;
   kcal: number;
+  workoutData: any;
+  setWorkoutData: any;
 }
 
-export const Workout = ({ title, favourite, timeToBeDone, kcal }: Props) => {
+export const Workout = ({
+  title,
+  favourite,
+  timeToBeDone,
+  kcal,
+  workoutData,
+  setWorkoutData,
+}: Props) => {
   return (
     <Container>
       <Content>
@@ -20,6 +29,9 @@ export const Workout = ({ title, favourite, timeToBeDone, kcal }: Props) => {
                 ? "./assets/filled-heart.svg"
                 : "./assets/unfilled-heart.svg"
             }
+            onClick={() => {
+              console.log(!favourite);
+            }}
           />
         </TitleSection>
         <DescriptionSection>
