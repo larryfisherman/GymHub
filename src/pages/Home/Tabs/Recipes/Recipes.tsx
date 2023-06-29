@@ -88,7 +88,7 @@ export const Recipes = () => {
               ))}
           </RecipesSection>
           <ComplexSetsItems>
-            <Title>Complex sets</Title>
+            <ComplexSetsTitle>Complex sets</ComplexSetsTitle>
             <ComplexSets />
           </ComplexSetsItems>
         </AllItems>
@@ -141,6 +141,10 @@ const Title = styled.title`
   font-weight: 800;
   font-size: 1.5rem;
   width: 100%;
+`;
+
+const ComplexSetsTitle = styled(Title)`
+  padding-left: 5rem;
 `;
 
 const TitleSection = styled.div`

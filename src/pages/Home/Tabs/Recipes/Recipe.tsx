@@ -53,12 +53,13 @@ const Content = styled.div`
   flex-direction: column;
   align-items: center;
   min-width: 20rem;
+  min-height: 28rem;
+  height: 28rem;
   padding: 1.875rem;
   border-radius: 3%;
   background-color: rgb(21, 34, 56);
   color: white;
   width: 30%;
-  max-height: 28rem;
   position: relative;
 
   @media (max-width: 768px) {

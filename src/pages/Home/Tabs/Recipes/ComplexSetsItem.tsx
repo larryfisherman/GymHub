@@ -95,7 +95,7 @@ const Description = styled.span`
   position: relative;
   overflow-wrap: break-word;
   font-size: 1rem;
-  padding-left: 3.8rem;
+  padding-left: 4.5rem;
   overflow-y: scroll;
 
   ::-webkit-scrollbar {
