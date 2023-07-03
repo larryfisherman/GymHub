@@ -45,8 +45,8 @@ export const Workout = ({
 };
 
 const Container = styled.div`
-  width: 50%;
-  height: 100%;
+  width: 45%;
+  height: 20rem;
   @media (max-width: 768px) {
     width: 100%;
   }
@@ -54,12 +54,11 @@ const Container = styled.div`
 const Content = styled.div`
   width: 80%;
   height: 100%;
-  color: white;
-  background-color: white;
   display: flex;
   flex-direction: column;
+  color: white;
+  background-color: white;
   padding: 30px;
-  margin-top: 3rem;
   border-radius: 5%;
   background: url("./assets/workout-4.svg") center center / cover;
 

@@ -26,12 +26,12 @@ export const WorkoutDiary = () => {
       <Content>
         <Title>MY WORKOUTS</Title>
         <Workouts>
-          {/* <AddWorkout>
+          <AddWorkout>
             <TitleSection>
               <span>Add Workout</span>
             </TitleSection>
             <AddWorkoutButton>+</AddWorkoutButton>
-          </AddWorkout> */}
+          </AddWorkout>
           {workouts.map(
             ({ title, favourite, id, timeToBeDone, kcal }: WorkoutProps) => (
               <Workout
@@ -51,17 +51,40 @@ export const WorkoutDiary = () => {
   );
 };
 
+const Container = styled.div`
+  width: 100%;
+  height: 100%;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+`;
+const Content = styled.div`
+  display: flex;
+  flex-direction: column;
+  width: 100%;
+  height: 100%;
+  padding: 30px;
+`;
+
+const Workouts = styled.div`
+  display: flex;
+  flex-wrap: wrap;
+  margin-top: 3rem;
+  justify-content: center;
+  align-items: center;
+`;
+
 const AddWorkout = styled.div`
   position: relative;
-  width: 40%;
-  height: 100%;
+  width: 45%;
+  height: 20rem;
   color: white;
   display: flex;
   flex-direction: column;
   padding: 30px;
-  margin-top: 3rem;
   border-radius: 5%;
   background: url("./assets/workout-4.svg") center center / cover;
+  margin-bottom: 2rem;
 
   @media (max-width: 768px) {
     width: 100%;
@@ -90,25 +113,4 @@ const AddWorkoutButton = styled.button`
   border-radius: 50%;
 `;
 
-const Container = styled.div`
-  width: 100%;
-  height: 100%;
-  display: flex;
-  justify-content: center;
-  align-items: center;
-`;
-const Content = styled.div`
-  display: flex;
-  flex-direction: column;
-  width: 100%;
-  height: 100%;
-  padding: 30px;
-`;
-
 const Title = styled.div``;
-const Workouts = styled.div`
-  display: flex;
-  flex-wrap: wrap;
-  justify-content: center;
-  align-items: center;
-`;

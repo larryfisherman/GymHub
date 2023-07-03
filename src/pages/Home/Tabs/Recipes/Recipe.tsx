@@ -126,7 +126,7 @@ const SeeMoreButton = styled.button`
   font-size: 1.5rem;
   border-radius: 5%;
   border: none;
-  background-color: rgb(144, 238, 144);
+  background-color: #a5c882;
   color: white;
 
   &:hover {

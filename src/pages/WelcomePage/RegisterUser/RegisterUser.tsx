@@ -2,6 +2,7 @@ import React, { useState } from "react";
 import styled from "styled-components";
 import axios from "axios";
 import { GoogleLogin } from "@react-oauth/google";
+import { useNavigate } from "react-router-dom";
 
 interface Props {
   setShowRegisterPopup: React.Dispatch<React.SetStateAction<boolean>>;
@@ -13,11 +14,11 @@ export const RegisterUser = ({
   setShowLoginPopup,
 }: Props) => {
   const [emailValue, setEmailValue] = useState("");
+  const [nameValue, setNameValue] = useState("");
   const [passwordValue, setPasswordValue] = useState("");
-  const [fullNameValue, setFullNameValue] = useState("");
   const [showPassword, setShowPassword] = useState(false);
 
-  // remember to change styling for laptops!
+  const navigate = useNavigate();
 
   return (
     <Container>
@@ -32,9 +33,9 @@ export const RegisterUser = ({
         <h1>Create Account</h1>
         <GoogleLogin onSuccess={() => console.log("success")} />
         <FullNameInput
-          value={fullNameValue}
-          onChange={(e) => setFullNameValue(e.target.value)}
-          placeholder="Full Name"
+          value={nameValue}
+          onChange={(e) => setNameValue(e.target.value)}
+          placeholder="Your name"
         />
         <EmailInput
           value={emailValue}
@@ -59,10 +60,13 @@ export const RegisterUser = ({
         </PasswordSection>
         <ConfirmButton
           onClick={() =>
-            axios.post("https://localhost:44390/api/user/register", {
-              email: emailValue,
-              password: passwordValue,
-            })
+            axios
+              .post("https://localhost:44390/api/user/register", {
+                name: nameValue,
+                email: emailValue,
+                password: passwordValue,
+              })
+              .then(() => navigate("/login"))
           }
         >
           CREATE ACCOUNT
@@ -156,6 +160,10 @@ const Content = styled.div`
   justify-content: space-between;
   border-radius: 2%;
   padding: 50px;
+
+  input:-webkit-autofill {
+    -webkit-box-shadow: 0 0 0px 1000px white inset;
+  }
 
   @media (max-width: 768px) {
     height: 100%;

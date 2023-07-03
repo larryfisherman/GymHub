@@ -1,6 +1,8 @@
 import React, { useState } from "react";
 import styled from "styled-components";
 import axios from "axios";
+import { useDispatch } from "react-redux";
+import { login } from "../../../store/userSlice.js";
 
 interface Props {
   setShowLoginPopup: React.Dispatch<React.SetStateAction<boolean>>;
@@ -10,6 +12,8 @@ export const LoginUser = ({ setShowLoginPopup }: Props) => {
   const [emailValue, setEmailValue] = useState("");
   const [passwordValue, setPasswordValue] = useState("");
   const [showPassword, setShowPassword] = useState(false);
+
+  const dispatch = useDispatch();
 
   return (
     <Container>
@@ -45,10 +49,15 @@ export const LoginUser = ({ setShowLoginPopup }: Props) => {
         </PasswordSection>
         <ConfirmButton
           onClick={() =>
-            axios.post("https://localhost:44390/api/user/register", {
-              email: emailValue,
-              password: passwordValue,
-            })
+            axios
+              .post("https://localhost:44390/api/user/register", {
+                email: emailValue,
+                password: passwordValue,
+              })
+              .then((res) => {
+                localStorage.setItem("token", res.data.token);
+                dispatch(login(res.data));
+              })
           }
         >
           LOG IN
@@ -126,6 +135,10 @@ const Content = styled.div`
   justify-content: space-between;
   border-radius: 2%;
   padding: 50px;
+
+  input:-webkit-autofill {
+    -webkit-box-shadow: 0 0 0px 1000px white inset;
+  }
 
   & > input {
     width: 50%;
