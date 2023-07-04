@@ -1,8 +1,9 @@
 import React, { useState } from "react";
 import styled from "styled-components";
 import axios from "axios";
+import { login } from "../../../store/userSlice";
 import { useDispatch } from "react-redux";
-import { login } from "../../../store/userSlice.js";
+import { useNavigate } from "react-router-dom";
 
 interface Props {
   setShowLoginPopup: React.Dispatch<React.SetStateAction<boolean>>;
@@ -14,6 +15,7 @@ export const LoginUser = ({ setShowLoginPopup }: Props) => {
   const [showPassword, setShowPassword] = useState(false);
 
   const dispatch = useDispatch();
+  const navigate = useNavigate();
 
   return (
     <Container>
@@ -50,13 +52,14 @@ export const LoginUser = ({ setShowLoginPopup }: Props) => {
         <ConfirmButton
           onClick={() =>
             axios
-              .post("https://localhost:44390/api/user/register", {
+              .post("https://localhost:44390/api/user/login", {
                 email: emailValue,
                 password: passwordValue,
               })
               .then((res) => {
                 localStorage.setItem("token", res.data.token);
-                dispatch(login(res.data));
+                dispatch(login(res.data.user));
+                navigate("/home");
               })
           }
         >

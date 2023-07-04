@@ -75,15 +75,15 @@ const Workouts = styled.div`
 `;
 
 const AddWorkout = styled.div`
-  position: relative;
-  width: 45%;
-  height: 20rem;
-  color: white;
   display: flex;
   flex-direction: column;
+  align-items: center;
+  width: 39rem;
+  height: 20rem;
   padding: 30px;
   border-radius: 5%;
   background: url("./assets/workout-4.svg") center center / cover;
+  color: white;
   margin-bottom: 2rem;
 
   @media (max-width: 768px) {
@@ -92,6 +92,8 @@ const AddWorkout = styled.div`
 `;
 
 const TitleSection = styled.div`
+  display: flex;
+  align-self: flex-start;
   font-size: 2rem;
   margin-bottom: 1rem;
 

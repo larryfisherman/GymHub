@@ -1,12 +1,18 @@
 import React from "react";
 import styled from "styled-components";
 import { SideBarItem } from "./SideBarItem";
+import { useDispatch } from "react-redux";
+import { logout } from "../../store/userSlice";
+import { useNavigate } from "react-router-dom";
 
 interface Props {
   setTabToggle: any;
 }
 
 export const NavSideBar = ({ setTabToggle }: Props) => {
+  const dispatch = useDispatch();
+  const navigate = useNavigate();
+
   return (
     <Nav>
       <Logo src="./assets/biceps-icon.svg" />
@@ -46,6 +52,11 @@ export const NavSideBar = ({ setTabToggle }: Props) => {
           <SideBarItem
             itemImg="./assets/logout-gray-icon.svg"
             itemName="Logout"
+            onClick={() => {
+              dispatch(logout);
+              navigate("/");
+              localStorage.removeItem("token");
+            }}
           />
         </UserSection>
       </Content>
