@@ -6,7 +6,7 @@ import { logout } from "../../store/userSlice";
 import { useNavigate } from "react-router-dom";
 
 interface Props {
-  setTabToggle: any;
+  setTabToggle?: any;
 }
 
 export const NavSideBar = ({ setTabToggle }: Props) => {
@@ -38,11 +38,11 @@ export const NavSideBar = ({ setTabToggle }: Props) => {
             itemName="Exercises"
             onClick={() => setTabToggle(4)}
           />
-          <SideBarItem
+          {/* <SideBarItem
             itemImg="./assets/progress-gray-icon.svg"
             itemName="Progress"
             onClick={() => setTabToggle(5)}
-          />
+          /> */}
         </NavItems>
         <UserSection>
           <SideBarItem

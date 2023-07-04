@@ -4,10 +4,16 @@ import { HeaderSection } from "./HeaderSection/HeaderSection";
 import { MainContent } from "./MainContent/MainContent";
 import { LoginUser } from "./LoginUser/LoginUser";
 import { RegisterUser } from "./RegisterUser/RegisterUser";
+import { useSelector } from "react-redux";
+import { selectUser } from "../../store/userSlice";
+import { useNavigate } from "react-router-dom";
 
 export const WelcomePage = () => {
   const [showRegisterPopup, setShowRegisterPopup] = useState(false);
   const [showLoginPopup, setShowLoginPopup] = useState(false);
+
+  const navigate = useNavigate();
+  const user = useSelector(selectUser);
 
   return (
     <Container>

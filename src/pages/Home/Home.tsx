@@ -9,7 +9,6 @@ export const Home = () => {
   const [tabToggle, setTabToggle] = useState(1);
 
   const user = useSelector(selectUser);
-  console.log(user);
 
   return (
     <>

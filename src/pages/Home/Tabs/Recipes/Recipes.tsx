@@ -5,10 +5,13 @@ import { Recipe } from "./Recipe";
 import { CategoriesItem } from "./CategoriesItem";
 import { ComplexSets } from "./ComplexSets";
 import { AddNewRecipePopup } from "./AddNewRecipePopup";
+import RecipeDetails from "./RecipeDetails";
 
 export const Recipes = () => {
   const [recipes, setRecipes] = useState([]);
   const [showAddRecipePopup, setShowAddRecipePopup] = useState(false);
+  const [showRecipeDetails, setShowRecipeDetails] = useState(false);
+  const [recipeDetailsId, setRecipeDetailsId] = useState(0);
 
   useEffect(() => {
     axios
@@ -54,48 +57,67 @@ export const Recipes = () => {
   ];
 
   return (
-    <Container>
-      {/* {showAddRecipePopup && <AddNewRecipePopup />} */}
-      <Content>
-        <TitleSection>
-          <span>Your Delicious</span>
-          <span>Recipes</span>
-        </TitleSection>
-        <CategoriesSection>
-          {categoriesItems.map((el) => (
-            <CategoriesItem key={el.id} title={el.title} image={el.image} />
-          ))}
-        </CategoriesSection>
-        <AllItems>
-          <RecipesSection>
-            <Title>All items</Title>
-            <RecipePopup>
-              <Title>Add New Recipe</Title>
-              <AddRecipe onClick={() => setShowAddRecipePopup(true)}>
-                +
-              </AddRecipe>
-            </RecipePopup>
-            {recipes &&
-              recipes.map((el: any) => (
-                <Recipe
-                  key={el.id}
-                  title={el.title}
-                  description={el.description}
-                  kcal={el.kcal}
-                  time={el.timeToBeDone}
-                  image={"./assets/recipe-1.svg"}
-                />
-              ))}
-          </RecipesSection>
-          <ComplexSetsItems>
-            <ComplexSetsTitle>Complex sets</ComplexSetsTitle>
-            <ComplexSets />
-          </ComplexSetsItems>
-        </AllItems>
-      </Content>
-    </Container>
+    <>
+      <Container>
+        {/* {showAddRecipePopup && <AddNewRecipePopup />} */}
+        {showRecipeDetails && (
+          <RecipeDetails
+            id={recipeDetailsId}
+            setShowRecipeDetails={setShowRecipeDetails}
+          />
+        )}
+        <Content>
+          <TitleSection>
+            <span>Your Delicious</span>
+            <span>Recipes</span>
+          </TitleSection>
+          <CategoriesSection>
+            {categoriesItems.map((el) => (
+              <CategoriesItem key={el.id} title={el.title} image={el.image} />
+            ))}
+          </CategoriesSection>
+          <AllItems>
+            <RecipesSection>
+              <Title>All items</Title>
+              <RecipePopup>
+                <Title>Add New Recipe</Title>
+                <AddRecipe onClick={() => setShowAddRecipePopup(true)}>
+                  +
+                </AddRecipe>
+              </RecipePopup>
+              {recipes &&
+                recipes.map((el: any) => (
+                  <Recipe
+                    key={el.id}
+                    id={el.id}
+                    title={el.title}
+                    description={el.description}
+                    kcal={el.kcal}
+                    time={el.timeToBeDone}
+                    image={"./assets/recipe-1.svg"}
+                    setShowRecipeDetails={setShowRecipeDetails}
+                    setRecipeDetailsId={setRecipeDetailsId}
+                  />
+                ))}
+            </RecipesSection>
+            <ComplexSetsItems>
+              <ComplexSetsTitle>Complex sets</ComplexSetsTitle>
+              <ComplexSets />
+            </ComplexSetsItems>
+          </AllItems>
+        </Content>
+      </Container>
+    </>
   );
 };
+
+const Header = styled.div`
+  width: 100%;
+  height: 10%;
+  background-color: black;
+  position: fixed;
+  z-index: 33333;
+`;
 
 const Container = styled.div`
   width: 100%;

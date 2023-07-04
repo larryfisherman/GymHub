@@ -1,5 +1,6 @@
 import React from "react";
 import styled from "styled-components";
+import { useNavigate } from "react-router-dom";
 
 interface Props {
   title: string;
@@ -7,9 +8,23 @@ interface Props {
   kcal: number;
   time: number;
   image: string;
+  id: number;
+  setShowRecipeDetails: any;
+  setRecipeDetailsId: any;
 }
 
-export const Recipe = ({ title, description, kcal, time, image }: Props) => {
+export const Recipe = ({
+  title,
+  description,
+  kcal,
+  time,
+  image,
+  setShowRecipeDetails,
+  setRecipeDetailsId,
+  id,
+}: Props) => {
+  const navigate = useNavigate();
+
   return (
     <Container>
       <Content>
@@ -20,7 +35,14 @@ export const Recipe = ({ title, description, kcal, time, image }: Props) => {
           <Calories>{kcal} kcal</Calories>
           <Time>{time ? ` ${time} minutes` : null}</Time>
         </CaloriesAndTimeSection>
-        <SeeMoreButton>SEE MORE</SeeMoreButton>
+        <SeeMoreButton
+          onClick={() => {
+            setShowRecipeDetails(true);
+            setRecipeDetailsId(id);
+          }}
+        >
+          SEE MORE
+        </SeeMoreButton>
       </Content>
     </Container>
   );
