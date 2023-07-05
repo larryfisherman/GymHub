@@ -1,20 +1,41 @@
 import React from "react";
 import styled from "styled-components";
 
-interface Props {
-  id?: number;
+interface stepsStateProps {
+  id: number;
   title: string;
   description: string;
 }
 
-export const RecipeDetailsStep = ({ id, title, description }: any) => {
+interface Props {
+  id: number;
+  title: string;
+  description: string;
+  setSteps: React.Dispatch<React.SetStateAction<stepsStateProps[]>>;
+}
+
+export const RecipeDetailsStep = ({
+  id,
+  title,
+  description,
+  setSteps,
+}: Props) => {
+  const handleInputChange = (id: number, value: string) => {
+    setSteps((prevData: any) =>
+      prevData.map((item: any) =>
+        item.id === id ? { ...item, description: value } : item
+      )
+    );
+  };
+
   return (
     <Container>
       <Content>
         <StepTitle>{title}</StepTitle>
         <StepDescription
           placeholder="Description"
-          defaultValue={description ? description : ""}
+          value={description ? description : ""}
+          onChange={(e) => handleInputChange(id, e.target.value)}
         />
         <LowerRightSeparator />
       </Content>

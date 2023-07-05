@@ -2,25 +2,42 @@ import React, { useEffect, useState } from "react";
 import styled from "styled-components";
 import axios from "axios";
 import { RecipeDetailsStep } from "./RecipeDetailsStep";
+import { RecipeDetailsIngredient } from "./RecipeDetailsIngredient";
 import { addStep } from "./utils/addStep";
+import { addIngredient } from "./utils/addIngredient";
 
 interface Props {
   id: number;
-  setShowRecipeDetails: any;
+  setShowRecipeDetails: React.Dispatch<React.SetStateAction<boolean>>;
+}
+
+interface stepsStateProps {
+  id: number;
+  title: string;
+  description: string;
+}
+
+interface ingredientsStateProps {
+  id: number;
+  name: string;
+  amount: number;
 }
 
 export const RecipeDetails = ({ id, setShowRecipeDetails }: Props) => {
   const [recipeData, setRecipeData] = useState<any>({});
-  const [steps, setSteps] = useState<any>([
+  const [steps, setSteps] = useState<stepsStateProps[]>([
     {
       id: 1,
       title: "Step 1",
       description: "Test1",
     },
+  ]);
+
+  const [ingrediens, setIngrediens] = useState<any[]>([
     {
-      id: 2,
-      title: "Step 2",
-      description: "Test 2",
+      id: 1,
+      name: "Carrot",
+      amount: 2,
     },
   ]);
 
@@ -73,12 +90,23 @@ export const RecipeDetails = ({ id, setShowRecipeDetails }: Props) => {
             </MakroSection>
             <IngrediensSection>
               <Title>Ingrediens (per serving)</Title>
-              <AmountAndIngredientSection>
-                <AmountInput placeholder="Amount" />
-                <IngredientInput placeholder="Ingredient" />
-              </AmountAndIngredientSection>
+              {ingrediens.map(({ id, amount, name }: any) => (
+                <RecipeDetailsIngredient
+                  id={id}
+                  amount={amount}
+                  name={name}
+                  setIngrediens={setIngrediens}
+                />
+              ))}
               <Separator />
-              <AddIngredient>+ Add Ingredient</AddIngredient>
+              <AddIngredient
+                onClick={() => {
+                  const addIngredients = addIngredient(ingrediens);
+                  setIngrediens([...ingrediens, addIngredients]);
+                }}
+              >
+                + Add Ingredient
+              </AddIngredient>
               <Separator />
             </IngrediensSection>
           </BottomLeftSection>
@@ -89,6 +117,7 @@ export const RecipeDetails = ({ id, setShowRecipeDetails }: Props) => {
                 title={title}
                 id={id}
                 description={description}
+                setSteps={setSteps}
               />
             ))}
             <AddStep
@@ -141,6 +170,7 @@ const MakroSection = styled.div`
 const IngrediensSection = styled.div`
   background-color: white;
   padding: 1rem;
+  overflow-y: scroll;
 `;
 
 const Title = styled.span`
@@ -148,23 +178,6 @@ const Title = styled.span`
   margin-left: 3rem;
   font-size: 2rem;
   font-weight: bold;
-`;
-
-const AmountAndIngredientSection = styled.div`
-  width: 100%;
-  display: flex;
-  justify-content: space-between;
-  padding-left: 3rem;
-  padding-right: 3rem;
-  margin-top: 1rem;
-`;
-
-const AmountInput = styled.input`
-  padding: 5px;
-`;
-const IngredientInput = styled.input`
-  width: 60%;
-  padding: 5px;
 `;
 
 const AddIngredient = styled.span`
@@ -273,7 +286,7 @@ const Container = styled.div`
   overflow: hidden;
 `;
 const Content = styled.div`
-  width: 89%;
+  width: 88.5%;
   height: 100%;
   background-color: lightgray;
   display: flex;
