@@ -1,6 +1,8 @@
 import React, { useEffect, useState } from "react";
 import styled from "styled-components";
 import axios from "axios";
+import { RecipeDetailsStep } from "./RecipeDetailsStep";
+import { addStep } from "./utils/addStep";
 
 interface Props {
   id: number;
@@ -9,12 +11,25 @@ interface Props {
 
 export const RecipeDetails = ({ id, setShowRecipeDetails }: Props) => {
   const [recipeData, setRecipeData] = useState<any>({});
+  const [steps, setSteps] = useState<any>([
+    {
+      id: 1,
+      title: "Step 1",
+      description: "Test1",
+    },
+    {
+      id: 2,
+      title: "Step 2",
+      description: "Test 2",
+    },
+  ]);
 
   useEffect(() => {
     axios
       .get(`https://localhost:44390/api/recipes/${id}`)
       .then((res) => setRecipeData(res.data));
   }, [id]);
+
   return (
     <Container>
       <Content>
@@ -68,11 +83,22 @@ export const RecipeDetails = ({ id, setShowRecipeDetails }: Props) => {
             </IngrediensSection>
           </BottomLeftSection>
           <BottomRightSection>
-            <StepTitle>Step 1</StepTitle>
-            <StepDescription placeholder="Description" />
-            <LowerRightSeparator />
-            <AddStep>+ Add Step</AddStep>
-            <LowerRightSeparator />
+            {steps.map(({ title, id, description }: any) => (
+              <RecipeDetailsStep
+                key={id}
+                title={title}
+                id={id}
+                description={description}
+              />
+            ))}
+            <AddStep
+              onClick={() => {
+                const addSteps = addStep(steps);
+                setSteps([...steps, addSteps]);
+              }}
+            >
+              + Add Step
+            </AddStep>
           </BottomRightSection>
         </BottomSection>
       </Content>
@@ -173,23 +199,11 @@ const BottomRightSection = styled.div`
   padding: 1rem;
   padding-left: 3rem;
   padding-right: 3rem;
-`;
-
-const StepTitle = styled(Title)`
-  margin-left: 0;
-`;
-
-const StepDescription = styled(Description)`
-  margin-top: 1rem;
+  overflow-y: scroll;
 `;
 
 const AddStep = styled(AddIngredient)`
   margin-left: 0;
-`;
-
-const LowerRightSeparator = styled(Separator)`
-  margin-left: 0;
-  margin-right: 0;
 `;
 
 // ------

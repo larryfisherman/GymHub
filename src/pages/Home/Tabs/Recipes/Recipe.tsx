@@ -23,8 +23,6 @@ export const Recipe = ({
   setRecipeDetailsId,
   id,
 }: Props) => {
-  const navigate = useNavigate();
-
   return (
     <Container>
       <Content>
