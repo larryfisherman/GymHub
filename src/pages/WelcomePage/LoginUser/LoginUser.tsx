@@ -58,7 +58,7 @@ export const LoginUser = ({ setShowLoginPopup }: Props) => {
               })
               .then((res) => {
                 localStorage.setItem("token", res.data.token);
-                dispatch(login(res.data.user));
+                dispatch(login(res.data));
                 navigate("/home");
               })
           }

@@ -5,6 +5,9 @@ import { RecipeDetailsStep } from "./RecipeDetailsStep";
 import { RecipeDetailsIngredient } from "./RecipeDetailsIngredient";
 import { addStep } from "./utils/addStep";
 import { addIngredient } from "./utils/addIngredient";
+import { useSelector } from "react-redux";
+import { selectUser } from "../../../../store/userSlice";
+import { RecipeDetailsCategories } from "./RecipeDetailsCategories";
 
 interface Props {
   id: number;
@@ -41,6 +44,33 @@ export const RecipeDetails = ({ id, setShowRecipeDetails }: Props) => {
     },
   ]);
 
+  const [categories, setCategories] = useState([
+    {
+      id: 1,
+      title: "Breakfast",
+      active: false,
+    },
+    {
+      id: 2,
+      title: "Lunch",
+      active: false,
+    },
+    {
+      id: 3,
+      title: "Dinner",
+      active: true,
+    },
+    {
+      id: 4,
+      title: "Saper",
+      active: false,
+    },
+  ]);
+
+  const user = useSelector(selectUser);
+
+  console.log(categories);
+
   useEffect(() => {
     axios
       .get(`https://localhost:44390/api/recipes/${id}`)
@@ -58,16 +88,35 @@ export const RecipeDetails = ({ id, setShowRecipeDetails }: Props) => {
           <Image src="./assets/blank-recipe-photo.svg" />
           <RightSection>
             <DishNameInput
-              value={
-                recipeData.title ? recipeData.title : "The name of the dish"
-              }
+              value={recipeData.title}
               placeholder="The name of the dish"
+              onChange={(e) =>
+                setRecipeData((prevState: any) => ({
+                  ...prevState,
+                  title: e.target.value,
+                }))
+              }
             />
             <AuthorAndDateSection>
-              <AuthorInput placeholder="Author" />
+              <AuthorInput
+                placeholder="Author"
+                defaultValue={user && user.user.name}
+                disabled
+              />
               <Date placeholder="Date" />
             </AuthorAndDateSection>
-            <AddCategory>ADD CATEGORY</AddCategory>
+            <Categories>
+              {categories.map(({ id, title, active }: any) => (
+                <RecipeDetailsCategories
+                  key={id}
+                  id={id}
+                  title={title}
+                  setCategories={setCategories}
+                  categories={categories}
+                  active={active}
+                />
+              ))}
+            </Categories>
             <Description
               value={
                 recipeData.description ? recipeData.description : "Description"
@@ -92,6 +141,7 @@ export const RecipeDetails = ({ id, setShowRecipeDetails }: Props) => {
               <Title>Ingrediens (per serving)</Title>
               {ingrediens.map(({ id, amount, name }: any) => (
                 <RecipeDetailsIngredient
+                  key={id}
                   id={id}
                   amount={amount}
                   name={name}
@@ -136,6 +186,12 @@ export const RecipeDetails = ({ id, setShowRecipeDetails }: Props) => {
 };
 
 export default RecipeDetails;
+
+const Categories = styled.div`
+  display: flex;
+  justify-content: space-between;
+  width: 55%;
+`;
 
 const Description = styled.input`
   width: 100%;
@@ -260,19 +316,6 @@ const AuthorInput = styled.input`
 const Date = styled.input`
   width: 45%;
   padding: 5px;
-`;
-const AddCategory = styled.button`
-  display: flex;
-  padding: 0.5rem;
-  border-radius: 5%;
-  border: 1px solid black;
-  letter-spacing: 1px;
-  font-weight: 200;
-  margin-bottom: 1rem;
-
-  &:hover {
-    cursor: pointer;
-  }
 `;
 
 const Container = styled.div`

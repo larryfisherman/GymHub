@@ -20,10 +20,26 @@ export const RecipeDetailsIngredient = ({
   name,
   setIngrediens,
 }: Props) => {
+  const handleInputChange = (id: number, property: string, value: string) => {
+    setIngrediens((prevData: any) =>
+      prevData.map((item: any) =>
+        item.id === id ? { ...item, [property]: value } : item
+      )
+    );
+  };
+
   return (
     <Container>
-      <AmountInput placeholder="Amount" value={amount} />
-      <IngredientInput placeholder="Ingredient" value={name} />
+      <AmountInput
+        placeholder="Amount"
+        value={amount}
+        onChange={(e) => handleInputChange(id, "amount", e.target.value)}
+      />
+      <IngredientInput
+        placeholder="Ingredient"
+        value={name}
+        onChange={(e) => handleInputChange(id, "name", e.target.value)}
+      />
       <TrashIcon src="./assets/trash-icon.svg" />
     </Container>
   );
