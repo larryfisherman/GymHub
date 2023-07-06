@@ -28,21 +28,9 @@ interface ingredientsStateProps {
 
 export const RecipeDetails = ({ id, setShowRecipeDetails }: Props) => {
   const [recipeData, setRecipeData] = useState<any>({});
-  const [steps, setSteps] = useState<stepsStateProps[]>([
-    {
-      id: 1,
-      title: "Step 1",
-      description: "Test1",
-    },
-  ]);
+  const [steps, setSteps] = useState<stepsStateProps[]>([]);
 
-  const [ingrediens, setIngrediens] = useState<any[]>([
-    {
-      id: 1,
-      name: "Carrot",
-      amount: 2,
-    },
-  ]);
+  const [ingrediens, setIngrediens] = useState<any[]>([]);
 
   const [categories, setCategories] = useState([
     {
@@ -58,7 +46,7 @@ export const RecipeDetails = ({ id, setShowRecipeDetails }: Props) => {
     {
       id: 3,
       title: "Dinner",
-      active: true,
+      active: false,
     },
     {
       id: 4,
@@ -69,20 +57,44 @@ export const RecipeDetails = ({ id, setShowRecipeDetails }: Props) => {
 
   const user = useSelector(selectUser);
 
-  console.log(categories);
-
   useEffect(() => {
-    axios
-      .get(`https://localhost:44390/api/recipes/${id}`)
-      .then((res) => setRecipeData(res.data));
-  }, [id]);
+    axios.get(`https://localhost:44390/api/recipes/${id}`).then((res) => {
+      setRecipeData(res.data);
+      setIngrediens(res.data.ingrediens);
+      setSteps(res.data.steps);
+
+      const newCategories = categories.map((el) => {
+        if (el.title === res.data.category) {
+          return { ...el, active: true };
+        }
+        return el;
+      });
+
+      setCategories(newCategories);
+    });
+  }, []);
+
+  useEffect(
+    () =>
+      setRecipeData((prevState: any) => ({
+        ...prevState,
+        category: categories.find((el) => el.active)?.title,
+        steps,
+        ingrediens,
+      })),
+    [steps, ingrediens, categories]
+  );
 
   return (
     <Container>
       <Content>
         <ExitIcon
           src="./assets/cross-icon.svg"
-          onClick={() => setShowRecipeDetails(false)}
+          onClick={() => {
+            axios
+              .put(`https://localhost:44390/api/recipes/${id}`, recipeData)
+              .then(() => setShowRecipeDetails(false));
+          }}
         />
         <UpperSection>
           <Image src="./assets/blank-recipe-photo.svg" />
@@ -118,10 +130,14 @@ export const RecipeDetails = ({ id, setShowRecipeDetails }: Props) => {
               ))}
             </Categories>
             <Description
-              value={
-                recipeData.description ? recipeData.description : "Description"
-              }
+              value={recipeData.description}
               placeholder="Description"
+              onChange={(e) =>
+                setRecipeData((prevState: any) => ({
+                  ...prevState,
+                  description: e.target.value,
+                }))
+              }
             />
           </RightSection>
         </UpperSection>

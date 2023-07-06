@@ -24,12 +24,12 @@ export const RecipeDetailsCategories = ({
   categories,
   active,
 }: Props) => {
-  console.log(active);
   const handleActiveChange = (id: number) => {
     const updatedState = categories.map((el: any) => ({
       ...el,
       active: false,
     }));
+
     setCategories(updatedState);
 
     setCategories((prevData: any) => {
@@ -41,7 +41,7 @@ export const RecipeDetailsCategories = ({
 
   return (
     <Container
-      style={{ backgroundColor: `${active ? "orange" : "none"}` }}
+      style={{ backgroundColor: `${active ? "orange" : "white"}` }}
       onClick={() => handleActiveChange(id)}
     >
       {title}

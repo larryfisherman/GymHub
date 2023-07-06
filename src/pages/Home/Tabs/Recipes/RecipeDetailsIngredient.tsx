@@ -34,6 +34,7 @@ export const RecipeDetailsIngredient = ({
         placeholder="Amount"
         value={amount}
         onChange={(e) => handleInputChange(id, "amount", e.target.value)}
+        type="number"
       />
       <IngredientInput
         placeholder="Ingredient"
