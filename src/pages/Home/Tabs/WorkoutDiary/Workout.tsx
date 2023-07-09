@@ -8,6 +8,7 @@ interface Props {
   kcal: number;
   workoutData: any;
   setWorkoutData: any;
+  setShowWorkoutPopup: any;
 }
 
 export const Workout = ({
@@ -17,6 +18,7 @@ export const Workout = ({
   kcal,
   workoutData,
   setWorkoutData,
+  setShowWorkoutPopup,
 }: Props) => {
   return (
     <Container>
@@ -38,7 +40,9 @@ export const Workout = ({
           <span>{timeToBeDone ? `${timeToBeDone} minutes` : null}</span>
           <span>{kcal ? `${kcal} kcal` : null}</span>
         </DescriptionSection>
-        <StartButton>START</StartButton>
+        <StartButton onClick={() => setShowWorkoutPopup(true)}>
+          START
+        </StartButton>
       </Content>
     </Container>
   );

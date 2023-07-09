@@ -2,14 +2,21 @@ import React from "react";
 import styled from "styled-components";
 
 interface Props {
+  id: number;
   title: string;
   image: string;
+  setSelectedCategory: any;
 }
 
-export const CategoriesItem = ({ title, image }: Props) => {
+export const CategoriesItem = ({
+  id,
+  title,
+  image,
+  setSelectedCategory,
+}: Props) => {
   return (
-    <Container>
-      <Image src={`./assets/${image}.svg`} />
+    <Container onClick={() => setSelectedCategory(id)}>
+      {/* <Image src={`./assets/${image}.svg`} />  */}
       <Content>{title}</Content>
     </Container>
   );

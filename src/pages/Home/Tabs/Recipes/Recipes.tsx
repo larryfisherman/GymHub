@@ -4,62 +4,28 @@ import styled from "styled-components";
 import { Recipe } from "./Recipe";
 import { CategoriesItem } from "./CategoriesItem";
 import { ComplexSets } from "./ComplexSets";
-import { AddNewRecipePopup } from "./AddNewRecipePopup";
 import RecipeDetails from "./RecipeDetails";
 
 export const Recipes = () => {
   const [recipes, setRecipes] = useState([]);
-  const [showAddRecipePopup, setShowAddRecipePopup] = useState(false);
+  const [categories, setCategories] = useState([]);
   const [showRecipeDetails, setShowRecipeDetails] = useState(false);
   const [recipeDetailsId, setRecipeDetailsId] = useState(0);
+  const [selectedCategory, setSelectedCategory] = useState(0);
 
   useEffect(() => {
     axios
       .get("https://localhost:44390/api/recipes/")
       .then((res) => setRecipes(res.data));
+
+    axios
+      .get("https://localhost:44390/api/recipes/categories")
+      .then((res) => setCategories(res.data));
   }, []);
-  const categoriesItems = [
-    {
-      id: 1,
-      title: "Meat dishes",
-      image: "recipe-1",
-    },
-    {
-      id: 2,
-      title: "Salads",
-      image: "recipe-2",
-    },
-    {
-      id: 3,
-      title: "Meat dishes",
-      image: "recipe-1",
-    },
-    {
-      id: 4,
-      title: "Salads",
-      image: "recipe-2",
-    },
-    {
-      id: 5,
-      title: "Meat dishes",
-      image: "recipe-1",
-    },
-    {
-      id: 6,
-      title: "Meat dishes",
-      image: "recipe-1",
-    },
-    {
-      id: 7,
-      title: "Meat dishes",
-      image: "recipe-1",
-    },
-  ];
 
   return (
     <>
       <Container>
-        {/* {showAddRecipePopup && <AddNewRecipePopup />} */}
         {showRecipeDetails && (
           <RecipeDetails
             id={recipeDetailsId}
@@ -72,8 +38,14 @@ export const Recipes = () => {
             <span>Recipes</span>
           </TitleSection>
           <CategoriesSection>
-            {categoriesItems.map((el) => (
-              <CategoriesItem key={el.id} title={el.title} image={el.image} />
+            {categories.map((el: any) => (
+              <CategoriesItem
+                key={el.id}
+                id={el.id}
+                title={el.title}
+                image={el.image}
+                setSelectedCategory={setSelectedCategory}
+              />
             ))}
           </CategoriesSection>
           <AllItems>
@@ -81,24 +53,26 @@ export const Recipes = () => {
               <Title>All items</Title>
               <RecipePopup>
                 <Title>Add New Recipe</Title>
-                <AddRecipe onClick={() => setShowAddRecipePopup(true)}>
+                <AddRecipe onClick={() => setShowRecipeDetails(true)}>
                   +
                 </AddRecipe>
               </RecipePopup>
               {recipes &&
-                recipes.map((el: any) => (
-                  <Recipe
-                    key={el.id}
-                    id={el.id}
-                    title={el.title}
-                    description={el.description}
-                    kcal={el.kcal}
-                    time={el.timeToBeDone}
-                    image={"./assets/recipe-1.svg"}
-                    setShowRecipeDetails={setShowRecipeDetails}
-                    setRecipeDetailsId={setRecipeDetailsId}
-                  />
-                ))}
+                recipes.map((el: any) => {
+                  return (
+                    <Recipe
+                      key={el.id}
+                      id={el.id}
+                      title={el.title}
+                      description={el.description}
+                      kcal={el.kcal}
+                      time={el.timeToBeDone}
+                      image={"./assets/recipe-3.svg"}
+                      setShowRecipeDetails={setShowRecipeDetails}
+                      setRecipeDetailsId={setRecipeDetailsId}
+                    />
+                  );
+                })}
             </RecipesSection>
             <ComplexSetsItems>
               <ComplexSetsTitle>Complex sets</ComplexSetsTitle>
@@ -110,14 +84,6 @@ export const Recipes = () => {
     </>
   );
 };
-
-const Header = styled.div`
-  width: 100%;
-  height: 10%;
-  background-color: black;
-  position: fixed;
-  z-index: 33333;
-`;
 
 const Container = styled.div`
   width: 100%;

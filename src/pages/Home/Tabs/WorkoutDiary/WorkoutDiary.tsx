@@ -2,6 +2,7 @@ import React, { useEffect, useState } from "react";
 import styled from "styled-components";
 import { Workout } from "./Workout";
 import axios from "axios";
+import { WorkoutPopup } from "./WorkoutPopup";
 
 interface WorkoutProps {
   title: string;
@@ -14,6 +15,8 @@ interface WorkoutProps {
 export const WorkoutDiary = () => {
   const [workouts, setWorkouts] = useState([]);
   const [workoutData, setWorkoutData] = useState([]);
+  const [showWorkoutPopup, setShowWorkoutPopup] = useState(false);
+  const [workoutId, setWorkoutId] = useState(0);
 
   useEffect(() => {
     axios.get("https://localhost:44390/api/workouts").then((res) => {
@@ -23,6 +26,12 @@ export const WorkoutDiary = () => {
 
   return (
     <Container>
+      {showWorkoutPopup && (
+        <WorkoutPopup
+          id={workoutId}
+          setShowWorkoutPopup={setShowWorkoutPopup}
+        />
+      )}
       <Content>
         <Title>MY WORKOUTS</Title>
         <Workouts>
@@ -42,6 +51,7 @@ export const WorkoutDiary = () => {
                 timeToBeDone={timeToBeDone}
                 workoutData={workoutData}
                 setWorkoutData={setWorkoutData}
+                setShowWorkoutPopup={setShowWorkoutPopup}
               />
             )
           )}
@@ -54,9 +64,6 @@ export const WorkoutDiary = () => {
 const Container = styled.div`
   width: 100%;
   height: 100%;
-  display: flex;
-  justify-content: center;
-  align-items: center;
 `;
 const Content = styled.div`
   display: flex;
