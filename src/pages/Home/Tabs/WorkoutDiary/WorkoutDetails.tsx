@@ -3,16 +3,37 @@ import styled from "styled-components";
 import { useSelector } from "react-redux";
 import { selectUser } from "../../../../store/userSlice";
 import axios from "axios";
+import { WorkoutDetailsSetsAndRepsItem } from "./WorkoutDetailsSetsAndRepsItem";
 
 interface Props {
   id: number;
   setShowWorkoutPopup: any;
 }
 
-export const WorkoutPopup = ({ id, setShowWorkoutPopup }: Props) => {
+export const WorkoutDetails = ({ id, setShowWorkoutPopup }: Props) => {
   const [workoutData, setWorkoutData] = useState<any>([]);
-  const [steps, setSteps] = useState<any>([]);
-  const [ingrediens, setIngrediens] = useState<any[]>([]);
+  const [setsAndReps, setSetsAndReps] = useState<any>([
+    {
+      id: 1,
+      title: "Standing dumbbell press",
+      sets: 3,
+      repeats: 10,
+    },
+    {
+      id: 2,
+      title: "Miliatry press",
+      sets: 2,
+      repeats: 10,
+    },
+    {
+      id: 3,
+      title: "Bench press",
+      sets: 4,
+      repeats: 6,
+    },
+  ]);
+
+  const [setsAndRepsCounter, setSetsAndRepsCounter] = useState<any>(1);
   const user = useSelector(selectUser);
 
   useEffect(() => {
@@ -20,28 +41,6 @@ export const WorkoutPopup = ({ id, setShowWorkoutPopup }: Props) => {
       setWorkoutData(res.data);
     });
   }, []);
-
-  //   useEffect(
-  //     () =>
-  //       setRecipeData((prevState: any) => ({
-  //         ...prevState,
-  //         category: categories.find((el) => el.active)?.title,
-  //         steps,
-  //         ingrediens,
-  //       })),
-  //     [steps, ingrediens, categories]
-  //   );
-
-  // const showPreview = (e: any) => {
-  //   if (e.target.files && e.target.files[0]) {
-  //     let imageFile = e.target.files[0];
-  //     const reader = new FileReader();
-  //     reader.onload = (x: any) => {
-  //       setImage(imageFile);
-  //     };
-  //     reader.readAsDataURL(imageFile);
-  //   }
-  // };
 
   return (
     <Container>
@@ -62,7 +61,7 @@ export const WorkoutPopup = ({ id, setShowWorkoutPopup }: Props) => {
                 .then(() => setShowWorkoutPopup(false));
             }}
           >
-            SAVE
+            EDIT
           </Button>
           <ExitIcon
             src="./assets/cross-icon.svg"
@@ -125,7 +124,6 @@ export const WorkoutPopup = ({ id, setShowWorkoutPopup }: Props) => {
         </UpperSection>
         <BottomSection>
           <BottomLeftSection>
-            <MakroSection></MakroSection>
             <IngrediensSection>
               <Title>Ingrediens (per serving)</Title>
               {/* {ingrediens.map(({ id, amount, name }: any) => (
@@ -143,16 +141,24 @@ export const WorkoutPopup = ({ id, setShowWorkoutPopup }: Props) => {
             </IngrediensSection>
           </BottomLeftSection>
           <BottomRightSection>
-            {/* {steps.map(({ title, id, description }: any) => (
-              <RecipeDetailsStep
-                key={id}
-                title={title}
-                id={id}
-                description={description}
-                setSteps={setSteps}
-              />
-            ))} */}
-            <AddStep onClick={() => {}}>+ Add Step</AddStep>
+            <TimeAndKcalSection>
+              <TimeAndKcalItem></TimeAndKcalItem>
+              <TimeAndKcalItem></TimeAndKcalItem>
+            </TimeAndKcalSection>
+            <SetsAndRepsSection>
+              <SetsAndRepsTitle>Sets & Reps</SetsAndRepsTitle>
+              <SetsAndReps>
+                {setsAndReps.map((el: any) => (
+                  <WorkoutDetailsSetsAndRepsItem
+                    key={el.id}
+                    id={el.id}
+                    title={el.title}
+                    sets={el.sets}
+                    repeats={el.repeats}
+                  />
+                ))}
+              </SetsAndReps>
+            </SetsAndRepsSection>
           </BottomRightSection>
         </BottomSection>
       </Content>
@@ -160,12 +166,77 @@ export const WorkoutPopup = ({ id, setShowWorkoutPopup }: Props) => {
   );
 };
 
+{
+  /* <SetsAndRepsCounter>
+                  <DecreaseButton
+                    onClick={() => {
+                      if (setsAndRepsCounter > 0)
+                        setSetsAndRepsCounter(setsAndRepsCounter - 1);
+                    }}
+                  >
+                    -
+                  </DecreaseButton>
+                  <Counter>{setsAndRepsCounter}</Counter>
+                  <IncreaseButton
+                    onClick={() =>
+                      setSetsAndRepsCounter(setsAndRepsCounter + 1)
+                    }
+                  >
+                    +
+                  </IncreaseButton>
+                </SetsAndRepsCounter> */
+}
+
+const SetsAndRepsSection = styled.div`
+  display: flex;
+  flex-direction: column;
+  align-items: flex-start;
+  justify-content: flex-start;
+  background-color: white;
+  height: 100%;
+  padding: 1.5rem;
+`;
+
+const SetsAndReps = styled.div`
+  display: flex;
+  flex-direction; column;
+  justify-content: flex-start;
+align-items: flex-start;
+  height: 100%;
+  width: 100%;
+  flex-wrap: wrap;
+`;
+
+const SetsAndRepsTitle = styled.span`
+  font-weight: bold;
+  font-size: 1.5rem;
+`;
+
 const RecipeActions = styled.div`
   display: flex;
   width: 100%;
   justify-content: flex-end;
   margin-bottom: 1rem;
   margin-right: 2rem;
+`;
+
+const TimeAndKcalSection = styled.div`
+  width: 100%;
+  display: flex;
+  justify-content: center;
+  background-color: white;
+  padding: 30px;
+  background-color: white;
+  margin-bottom: 1rem;
+  align-items: center;
+`;
+
+const TimeAndKcalItem = styled.span`
+  background-color: black;
+  width: 4rem;
+  height: 4rem;
+  margin: 2rem;
+  border-radius: 50%;
 `;
 
 const Button = styled.button`
@@ -224,15 +295,6 @@ const BottomLeftSection = styled.div`
   width: 45%;
 `;
 
-const MakroSection = styled.div`
-  width: 100%;
-  display: flex;
-  justify-content: space-between;
-  padding: 30px;
-  background-color: white;
-  margin-bottom: 1rem;
-`;
-
 const IngrediensSection = styled.div`
   background-color: white;
   padding: 1rem;
@@ -257,32 +319,18 @@ const AddIngredient = styled.span`
   }
 `;
 
-const MakroItem = styled.div`
-  display: flex;
-  justify-content: center;
-  align-items: center;
-  width: 5rem;
-  height: 5rem;
-  border-radius: 50%;
-  color: white;
-  font-weight: 550;
-`;
-
 // -------
 
 // LOWER RIGHT SECTION
 
 const BottomRightSection = styled.div`
   width: 45%;
-  background-color: white;
+  display: flex;
+  flex-direction: column;
   padding: 1rem;
   padding-left: 3rem;
   padding-right: 3rem;
   overflow-y: scroll;
-`;
-
-const AddStep = styled(AddIngredient)`
-  margin-left: 0;
 `;
 
 // ------
@@ -365,3 +413,46 @@ const ExitIcon = styled.img`
     cursor: pointer;
   }
 `;
+
+// const SetsAndRepsCounter = styled.div`
+//   display: flex;
+//   justify-content: space-between;
+//   align-items: center;
+//   border: 1px solid black;
+//   border-radius: 5%;
+//   width: 7rem;
+//   height: 2rem;
+// `;
+// const DecreaseButton = styled.button`
+//   display: flex;
+//   justify-content: center;
+//   align-items: center;
+//   width: 40%;
+//   height: 100%;
+//   background-color: transparent;
+//   border: none;
+//   border-right: 1px solid black;
+//   background-color: orange;
+//   color: white;
+//   font-size: 1.5rem;
+// `;
+// const Counter = styled.span`
+//   padding: 1rem;
+//   height: 100%;
+//   display: flex;
+//   align-items: center;
+//   justify-content: center;
+// `;
+// const IncreaseButton = styled.button`
+//   display: flex;
+//   align-items: center;
+//   justify-content: center;
+//   background-color: transparent;
+//   border: none;
+//   border-left: 1px solid black;
+//   width: 40%;
+//   height: 100%;
+//   background-color: orange;
+//   color: white;
+//   font-size: 1.5rem;
+// `;

@@ -3,12 +3,12 @@ import styled from "styled-components";
 
 interface Props {
   title: string;
+  id: number;
   favourite: boolean;
   timeToBeDone: number;
   kcal: number;
-  workoutData: any;
-  setWorkoutData: any;
   setShowWorkoutPopup: any;
+  setWorkoutId: any;
 }
 
 export const Workout = ({
@@ -16,9 +16,9 @@ export const Workout = ({
   favourite,
   timeToBeDone,
   kcal,
-  workoutData,
-  setWorkoutData,
   setShowWorkoutPopup,
+  setWorkoutId,
+  id,
 }: Props) => {
   return (
     <Container>
@@ -40,8 +40,13 @@ export const Workout = ({
           <span>{timeToBeDone ? `${timeToBeDone} minutes` : null}</span>
           <span>{kcal ? `${kcal} kcal` : null}</span>
         </DescriptionSection>
-        <StartButton onClick={() => setShowWorkoutPopup(true)}>
-          START
+        <StartButton
+          onClick={() => {
+            setShowWorkoutPopup(true);
+            setWorkoutId(id);
+          }}
+        >
+          SEE MORE
         </StartButton>
       </Content>
     </Container>

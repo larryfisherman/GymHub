@@ -3,6 +3,7 @@ import styled from "styled-components";
 import { Workout } from "./Workout";
 import axios from "axios";
 import { WorkoutPopup } from "./WorkoutPopup";
+import { WorkoutDetails } from "./WorkoutDetails";
 
 interface WorkoutProps {
   title: string;
@@ -27,7 +28,7 @@ export const WorkoutDiary = () => {
   return (
     <Container>
       {showWorkoutPopup && (
-        <WorkoutPopup
+        <WorkoutDetails
           id={workoutId}
           setShowWorkoutPopup={setShowWorkoutPopup}
         />
@@ -45,13 +46,13 @@ export const WorkoutDiary = () => {
             ({ title, favourite, id, timeToBeDone, kcal }: WorkoutProps) => (
               <Workout
                 key={id}
+                id={id}
                 title={title}
                 favourite={favourite}
                 kcal={kcal}
                 timeToBeDone={timeToBeDone}
-                workoutData={workoutData}
-                setWorkoutData={setWorkoutData}
                 setShowWorkoutPopup={setShowWorkoutPopup}
+                setWorkoutId={setWorkoutId}
               />
             )
           )}
