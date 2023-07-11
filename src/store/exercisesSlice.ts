@@ -6,13 +6,13 @@ export const exercisesSlice = createSlice({
     exercises: null,
   },
   reducers: {
-    setExercises: (state, action) => {
-      state.exercises = action.payload.recepies;
+    setExercisesStore: (state, action) => {
+      state.exercises = action.payload.exercises;
     },
   },
 });
 
-export const { setExercises } = exercisesSlice.actions;
+export const { setExercisesStore } = exercisesSlice.actions;
 export const selectExercises = (state: any) => state.exercises.exercises;
 
 export default exercisesSlice.reducer;

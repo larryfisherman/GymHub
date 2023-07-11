@@ -2,6 +2,7 @@ import React, { useState, useEffect } from "react";
 import styled from "styled-components";
 import { Exercise } from "./Exercise";
 import { Category } from "./Category";
+import { setExercisesStore } from "../../../../store/exercisesSlice";
 
 export const Exercises = () => {
   const [exercises, setExercises] = useState([
@@ -20,8 +21,8 @@ export const Exercises = () => {
   ]);
 
   useEffect(() => {
-    setExercises(exercises);
-  }, [exercises]);
+    setExercisesStore(exercises);
+  }, []);
 
   const [categories, setCategories] = useState([
     {

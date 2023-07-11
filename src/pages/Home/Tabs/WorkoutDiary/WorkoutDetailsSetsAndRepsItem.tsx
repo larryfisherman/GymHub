@@ -1,4 +1,4 @@
-import React from "react";
+import React, { useState } from "react";
 import styled from "styled-components";
 
 interface Props {
@@ -14,6 +14,7 @@ export const WorkoutDetailsSetsAndRepsItem = ({
   sets,
   repeats,
 }: Props) => {
+  const [edit, setEdit] = useState(false);
   return (
     <Container>
       <Content>

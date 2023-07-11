@@ -4,6 +4,7 @@ import { useSelector } from "react-redux";
 import { selectUser } from "../../../../store/userSlice";
 import axios from "axios";
 import { WorkoutDetailsSetsAndRepsItem } from "./WorkoutDetailsSetsAndRepsItem";
+import { selectExercises } from "../../../../store/exercisesSlice";
 
 interface Props {
   id: number;
@@ -35,6 +36,9 @@ export const WorkoutDetails = ({ id, setShowWorkoutPopup }: Props) => {
 
   const [setsAndRepsCounter, setSetsAndRepsCounter] = useState<any>(1);
   const user = useSelector(selectUser);
+  const exercises = useSelector(selectExercises);
+
+  console.log(exercises);
 
   useEffect(() => {
     axios.get(`https://localhost:44390/api/workouts/${id}`).then((res) => {
