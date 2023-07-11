@@ -1,28 +1,54 @@
 import React from "react";
 import styled from "styled-components";
-import { UpperSectionItem } from "./UpperSectionItem";
 
 export const UpperSection = () => {
   return (
-    <Content>
-      <UpperSectionItem
-        icon="workout-diary-landing-icon"
-        text="Log your workouts and master your exercise regimen with our workout diary. Choose from diverse exercises and craft tailored workout plans that harmonize with your schedule and fitness capacity."
-        title="Workout diary"
-      />
-      <UpperSectionItem
-        icon="recipies-landing-icon"
-        text="Discover delectable recipes that comply with your dietary requisities and fitness aspirations. Our recipe repository has everything you need to refuel your body and persist on the path to success."
-        title="Recipies"
-      />
-      <UpperSectionItem
-        icon="progress-landing-icon"
-        text="Measure your advancement and witness your triumphs with our user-friendly progress tracker. Estabilish targets and milestones, and revel in your accomplishments every step of the way."
-        title="Progress"
-      />
-    </Content>
+    <Container>
+      <Content>
+        <TitleSection>
+          <Title>All in one tool that you need</Title>
+          <Description>
+            Welcome to GymHUB - the ultimate fitness dashboard to help you
+            achieve your health and fitness goals! Our project was born out of a
+            passion for fitness and a desire to make it accessible to everyone.
+          </Description>
+          <BackgroundImage src="./assets/progress-screen.svg" />
+        </TitleSection>
+      </Content>
+    </Container>
   );
 };
+
+const TitleSection = styled.div`
+  display: flex;
+  height: 50%;
+  width: 100%;
+  flex-direction: column;
+  align-items: center;
+  justify-content: space-between;
+  background: url("./assets/welcome-page-title-section.svg") center center /
+    cover;
+`;
+const Title = styled.span`
+  font-size: 3rem;
+  font-size: bold;
+  margin-top: 3rem;
+  margin-bottom: 3rem;
+`;
+const Description = styled.span`
+  width: 45%;
+  margin-bottom: 3rem;
+`;
+
+const Images = styled.div`
+  width: 100%;
+  height: 20%;
+`;
+
+const Container = styled.div`
+  width: 100%;
+  height: 100%;
+`;
 
 const Content = styled.div`
   height: 100%;
@@ -31,4 +57,9 @@ const Content = styled.div`
   @media (max-width: 768px) {
     flex-direction: column;
   }
+`;
+
+const BackgroundImage = styled.img`
+  width: 50%;
+  height: 80%;
 `;
