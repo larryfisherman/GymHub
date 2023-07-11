@@ -1,4 +1,4 @@
-import React, { useState } from "react";
+import React, { useState, useEffect } from "react";
 import styled from "styled-components";
 import { Exercise } from "./Exercise";
 import { Category } from "./Category";
@@ -18,6 +18,10 @@ export const Exercises = () => {
       title: "Yoga",
     },
   ]);
+
+  useEffect(() => {
+    setExercises(exercises);
+  }, [exercises]);
 
   const [categories, setCategories] = useState([
     {

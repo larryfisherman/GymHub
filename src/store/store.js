@@ -1,6 +1,6 @@
 import { combineReducers, configureStore } from "@reduxjs/toolkit";
 import userReducer from "./userSlice";
-import recipesSlice from "./recepiesSlice";
+import exercisesSlice from "./exercisesSlice";
 import { persistReducer } from "redux-persist";
 import storage from "redux-persist/lib/storage";
 
@@ -11,7 +11,7 @@ const persistConfig = {
 
 const reducers = combineReducers({
   user: userReducer,
-  recipes: recipesSlice,
+  exercises: exercisesSlice,
 });
 
 const persistedReducer = persistReducer(persistConfig, reducers);

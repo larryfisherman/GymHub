@@ -15,12 +15,34 @@ export const WorkoutDetailsSetsAndRepsItem = ({
   repeats,
 }: Props) => {
   return (
-    <Content>
-      {sets}x{repeats} {title}
-    </Content>
+    <Container>
+      <Content>
+        {sets}x{repeats} {title}
+        <PencilIcon src="./assets/pencil-icon.svg" />
+      </Content>
+      <Separator />
+    </Container>
   );
 };
 
+const PencilIcon = styled.img`
+  &:hover {
+    cursor: pointer;
+  }
+`;
+
+const Container = styled.div`
+  width: 100%;
+`;
 const Content = styled.div`
+  width: 100%;
+  display: flex;
+  align-items: flex-start;
+  justify-content: space-between;
+`;
+
+const Separator = styled.hr`
+  margin-top: 1rem;
+  margin-bottom: 1rem;
   width: 100%;
 `;

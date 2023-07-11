@@ -93,7 +93,7 @@ export const WorkoutDetails = ({ id, setShowWorkoutPopup }: Props) => {
             <AuthorAndDateSection>
               <AuthorInput
                 placeholder="Author"
-                defaultValue={user && user.user.name}
+                // defaultValue={user && user.user.name}
                 disabled
               />
               <Date placeholder="Date" />
@@ -200,11 +200,8 @@ const SetsAndRepsSection = styled.div`
 const SetsAndReps = styled.div`
   display: flex;
   flex-direction; column;
-  justify-content: flex-start;
-align-items: flex-start;
-  height: 100%;
-  width: 100%;
   flex-wrap: wrap;
+  margin-top: 1rem;
 `;
 
 const SetsAndRepsTitle = styled.span`
