@@ -55,7 +55,7 @@ const Title = styled.span`
   font-size: 3rem;
   font-size: bold;
   margin-top: 3rem;
-  margin-bottom: 3rem;
+  margin-bottom: 5rem;
 `;
 const Arrows = styled.div`
   display: flex;
@@ -74,4 +74,9 @@ const RightArrow = styled.img`
 `;
 const ReviewsSection = styled.div`
   display: flex;
+  justify-content: space-between;
+  align-items: center;
+  margin-bottom: 3rem;
+  margin-left: 2rem;
+  margin-right: 2rem;
 `;

@@ -41,8 +41,9 @@ const Description = styled.div`
   display: flex;
   flex-direction: column;
   justify-content: center;
-  align-items: center;
+  align-items: flex-start;
   width: 45%;
+  margin-left: 3rem;
 `;
 
 const Title = styled.span`
@@ -54,7 +55,7 @@ const Title = styled.span`
   margin-bottom: 3rem;
 `;
 const Text = styled.span`
-  width: 45%;
+  width: 60%;
   text-align: left;
   display: flex;
   align-self: flex-start;

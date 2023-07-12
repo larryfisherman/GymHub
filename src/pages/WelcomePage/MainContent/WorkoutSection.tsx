@@ -6,7 +6,13 @@ export const WorkoutSection = () => {
     <Container>
       <Content>
         <Description>
-          <Title>The choise is yours</Title>
+          <Title>
+            The{" "}
+            <UnderlineMarker>
+              <SecondUnderlineMarker>choice</SecondUnderlineMarker>
+            </UnderlineMarker>{" "}
+            is yours
+          </Title>
           <Text>
             <Item>
               <CheckedIcon src="./assets/check-icon.svg" />
@@ -32,6 +38,40 @@ export const WorkoutSection = () => {
     </Container>
   );
 };
+
+const UnderlineMarker = styled.span`
+  position: relative;
+  display: inline-block;
+
+  &::after {
+    content: "";
+    position: absolute;
+    left: -10px;
+    bottom: 11px;
+    width: 11rem;
+    height: 8px;
+    background-color: #ff9800;
+    border-radius: 50px;
+    transform: scaleX(0.8) skewX(-50deg);
+  }
+`;
+
+const SecondUnderlineMarker = styled.span`
+  position: relative;
+  display: inline-block;
+
+  &::after {
+    content: "";
+    position: absolute;
+    left: 2rem;
+    bottom: 4px;
+    width: 9rem;
+    height: 8px;
+    background-color: #ff9800;
+    border-radius: 50px;
+    transform: scaleX(0.8) rotate(-3rem) skewX(-1deg);
+  }
+`;
 
 const Images = styled.div`
   position: relative;
