@@ -1,7 +1,6 @@
 import React from "react";
 import styled from "styled-components";
 import { UpperSection } from "./UpperSection";
-import { LowerSection } from "./LowerSection";
 import { CommunitySection } from "./CommunitySection";
 import { WorkoutSection } from "./WorkoutSection";
 import { OpinionsSection } from "./OpinionsSection";
@@ -29,4 +28,5 @@ const Content = styled.div`
   display: flex;
   flex-direction: column;
   justify-content: space-between;
+  background-color: #f8f8f8;
 `;

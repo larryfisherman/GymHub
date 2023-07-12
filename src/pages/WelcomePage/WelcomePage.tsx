@@ -7,6 +7,7 @@ import { RegisterUser } from "./RegisterUser/RegisterUser";
 import { useSelector } from "react-redux";
 import { selectUser } from "../../store/userSlice";
 import { useNavigate } from "react-router-dom";
+import { Footer } from "./Footer/Footer";
 
 export const WelcomePage = () => {
   const [showRegisterPopup, setShowRegisterPopup] = useState(false);
@@ -27,6 +28,7 @@ export const WelcomePage = () => {
         {showLoginPopup && <LoginUser setShowLoginPopup={setShowLoginPopup} />}
         <HeaderSection setShowRegisterPopup={setShowRegisterPopup} />
         <MainContent />
+        <Footer />
       </Content>
     </Container>
   );
