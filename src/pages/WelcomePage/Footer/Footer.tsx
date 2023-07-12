@@ -20,18 +20,26 @@ export const Footer = () => {
             <Link src="./assets/ig-icon.svg" />
           </SocialMedia>
         </LeftSide>
-        <RightSide></RightSide>
+        <RightSide>
+          <CopyrightText>
+            © Copyright by GymHub. All Rights Reserved.
+          </CopyrightText>
+        </RightSide>
       </Content>
     </Container>
   );
 };
 
-const Link = styled.img``;
-
-const SocialMedia = styled.div`
-  display: flex;
-  justify-content: space-betwen;
+const CopyrightText = styled.span`
+  color: white;
 `;
+
+const Link = styled.img`
+  &:hover {
+    cursor: pointer;
+  }
+`;
+
 const Text = styled.span`
   color: white;
   width: 20%;
@@ -41,13 +49,19 @@ const Text = styled.span`
 const Logo = styled.img``;
 
 const LeftSide = styled.div`
-  height: 75%;
+  height: 90%;
   display: flex;
   flex-direction: column;
   align-items: flex-start;
   justify-content: space-between;
 `;
-const RightSide = styled.div``;
+const RightSide = styled.div`
+  display: flex;
+  justify-contnet: flex-end;
+  align-items: flex-end;
+  width: 30%;
+  height: 100%;
+`;
 
 const Container = styled.div`
   width: 100%;
@@ -57,6 +71,14 @@ const Container = styled.div`
 
 const Content = styled.div`
   width: 100%;
+  height: 100%;
+  display: flex;
   height: 25rem;
   padding: 2rem;
+`;
+
+const SocialMedia = styled.div`
+  display: flex;
+  justify-content: space-between;
+  width: 15%;
 `;

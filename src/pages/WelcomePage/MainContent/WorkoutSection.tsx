@@ -102,9 +102,9 @@ const Content = styled.div`
 const Description = styled.div`
   display: flex;
   flex-direction: column;
-  align-items: center;
+  align-items: flex-start;
   justify-content: center;
-  margin-left: 5rem;
+  margin-left: 10rem;
   width: 40%;
 `;
 const Title = styled.span`
