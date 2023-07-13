@@ -1,47 +1,55 @@
 import React, { useEffect, useState } from "react";
 import styled from "styled-components";
+import axios from "axios";
+
 import { useSelector } from "react-redux";
 import { selectUser } from "../../../../store/userSlice";
-import axios from "axios";
 import { WorkoutDetailsSetsAndRepsItem } from "./WorkoutDetailsSetsAndRepsItem";
-import { selectExercises } from "../../../../store/exercisesSlice";
-import { Exercise } from "../Exercises/Exercise";
+import {
+  selectExercises,
+  setExercisesStore,
+} from "../../../../store/exercisesSlice";
 import { WorkoutExercise } from "./WorkoutExercise";
+import { useDispatch } from "react-redux";
 
 interface Props {
   id: number;
   setShowWorkoutPopup: any;
-  setActiveExercises: any;
-  activeExercises: any;
 }
 
-export const WorkoutDetails = ({
-  id,
-  setShowWorkoutPopup,
-  activeExercises,
-  setActiveExercises,
-}: Props) => {
+export const WorkoutDetailsEdit = ({ id, setShowWorkoutPopup }: Props) => {
   const [workoutData, setWorkoutData] = useState<any>([]);
   const [setsAndReps, setSetsAndReps] = useState<any>([]);
+  const [activeExercises, setActiveExercises] = useState<any>([]);
 
-  const [setsAndRepsCounter, setSetsAndRepsCounter] = useState<any>(1);
   const exercises = useSelector(selectExercises);
+  const user = useSelector(selectUser);
+
+  useEffect(() => {
+    axios.get(`https://localhost:44390/api/workouts/${id}`).then((res) => {
+      setWorkoutData(res.data);
+      setSetsAndReps(res.data.exercises);
+      setActiveExercises(res.data.exercises.map((el: any) => el.id));
+    });
+  }, []);
 
   useEffect(() => {
     const filteredExercises = exercises.filter((ex: any) =>
       activeExercises.includes(ex.id)
     );
 
+    console.log(filteredExercises, "filtered");
+    console.log(setsAndReps, "setsAndR");
+
     setSetsAndReps(filteredExercises);
   }, [activeExercises]);
 
   useEffect(() => {
-    axios.get(`https://localhost:44390/api/workouts/${id}`).then((res) => {
-      setWorkoutData(res.data);
-    });
-  }, []);
-
-  useEffect(() => console.log(setsAndReps), []);
+    setWorkoutData((prevState: any) => ({
+      ...prevState,
+      exercises: setsAndReps,
+    }));
+  }, [activeExercises, setsAndReps]);
 
   return (
     <Container>
@@ -62,11 +70,14 @@ export const WorkoutDetails = ({
                 .then(() => setShowWorkoutPopup(false));
             }}
           >
-            EDIT
+            SAVE
           </Button>
           <ExitIcon
             src="./assets/cross-icon.svg"
-            onClick={() => setShowWorkoutPopup(false)}
+            onClick={() => {
+              setActiveExercises([]);
+              setShowWorkoutPopup(false);
+            }}
           />
         </RecipeActions>
         <UpperSection>
@@ -94,23 +105,11 @@ export const WorkoutDetails = ({
             <AuthorAndDateSection>
               <AuthorInput
                 placeholder="Author"
-                // defaultValue={user && user.user.name}
+                defaultValue={user && user.user.name}
                 disabled
               />
               <Date placeholder="Date" disabled />
             </AuthorAndDateSection>
-            <Categories>
-              {/* {categories.map(({ id, title, active }: any) => (
-                <RecipeDetailsCategories
-                  key={id}
-                  id={id}
-                  title={title}
-                  setCategories={setCategories}
-                  categories={categories}
-                  active={active}
-                />
-              ))} */}
-            </Categories>
             <Description
               value={workoutData.description}
               placeholder="Description"
@@ -265,23 +264,9 @@ const ImageContainer = styled.label`
   }
 `;
 
-const Categories = styled.div`
-  display: flex;
-  justify-content: space-between;
-  width: 55%;
-`;
-
 const Description = styled.input`
   width: 100%;
   padding: 5px;
-`;
-
-const Separator = styled.hr`
-  margin-top: 1rem;
-  margin-bottom: 1rem;
-  margin-left: 3rem;
-  margin-right: 3rem;
-  opacity: 0.6;
 `;
 
 // BOTTOM LOWER STYLES

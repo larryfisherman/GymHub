@@ -38,11 +38,6 @@ export const NavSideBar = ({ setTabToggle }: Props) => {
             itemName="Exercises"
             onClick={() => setTabToggle(4)}
           />
-          {/* <SideBarItem
-            itemImg="./assets/progress-gray-icon.svg"
-            itemName="Progress"
-            onClick={() => setTabToggle(5)}
-          /> */}
         </NavItems>
         <UserSection>
           <SideBarItem

@@ -16,16 +16,23 @@ export const WorkoutExercise = ({
 }: Props) => {
   const [isActive, setIsActive] = useState(false);
 
+  const checkIfActive = () => {
+    const active = activeExercises.find((el: any) => el === id);
+    if (active) setIsActive(true);
+  };
+
   const handleActiveChange = () => {
     if (isActive) return setActiveExercises(() => [...activeExercises, id]);
 
-    const idToRemove = activeExercises.find((el: any) => el === id);
-
-    const elementIndex = activeExercises.indexOf(idToRemove);
+    const elementIndex = activeExercises.indexOf(
+      activeExercises.find((el: any) => el === id)
+    );
 
     const newState = [
-      ...activeExercises.slice(0, elementIndex),
-      ...activeExercises.slice(elementIndex + 1),
+      ...new Set([
+        ...activeExercises.slice(0, elementIndex),
+        ...activeExercises.slice(elementIndex + 1),
+      ]),
     ];
 
     setActiveExercises(newState);
@@ -34,6 +41,10 @@ export const WorkoutExercise = ({
   useEffect(() => {
     handleActiveChange();
   }, [isActive]);
+
+  useEffect(() => {
+    checkIfActive();
+  }, [activeExercises]);
 
   return (
     <Container

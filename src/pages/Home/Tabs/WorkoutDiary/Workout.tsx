@@ -7,7 +7,7 @@ interface Props {
   favourite: boolean;
   timeToBeDone: number;
   kcal: number;
-  setShowWorkoutPopup: any;
+  setShowEditWorkoutDetails: any;
   setWorkoutId: any;
 }
 
@@ -16,7 +16,7 @@ export const Workout = ({
   favourite,
   timeToBeDone,
   kcal,
-  setShowWorkoutPopup,
+  setShowEditWorkoutDetails,
   setWorkoutId,
   id,
 }: Props) => {
@@ -42,7 +42,7 @@ export const Workout = ({
         </DescriptionSection>
         <StartButton
           onClick={() => {
-            setShowWorkoutPopup(true);
+            setShowEditWorkoutDetails(true);
             setWorkoutId(id);
           }}
         >

@@ -2,8 +2,7 @@ import React, { useEffect, useState } from "react";
 import styled from "styled-components";
 import { Workout } from "./Workout";
 import axios from "axios";
-import { WorkoutPopup } from "./WorkoutPopup";
-import { WorkoutDetails } from "./WorkoutDetails";
+import { WorkoutDetailsEdit } from "./WorkoutDetailsEdit";
 
 interface WorkoutProps {
   title: string;
@@ -15,10 +14,8 @@ interface WorkoutProps {
 
 export const WorkoutDiary = () => {
   const [workouts, setWorkouts] = useState([]);
-  const [workoutData, setWorkoutData] = useState([]);
-  const [showWorkoutPopup, setShowWorkoutPopup] = useState(false);
+  const [showEditWorkoutDetails, setShowEditWorkoutDetails] = useState(false);
   const [workoutId, setWorkoutId] = useState(0);
-  const [activeExercises, setActiveExercises] = useState([]);
 
   useEffect(() => {
     axios.get("https://localhost:44390/api/workouts").then((res) => {
@@ -28,12 +25,10 @@ export const WorkoutDiary = () => {
 
   return (
     <Container>
-      {showWorkoutPopup && (
-        <WorkoutDetails
+      {showEditWorkoutDetails && (
+        <WorkoutDetailsEdit
           id={workoutId}
-          setShowWorkoutPopup={setShowWorkoutPopup}
-          activeExercises={activeExercises}
-          setActiveExercises={setActiveExercises}
+          setShowWorkoutPopup={setShowEditWorkoutDetails}
         />
       )}
       <Content>
@@ -54,7 +49,7 @@ export const WorkoutDiary = () => {
                 favourite={favourite}
                 kcal={kcal}
                 timeToBeDone={timeToBeDone}
-                setShowWorkoutPopup={setShowWorkoutPopup}
+                setShowEditWorkoutDetails={setShowEditWorkoutDetails}
                 setWorkoutId={setWorkoutId}
               />
             )
