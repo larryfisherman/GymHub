@@ -2,6 +2,7 @@ import React, { useState, useEffect } from "react";
 import styled from "styled-components";
 import { Exercise } from "./Exercise";
 import { Category } from "./Category";
+import { useDispatch } from "react-redux";
 import { setExercisesStore } from "../../../../store/exercisesSlice";
 
 export const Exercises = () => {
@@ -9,20 +10,26 @@ export const Exercises = () => {
     {
       id: 1,
       title: "Miliatry press",
+      sets: 4,
+      repeats: 6,
     },
     {
       id: 2,
       title: "Standing dumbbell press",
+      sets: 3,
+      repeats: 10,
     },
     {
       id: 3,
       title: "Yoga",
+      sets: 2,
+      repeats: 4,
     },
   ]);
 
-  useEffect(() => {
-    setExercisesStore(exercises);
-  }, []);
+  const dispatch = useDispatch();
+
+  dispatch(setExercisesStore(exercises));
 
   const [categories, setCategories] = useState([
     {

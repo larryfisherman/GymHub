@@ -6,6 +6,7 @@ interface Props {
   title: string;
   sets: number;
   repeats: number;
+  setSetsAndReps: any;
 }
 
 export const WorkoutDetailsSetsAndRepsItem = ({
@@ -13,18 +14,67 @@ export const WorkoutDetailsSetsAndRepsItem = ({
   title,
   sets,
   repeats,
+  setSetsAndReps,
 }: Props) => {
-  const [edit, setEdit] = useState(false);
+  const [isEdit, setIsEdit] = useState(false);
+
+  const handleInputChange = (id: number, property: string, value: string) => {
+    setSetsAndReps((prevData: any) =>
+      prevData.map((item: any) =>
+        item.id === id ? { ...item, [property]: value } : item
+      )
+    );
+  };
+
   return (
     <Container>
-      <Content>
-        {sets}x{repeats} {title}
-        <PencilIcon src="./assets/pencil-icon.svg" />
-      </Content>
+      {isEdit ? (
+        <Content>
+          <ValuesSection>
+            <SetsInput
+              defaultValue={sets}
+              onChange={(e) => handleInputChange(id, "sets", e.target.value)}
+            />{" "}
+            x{" "}
+            <RepeatsInput
+              defaultValue={repeats}
+              onChange={(e) => handleInputChange(id, "repeats", e.target.value)}
+            />
+          </ValuesSection>
+          {title}
+          <PencilIcon
+            src="./assets/pencil-icon.svg"
+            onClick={() => setIsEdit(!isEdit)}
+          />
+        </Content>
+      ) : (
+        <Content>
+          {sets}x{repeats} {title}
+          <PencilIcon
+            src="./assets/pencil-icon.svg"
+            onClick={() => setIsEdit(!isEdit)}
+          />
+        </Content>
+      )}
+
       <Separator />
     </Container>
   );
 };
+
+const ValuesSection = styled.div`
+  height: 1rem;
+  margin-bottom: 1rem;
+`;
+
+const SetsInput = styled.input`
+  width: 2rem;
+  text-align: center;
+`;
+const RepeatsInput = styled.input`
+  width: 2rem;
+  text-align: center;
+`;
 
 const PencilIcon = styled.img`
   &:hover {
@@ -34,6 +84,11 @@ const PencilIcon = styled.img`
 
 const Container = styled.div`
   width: 100%;
+  display: flex;
+  flex-direction: column;
+  justify-content: space-between;
+  height: 3rem;
+  margin-top: 1rem;
 `;
 const Content = styled.div`
   width: 100%;
@@ -43,7 +98,5 @@ const Content = styled.div`
 `;
 
 const Separator = styled.hr`
-  margin-top: 1rem;
-  margin-bottom: 1rem;
   width: 100%;
 `;

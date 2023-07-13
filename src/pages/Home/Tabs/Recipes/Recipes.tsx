@@ -18,9 +18,9 @@ export const Recipes = () => {
       .get("https://localhost:44390/api/recipes/")
       .then((res) => setRecipes(res.data));
 
-    axios
-      .get("https://localhost:44390/api/recipes/categories")
-      .then((res) => setCategories(res.data));
+    // axios
+    //   .get("https://localhost:44390/api/recipes/categories")
+    //   .then((res) => setCategories(res.data));
   }, []);
 
   return (

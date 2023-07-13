@@ -5,46 +5,43 @@ import { selectUser } from "../../../../store/userSlice";
 import axios from "axios";
 import { WorkoutDetailsSetsAndRepsItem } from "./WorkoutDetailsSetsAndRepsItem";
 import { selectExercises } from "../../../../store/exercisesSlice";
+import { Exercise } from "../Exercises/Exercise";
+import { WorkoutExercise } from "./WorkoutExercise";
 
 interface Props {
   id: number;
   setShowWorkoutPopup: any;
+  setActiveExercises: any;
+  activeExercises: any;
 }
 
-export const WorkoutDetails = ({ id, setShowWorkoutPopup }: Props) => {
+export const WorkoutDetails = ({
+  id,
+  setShowWorkoutPopup,
+  activeExercises,
+  setActiveExercises,
+}: Props) => {
   const [workoutData, setWorkoutData] = useState<any>([]);
-  const [setsAndReps, setSetsAndReps] = useState<any>([
-    {
-      id: 1,
-      title: "Standing dumbbell press",
-      sets: 3,
-      repeats: 10,
-    },
-    {
-      id: 2,
-      title: "Miliatry press",
-      sets: 2,
-      repeats: 10,
-    },
-    {
-      id: 3,
-      title: "Bench press",
-      sets: 4,
-      repeats: 6,
-    },
-  ]);
+  const [setsAndReps, setSetsAndReps] = useState<any>([]);
 
   const [setsAndRepsCounter, setSetsAndRepsCounter] = useState<any>(1);
-  const user = useSelector(selectUser);
   const exercises = useSelector(selectExercises);
 
-  console.log(exercises);
+  useEffect(() => {
+    const filteredExercises = exercises.filter((ex: any) =>
+      activeExercises.includes(ex.id)
+    );
+
+    setSetsAndReps(filteredExercises);
+  }, [activeExercises]);
 
   useEffect(() => {
     axios.get(`https://localhost:44390/api/workouts/${id}`).then((res) => {
       setWorkoutData(res.data);
     });
   }, []);
+
+  useEffect(() => console.log(setsAndReps), []);
 
   return (
     <Container>
@@ -100,7 +97,7 @@ export const WorkoutDetails = ({ id, setShowWorkoutPopup }: Props) => {
                 // defaultValue={user && user.user.name}
                 disabled
               />
-              <Date placeholder="Date" />
+              <Date placeholder="Date" disabled />
             </AuthorAndDateSection>
             <Categories>
               {/* {categories.map(({ id, title, active }: any) => (
@@ -128,21 +125,18 @@ export const WorkoutDetails = ({ id, setShowWorkoutPopup }: Props) => {
         </UpperSection>
         <BottomSection>
           <BottomLeftSection>
-            <IngrediensSection>
-              <Title>Ingrediens (per serving)</Title>
-              {/* {ingrediens.map(({ id, amount, name }: any) => (
-                <RecipeDetailsIngredient
+            <ExercisesSection>
+              <Title>Exercises</Title>
+              {exercises.map(({ id, title }: any) => (
+                <WorkoutExercise
                   key={id}
                   id={id}
-                  amount={amount}
-                  name={name}
-                  setIngrediens={setIngrediens}
+                  title={title}
+                  activeExercises={activeExercises}
+                  setActiveExercises={setActiveExercises}
                 />
-              ))} */}
-              <Separator />
-              <AddIngredient onClick={() => {}}>+ Add Ingredient</AddIngredient>
-              <Separator />
-            </IngrediensSection>
+              ))}
+            </ExercisesSection>
           </BottomLeftSection>
           <BottomRightSection>
             <TimeAndKcalSection>
@@ -159,6 +153,7 @@ export const WorkoutDetails = ({ id, setShowWorkoutPopup }: Props) => {
                     title={el.title}
                     sets={el.sets}
                     repeats={el.repeats}
+                    setSetsAndReps={setSetsAndReps}
                   />
                 ))}
               </SetsAndReps>
@@ -202,6 +197,7 @@ const SetsAndRepsSection = styled.div`
 `;
 
 const SetsAndReps = styled.div`
+width: 100%;
   display: flex;
   flex-direction; column;
   flex-wrap: wrap;
@@ -296,7 +292,7 @@ const BottomLeftSection = styled.div`
   width: 45%;
 `;
 
-const IngrediensSection = styled.div`
+const ExercisesSection = styled.div`
   background-color: white;
   padding: 1rem;
   overflow-y: scroll;
@@ -304,9 +300,9 @@ const IngrediensSection = styled.div`
 
 const Title = styled.span`
   display: flex;
-  margin-left: 3rem;
   font-size: 2rem;
   font-weight: bold;
+  margin-bottom: 2rem;
 `;
 
 const AddIngredient = styled.span`

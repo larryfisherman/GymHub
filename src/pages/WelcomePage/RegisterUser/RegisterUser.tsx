@@ -1,7 +1,6 @@
 import React, { useState } from "react";
 import styled from "styled-components";
 import axios from "axios";
-import { GoogleLogin } from "@react-oauth/google";
 import { useNavigate } from "react-router-dom";
 
 interface Props {
@@ -31,7 +30,6 @@ export const RegisterUser = ({
           <Logo src="./assets/logo.svg" />
         </UpperSection>
         <h1>Create Account</h1>
-        <GoogleLogin onSuccess={() => console.log("success")} />
         <FullNameInput
           value={nameValue}
           onChange={(e) => setNameValue(e.target.value)}

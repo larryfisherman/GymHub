@@ -2,7 +2,10 @@ import React, { useEffect, useState } from "react";
 import styled from "styled-components";
 import { useSelector } from "react-redux";
 import { selectUser } from "../../../../store/userSlice";
+import { selectExercises } from "../../../../store/exercisesSlice";
 import axios from "axios";
+import { Exercise } from "../Exercises/Exercise";
+import { WorkoutExercise } from "./WorkoutExercise";
 
 interface Props {
   id: number;
@@ -14,6 +17,8 @@ export const WorkoutPopup = ({ id, setShowWorkoutPopup }: Props) => {
   const [steps, setSteps] = useState<any>([]);
   const [ingrediens, setIngrediens] = useState<any[]>([]);
   const user = useSelector(selectUser);
+
+  const exercises = useSelector(selectExercises);
 
   useEffect(() => {
     axios.get(`https://localhost:44390/api/workouts/${id}`).then((res) => {
@@ -126,21 +131,15 @@ export const WorkoutPopup = ({ id, setShowWorkoutPopup }: Props) => {
         <BottomSection>
           <BottomLeftSection>
             <MakroSection></MakroSection>
-            <IngrediensSection>
-              <Title>Ingrediens (per serving)</Title>
-              {/* {ingrediens.map(({ id, amount, name }: any) => (
-                <RecipeDetailsIngredient
-                  key={id}
-                  id={id}
-                  amount={amount}
-                  name={name}
-                  setIngrediens={setIngrediens}
-                />
+            <ExercisesSection>
+              <Title>Exercises</Title>
+              {/* {exercises.map(({ id, title }: any) => (
+                <WorkoutExercise key={id} id={id} title={title} />
               ))} */}
               <Separator />
               <AddIngredient onClick={() => {}}>+ Add Ingredient</AddIngredient>
               <Separator />
-            </IngrediensSection>
+            </ExercisesSection>
           </BottomLeftSection>
           <BottomRightSection>
             {/* {steps.map(({ title, id, description }: any) => (
@@ -233,7 +232,7 @@ const MakroSection = styled.div`
   margin-bottom: 1rem;
 `;
 
-const IngrediensSection = styled.div`
+const ExercisesSection = styled.div`
   background-color: white;
   padding: 1rem;
   overflow-y: scroll;

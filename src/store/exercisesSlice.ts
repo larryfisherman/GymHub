@@ -3,11 +3,11 @@ import { createSlice } from "@reduxjs/toolkit";
 export const exercisesSlice = createSlice({
   name: "exercises",
   initialState: {
-    exercises: null,
+    exercises: [],
   },
   reducers: {
     setExercisesStore: (state, action) => {
-      state.exercises = action.payload.exercises;
+      state.exercises = action.payload;
     },
   },
 });

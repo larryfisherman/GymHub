@@ -18,6 +18,7 @@ export const WorkoutDiary = () => {
   const [workoutData, setWorkoutData] = useState([]);
   const [showWorkoutPopup, setShowWorkoutPopup] = useState(false);
   const [workoutId, setWorkoutId] = useState(0);
+  const [activeExercises, setActiveExercises] = useState([]);
 
   useEffect(() => {
     axios.get("https://localhost:44390/api/workouts").then((res) => {
@@ -31,6 +32,8 @@ export const WorkoutDiary = () => {
         <WorkoutDetails
           id={workoutId}
           setShowWorkoutPopup={setShowWorkoutPopup}
+          activeExercises={activeExercises}
+          setActiveExercises={setActiveExercises}
         />
       )}
       <Content>
