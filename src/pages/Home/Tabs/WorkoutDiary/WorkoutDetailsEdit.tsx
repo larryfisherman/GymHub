@@ -7,6 +7,8 @@ import { selectUser } from "../../../../store/userSlice";
 import { WorkoutDetailsSetsAndRepsItem } from "./WorkoutDetailsSetsAndRepsItem";
 import { selectExercises } from "../../../../store/exercisesSlice";
 import { WorkoutExercise } from "./WorkoutExercise";
+import { InfinitySpin } from "react-loader-spinner";
+import { useWorkoutData } from "./hooks/useWorkoutData";
 
 interface Props {
   id: number;
@@ -14,153 +16,137 @@ interface Props {
 }
 
 export const WorkoutDetailsEdit = ({ id, setShowWorkoutPopup }: Props) => {
-  const [workoutData, setWorkoutData] = useState<any>([]);
-  const [setsAndReps, setSetsAndReps] = useState<any>([]);
-  const [activeExercises, setActiveExercises] = useState<any>([]);
-  const [loading, setLoading] = useState(false);
+  const {
+    loading,
+    setLoading,
+    workoutData,
+    setsAndReps,
+    activeExercises,
+    setWorkoutData,
+    setSetsAndReps,
+    setActiveExercises,
+  } = useWorkoutData(id);
 
   const exercises = useSelector(selectExercises);
   const user = useSelector(selectUser);
 
-  useEffect(() => {
-    setLoading(true);
-    axios
-      .get(`https://localhost:44390/api/workouts/${id}`)
-      .then((res) => {
-        setWorkoutData(res.data);
-        setSetsAndReps(res.data.exercises);
-        setActiveExercises(res.data.exercises.map((el: any) => el.id));
-      })
-      .finally(() => setLoading(false));
-  }, []);
-
-  useEffect(() => {
-    const filteredExercises = exercises.filter((ex: any) =>
-      activeExercises.includes(ex.id)
-    );
-
-    console.log(filteredExercises, "filtered");
-    console.log(setsAndReps, "setsAndR");
-
-    setSetsAndReps(filteredExercises);
-  }, [activeExercises]);
-
-  useEffect(() => {
-    setWorkoutData((prevState: any) => ({
-      ...prevState,
-      exercises: setsAndReps,
-    }));
-  }, [activeExercises, setsAndReps]);
-
   return (
     <Container>
-      <Content>
-        <RecipeActions>
-          <Button
-            onClick={() => {
-              if (id) {
-                return axios
-                  .put(
-                    `https://localhost:44390/api/workouts/${id}`,
-                    workoutData
-                  )
-                  .then(() => setShowWorkoutPopup(false));
-              }
-              axios
-                .post("https://localhost:44390/api/workouts", workoutData)
-                .then(() => setShowWorkoutPopup(false));
-            }}
-          >
-            SAVE
-          </Button>
-          <ExitIcon
-            src="./assets/cross-icon.svg"
-            onClick={() => {
-              setActiveExercises([]);
-              setShowWorkoutPopup(false);
-            }}
-          />
-        </RecipeActions>
-        <UpperSection>
-          <ImageContainer>
-            <Image
-            // src={
-            //   recipeData.imageSrc
-            //     ? recipeData.imageSrc
-            //     : "./assets/blank-recipe-photo.svg"
-            // }
+      {loading ? (
+        <SpinnerWrapper>
+          <InfinitySpin />
+        </SpinnerWrapper>
+      ) : (
+        <Content>
+          <RecipeActions>
+            <Button
+              onClick={() => {
+                if (id) {
+                  return axios
+                    .put(
+                      `https://localhost:44390/api/workouts/${id}`,
+                      workoutData
+                    )
+                    .then(() => setLoading(true))
+                    .finally(() => setShowWorkoutPopup(false));
+                }
+                axios
+                  .post("https://localhost:44390/api/workouts", workoutData)
+                  .then(() => setLoading(true))
+                  .finally(() => setShowWorkoutPopup(false));
+              }}
+            >
+              SAVE
+            </Button>
+            <ExitIcon
+              src="./assets/cross-icon.svg"
+              onClick={() => {
+                setActiveExercises([]);
+                setShowWorkoutPopup(false);
+              }}
             />
-            {/* <input type="file" onChange={showPreview} /> */}
-          </ImageContainer>
-          <RightSection>
-            <DishNameInput
-              value={workoutData.title}
-              placeholder="The name of the workout"
-              onChange={(e) =>
-                setWorkoutData((prevState: any) => ({
-                  ...prevState,
-                  title: e.target.value,
-                }))
-              }
-            />
-            <AuthorAndDateSection>
-              <AuthorInput
-                placeholder="Author"
-                defaultValue={user && user.user.name}
-                disabled
+          </RecipeActions>
+          <UpperSection>
+            <ImageContainer>
+              <Image
+              // src={
+              //   recipeData.imageSrc
+              //     ? recipeData.imageSrc
+              //     : "./assets/blank-recipe-photo.svg"
+              // }
               />
-              <Date placeholder="Date" disabled />
-            </AuthorAndDateSection>
-            <Description
-              value={workoutData.description}
-              placeholder="Description"
-              onChange={(e) =>
-                setWorkoutData((prevState: any) => ({
-                  ...prevState,
-                  description: e.target.value,
-                }))
-              }
-            />
-          </RightSection>
-        </UpperSection>
-        <BottomSection>
-          <BottomLeftSection>
-            <ExercisesSection>
-              <Title>Exercises</Title>
-              {exercises.map(({ id, title }: any) => (
-                <WorkoutExercise
-                  key={id}
-                  id={id}
-                  title={title}
-                  activeExercises={activeExercises}
-                  setActiveExercises={setActiveExercises}
+              {/* <input type="file" onChange={showPreview} /> */}
+            </ImageContainer>
+            <RightSection>
+              <DishNameInput
+                value={workoutData.title}
+                placeholder="The name of the workout"
+                onChange={(e) =>
+                  setWorkoutData((prevState: any) => ({
+                    ...prevState,
+                    title: e.target.value,
+                  }))
+                }
+              />
+              <AuthorAndDateSection>
+                <AuthorInput
+                  placeholder="Author"
+                  defaultValue={user && user.user.name}
+                  disabled
                 />
-              ))}
-            </ExercisesSection>
-          </BottomLeftSection>
-          <BottomRightSection>
-            <TimeAndKcalSection>
-              <TimeAndKcalItem></TimeAndKcalItem>
-              <TimeAndKcalItem></TimeAndKcalItem>
-            </TimeAndKcalSection>
-            <SetsAndRepsSection>
-              <SetsAndRepsTitle>Sets & Reps</SetsAndRepsTitle>
-              <SetsAndReps>
-                {setsAndReps.map((el: any) => (
-                  <WorkoutDetailsSetsAndRepsItem
-                    key={el.id}
-                    id={el.id}
-                    title={el.title}
-                    sets={el.sets}
-                    repeats={el.repeats}
-                    setSetsAndReps={setSetsAndReps}
+                <Date placeholder="Date" disabled />
+              </AuthorAndDateSection>
+              <Description
+                value={workoutData.description}
+                placeholder="Description"
+                onChange={(e) =>
+                  setWorkoutData((prevState: any) => ({
+                    ...prevState,
+                    description: e.target.value,
+                  }))
+                }
+              />
+            </RightSection>
+          </UpperSection>
+          <BottomSection>
+            <BottomLeftSection>
+              <ExercisesSection>
+                <Title>Exercises</Title>
+                {exercises.map(({ id, title }: any) => (
+                  <WorkoutExercise
+                    key={id}
+                    id={id}
+                    title={title}
+                    activeExercises={activeExercises}
+                    setActiveExercises={setActiveExercises}
                   />
                 ))}
-              </SetsAndReps>
-            </SetsAndRepsSection>
-          </BottomRightSection>
-        </BottomSection>
-      </Content>
+              </ExercisesSection>
+            </BottomLeftSection>
+            <BottomRightSection>
+              <TimeAndKcalSection>
+                <TimeAndKcalItem></TimeAndKcalItem>
+                <TimeAndKcalItem></TimeAndKcalItem>
+              </TimeAndKcalSection>
+              <SetsAndRepsSection>
+                <SetsAndRepsTitle>Sets & Reps</SetsAndRepsTitle>
+                <SetsAndReps>
+                  {setsAndReps.map((el: any) => (
+                    <WorkoutDetailsSetsAndRepsItem
+                      key={el.id}
+                      id={el.id}
+                      title={el.title}
+                      sets={el.sets}
+                      repeats={el.repeats}
+                      setSetsAndReps={setSetsAndReps}
+                    />
+                  ))}
+                </SetsAndReps>
+              </SetsAndRepsSection>
+            </BottomRightSection>
+          </BottomSection>
+        </Content>
+      )}
     </Container>
   );
 };
@@ -185,6 +171,14 @@ export const WorkoutDetailsEdit = ({ id, setShowWorkoutPopup }: Props) => {
                   </IncreaseButton>
                 </SetsAndRepsCounter> */
 }
+
+const SpinnerWrapper = styled.div`
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  width: 100%;
+  height: 100vh;
+`;
 
 const SetsAndRepsSection = styled.div`
   display: flex;

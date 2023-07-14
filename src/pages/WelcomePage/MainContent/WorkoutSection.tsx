@@ -80,10 +80,10 @@ const Images = styled.div`
 const WorkoutImage = styled.img`
   width: 100%;
   position: absolute;
+  z-index: 1;
 `;
 const WorkoutImageBackground = styled.img`
   position: relative;
-  z-index: -5;
   right: 40rem;
 `;
 
@@ -91,6 +91,7 @@ const Container = styled.div`
   width: 100%;
   height: 100%;
   margin-top: 10rem;
+  background-color: white;
 `;
 const Content = styled.div`
   display: flex;
@@ -106,6 +107,8 @@ const Description = styled.div`
   justify-content: center;
   margin-left: 10rem;
   width: 40%;
+  position: relative;
+  z-index: 3;
 `;
 const Title = styled.span`
   font-size: 3rem;
@@ -118,6 +121,8 @@ const Text = styled.span`
   display: flex;
   flex-direction: column;
   justify-content: flex-start;
+  position: relative;
+  z-index: 3;
 `;
 const Item = styled.div`
   display: flex;

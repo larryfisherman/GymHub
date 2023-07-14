@@ -41,7 +41,7 @@ export const WorkoutDetailsSetsAndRepsItem = ({
               onChange={(e) => handleInputChange(id, "repeats", e.target.value)}
             />
           </ValuesSection>
-          {title}
+          <Title>{title}</Title>
           <PencilIcon
             src="./assets/pencil-icon.svg"
             onClick={() => setIsEdit(!isEdit)}
@@ -62,9 +62,15 @@ export const WorkoutDetailsSetsAndRepsItem = ({
   );
 };
 
+const Title = styled.span`
+  display: flex;
+  flex-grow: 1;
+`;
+
 const ValuesSection = styled.div`
   height: 1rem;
   margin-bottom: 1rem;
+  margin-right: 1rem;
 `;
 
 const SetsInput = styled.input`
