@@ -64,12 +64,12 @@ const SecondUnderlineMarker = styled.span`
     content: "";
     position: absolute;
     left: 2rem;
-    bottom: 4px;
-    width: 9rem;
+    bottom: 5px;
+    width: 11rem;
     height: 8px;
     background-color: #ff9800;
     border-radius: 50px;
-    transform: scaleX(0.8) rotate(-3rem) skewX(-1deg);
+    transform: scaleX(0.8) skewX(-1deg);
   }
 `;
 

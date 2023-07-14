@@ -25,6 +25,12 @@ export const Exercises = () => {
       sets: 2,
       repeats: 4,
     },
+    {
+      id: 4,
+      title: "Bench press",
+      sets: 4,
+      repeats: 6,
+    },
   ]);
 
   const dispatch = useDispatch();

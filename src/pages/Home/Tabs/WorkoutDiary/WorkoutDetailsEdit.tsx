@@ -201,7 +201,7 @@ width: 100%;
   flex-direction; column;
   flex-wrap: wrap;
   margin-top: 1rem;
-`;
+  `;
 
 const SetsAndRepsTitle = styled.span`
   font-weight: bold;
@@ -280,7 +280,6 @@ const BottomLeftSection = styled.div`
 const ExercisesSection = styled.div`
   background-color: white;
   padding: 1rem;
-  overflow-y: scroll;
 `;
 
 const Title = styled.span`
@@ -288,17 +287,6 @@ const Title = styled.span`
   font-size: 2rem;
   font-weight: bold;
   margin-bottom: 2rem;
-`;
-
-const AddIngredient = styled.span`
-  display: flex;
-  font-size: 2rem;
-  font-weight: bold;
-  margin-left: 3rem;
-
-  &:hover {
-    cursor: pointer;
-  }
 `;
 
 // -------
@@ -312,7 +300,6 @@ const BottomRightSection = styled.div`
   padding: 1rem;
   padding-left: 3rem;
   padding-right: 3rem;
-  overflow-y: scroll;
 `;
 
 // ------
@@ -371,7 +358,7 @@ const Container = styled.div`
 const Content = styled.div`
   width: 88.5%;
   height: 100%;
-  background-color: lightgray;
+  background-color: #f8f8f8;
   display: flex;
   flex-direction: column;
   align-items: center;

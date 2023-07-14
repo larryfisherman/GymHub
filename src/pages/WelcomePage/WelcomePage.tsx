@@ -13,9 +13,6 @@ export const WelcomePage = () => {
   const [showRegisterPopup, setShowRegisterPopup] = useState(false);
   const [showLoginPopup, setShowLoginPopup] = useState(false);
 
-  const navigate = useNavigate();
-  const user = useSelector(selectUser);
-
   return (
     <Container>
       <Content>

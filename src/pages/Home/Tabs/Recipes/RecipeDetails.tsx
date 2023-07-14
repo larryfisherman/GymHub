@@ -8,6 +8,7 @@ import { addIngredient } from "./utils/addIngredient";
 import { useSelector } from "react-redux";
 import { selectUser } from "../../../../store/userSlice";
 import { RecipeDetailsCategories } from "./RecipeDetailsCategories";
+import { InfinitySpin } from "react-loader-spinner";
 
 interface Props {
   id: number;
@@ -30,6 +31,8 @@ export const RecipeDetails = ({ id, setShowRecipeDetails }: Props) => {
   const [recipeData, setRecipeData] = useState<any>([]);
   const [steps, setSteps] = useState<stepsStateProps[]>([]);
   const [ingrediens, setIngrediens] = useState<any[]>([]);
+  const [loading, setLoading] = useState(false);
+
   const user = useSelector(selectUser);
 
   const [categories, setCategories] = useState([
@@ -58,20 +61,25 @@ export const RecipeDetails = ({ id, setShowRecipeDetails }: Props) => {
   useEffect(() => {
     if (!id) return setRecipeData(null);
 
-    axios.get(`https://localhost:44390/api/recipes/${id}`).then((res) => {
-      setRecipeData(res.data);
-      setIngrediens(res.data.ingrediens);
-      setSteps(res.data.steps);
+    setLoading(true);
 
-      const newCategories = categories.map((el) => {
-        if (el.title === res.data.category) {
-          return { ...el, active: true };
-        }
-        return el;
-      });
+    axios
+      .get(`https://localhost:44390/api/recipes/${id}`)
+      .then((res) => {
+        setRecipeData(res.data);
+        setIngrediens(res.data.ingrediens);
+        setSteps(res.data.steps);
 
-      setCategories(newCategories);
-    });
+        const newCategories = categories.map((el) => {
+          if (el.title === res.data.category) {
+            return { ...el, active: true };
+          }
+          return el;
+        });
+
+        setCategories(newCategories);
+      })
+      .finally(() => setLoading(false));
   }, []);
 
   useEffect(
@@ -98,138 +106,149 @@ export const RecipeDetails = ({ id, setShowRecipeDetails }: Props) => {
 
   return (
     <Container>
-      <Content>
-        <RecipeActions>
-          <Button
-            onClick={() => {
-              if (id) {
-                return axios
-                  .put(`https://localhost:44390/api/recipes/${id}`, recipeData)
-                  .then(() => setShowRecipeDetails(false));
-              }
-
-              axios
-                .post("https://localhost:44390/api/recipes", recipeData)
-                .then(() => setShowRecipeDetails(false));
-            }}
-          >
-            SAVE
-          </Button>
-          <ExitIcon
-            src="./assets/cross-icon.svg"
-            onClick={() => setShowRecipeDetails(false)}
-          />
-        </RecipeActions>
-        <UpperSection>
-          <ImageContainer>
-            <Image
-              src={
-                recipeData.imageSrc
-                  ? recipeData.imageSrc
-                  : "./assets/blank-recipe-photo.svg"
-              }
-            />
-            {/* <input type="file" onChange={showPreview} /> */}
-          </ImageContainer>
-          <RightSection>
-            <DishNameInput
-              value={recipeData.title}
-              placeholder="The name of the dish"
-              onChange={(e) =>
-                setRecipeData((prevState: any) => ({
-                  ...prevState,
-                  title: e.target.value,
-                }))
-              }
-            />
-            <AuthorAndDateSection>
-              <AuthorInput
-                placeholder="Author"
-                defaultValue={user && user.user.name}
-                disabled
-              />
-              <Date placeholder="Date" />
-            </AuthorAndDateSection>
-            <Categories>
-              {categories.map(({ id, title, active }: any) => (
-                <RecipeDetailsCategories
-                  key={id}
-                  id={id}
-                  title={title}
-                  setCategories={setCategories}
-                  categories={categories}
-                  active={active}
-                />
-              ))}
-            </Categories>
-            <Description
-              value={recipeData.description}
-              placeholder="Description"
-              onChange={(e) =>
-                setRecipeData((prevState: any) => ({
-                  ...prevState,
-                  description: e.target.value,
-                }))
-              }
-            />
-          </RightSection>
-        </UpperSection>
-        <BottomSection>
-          <BottomLeftSection>
-            <MakroSection>
-              <MakroItem style={{ backgroundColor: "#846075" }}>kcal</MakroItem>
-              <MakroItem style={{ backgroundColor: "#FF9800" }}>
-                carbs
-              </MakroItem>
-              <MakroItem style={{ backgroundColor: "#A5C882" }}>
-                protein
-              </MakroItem>
-              <MakroItem style={{ backgroundColor: "#AF5D63" }}>fat</MakroItem>
-            </MakroSection>
-            <IngrediensSection>
-              <Title>Ingrediens (per serving)</Title>
-              {ingrediens.map(({ id, amount, name }: any) => (
-                <RecipeDetailsIngredient
-                  key={id}
-                  id={id}
-                  amount={amount}
-                  name={name}
-                  setIngrediens={setIngrediens}
-                />
-              ))}
-              <Separator />
-              <AddIngredient
-                onClick={() => {
-                  const addIngredients = addIngredient(ingrediens);
-                  setIngrediens([...ingrediens, addIngredients]);
-                }}
-              >
-                + Add Ingredient
-              </AddIngredient>
-              <Separator />
-            </IngrediensSection>
-          </BottomLeftSection>
-          <BottomRightSection>
-            {steps.map(({ title, id, description }: any) => (
-              <RecipeDetailsStep
-                key={id}
-                title={title}
-                id={id}
-                description={description}
-                setSteps={setSteps}
-              />
-            ))}
-            <AddStep
+      {loading ? (
+        <InfinitySpin />
+      ) : (
+        <Content>
+          <RecipeActions>
+            <Button
               onClick={() => {
-                const addSteps = addStep(steps);
-                setSteps([...steps, addSteps]);
+                if (id) {
+                  return axios
+                    .put(
+                      `https://localhost:44390/api/recipes/${id}`,
+                      recipeData
+                    )
+                    .then(() => setShowRecipeDetails(false));
+                }
+
+                axios
+                  .post("https://localhost:44390/api/recipes", recipeData)
+                  .then(() => setShowRecipeDetails(false));
               }}
             >
-              + Add Step
-            </AddStep>
-          </BottomRightSection>
-        </BottomSection>
-      </Content>
+              SAVE
+            </Button>
+            <ExitIcon
+              src="./assets/cross-icon.svg"
+              onClick={() => setShowRecipeDetails(false)}
+            />
+          </RecipeActions>
+          <UpperSection>
+            <ImageContainer>
+              <Image
+                src={
+                  recipeData.imageSrc
+                    ? recipeData.imageSrc
+                    : "./assets/blank-recipe-photo.svg"
+                }
+              />
+              {/* <input type="file" onChange={showPreview} /> */}
+            </ImageContainer>
+            <RightSection>
+              <DishNameInput
+                value={recipeData.title}
+                placeholder="The name of the dish"
+                onChange={(e) =>
+                  setRecipeData((prevState: any) => ({
+                    ...prevState,
+                    title: e.target.value,
+                  }))
+                }
+              />
+              <AuthorAndDateSection>
+                <AuthorInput
+                  placeholder="Author"
+                  defaultValue={user && user.user.name}
+                  disabled
+                />
+                <Date placeholder="Date" />
+              </AuthorAndDateSection>
+              <Categories>
+                {categories.map(({ id, title, active }: any) => (
+                  <RecipeDetailsCategories
+                    key={id}
+                    id={id}
+                    title={title}
+                    setCategories={setCategories}
+                    categories={categories}
+                    active={active}
+                  />
+                ))}
+              </Categories>
+              <Description
+                value={recipeData.description}
+                placeholder="Description"
+                onChange={(e) =>
+                  setRecipeData((prevState: any) => ({
+                    ...prevState,
+                    description: e.target.value,
+                  }))
+                }
+              />
+            </RightSection>
+          </UpperSection>
+          <BottomSection>
+            <BottomLeftSection>
+              <MakroSection>
+                <MakroItem style={{ backgroundColor: "#846075" }}>
+                  kcal
+                </MakroItem>
+                <MakroItem style={{ backgroundColor: "#FF9800" }}>
+                  carbs
+                </MakroItem>
+                <MakroItem style={{ backgroundColor: "#A5C882" }}>
+                  protein
+                </MakroItem>
+                <MakroItem style={{ backgroundColor: "#AF5D63" }}>
+                  fat
+                </MakroItem>
+              </MakroSection>
+              <IngrediensSection>
+                <Title>Ingrediens (per serving)</Title>
+                {ingrediens.map(({ id, amount, name }: any) => (
+                  <RecipeDetailsIngredient
+                    key={id}
+                    id={id}
+                    amount={amount}
+                    name={name}
+                    setIngrediens={setIngrediens}
+                  />
+                ))}
+                <Separator />
+                <AddIngredient
+                  onClick={() => {
+                    const addIngredients = addIngredient(ingrediens);
+                    setIngrediens([...ingrediens, addIngredients]);
+                  }}
+                >
+                  + Add Ingredient
+                </AddIngredient>
+                <Separator />
+              </IngrediensSection>
+            </BottomLeftSection>
+            <BottomRightSection>
+              {steps.map(({ title, id, description }: any) => (
+                <RecipeDetailsStep
+                  key={id}
+                  title={title}
+                  id={id}
+                  description={description}
+                  setSteps={setSteps}
+                />
+              ))}
+              <AddStep
+                onClick={() => {
+                  const addSteps = addStep(steps);
+                  setSteps([...steps, addSteps]);
+                }}
+              >
+                + Add Step
+              </AddStep>
+            </BottomRightSection>
+          </BottomSection>
+        </Content>
+      )}
     </Container>
   );
 };

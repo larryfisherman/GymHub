@@ -8,13 +8,11 @@ import { selectUser } from "../../store/userSlice";
 export const Home = () => {
   const [tabToggle, setTabToggle] = useState(1);
 
-  const user = useSelector(selectUser);
-
   return (
     <>
       <Container>
         <Content>
-          <NavSideBar setTabToggle={setTabToggle} />
+          <NavSideBar setTabToggle={setTabToggle} tab={tabToggle} />
           <Main tabToggle={tabToggle} />
         </Content>
       </Container>

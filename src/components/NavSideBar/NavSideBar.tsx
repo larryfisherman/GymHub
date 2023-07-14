@@ -1,4 +1,4 @@
-import React from "react";
+import React, { useState } from "react";
 import styled from "styled-components";
 import { SideBarItem } from "./SideBarItem";
 import { useDispatch } from "react-redux";
@@ -6,10 +6,11 @@ import { logout } from "../../store/userSlice";
 import { useNavigate } from "react-router-dom";
 
 interface Props {
-  setTabToggle?: any;
+  setTabToggle: React.Dispatch<React.SetStateAction<number>>;
+  tab: number;
 }
 
-export const NavSideBar = ({ setTabToggle }: Props) => {
+export const NavSideBar = ({ setTabToggle, tab }: Props) => {
   const dispatch = useDispatch();
   const navigate = useNavigate();
 
@@ -22,21 +23,25 @@ export const NavSideBar = ({ setTabToggle }: Props) => {
             itemImg="./assets/home-gray-icon.svg"
             itemName="Home"
             onClick={() => setTabToggle(1)}
+            isActive={tab === 1}
           />
           <SideBarItem
             itemImg="./assets/diary-gray-icon.svg"
             itemName="Workout Diary"
             onClick={() => setTabToggle(2)}
+            isActive={tab === 2}
           />
           <SideBarItem
             itemImg="./assets/recipe-gray-icon.svg"
             itemName="Recipes"
             onClick={() => setTabToggle(3)}
+            isActive={tab === 3}
           />
           <SideBarItem
             itemImg="./assets/excercise-gray-icon.svg"
             itemName="Exercises"
             onClick={() => setTabToggle(4)}
+            isActive={tab === 4}
           />
         </NavItems>
         <UserSection>
