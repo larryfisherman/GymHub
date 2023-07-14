@@ -3,6 +3,7 @@ import styled from "styled-components";
 import { Workout } from "./Workout";
 import axios from "axios";
 import { WorkoutDetailsEdit } from "./WorkoutDetailsEdit";
+import { InfinitySpin } from "react-loader-spinner";
 
 interface WorkoutProps {
   title: string;
@@ -16,11 +17,16 @@ export const WorkoutDiary = () => {
   const [workouts, setWorkouts] = useState([]);
   const [showEditWorkoutDetails, setShowEditWorkoutDetails] = useState(false);
   const [workoutId, setWorkoutId] = useState(0);
+  const [loading, setLoading] = useState(false);
 
   useEffect(() => {
-    axios.get("https://localhost:44390/api/workouts").then((res) => {
-      setWorkouts(res.data);
-    });
+    setLoading(true);
+    axios
+      .get("https://localhost:44390/api/workouts")
+      .then((res) => {
+        setWorkouts(res.data);
+      })
+      .finally(() => setLoading(false));
   }, []);
 
   return (
@@ -31,31 +37,37 @@ export const WorkoutDiary = () => {
           setShowWorkoutPopup={setShowEditWorkoutDetails}
         />
       )}
-      <Content>
-        <Title>MY WORKOUTS</Title>
-        <Workouts>
-          <AddWorkout>
-            <TitleSection>
-              <span>Add Workout</span>
-            </TitleSection>
-            <AddWorkoutButton>+</AddWorkoutButton>
-          </AddWorkout>
-          {workouts.map(
-            ({ title, favourite, id, timeToBeDone, kcal }: WorkoutProps) => (
-              <Workout
-                key={id}
-                id={id}
-                title={title}
-                favourite={favourite}
-                kcal={kcal}
-                timeToBeDone={timeToBeDone}
-                setShowEditWorkoutDetails={setShowEditWorkoutDetails}
-                setWorkoutId={setWorkoutId}
-              />
-            )
-          )}
-        </Workouts>
-      </Content>
+      {loading ? (
+        <SpinnerWrapper>
+          <InfinitySpin />
+        </SpinnerWrapper>
+      ) : (
+        <Content>
+          <Title>MY WORKOUTS</Title>
+          <Workouts>
+            <AddWorkout>
+              <TitleSection>
+                <span>Add Workout</span>
+              </TitleSection>
+              <AddWorkoutButton>+</AddWorkoutButton>
+            </AddWorkout>
+            {workouts.map(
+              ({ title, favourite, id, timeToBeDone, kcal }: WorkoutProps) => (
+                <Workout
+                  key={id}
+                  id={id}
+                  title={title}
+                  favourite={favourite}
+                  kcal={kcal}
+                  timeToBeDone={timeToBeDone}
+                  setShowEditWorkoutDetails={setShowEditWorkoutDetails}
+                  setWorkoutId={setWorkoutId}
+                />
+              )
+            )}
+          </Workouts>
+        </Content>
+      )}
     </Container>
   );
 };
@@ -64,12 +76,21 @@ const Container = styled.div`
   width: 100%;
   height: 100%;
 `;
+
 const Content = styled.div`
   display: flex;
   flex-direction: column;
   width: 100%;
-  height: 100%;
+  height: 100vh;
   padding: 30px;
+`;
+
+const SpinnerWrapper = styled.div`
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  width: 100%;
+  height: 100vh;
 `;
 
 const Workouts = styled.div`

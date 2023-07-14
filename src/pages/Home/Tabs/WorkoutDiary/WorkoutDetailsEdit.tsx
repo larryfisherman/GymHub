@@ -5,12 +5,8 @@ import axios from "axios";
 import { useSelector } from "react-redux";
 import { selectUser } from "../../../../store/userSlice";
 import { WorkoutDetailsSetsAndRepsItem } from "./WorkoutDetailsSetsAndRepsItem";
-import {
-  selectExercises,
-  setExercisesStore,
-} from "../../../../store/exercisesSlice";
+import { selectExercises } from "../../../../store/exercisesSlice";
 import { WorkoutExercise } from "./WorkoutExercise";
-import { useDispatch } from "react-redux";
 
 interface Props {
   id: number;
@@ -21,16 +17,21 @@ export const WorkoutDetailsEdit = ({ id, setShowWorkoutPopup }: Props) => {
   const [workoutData, setWorkoutData] = useState<any>([]);
   const [setsAndReps, setSetsAndReps] = useState<any>([]);
   const [activeExercises, setActiveExercises] = useState<any>([]);
+  const [loading, setLoading] = useState(false);
 
   const exercises = useSelector(selectExercises);
   const user = useSelector(selectUser);
 
   useEffect(() => {
-    axios.get(`https://localhost:44390/api/workouts/${id}`).then((res) => {
-      setWorkoutData(res.data);
-      setSetsAndReps(res.data.exercises);
-      setActiveExercises(res.data.exercises.map((el: any) => el.id));
-    });
+    setLoading(true);
+    axios
+      .get(`https://localhost:44390/api/workouts/${id}`)
+      .then((res) => {
+        setWorkoutData(res.data);
+        setSetsAndReps(res.data.exercises);
+        setActiveExercises(res.data.exercises.map((el: any) => el.id));
+      })
+      .finally(() => setLoading(false));
   }, []);
 
   useEffect(() => {

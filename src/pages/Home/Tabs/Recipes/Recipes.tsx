@@ -4,6 +4,7 @@ import styled from "styled-components";
 import { Recipe } from "./Recipe";
 import { CategoriesItem } from "./CategoriesItem";
 import { ComplexSets } from "./ComplexSets";
+import { InfinitySpin } from "react-loader-spinner";
 import RecipeDetails from "./RecipeDetails";
 
 export const Recipes = () => {
@@ -12,11 +13,14 @@ export const Recipes = () => {
   const [showRecipeDetails, setShowRecipeDetails] = useState(false);
   const [recipeDetailsId, setRecipeDetailsId] = useState(0);
   const [selectedCategory, setSelectedCategory] = useState(0);
+  const [loading, setLoading] = useState(false);
 
   useEffect(() => {
+    setLoading(true);
     axios
       .get("https://localhost:44390/api/recipes/")
-      .then((res) => setRecipes(res.data));
+      .then((res) => setRecipes(res.data))
+      .finally(() => setLoading(false));
 
     // axios
     //   .get("https://localhost:44390/api/recipes/categories")
@@ -32,58 +36,72 @@ export const Recipes = () => {
             setShowRecipeDetails={setShowRecipeDetails}
           />
         )}
-        <Content>
-          <TitleSection>
-            <span>Your Delicious</span>
-            <span>Recipes</span>
-          </TitleSection>
-          <CategoriesSection>
-            {categories.map((el: any) => (
-              <CategoriesItem
-                key={el.id}
-                id={el.id}
-                title={el.title}
-                image={el.image}
-                setSelectedCategory={setSelectedCategory}
-              />
-            ))}
-          </CategoriesSection>
-          <AllItems>
-            <RecipesSection>
-              <Title>All items</Title>
-              <RecipePopup>
-                <Title>Add New Recipe</Title>
-                <AddRecipe onClick={() => setShowRecipeDetails(true)}>
-                  +
-                </AddRecipe>
-              </RecipePopup>
-              {recipes &&
-                recipes.map((el: any) => {
-                  return (
-                    <Recipe
-                      key={el.id}
-                      id={el.id}
-                      title={el.title}
-                      description={el.description}
-                      kcal={el.kcal}
-                      time={el.timeToBeDone}
-                      image={"./assets/recipe-3.svg"}
-                      setShowRecipeDetails={setShowRecipeDetails}
-                      setRecipeDetailsId={setRecipeDetailsId}
-                    />
-                  );
-                })}
-            </RecipesSection>
-            <ComplexSetsItems>
-              <ComplexSetsTitle>Complex sets</ComplexSetsTitle>
-              <ComplexSets />
-            </ComplexSetsItems>
-          </AllItems>
-        </Content>
+        {loading ? (
+          <SpinnerWrapper>
+            <InfinitySpin />
+          </SpinnerWrapper>
+        ) : (
+          <Content>
+            <TitleSection>
+              <span>Your Delicious</span>
+              <span>Recipes</span>
+            </TitleSection>
+            <CategoriesSection>
+              {categories.map((el: any) => (
+                <CategoriesItem
+                  key={el.id}
+                  id={el.id}
+                  title={el.title}
+                  image={el.image}
+                  setSelectedCategory={setSelectedCategory}
+                />
+              ))}
+            </CategoriesSection>
+            <AllItems>
+              <RecipesSection>
+                <Title>All items</Title>
+                <RecipePopup>
+                  <Title>Add New Recipe</Title>
+                  <AddRecipe onClick={() => setShowRecipeDetails(true)}>
+                    +
+                  </AddRecipe>
+                </RecipePopup>
+                {recipes &&
+                  recipes.map((el: any) => {
+                    return (
+                      <Recipe
+                        key={el.id}
+                        id={el.id}
+                        title={el.title}
+                        description={el.description}
+                        kcal={el.kcal}
+                        time={el.timeToBeDone}
+                        image={"./assets/recipe-3.svg"}
+                        setShowRecipeDetails={setShowRecipeDetails}
+                        setRecipeDetailsId={setRecipeDetailsId}
+                      />
+                    );
+                  })}
+              </RecipesSection>
+              <ComplexSetsItems>
+                <ComplexSetsTitle>Complex sets</ComplexSetsTitle>
+                <ComplexSets />
+              </ComplexSetsItems>
+            </AllItems>
+          </Content>
+        )}
       </Container>
     </>
   );
 };
+
+const SpinnerWrapper = styled.div`
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  width: 100%;
+  height: 100vh;
+`;
 
 const Container = styled.div`
   width: 100%;
