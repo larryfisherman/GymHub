@@ -4,6 +4,7 @@ import { Workout } from "./Workout";
 import axios from "axios";
 import { WorkoutDetailsEdit } from "./WorkoutDetailsEdit";
 import { InfinitySpin } from "react-loader-spinner";
+import { useWorkoutDiaryData } from "./hooks/useWorkoutDiaryData";
 
 interface WorkoutProps {
   title: string;
@@ -14,20 +15,14 @@ interface WorkoutProps {
 }
 
 export const WorkoutDiary = () => {
-  const [workouts, setWorkouts] = useState([]);
-  const [showEditWorkoutDetails, setShowEditWorkoutDetails] = useState(false);
-  const [workoutId, setWorkoutId] = useState(0);
-  const [loading, setLoading] = useState(false);
-
-  useEffect(() => {
-    setLoading(true);
-    axios
-      .get("https://localhost:44390/api/workouts")
-      .then((res) => {
-        setWorkouts(res.data);
-      })
-      .finally(() => setLoading(false));
-  }, []);
+  const {
+    workouts,
+    showEditWorkoutDetails,
+    setShowEditWorkoutDetails,
+    workoutId,
+    setWorkoutId,
+    loading,
+  } = useWorkoutDiaryData();
 
   return (
     <Container>

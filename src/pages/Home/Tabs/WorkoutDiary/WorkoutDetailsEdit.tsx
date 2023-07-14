@@ -8,7 +8,7 @@ import { WorkoutDetailsSetsAndRepsItem } from "./WorkoutDetailsSetsAndRepsItem";
 import { selectExercises } from "../../../../store/exercisesSlice";
 import { WorkoutExercise } from "./WorkoutExercise";
 import { InfinitySpin } from "react-loader-spinner";
-import { useWorkoutData } from "./hooks/useWorkoutData";
+import { useWorkoutDetailsData } from "./hooks/useWorkoutDetailsData";
 
 interface Props {
   id: number;
@@ -25,7 +25,7 @@ export const WorkoutDetailsEdit = ({ id, setShowWorkoutPopup }: Props) => {
     setWorkoutData,
     setSetsAndReps,
     setActiveExercises,
-  } = useWorkoutData(id);
+  } = useWorkoutDetailsData(id);
 
   const exercises = useSelector(selectExercises);
   const user = useSelector(selectUser);

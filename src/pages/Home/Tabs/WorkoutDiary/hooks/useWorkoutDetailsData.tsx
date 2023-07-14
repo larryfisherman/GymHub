@@ -2,7 +2,7 @@ import { useEffect, useState } from "react";
 import axios from "axios";
 import { useActiveExercises } from "./useActiveExercises";
 
-export const useWorkoutData = (id: number) => {
+export const useWorkoutDetailsData = (id: number) => {
   const [loading, setLoading] = useState(false);
   const [workoutData, setWorkoutData] = useState<any>([]);
   const [setsAndReps, setSetsAndReps] = useState<any>([]);
