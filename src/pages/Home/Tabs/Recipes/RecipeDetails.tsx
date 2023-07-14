@@ -213,6 +213,7 @@ export const RecipeDetails = ({ id, setShowRecipeDetails }: Props) => {
                     amount={amount}
                     name={name}
                     setIngrediens={setIngrediens}
+                    ingrediens={ingrediens}
                   />
                 ))}
                 <Separator />
@@ -234,6 +235,7 @@ export const RecipeDetails = ({ id, setShowRecipeDetails }: Props) => {
                   title={title}
                   id={id}
                   description={description}
+                  steps={steps}
                   setSteps={setSteps}
                 />
               ))}

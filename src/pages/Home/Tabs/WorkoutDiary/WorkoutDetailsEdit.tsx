@@ -1,6 +1,7 @@
 import React, { useEffect, useState } from "react";
 import styled from "styled-components";
 import axios from "axios";
+import moment from "moment";
 
 import { useSelector } from "react-redux";
 import { selectUser } from "../../../../store/userSlice";
@@ -60,10 +61,7 @@ export const WorkoutDetailsEdit = ({ id, setShowWorkoutPopup }: Props) => {
             </Button>
             <ExitIcon
               src="./assets/cross-icon.svg"
-              onClick={() => {
-                setActiveExercises([]);
-                setShowWorkoutPopup(false);
-              }}
+              onClick={() => setShowWorkoutPopup(false)}
             />
           </RecipeActions>
           <UpperSection>
@@ -94,7 +92,15 @@ export const WorkoutDetailsEdit = ({ id, setShowWorkoutPopup }: Props) => {
                   defaultValue={user && user.user.name}
                   disabled
                 />
-                <Date placeholder="Date" disabled />
+                <Date
+                  placeholder="Date"
+                  disabled
+                  value={
+                    id
+                      ? workoutData.createdDate
+                      : moment().format("MMMM Do YYYY, h:mm:ss a")
+                  }
+                />
               </AuthorAndDateSection>
               <Description
                 value={workoutData.description}

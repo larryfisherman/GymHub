@@ -11,6 +11,8 @@ export const useWorkoutDetailsData = (id: number) => {
   const filteredExercises = useActiveExercises(activeExercises, setsAndReps);
 
   useEffect(() => {
+    if (!id) return;
+
     setLoading(true);
     axios
       .get(`https://localhost:44390/api/workouts/${id}`)

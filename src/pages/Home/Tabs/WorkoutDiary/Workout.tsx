@@ -118,7 +118,7 @@ const DescriptionSection = styled.div`
 const StartButton = styled.button`
   display: flex;
   margin-top: 5rem;
-  width: 10rem;
+  width: 12rem;
   height: 5rem;
   justify-content: center;
   align-items: center;

@@ -44,7 +44,14 @@ export const WorkoutDiary = () => {
               <TitleSection>
                 <span>Add Workout</span>
               </TitleSection>
-              <AddWorkoutButton>+</AddWorkoutButton>
+              <AddWorkoutButton
+                onClick={() => {
+                  setWorkoutId(0);
+                  setShowEditWorkoutDetails(true);
+                }}
+              >
+                +
+              </AddWorkoutButton>
             </AddWorkout>
             {workouts.map(
               ({ title, favourite, id, timeToBeDone, kcal }: WorkoutProps) => (
@@ -132,9 +139,18 @@ const TitleSection = styled.div`
 `;
 
 const AddWorkoutButton = styled.button`
-  width: 10rem;
-  height: 10rem;
   border-radius: 50%;
+  height: 7rem;
+  width: 7rem;
+  border: 2px solid black;
+  background-color: rgba(255, 255, 255, 0.5);
+  color: white;
+  font-size: 2.5rem;
+  margin-top: 3rem;
+
+  &:hover {
+    cursor: pointer;
+  }
 `;
 
 const Title = styled.div``;

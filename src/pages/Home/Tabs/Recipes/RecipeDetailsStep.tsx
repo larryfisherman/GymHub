@@ -11,6 +11,7 @@ interface Props {
   id: number;
   title: string;
   description: string;
+  steps: any;
   setSteps: React.Dispatch<React.SetStateAction<stepsStateProps[]>>;
 }
 
@@ -18,6 +19,7 @@ export const RecipeDetailsStep = ({
   id,
   title,
   description,
+  steps,
   setSteps,
 }: Props) => {
   const handleInputChange = (id: number, value: string) => {
@@ -30,21 +32,32 @@ export const RecipeDetailsStep = ({
 
   return (
     <Container>
+      <StepTitle>{title}</StepTitle>
       <Content>
-        <StepTitle>{title}</StepTitle>
         <StepDescription
           placeholder="Description"
           value={description ? description : ""}
           onChange={(e) => handleInputChange(id, e.target.value)}
         />
-        <LowerRightSeparator />
       </Content>
+
+      <LowerRightSeparator />
     </Container>
   );
 };
 
 const Container = styled.div``;
-const Content = styled.div``;
+
+const Content = styled.div`
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  margin-top: 1rem;
+`;
+
+const TrashIcon = styled.img`
+  cursor: pointer;
+`;
 
 const StepTitle = styled.span`
   margin-left: 0;
@@ -54,9 +67,8 @@ const StepTitle = styled.span`
 `;
 
 const StepDescription = styled.input`
-  width: 100%;
+  width: 95%;
   padding: 5px;
-  margin-top: 1rem;
 `;
 
 const LowerRightSeparator = styled.hr`

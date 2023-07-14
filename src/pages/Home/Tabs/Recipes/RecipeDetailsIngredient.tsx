@@ -12,12 +12,14 @@ interface Props {
   amount: number;
   name: string;
   setIngrediens: React.Dispatch<React.SetStateAction<ingrediensStateProps[]>>;
+  ingrediens: any;
 }
 
 export const RecipeDetailsIngredient = ({
   id,
   amount,
   name,
+  ingrediens,
   setIngrediens,
 }: Props) => {
   const handleInputChange = (id: number, property: string, value: string) => {
@@ -25,6 +27,14 @@ export const RecipeDetailsIngredient = ({
       prevData.map((item: any) =>
         item.id === id ? { ...item, [property]: value } : item
       )
+    );
+  };
+
+  const removeIngredient = () => {
+    const element = ingrediens.find((el: any) => el.id === id);
+
+    setIngrediens((prevState) =>
+      prevState.filter((el) => el.id !== element.id)
     );
   };
 
@@ -41,7 +51,7 @@ export const RecipeDetailsIngredient = ({
         value={name}
         onChange={(e) => handleInputChange(id, "name", e.target.value)}
       />
-      <TrashIcon src="./assets/trash-icon.svg" />
+      <TrashIcon src="./assets/trash-icon.svg" onClick={removeIngredient} />
     </Container>
   );
 };
