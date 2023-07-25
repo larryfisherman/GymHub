@@ -40,7 +40,6 @@ export const RecipeDetailsStep = ({
           onChange={(e) => handleInputChange(id, e.target.value)}
         />
       </Content>
-
       <LowerRightSeparator />
     </Container>
   );
@@ -53,10 +52,6 @@ const Content = styled.div`
   justify-content: space-between;
   align-items: center;
   margin-top: 1rem;
-`;
-
-const TrashIcon = styled.img`
-  cursor: pointer;
 `;
 
 const StepTitle = styled.span`

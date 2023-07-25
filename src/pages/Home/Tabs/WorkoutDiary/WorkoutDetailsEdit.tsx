@@ -1,4 +1,4 @@
-import React, { useEffect, useState } from "react";
+import React from "react";
 import styled from "styled-components";
 import axios from "axios";
 import moment from "moment";
@@ -44,15 +44,18 @@ export const WorkoutDetailsEdit = ({ id, setShowWorkoutPopup }: Props) => {
               onClick={() => {
                 if (id) {
                   return axios
-                    .put(
-                      `https://localhost:44390/api/workouts/${id}`,
-                      workoutData
-                    )
+                    .put(`https://localhost:44390/api/workouts/${id}`, {
+                      ...workoutData,
+                      WorkoutExercises: setsAndReps,
+                    })
                     .then(() => setLoading(true))
                     .finally(() => setShowWorkoutPopup(false));
                 }
                 axios
-                  .post("https://localhost:44390/api/workouts", workoutData)
+                  .post("https://localhost:44390/api/workouts", {
+                    ...workoutData,
+                    workoutExercises: setsAndReps,
+                  })
                   .then(() => setLoading(true))
                   .finally(() => setShowWorkoutPopup(false));
               }}
@@ -156,27 +159,6 @@ export const WorkoutDetailsEdit = ({ id, setShowWorkoutPopup }: Props) => {
     </Container>
   );
 };
-
-{
-  /* <SetsAndRepsCounter>
-                  <DecreaseButton
-                    onClick={() => {
-                      if (setsAndRepsCounter > 0)
-                        setSetsAndRepsCounter(setsAndRepsCounter - 1);
-                    }}
-                  >
-                    -
-                  </DecreaseButton>
-                  <Counter>{setsAndRepsCounter}</Counter>
-                  <IncreaseButton
-                    onClick={() =>
-                      setSetsAndRepsCounter(setsAndRepsCounter + 1)
-                    }
-                  >
-                    +
-                  </IncreaseButton>
-                </SetsAndRepsCounter> */
-}
 
 const SpinnerWrapper = styled.div`
   display: flex;
@@ -383,46 +365,3 @@ const ExitIcon = styled.img`
     cursor: pointer;
   }
 `;
-
-// const SetsAndRepsCounter = styled.div`
-//   display: flex;
-//   justify-content: space-between;
-//   align-items: center;
-//   border: 1px solid black;
-//   border-radius: 5%;
-//   width: 7rem;
-//   height: 2rem;
-// `;
-// const DecreaseButton = styled.button`
-//   display: flex;
-//   justify-content: center;
-//   align-items: center;
-//   width: 40%;
-//   height: 100%;
-//   background-color: transparent;
-//   border: none;
-//   border-right: 1px solid black;
-//   background-color: orange;
-//   color: white;
-//   font-size: 1.5rem;
-// `;
-// const Counter = styled.span`
-//   padding: 1rem;
-//   height: 100%;
-//   display: flex;
-//   align-items: center;
-//   justify-content: center;
-// `;
-// const IncreaseButton = styled.button`
-//   display: flex;
-//   align-items: center;
-//   justify-content: center;
-//   background-color: transparent;
-//   border: none;
-//   border-left: 1px solid black;
-//   width: 40%;
-//   height: 100%;
-//   background-color: orange;
-//   color: white;
-//   font-size: 1.5rem;
-// `;

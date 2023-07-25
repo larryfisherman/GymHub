@@ -17,7 +17,10 @@ export const WorkoutExercise = ({
   const [isActive, setIsActive] = useState(false);
 
   const checkIfActive = () => {
-    const active = activeExercises.find((el: any) => el === id);
+    const activeExercisesArray = [...new Set([...activeExercises])];
+
+    const active = activeExercisesArray.find((el: number) => el === id);
+
     if (active) setIsActive(true);
   };
 
@@ -44,7 +47,7 @@ export const WorkoutExercise = ({
 
   useEffect(() => {
     checkIfActive();
-  }, [activeExercises]);
+  }, []);
 
   return (
     <Container

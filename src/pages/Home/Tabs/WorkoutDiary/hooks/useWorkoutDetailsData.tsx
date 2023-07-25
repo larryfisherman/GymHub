@@ -17,7 +17,7 @@ export const useWorkoutDetailsData = (id: number) => {
     axios
       .get(`https://localhost:44390/api/workouts/${id}`)
       .then((res) => {
-        setWorkoutData(res.data);
+        setWorkoutData(res.data.workout);
         setSetsAndReps(res.data.exercises);
         setActiveExercises(res.data.exercises.map((el: any) => el.id));
       })
@@ -27,7 +27,6 @@ export const useWorkoutDetailsData = (id: number) => {
   useEffect(() => {
     setWorkoutData((prevState: any) => ({
       ...prevState,
-      exercises: setsAndReps,
     }));
   }, [activeExercises, setsAndReps]);
 

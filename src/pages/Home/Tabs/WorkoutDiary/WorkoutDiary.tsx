@@ -1,7 +1,6 @@
-import React, { useEffect, useState } from "react";
+import React from "react";
 import styled from "styled-components";
 import { Workout } from "./Workout";
-import axios from "axios";
 import { WorkoutDetailsEdit } from "./WorkoutDetailsEdit";
 import { InfinitySpin } from "react-loader-spinner";
 import { useWorkoutDiaryData } from "./hooks/useWorkoutDiaryData";
@@ -9,7 +8,7 @@ import { useWorkoutDiaryData } from "./hooks/useWorkoutDiaryData";
 interface WorkoutProps {
   title: string;
   favourite: boolean;
-  id: number;
+  workoutId: number;
   kcal: number;
   timeToBeDone: number;
 }
@@ -54,10 +53,16 @@ export const WorkoutDiary = () => {
               </AddWorkoutButton>
             </AddWorkout>
             {workouts.map(
-              ({ title, favourite, id, timeToBeDone, kcal }: WorkoutProps) => (
+              ({
+                title,
+                favourite,
+                workoutId,
+                timeToBeDone,
+                kcal,
+              }: WorkoutProps) => (
                 <Workout
-                  key={id}
-                  id={id}
+                  key={workoutId}
+                  id={workoutId}
                   title={title}
                   favourite={favourite}
                   kcal={kcal}

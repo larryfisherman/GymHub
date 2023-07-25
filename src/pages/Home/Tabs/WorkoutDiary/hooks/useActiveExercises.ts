@@ -6,6 +6,7 @@ const activeExercisesHandler = (arr1: any, arr2: any) => {
     const matchingObj = arr2.find((obj2: any) => obj2.id === obj1.id);
     if (matchingObj) {
       const mergedObj = { ...obj1 };
+      matchingObj.title = mergedObj.title;
       Object.keys(obj1).forEach((key) => {
         if (obj1[key] !== matchingObj[key]) {
           mergedObj[key] = matchingObj[key];
