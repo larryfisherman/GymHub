@@ -14,9 +14,14 @@ import { useWorkoutDetailsData } from "./hooks/useWorkoutDetailsData";
 interface Props {
   id: number;
   setShowWorkoutPopup: any;
+  getWorkouts: any;
 }
 
-export const WorkoutDetailsEdit = ({ id, setShowWorkoutPopup }: Props) => {
+export const WorkoutDetailsEdit = ({
+  id,
+  setShowWorkoutPopup,
+  getWorkouts,
+}: Props) => {
   const {
     loading,
     setLoading,
@@ -46,7 +51,7 @@ export const WorkoutDetailsEdit = ({ id, setShowWorkoutPopup }: Props) => {
                   return axios
                     .put(`https://localhost:44390/api/workouts/${id}`, {
                       ...workoutData,
-                      WorkoutExercises: setsAndReps,
+                      workoutExercises: setsAndReps,
                     })
                     .then(() => setLoading(true))
                     .finally(() => setShowWorkoutPopup(false));
@@ -57,7 +62,10 @@ export const WorkoutDetailsEdit = ({ id, setShowWorkoutPopup }: Props) => {
                     workoutExercises: setsAndReps,
                   })
                   .then(() => setLoading(true))
-                  .finally(() => setShowWorkoutPopup(false));
+                  .finally(() => {
+                    setShowWorkoutPopup(false);
+                    getWorkouts();
+                  });
               }}
             >
               SAVE

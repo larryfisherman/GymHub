@@ -7,7 +7,7 @@ export const useWorkoutDiaryData = () => {
   const [workoutId, setWorkoutId] = useState(0);
   const [loading, setLoading] = useState(false);
 
-  useEffect(() => {
+  const getWorkouts = () => {
     setLoading(true);
     axios
       .get("https://localhost:44390/api/workouts")
@@ -15,6 +15,10 @@ export const useWorkoutDiaryData = () => {
         setWorkouts(res.data);
       })
       .finally(() => setLoading(false));
+  };
+
+  useEffect(() => {
+    getWorkouts();
   }, []);
 
   return {
@@ -24,5 +28,7 @@ export const useWorkoutDiaryData = () => {
     workoutId,
     setWorkoutId,
     loading,
+    setLoading,
+    getWorkouts,
   };
 };

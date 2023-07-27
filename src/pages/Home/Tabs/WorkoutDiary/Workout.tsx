@@ -1,5 +1,7 @@
-import React from "react";
+import React, { useState } from "react";
 import styled from "styled-components";
+import { ConfirmationModal } from "../../../../components/ConfirmationModal/ConfirmationModal";
+import axios from "axios";
 
 interface Props {
   title: string;
@@ -9,6 +11,8 @@ interface Props {
   kcal: number;
   setShowEditWorkoutDetails: any;
   setWorkoutId: any;
+  setLoading: any;
+  getWorkouts: any;
 }
 
 export const Workout = ({
@@ -19,13 +23,38 @@ export const Workout = ({
   setShowEditWorkoutDetails,
   setWorkoutId,
   id,
+  setLoading,
+  getWorkouts,
 }: Props) => {
+  const [showConfirmationModal, setShowConfirmationModal] = useState(false);
+
   return (
     <Container>
-      <Content>
-        <TitleSection>
-          <span>{title}</span>
-          <HeartIcon
+      {showConfirmationModal ? (
+        <ConfirmationModal
+          onClick={() => console.log(id)}
+          message="Are you sure you want to remove a workout?"
+          onCancel={() => setShowConfirmationModal(false)}
+          onConfirm={() => {
+            setLoading(true);
+            axios
+              .delete(`https://localhost:44390/api/workouts/${id}`)
+              .finally(() => {
+                setLoading(false);
+                setShowConfirmationModal(false);
+                getWorkouts();
+              });
+          }}
+        />
+      ) : (
+        <Content>
+          <TitleSection>
+            <span>{title}</span>
+            <TrashIcon
+              src="./assets/trash-icon.svg"
+              onClick={() => setShowConfirmationModal(true)}
+            />
+            {/* <HeartIcon
             src={
               favourite
                 ? "./assets/filled-heart.svg"
@@ -34,21 +63,22 @@ export const Workout = ({
             onClick={() => {
               console.log(!favourite);
             }}
-          />
-        </TitleSection>
-        <DescriptionSection>
-          <span>{timeToBeDone ? `${timeToBeDone} minutes` : null}</span>
-          <span>{kcal ? `${kcal} kcal` : null}</span>
-        </DescriptionSection>
-        <StartButton
-          onClick={() => {
-            setShowEditWorkoutDetails(true);
-            setWorkoutId(id);
-          }}
-        >
-          SEE MORE
-        </StartButton>
-      </Content>
+          /> */}
+          </TitleSection>
+          <DescriptionSection>
+            <span>{timeToBeDone ? `${timeToBeDone} minutes` : null}</span>
+            <span>{kcal ? `${kcal} kcal` : null}</span>
+          </DescriptionSection>
+          <StartButton
+            onClick={() => {
+              setShowEditWorkoutDetails(true);
+              setWorkoutId(id);
+            }}
+          >
+            SEE MORE
+          </StartButton>
+        </Content>
+      )}
     </Container>
   );
 };
@@ -69,7 +99,6 @@ const Content = styled.div`
   color: white;
   background-color: white;
   padding: 30px;
-  border-radius: 5%;
   background: url("./assets/workout-4.svg") center center / cover;
 
   @media (max-width: 768px) {
@@ -80,6 +109,7 @@ const Content = styled.div`
 const TitleSection = styled.div`
   display: flex;
   justify-content: space-between;
+  align-items: center;
   font-size: 2rem;
   margin-bottom: 1rem;
 
@@ -95,7 +125,8 @@ const TitleSection = styled.div`
   }
 `;
 
-const HeartIcon = styled.img`
+const TrashIcon = styled.img`
+  width: 6%;
   &:hover {
     cursor: pointer;
   }

@@ -1,9 +1,11 @@
-import React from "react";
+import React, { useState } from "react";
 import styled from "styled-components";
 import { Workout } from "./Workout";
 import { WorkoutDetailsEdit } from "./WorkoutDetailsEdit";
 import { InfinitySpin } from "react-loader-spinner";
 import { useWorkoutDiaryData } from "./hooks/useWorkoutDiaryData";
+import { ConfirmationModal } from "../../../../components/ConfirmationModal/ConfirmationModal";
+import axios from "axios";
 
 interface WorkoutProps {
   title: string;
@@ -21,6 +23,8 @@ export const WorkoutDiary = () => {
     workoutId,
     setWorkoutId,
     loading,
+    setLoading,
+    getWorkouts,
   } = useWorkoutDiaryData();
 
   return (
@@ -29,6 +33,7 @@ export const WorkoutDiary = () => {
         <WorkoutDetailsEdit
           id={workoutId}
           setShowWorkoutPopup={setShowEditWorkoutDetails}
+          getWorkouts={getWorkouts}
         />
       )}
       {loading ? (
@@ -69,6 +74,8 @@ export const WorkoutDiary = () => {
                   timeToBeDone={timeToBeDone}
                   setShowEditWorkoutDetails={setShowEditWorkoutDetails}
                   setWorkoutId={setWorkoutId}
+                  getWorkouts={getWorkouts}
+                  setLoading={setLoading}
                 />
               )
             )}
@@ -115,7 +122,6 @@ const AddWorkout = styled.div`
   width: 39rem;
   height: 20rem;
   padding: 30px;
-  border-radius: 5%;
   background: url("./assets/workout-4.svg") center center / cover;
   color: white;
   margin-bottom: 2rem;
