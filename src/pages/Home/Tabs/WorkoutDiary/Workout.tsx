@@ -32,7 +32,6 @@ export const Workout = ({
     <Container>
       {showConfirmationModal ? (
         <ConfirmationModal
-          onClick={() => console.log(id)}
           message="Are you sure you want to remove a workout?"
           onCancel={() => setShowConfirmationModal(false)}
           onConfirm={() => {

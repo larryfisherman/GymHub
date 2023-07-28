@@ -1,11 +1,9 @@
-import React, { useState } from "react";
+import React from "react";
 import styled from "styled-components";
 import { Workout } from "./Workout";
 import { WorkoutDetailsEdit } from "./WorkoutDetailsEdit";
 import { InfinitySpin } from "react-loader-spinner";
 import { useWorkoutDiaryData } from "./hooks/useWorkoutDiaryData";
-import { ConfirmationModal } from "../../../../components/ConfirmationModal/ConfirmationModal";
-import axios from "axios";
 
 interface WorkoutProps {
   title: string;

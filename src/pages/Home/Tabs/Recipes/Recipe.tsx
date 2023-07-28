@@ -10,8 +10,8 @@ interface Props {
   time: number;
   image: string;
   id: number;
-  setShowRecipeDetails: any;
-  setRecipeDetailsId: any;
+  setShowRecipeDetails: React.Dispatch<React.SetStateAction<boolean>>;
+  setRecipeDetailsId: React.Dispatch<React.SetStateAction<number>>;
 }
 
 export const Recipe = ({

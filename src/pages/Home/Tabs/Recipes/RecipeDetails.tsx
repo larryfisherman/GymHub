@@ -87,8 +87,8 @@ export const RecipeDetails = ({ id, setShowRecipeDetails }: Props) => {
       setRecipeData((prevState: any) => ({
         ...prevState,
         category: categories.find((el) => el.active)?.title,
-        steps,
-        ingrediens,
+        recipeSteps: steps,
+        recipeIngrediens: ingrediens,
       })),
     [steps, ingrediens, categories]
   );
