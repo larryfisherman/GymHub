@@ -1,4 +1,4 @@
-import React from "react";
+import React, { useState } from "react";
 import styled from "styled-components";
 import axios from "axios";
 import moment from "moment";
@@ -35,6 +35,9 @@ export const WorkoutDetailsEdit = ({
 
   const exercises = useSelector(selectExercises);
   const user = useSelector(selectUser);
+
+  const [isKcalEdit, setIsKcalEdit] = useState(false);
+  const [isTimeEdit, setIsTimeEdit] = useState(false);
 
   return (
     <Container>
@@ -114,7 +117,7 @@ export const WorkoutDetailsEdit = ({
                 />
               </AuthorAndDateSection>
               <Description
-                value={workoutData.description}
+                value={workoutData.description ? workoutData.description : ""}
                 placeholder="Description"
                 onChange={(e) =>
                   setWorkoutData((prevState: any) => ({
@@ -142,8 +145,24 @@ export const WorkoutDetailsEdit = ({
             </BottomLeftSection>
             <BottomRightSection>
               <TimeAndKcalSection>
-                <TimeAndKcalItem></TimeAndKcalItem>
-                <TimeAndKcalItem></TimeAndKcalItem>
+                <TimeAndKcalItem
+                  onClick={() => setIsTimeEdit(true)}
+                  style={{ backgroundColor: "#846075" }}
+                >
+                  <ClockIcon src="./assets/clock-icon.svg" />
+                  <TimeAndKcalItemText>
+                    {workoutData.timeToBeDone} min
+                  </TimeAndKcalItemText>
+                </TimeAndKcalItem>
+                <TimeAndKcalItem
+                  onClick={() => setIsKcalEdit(true)}
+                  style={{ backgroundColor: "#AF5D63" }}
+                >
+                  <ClockIcon src="./assets/fire-kcal-icon.svg" />
+                  <TimeAndKcalItemText>
+                    {workoutData.kcal} kcal
+                  </TimeAndKcalItemText>
+                </TimeAndKcalItem>
               </TimeAndKcalSection>
               <SetsAndRepsSection>
                 <SetsAndRepsTitle>Sets & Reps</SetsAndRepsTitle>
@@ -168,6 +187,12 @@ export const WorkoutDetailsEdit = ({
   );
 };
 
+const ClockIcon = styled.img`
+  width: 2rem;
+`;
+
+const TimeAndKcalItemText = styled.span``;
+
 const SpinnerWrapper = styled.div`
   display: flex;
   justify-content: center;
@@ -187,7 +212,7 @@ const SetsAndRepsSection = styled.div`
 `;
 
 const SetsAndReps = styled.div`
-width: 100%;
+  width: 100%;
   display: flex;
   flex-direction; column;
   flex-wrap: wrap;
@@ -213,17 +238,18 @@ const TimeAndKcalSection = styled.div`
   justify-content: center;
   background-color: white;
   padding: 30px;
-  background-color: white;
   margin-bottom: 1rem;
   align-items: center;
 `;
 
 const TimeAndKcalItem = styled.span`
-  background-color: black;
-  width: 4rem;
-  height: 4rem;
+  width: 9rem;
+  height: 9rem;
   margin: 2rem;
   border-radius: 50%;
+  display: flex;
+  align-items: center;
+  justify-content: center;
 `;
 
 const Button = styled.button`

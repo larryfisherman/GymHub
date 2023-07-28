@@ -6,26 +6,19 @@ import { CategoriesItem } from "./CategoriesItem";
 import { ComplexSets } from "./ComplexSets";
 import { InfinitySpin } from "react-loader-spinner";
 import RecipeDetails from "./RecipeDetails";
+import { useRecipesData } from "./hooks/useRecipesData";
 
 export const Recipes = () => {
-  const [recipes, setRecipes] = useState([]);
-  const [categories, setCategories] = useState([]);
-  const [showRecipeDetails, setShowRecipeDetails] = useState(false);
-  const [recipeDetailsId, setRecipeDetailsId] = useState(0);
-  const [selectedCategory, setSelectedCategory] = useState(0);
-  const [loading, setLoading] = useState(false);
-
-  useEffect(() => {
-    setLoading(true);
-    axios
-      .get("https://localhost:44390/api/recipes/")
-      .then((res) => setRecipes(res.data))
-      .finally(() => setLoading(false));
-
-    // axios
-    //   .get("https://localhost:44390/api/recipes/categories")
-    //   .then((res) => setCategories(res.data));
-  }, []);
+  const {
+    loading,
+    recipes,
+    categories,
+    showRecipeDetails,
+    recipeDetailsId,
+    setShowRecipeDetails,
+    setSelectedCategory,
+    setRecipeDetailsId,
+  } = useRecipesData();
 
   return (
     <>
@@ -42,10 +35,8 @@ export const Recipes = () => {
           </SpinnerWrapper>
         ) : (
           <Content>
-            <TitleSection>
-              <span>Your Delicious</span>
-              <span>Recipes</span>
-            </TitleSection>
+            <PreTitle>Your Delicious</PreTitle>
+            <TopTitle>Recipes</TopTitle>
             <CategoriesSection>
               {categories.map((el: any) => (
                 <CategoriesItem
@@ -59,13 +50,13 @@ export const Recipes = () => {
             </CategoriesSection>
             <AllItems>
               <RecipesSection>
-                <Title>All items</Title>
-                <RecipePopup>
-                  <Title>Add New Recipe</Title>
-                  <AddRecipe onClick={() => setShowRecipeDetails(true)}>
+                <RecipeTitles>All items</RecipeTitles>
+                <AddRecipe>
+                  <RecipeTitles>Add New Recipe</RecipeTitles>
+                  <AddRecipeButton onClick={() => setShowRecipeDetails(true)}>
                     +
-                  </AddRecipe>
-                </RecipePopup>
+                  </AddRecipeButton>
+                </AddRecipe>
                 {recipes &&
                   recipes.map((el: any) => {
                     return (
@@ -94,6 +85,18 @@ export const Recipes = () => {
     </>
   );
 };
+
+const TopTitle = styled.span`
+  display: flex;
+  font-size: 2.5rem;
+  font-weight: bold;
+`;
+const PreTitle = styled.span`
+  display: flex;
+  font-size: 2rem;
+  color: lightgray;
+  font-weight: 500;
+`;
 
 const SpinnerWrapper = styled.div`
   display: flex;
@@ -141,7 +144,7 @@ const ComplexSetsItems = styled.div`
   }
 `;
 
-const Title = styled.title`
+const RecipeTitles = styled.title`
   display: flex;
   margin: 1rem;
   font-weight: 800;
@@ -149,16 +152,8 @@ const Title = styled.title`
   width: 100%;
 `;
 
-const ComplexSetsTitle = styled(Title)`
+const ComplexSetsTitle = styled(RecipeTitles)`
   padding-left: 5rem;
-`;
-
-const TitleSection = styled.div`
-  font-weight: 700;
-  font-size: 1.5rem;
-  display: flex;
-  flex-direction: column;
-  align-items: flex-start;
 `;
 
 const CategoriesSection = styled.div`
@@ -193,14 +188,13 @@ const RecipesSection = styled.div`
   }
 `;
 
-const RecipePopup = styled.div`
+const AddRecipe = styled.div`
   display: flex;
   min-width: 20rem;
   height: 28rem;
   padding: 2rem;
   flex-direction: column;
   align-items: center;
-  border-radius: 3%;
   background-color: rgb(21, 34, 56);
   color: white;
   margin-bottom: 3rem;
@@ -213,7 +207,7 @@ const RecipePopup = styled.div`
   }
 `;
 
-const AddRecipe = styled.button`
+const AddRecipeButton = styled.button`
   border-radius: 50%;
   height: 10rem;
   width: 10rem;

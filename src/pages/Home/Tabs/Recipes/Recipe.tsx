@@ -1,5 +1,7 @@
-import React from "react";
+import React, { useState } from "react";
 import styled from "styled-components";
+import axios from "axios";
+import { ConfirmationModal } from "../../../../components/ConfirmationModal/ConfirmationModal";
 
 interface Props {
   title: string;
@@ -22,33 +24,79 @@ export const Recipe = ({
   setRecipeDetailsId,
   id,
 }: Props) => {
+  const [showConfirmationModal, setShowConfirmationModal] = useState(false);
+
   return (
     <Container>
-      <Content>
-        <Image src={image} loading="lazy" />
-        <Title>{title}</Title>
-        <Description>{description}</Description>
-        <CaloriesAndTimeSection>
-          <Calories>{kcal} kcal</Calories>
-          <Time>{time ? ` ${time} minutes` : null}</Time>
-        </CaloriesAndTimeSection>
-        <SeeMoreButton
-          onClick={() => {
-            setShowRecipeDetails(true);
-            setRecipeDetailsId(id);
+      {showConfirmationModal ? (
+        <ConfirmationModal
+          message="Are you sure you want to delete a recipe?"
+          onCancel={() => setShowConfirmationModal(false)}
+          onConfirm={() => {
+            axios
+              .delete(`https://localhost:44390/api/recipes/${id}`)
+              .finally(() => {
+                setShowConfirmationModal(false);
+              });
           }}
-        >
-          SEE MORE
-        </SeeMoreButton>
-      </Content>
+        />
+      ) : (
+        <Content>
+          <TrashIcon
+            src="./assets/trash-icon.svg"
+            onClick={() => setShowConfirmationModal(true)}
+          />
+          <Image src={image} loading="lazy" />
+          <Title>{title}</Title>
+          <Description>{description}</Description>
+          <CaloriesAndTimeSection>
+            {kcal && (
+              <CaloriesAndTimeItem>
+                <CaloriesAndTimeItemIcon src="./assets/fire-kcal-icon.svg" />
+                <CaloriesAndTimeItemText>{kcal} kcal</CaloriesAndTimeItemText>
+              </CaloriesAndTimeItem>
+            )}
+            {time && (
+              <CaloriesAndTimeItem>
+                <CaloriesAndTimeItemIcon src="./assets/clock-icon.svg" />
+                <CaloriesAndTimeItemText>
+                  {time ? ` ${time} minutes` : null}
+                </CaloriesAndTimeItemText>
+              </CaloriesAndTimeItem>
+            )}
+          </CaloriesAndTimeSection>
+          <SeeMoreButton
+            onClick={() => {
+              setShowRecipeDetails(true);
+              setRecipeDetailsId(id);
+            }}
+          >
+            SEE MORE
+          </SeeMoreButton>
+        </Content>
+      )}
     </Container>
   );
 };
 
-const Calories = styled.span`
-  color: orange;
+const TrashIcon = styled.img`
+  display: flex;
+  align-self: flex-end;
+
+  &:hover {
+    cursor: pointer;
+  }
 `;
-const Time = styled.span``;
+
+const CaloriesAndTimeItem = styled.div`
+  display: flex;
+`;
+
+const CaloriesAndTimeItemText = styled.span``;
+
+const CaloriesAndTimeItemIcon = styled.img`
+  width: 1.5rem;
+`;
 
 const Container = styled.div`
   display: flex;
@@ -75,7 +123,6 @@ const Content = styled.div`
   min-height: 28rem;
   height: 28rem;
   padding: 1.875rem;
-  border-radius: 3%;
   background-color: rgb(21, 34, 56);
   color: white;
   width: 30%;
@@ -127,9 +174,9 @@ const Description = styled.span`
 
 const CaloriesAndTimeSection = styled.div`
   display: flex;
-  span {
-    margin-left: 1rem;
-  }
+  justify-content: space-between;
+  width: 90%;
+
   @media (max-width: 768px) {
     padding-left: 0;
   }

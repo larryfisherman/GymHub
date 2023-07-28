@@ -5,17 +5,11 @@ interface Props {
   message?: string;
   onConfirm?: any;
   onCancel?: any;
-  onClick: any;
 }
 
-export const ConfirmationModal = ({
-  message,
-  onConfirm,
-  onCancel,
-  onClick,
-}: Props) => {
+export const ConfirmationModal = ({ message, onConfirm, onCancel }: Props) => {
   return (
-    <Container onClick={onClick}>
+    <Container>
       <Content>
         <Text>{message}</Text>
         <Buttons>

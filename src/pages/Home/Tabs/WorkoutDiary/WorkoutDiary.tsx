@@ -42,7 +42,8 @@ export const WorkoutDiary = () => {
         </SpinnerWrapper>
       ) : (
         <Content>
-          <Title>MY WORKOUTS</Title>
+          <PreTitle>Let's get to</PreTitle>
+          <Title>Workout Diary</Title>
           <Workouts>
             <AddWorkout>
               <TitleSection>
@@ -85,6 +86,18 @@ export const WorkoutDiary = () => {
     </Container>
   );
 };
+
+const Title = styled.span`
+  display: flex;
+  font-size: 2.5rem;
+  font-weight: bold;
+`;
+const PreTitle = styled.span`
+  display: flex;
+  font-size: 2rem;
+  color: lightgray;
+  font-weight: 500;
+`;
 
 const Container = styled.div`
   width: 100%;
@@ -163,5 +176,3 @@ const AddWorkoutButton = styled.button`
     cursor: pointer;
   }
 `;
-
-const Title = styled.div``;
