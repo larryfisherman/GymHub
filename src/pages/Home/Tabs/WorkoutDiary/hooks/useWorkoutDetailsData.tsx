@@ -25,12 +25,6 @@ export const useWorkoutDetailsData = (id: number) => {
   }, []);
 
   useEffect(() => {
-    setWorkoutData((prevState: any) => ({
-      ...prevState,
-    }));
-  }, [activeExercises, setsAndReps]);
-
-  useEffect(() => {
     setSetsAndReps(filteredExercises);
   }, [activeExercises]);
 

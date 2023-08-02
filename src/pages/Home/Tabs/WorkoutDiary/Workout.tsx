@@ -53,16 +53,6 @@ export const Workout = ({
               src="./assets/trash-icon.svg"
               onClick={() => setShowConfirmationModal(true)}
             />
-            {/* <HeartIcon
-            src={
-              favourite
-                ? "./assets/filled-heart.svg"
-                : "./assets/unfilled-heart.svg"
-            }
-            onClick={() => {
-              console.log(!favourite);
-            }}
-          /> */}
           </TitleSection>
           <DescriptionSection>
             <span>{timeToBeDone ? `${timeToBeDone} minutes` : null}</span>

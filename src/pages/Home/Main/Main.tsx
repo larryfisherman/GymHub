@@ -3,7 +3,7 @@ import styled from "styled-components";
 import { useTab } from "../../../hooks/useTab";
 
 interface Props {
-  tabToggle: any;
+  tabToggle: number;
 }
 
 export const Main = ({ tabToggle }: Props) => {

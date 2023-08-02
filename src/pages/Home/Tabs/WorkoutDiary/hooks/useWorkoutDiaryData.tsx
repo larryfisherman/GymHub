@@ -11,9 +11,7 @@ export const useWorkoutDiaryData = () => {
     setLoading(true);
     axios
       .get("https://localhost:44390/api/workouts")
-      .then((res) => {
-        setWorkouts(res.data);
-      })
+      .then((res) => setWorkouts(res.data))
       .finally(() => setLoading(false));
   };
 

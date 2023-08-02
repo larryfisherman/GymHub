@@ -1,11 +1,10 @@
-import React, { useEffect, useState } from "react";
-import axios from "axios";
+import React from "react";
 import styled from "styled-components";
 import { Recipe } from "./Recipe";
 import { CategoriesItem } from "./CategoriesItem";
 import { ComplexSets } from "./ComplexSets";
 import { InfinitySpin } from "react-loader-spinner";
-import RecipeDetails from "./RecipeDetails";
+import { RecipeDetailsEdit } from "./RecipeDetailsEdit";
 import { useRecipesData } from "./hooks/useRecipesData";
 
 export const Recipes = () => {
@@ -18,15 +17,17 @@ export const Recipes = () => {
     setShowRecipeDetails,
     setSelectedCategory,
     setRecipeDetailsId,
+    getRecipes,
   } = useRecipesData();
 
   return (
     <>
       <Container>
         {showRecipeDetails && (
-          <RecipeDetails
+          <RecipeDetailsEdit
             id={recipeDetailsId}
             setShowRecipeDetails={setShowRecipeDetails}
+            getRecipes={getRecipes}
           />
         )}
         {loading ? (
@@ -61,8 +62,8 @@ export const Recipes = () => {
                   recipes.map((el: any) => {
                     return (
                       <Recipe
-                        key={el.id}
-                        id={el.id}
+                        key={el.recipeId}
+                        id={el.recipeId}
                         title={el.title}
                         description={el.description}
                         kcal={el.kcal}
@@ -70,6 +71,7 @@ export const Recipes = () => {
                         image={"./assets/recipe-3.svg"}
                         setShowRecipeDetails={setShowRecipeDetails}
                         setRecipeDetailsId={setRecipeDetailsId}
+                        getRecipes={getRecipes}
                       />
                     );
                   })}

@@ -1,108 +1,40 @@
-import React, { useEffect, useState, useMemo } from "react";
+import React from "react";
 import styled from "styled-components";
 import axios from "axios";
 import { RecipeDetailsStep } from "./RecipeDetailsStep";
 import { RecipeDetailsIngredient } from "./RecipeDetailsIngredient";
 import { addStep } from "./utils/addStep";
 import { addIngredient } from "./utils/addIngredient";
-import { useSelector } from "react-redux";
-import { selectUser } from "../../../../store/userSlice";
 import { RecipeDetailsCategories } from "./RecipeDetailsCategories";
 import { InfinitySpin } from "react-loader-spinner";
+import { useRecipeDetailsData } from "./hooks/useRecipeDetailsData";
+import { RecipeIngredientsPopup } from "./RecipeIngredientsPopup";
 
 interface Props {
   id: number;
   setShowRecipeDetails: React.Dispatch<React.SetStateAction<boolean>>;
+  getRecipes: () => void;
 }
 
-interface stepsStateProps {
-  id: number;
-  title: string;
-  description: string;
-}
-
-interface ingredientsStateProps {
-  id?: number;
-  name: string;
-  amount: number;
-}
-
-export const RecipeDetails = ({ id, setShowRecipeDetails }: Props) => {
-  const [recipeData, setRecipeData] = useState<any>([]);
-  const [steps, setSteps] = useState<stepsStateProps[]>([]);
-  const [ingrediens, setIngrediens] = useState<any[]>([]);
-  const [loading, setLoading] = useState(false);
-
-  const user = useSelector(selectUser);
-
-  const [categories, setCategories] = useState([
-    {
-      id: 1,
-      title: "Breakfast",
-      active: false,
-    },
-    {
-      id: 2,
-      title: "Lunch",
-      active: false,
-    },
-    {
-      id: 3,
-      title: "Dinner",
-      active: false,
-    },
-    {
-      id: 4,
-      title: "Saper",
-      active: false,
-    },
-  ]);
-
-  useEffect(() => {
-    if (!id) return setRecipeData(null);
-
-    setLoading(true);
-
-    axios
-      .get(`https://localhost:44390/api/recipes/${id}`)
-      .then((res) => {
-        setRecipeData(res.data);
-        setIngrediens(res.data.ingrediens);
-        setSteps(res.data.steps);
-
-        const newCategories = categories.map((el) => {
-          if (el.title === res.data.category) {
-            return { ...el, active: true };
-          }
-          return el;
-        });
-
-        setCategories(newCategories);
-      })
-      .finally(() => setLoading(false));
-  }, []);
-
-  useEffect(
-    () =>
-      setRecipeData((prevState: any) => ({
-        ...prevState,
-        category: categories.find((el) => el.active)?.title,
-        recipeSteps: steps,
-        recipeIngrediens: ingrediens,
-      })),
-    [steps, ingrediens, categories]
-  );
-
-  // const showPreview = (e: any) => {
-  //   if (e.target.files && e.target.files[0]) {
-  //     let imageFile = e.target.files[0];
-  //     const reader = new FileReader();
-  //     reader.onload = (x: any) => {
-  //       setImage(imageFile);
-  //     };
-  //     reader.readAsDataURL(imageFile);
-  //   }
-  // };
+export const RecipeDetailsEdit = ({
+  id,
+  setShowRecipeDetails,
+  getRecipes,
+}: Props) => {
+  const {
+    recipeData,
+    setRecipeData,
+    loading,
+    categories,
+    setCategories,
+    steps,
+    setSteps,
+    ingredients,
+    setIngredients,
+    user,
+    showRecipeIngredientsPopup,
+    setShowRecipeIngredientsPopup,
+  } = useRecipeDetailsData(id);
 
   return (
     <Container>
@@ -110,6 +42,7 @@ export const RecipeDetails = ({ id, setShowRecipeDetails }: Props) => {
         <InfinitySpin />
       ) : (
         <Content>
+          {showRecipeIngredientsPopup && <RecipeIngredientsPopup index={0} />}
           <RecipeActions>
             <Button
               onClick={() => {
@@ -119,12 +52,18 @@ export const RecipeDetails = ({ id, setShowRecipeDetails }: Props) => {
                       `https://localhost:44390/api/recipes/${id}`,
                       recipeData
                     )
-                    .then(() => setShowRecipeDetails(false));
+                    .finally(() => {
+                      setShowRecipeDetails(false);
+                      getRecipes();
+                    });
                 }
 
                 axios
                   .post("https://localhost:44390/api/recipes", recipeData)
-                  .then(() => setShowRecipeDetails(false));
+                  .finally(() => {
+                    setShowRecipeDetails(false);
+                    getRecipes();
+                  });
               }}
             >
               SAVE
@@ -143,11 +82,10 @@ export const RecipeDetails = ({ id, setShowRecipeDetails }: Props) => {
                     : "./assets/blank-recipe-photo.svg"
                 }
               />
-              {/* <input type="file" onChange={showPreview} /> */}
             </ImageContainer>
             <RightSection>
               <DishNameInput
-                value={recipeData.title}
+                value={recipeData.title ? recipeData.title : ""}
                 placeholder="The name of the dish"
                 onChange={(e) =>
                   setRecipeData((prevState: any) => ({
@@ -206,22 +144,19 @@ export const RecipeDetails = ({ id, setShowRecipeDetails }: Props) => {
               </MakroSection>
               <IngrediensSection>
                 <Title>Ingrediens (per serving)</Title>
-                {ingrediens.map(({ id, amount, name }: any) => (
+                {ingredients.map(({ id, amount, name }: any) => (
                   <RecipeDetailsIngredient
                     key={id}
                     id={id}
                     amount={amount}
                     name={name}
-                    setIngrediens={setIngrediens}
-                    ingrediens={ingrediens}
+                    setIngredients={setIngredients}
+                    ingredients={ingredients}
                   />
                 ))}
                 <Separator />
                 <AddIngredient
-                  onClick={() => {
-                    const addIngredients = addIngredient(ingrediens);
-                    setIngrediens([...ingrediens, addIngredients]);
-                  }}
+                  onClick={() => setShowRecipeIngredientsPopup(true)}
                 >
                   + Add Ingredient
                 </AddIngredient>
@@ -229,7 +164,7 @@ export const RecipeDetails = ({ id, setShowRecipeDetails }: Props) => {
               </IngrediensSection>
             </BottomLeftSection>
             <BottomRightSection>
-              {steps.map(({ title, id, description }: any) => (
+              {steps?.map(({ title, id, description }: any) => (
                 <RecipeDetailsStep
                   key={id}
                   title={title}
@@ -254,9 +189,6 @@ export const RecipeDetails = ({ id, setShowRecipeDetails }: Props) => {
     </Container>
   );
 };
-
-export default RecipeDetails;
-
 const RecipeActions = styled.div`
   display: flex;
   width: 100%;

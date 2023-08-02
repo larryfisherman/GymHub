@@ -12,6 +12,7 @@ interface Props {
   id: number;
   setShowRecipeDetails: React.Dispatch<React.SetStateAction<boolean>>;
   setRecipeDetailsId: React.Dispatch<React.SetStateAction<number>>;
+  getRecipes: () => void;
 }
 
 export const Recipe = ({
@@ -23,6 +24,7 @@ export const Recipe = ({
   setShowRecipeDetails,
   setRecipeDetailsId,
   id,
+  getRecipes,
 }: Props) => {
   const [showConfirmationModal, setShowConfirmationModal] = useState(false);
 
@@ -37,6 +39,7 @@ export const Recipe = ({
               .delete(`https://localhost:44390/api/recipes/${id}`)
               .finally(() => {
                 setShowConfirmationModal(false);
+                getRecipes();
               });
           }}
         />

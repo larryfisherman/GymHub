@@ -57,7 +57,10 @@ export const WorkoutDetailsEdit = ({
                       workoutExercises: setsAndReps,
                     })
                     .then(() => setLoading(true))
-                    .finally(() => setShowWorkoutPopup(false));
+                    .finally(() => {
+                      getWorkouts();
+                      setShowWorkoutPopup(false);
+                    });
                 }
                 axios
                   .post("https://localhost:44390/api/workouts", {

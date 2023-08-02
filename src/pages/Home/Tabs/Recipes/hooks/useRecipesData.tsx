@@ -29,5 +29,6 @@ export const useRecipesData = () => {
     setShowRecipeDetails,
     setSelectedCategory,
     setRecipeDetailsId,
+    getRecipes
   };
 };

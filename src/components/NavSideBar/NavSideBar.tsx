@@ -43,6 +43,12 @@ export const NavSideBar = ({ setTabToggle, tab }: Props) => {
             onClick={() => setTabToggle(4)}
             isActive={tab === 4}
           />
+          <SideBarItem
+            itemImg="./assets/recipe-gray-icon.svg"
+            itemName="Ingredients"
+            onClick={() => setTabToggle(5)}
+            isActive={tab === 5}
+          />
         </NavItems>
         <UserSection>
           <SideBarItem

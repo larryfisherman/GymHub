@@ -25,20 +25,14 @@ export const WorkoutExercise = ({
   };
 
   const handleActiveChange = () => {
-    if (isActive) return setActiveExercises(() => [...activeExercises, id]);
-
-    const elementIndex = activeExercises.indexOf(
-      activeExercises.find((el: any) => el === id)
-    );
-
-    const newState = [
-      ...new Set([
-        ...activeExercises.slice(0, elementIndex),
-        ...activeExercises.slice(elementIndex + 1),
-      ]),
-    ];
-
-    setActiveExercises(newState);
+    if (!isActive) {
+      const updatedExercises = activeExercises.filter(
+        (el: number) => el !== id
+      );
+      setActiveExercises(updatedExercises);
+    } else {
+      setActiveExercises([...activeExercises, id]);
+    }
   };
 
   useEffect(() => {

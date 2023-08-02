@@ -2,7 +2,7 @@ import React from "react";
 import styled from "styled-components";
 
 interface ingrediensStateProps {
-  id: number;
+  id?: number;
   name: string;
   amount: number;
 }
@@ -11,19 +11,19 @@ interface Props {
   id: number;
   amount: number;
   name: string;
-  setIngrediens: React.Dispatch<React.SetStateAction<ingrediensStateProps[]>>;
-  ingrediens: any;
+  setIngredients: React.Dispatch<React.SetStateAction<ingrediensStateProps[]>>;
+  ingredients: any;
 }
 
 export const RecipeDetailsIngredient = ({
   id,
   amount,
   name,
-  ingrediens,
-  setIngrediens,
+  ingredients,
+  setIngredients,
 }: Props) => {
   const handleInputChange = (id: number, property: string, value: string) => {
-    setIngrediens((prevData: any) =>
+    setIngredients((prevData: any) =>
       prevData.map((item: any) =>
         item.id === id ? { ...item, [property]: value } : item
       )
@@ -31,9 +31,9 @@ export const RecipeDetailsIngredient = ({
   };
 
   const removeIngredient = () => {
-    const element = ingrediens.find((el: any) => el.id === id);
+    const element = ingredients.find((el: any) => el.id === id);
 
-    setIngrediens((prevState) =>
+    setIngredients((prevState) =>
       prevState.filter((el) => el.id !== element.id)
     );
   };
@@ -42,13 +42,13 @@ export const RecipeDetailsIngredient = ({
     <Container>
       <AmountInput
         placeholder="Amount"
-        value={amount}
+        value={amount ? amount : ""}
         onChange={(e) => handleInputChange(id, "amount", e.target.value)}
         type="number"
       />
       <IngredientInput
         placeholder="Ingredient"
-        value={name}
+        value={name ? name : ""}
         onChange={(e) => handleInputChange(id, "name", e.target.value)}
       />
       <TrashIcon src="./assets/trash-icon.svg" onClick={removeIngredient} />
