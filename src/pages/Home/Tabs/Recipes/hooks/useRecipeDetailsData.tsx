@@ -19,6 +19,7 @@ export const useRecipeDetailsData = (id: number) => {
   const [recipeData, setRecipeData] = useState<any>([]);
   const [steps, setSteps] = useState<stepsStateProps[]>([]);
   const [ingredients, setIngredients] = useState<any>([]);
+  const [selectedIngredients, setSelectedIngredients] = useState([]);
   const [loading, setLoading] = useState(false);
   const [showRecipeIngredientsPopup, setShowRecipeIngredientsPopup] =
     useState(false);
@@ -98,5 +99,7 @@ export const useRecipeDetailsData = (id: number) => {
     user,
     showRecipeIngredientsPopup,
     setShowRecipeIngredientsPopup,
+    selectedIngredients,
+    setSelectedIngredients,
   };
 };

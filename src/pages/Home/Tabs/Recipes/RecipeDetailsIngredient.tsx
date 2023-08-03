@@ -1,4 +1,4 @@
-import React from "react";
+import React, { useState } from "react";
 import styled from "styled-components";
 
 interface ingrediensStateProps {
@@ -25,9 +25,28 @@ export const RecipeDetailsIngredient = ({
   amount,
   setShowIngredientDetails,
   setIngredientId,
+  selectedIngredients,
+  setSelectedIngredients,
 }: any) => {
+  const [isActive, setIsActive] = useState(false);
+
+  const handleIngredientClick = (id: any) => {
+    if (selectedIngredients.includes(id)) {
+      setSelectedIngredients((prevSelected: any) =>
+        prevSelected.filter((ingredientId: number) => ingredientId !== id)
+      );
+    } else {
+      setSelectedIngredients((prevSelected: any) => [...prevSelected, id]);
+    }
+  };
   return (
-    <Container>
+    <Container
+      style={isActive ? { border: "2px solid #FF9800" } : {}}
+      onClick={() => {
+        handleIngredientClick(id);
+        setIsActive(!isActive);
+      }}
+    >
       <Content>
         <IngredientTitle>{name}</IngredientTitle>
         <IngredientMakro>
@@ -64,6 +83,11 @@ const Container = styled.div`
   margin-bottom: 2rem;
   height: 15rem;
   border-radius: 3%;
+  border: 2px solid transparent;
+
+  &:hover {
+    cursor: pointer;
+  }
 `;
 const Content = styled.div`
   display: flex;

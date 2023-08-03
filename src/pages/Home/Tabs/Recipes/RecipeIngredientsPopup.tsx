@@ -1,41 +1,26 @@
-import React, { useRef } from "react";
+import React from "react";
 import styled from "styled-components";
 import { RecipeDetailsIngredient } from "./RecipeDetailsIngredient";
-import { Ingredient } from "../Ingredients/Ingredient";
+import { useRecipeIngredientsPopup } from "./hooks/useRecipeIngredientsPopup";
 
 export const RecipeIngredientsPopup = ({
   setShowRecipeIngredientsPopup,
   ingredients,
+  selectedIngredients,
+  setSelectedIngredients,
 }: any) => {
-  const popupRef = useRef<any>(null);
-  const isDragging = useRef(false);
-  const initialPosition = useRef({ x: 0, y: 0 });
+  const {
+    popupRef,
+    handleMouseDown,
+    handleMouseMove,
+    handleMouseUp,
+    filterValue,
+    setFilterValue,
+  } = useRecipeIngredientsPopup();
 
-  const handleMouseDown = (event: any) => {
-    isDragging.current = true;
-    initialPosition.current = {
-      x: event.clientX - popupRef.current.offsetLeft,
-      y: event.clientY - popupRef.current.offsetTop,
-    };
-  };
-
-  const handleMouseMove = (event: any) => {
-    if (!isDragging.current) return;
-
-    const x = event.clientX - initialPosition.current.x;
-    const y = event.clientY - initialPosition.current.y;
-    popupRef.current.style.left = `${x}px`;
-    popupRef.current.style.top = `${y}px`;
-  };
-
-  const handleMouseUp = () => {
-    isDragging.current = false;
-  };
-
-  const closePopup = () => {
-    // Implement close popup functionality here
-    console.log("Popup closed!");
-  };
+  const filteredIngredients = ingredients.filter((el: any) =>
+    el.name.toLowerCase().includes(filterValue.toLowerCase())
+  );
 
   return (
     <Container
@@ -44,21 +29,25 @@ export const RecipeIngredientsPopup = ({
       onMouseMove={handleMouseMove}
       onMouseUp={handleMouseUp}
     >
-      <Content>
-        <Header>
-          <ExitButton
-            src="./assets/cross-icon.svg"
-            onClick={() => setShowRecipeIngredientsPopup(false)}
+      <Header>
+        <ExitButton
+          src="./assets/cross-icon.svg"
+          onClick={() => setShowRecipeIngredientsPopup(false)}
+        />
+        <Title>Add your ingredients!</Title>
+        <SearchInputSection>
+          <SearchInput
+            value={filterValue}
+            onChange={(e) => setFilterValue(e.target.value)}
           />
-          <Title>Add your ingredients!</Title>
-          <SearchInputSection>
-            <SearchInput />
-            <SearchIcon src="./assets/magnifying-glass-icon.svg" />
-          </SearchInputSection>
-        </Header>
+          <SearchIcon src="./assets/magnifying-glass-icon.svg" />
+        </SearchInputSection>
+      </Header>
+      <Content>
         <IngredientsSection>
-          {ingredients.map((el: any) => (
+          {filteredIngredients.map((el: any) => (
             <RecipeDetailsIngredient
+              key={el.ingredientId}
               id={el.ingredientId}
               name={el.name}
               protein={el.protein}
@@ -66,6 +55,8 @@ export const RecipeIngredientsPopup = ({
               carbs={el.carbs}
               kcal={el.kcal}
               amount={el.amount}
+              selectedIngredients={selectedIngredients}
+              setSelectedIngredients={setSelectedIngredients}
             />
           ))}
         </IngredientsSection>
@@ -75,13 +66,15 @@ export const RecipeIngredientsPopup = ({
 };
 
 const Header = styled.div`
-  width: 100%;
-  height: 30%;
   position: sticky;
-  top: -0.6rem;
-  background-color: #f8f8f8;
+  top: 0;
+  background-color: #f1f1f1;
+  padding: 10px;
+  margin: 0;
+  box-sizing: border-box;
   display: flex;
   flex-direction: column;
+  align-items: center;
 `;
 
 const Title = styled.span`
@@ -131,21 +124,25 @@ const IngredientsSection = styled.div`
 
 const Content = styled.div`
   width: 100%;
+  margin-top: 1rem;
   display: flex;
   justify-content: center;
   align-items: center;
   flex-direction: column;
+  padding: 2rem;
 `;
 
 const Container = styled.div`
   position: absolute;
+  display: flex;
+  justify-content: space-between;
+  flex-direction: column;
   width: 40%;
   height: 90%;
   background-color: #f8f8f8;
   border: 1px solid #ff9800;
   border-radius: 4px;
   z-index: 9999;
-  padding: 10px;
   cursor: grab;
 
   overflow-y: scroll;

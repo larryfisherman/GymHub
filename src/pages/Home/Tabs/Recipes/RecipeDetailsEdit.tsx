@@ -33,7 +33,11 @@ export const RecipeDetailsEdit = ({
     user,
     showRecipeIngredientsPopup,
     setShowRecipeIngredientsPopup,
+    selectedIngredients,
+    setSelectedIngredients,
   } = useRecipeDetailsData(id);
+
+  console.log(selectedIngredients);
 
   return (
     <Container>
@@ -45,6 +49,8 @@ export const RecipeDetailsEdit = ({
             <RecipeIngredientsPopup
               ingredients={ingredients}
               setShowRecipeIngredientsPopup={setShowRecipeIngredientsPopup}
+              selectedIngredients={selectedIngredients}
+              setSelectedIngredients={setSelectedIngredients}
             />
           )}
           <RecipeActions>
