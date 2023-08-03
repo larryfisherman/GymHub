@@ -55,18 +55,22 @@ export const useRecipeDetailsData = (id: number) => {
       .get(`https://localhost:44390/api/recipes/${id}`)
       .then((res) => {
         setRecipeData(res.data);
-        setIngredients(res.data.recipeIngredients);
         setSteps(res.data.recipeSteps);
 
-        const newCategories = categories.map((el) => {
-          if (el.title === res.data.category) {
-            return { ...el, active: true };
-          }
-          return el;
-        });
+        // const newCategories = categories.map((el) => {
+        //   if (el.title === res.data.category) {
+        //     return { ...el, active: true };
+        //   }
+        //   return el;
+        // });
 
-        setCategories(newCategories);
+        // setCategories(newCategories);
       })
+      .then(() =>
+        axios
+          .get("https://localhost:44390/api/ingredients")
+          .then((res) => setIngredients(res.data))
+      )
       .finally(() => setLoading(false));
   }, []);
 

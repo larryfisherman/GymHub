@@ -16,63 +16,84 @@ interface Props {
 }
 
 export const RecipeDetailsIngredient = ({
-  id,
-  amount,
   name,
-  ingredients,
-  setIngredients,
-}: Props) => {
-  const handleInputChange = (id: number, property: string, value: string) => {
-    setIngredients((prevData: any) =>
-      prevData.map((item: any) =>
-        item.id === id ? { ...item, [property]: value } : item
-      )
-    );
-  };
-
-  const removeIngredient = () => {
-    const element = ingredients.find((el: any) => el.id === id);
-
-    setIngredients((prevState) =>
-      prevState.filter((el) => el.id !== element.id)
-    );
-  };
-
+  id,
+  protein,
+  fat,
+  carbs,
+  kcal,
+  amount,
+  setShowIngredientDetails,
+  setIngredientId,
+}: any) => {
   return (
     <Container>
-      <AmountInput
-        placeholder="Amount"
-        value={amount ? amount : ""}
-        onChange={(e) => handleInputChange(id, "amount", e.target.value)}
-        type="number"
-      />
-      <IngredientInput
-        placeholder="Ingredient"
-        value={name ? name : ""}
-        onChange={(e) => handleInputChange(id, "name", e.target.value)}
-      />
-      <TrashIcon src="./assets/trash-icon.svg" onClick={removeIngredient} />
+      <Content>
+        <IngredientTitle>{name}</IngredientTitle>
+        <IngredientMakro>
+          <IngredientMakroItem>{protein}g protein</IngredientMakroItem>
+          <IngredientMakroItem>{fat}g fat</IngredientMakroItem>
+          <IngredientMakroItem>{carbs}g carbs</IngredientMakroItem>
+          <IngredientMakroItem>{kcal} kcal</IngredientMakroItem>
+        </IngredientMakro>
+        <Button
+          onClick={() => {
+            setShowIngredientDetails(true);
+            setIngredientId(id);
+          }}
+        >
+          SEE MORE
+        </Button>
+      </Content>
     </Container>
   );
 };
 
-const Container = styled.div`
-  width: 100%;
+const IngredientMakro = styled.div`
   display: flex;
   justify-content: space-between;
-  padding-left: 3rem;
-  padding-right: 3rem;
-  margin-top: 1rem;
+  flex-direction: column;
+  align-items: flex-end;
+  padding-right: 5rem;
+`;
+const IngredientMakroItem = styled.div``;
+
+const Container = styled.div`
+  width: 100%;
+  background-color: white;
+  margin-bottom: 2rem;
+  height: 15rem;
+  border-radius: 3%;
+`;
+const Content = styled.div`
+  display: flex;
+  height: 100%;
+  width: 100%;
+  flex-direction: column;
+  justify-content: space-between;
+  padding: 1rem;
 `;
 
-const AmountInput = styled.input`
-  padding: 5px;
+const Button = styled.button`
+  display: flex;
+  width: 7rem;
+  height: 3rem;
+  align-items: center;
+  justify-content: center;
+  background-color: #ff9800;
+  font-size: 1rem;
+  color: white;
+  letter-spacing: 1px;
+  font-weight: 700;
+  border: 1px solid transparent;
+  border-radius: 5%;
+
+  &:hover {
+    cursor: pointer;
+  }
 `;
 
-const IngredientInput = styled.input`
-  width: 60%;
-  padding: 5px;
-`;
-const TrashIcon = styled.img`
-  cursor: pointer;
+const IngredientTitle = styled.h3`
+  display: flex;
+  font-size: 1.5rem;
 `;

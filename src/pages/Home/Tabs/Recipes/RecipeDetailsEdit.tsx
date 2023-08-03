@@ -4,7 +4,6 @@ import axios from "axios";
 import { RecipeDetailsStep } from "./RecipeDetailsStep";
 import { RecipeDetailsIngredient } from "./RecipeDetailsIngredient";
 import { addStep } from "./utils/addStep";
-import { addIngredient } from "./utils/addIngredient";
 import { RecipeDetailsCategories } from "./RecipeDetailsCategories";
 import { InfinitySpin } from "react-loader-spinner";
 import { useRecipeDetailsData } from "./hooks/useRecipeDetailsData";
@@ -42,7 +41,12 @@ export const RecipeDetailsEdit = ({
         <InfinitySpin />
       ) : (
         <Content>
-          {showRecipeIngredientsPopup && <RecipeIngredientsPopup index={0} />}
+          {showRecipeIngredientsPopup && (
+            <RecipeIngredientsPopup
+              ingredients={ingredients}
+              setShowRecipeIngredientsPopup={setShowRecipeIngredientsPopup}
+            />
+          )}
           <RecipeActions>
             <Button
               onClick={() => {
@@ -144,7 +148,7 @@ export const RecipeDetailsEdit = ({
               </MakroSection>
               <IngrediensSection>
                 <Title>Ingrediens (per serving)</Title>
-                {ingredients.map(({ id, amount, name }: any) => (
+                {/* {ingredients.map(({ id, amount, name }: any) => (
                   <RecipeDetailsIngredient
                     key={id}
                     id={id}
@@ -153,7 +157,7 @@ export const RecipeDetailsEdit = ({
                     setIngredients={setIngredients}
                     ingredients={ingredients}
                   />
-                ))}
+                ))} */}
                 <Separator />
                 <AddIngredient
                   onClick={() => setShowRecipeIngredientsPopup(true)}
