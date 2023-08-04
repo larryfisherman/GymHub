@@ -57,6 +57,7 @@ export const RecipeIngredientsPopup = ({
               amount={el.amount}
               selectedIngredients={selectedIngredients}
               setSelectedIngredients={setSelectedIngredients}
+              ingredients={ingredients}
             />
           ))}
         </IngredientsSection>

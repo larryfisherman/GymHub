@@ -8,6 +8,7 @@ import { RecipeDetailsCategories } from "./RecipeDetailsCategories";
 import { InfinitySpin } from "react-loader-spinner";
 import { useRecipeDetailsData } from "./hooks/useRecipeDetailsData";
 import { RecipeIngredientsPopup } from "./RecipeIngredientsPopup";
+import { sumMacroElements } from "./utils/sumMacroElements";
 
 interface Props {
   id: number;
@@ -29,7 +30,6 @@ export const RecipeDetailsEdit = ({
     steps,
     setSteps,
     ingredients,
-    setIngredients,
     user,
     showRecipeIngredientsPopup,
     setShowRecipeIngredientsPopup,
@@ -37,7 +37,8 @@ export const RecipeDetailsEdit = ({
     setSelectedIngredients,
   } = useRecipeDetailsData(id);
 
-  console.log(selectedIngredients);
+  const { totalFat, totalCarbo, totalKcal, totalProteins } =
+    sumMacroElements(selectedIngredients);
 
   return (
     <Container>
@@ -84,15 +85,6 @@ export const RecipeDetailsEdit = ({
             />
           </RecipeActions>
           <UpperSection>
-            <ImageContainer>
-              <Image
-                src={
-                  recipeData.imageSrc
-                    ? recipeData.imageSrc
-                    : "./assets/blank-recipe-photo.svg"
-                }
-              />
-            </ImageContainer>
             <RightSection>
               <DishNameInput
                 value={recipeData.title ? recipeData.title : ""}
@@ -140,30 +132,33 @@ export const RecipeDetailsEdit = ({
             <BottomLeftSection>
               <MakroSection>
                 <MakroItem style={{ backgroundColor: "#846075" }}>
-                  kcal
+                  {totalKcal}g kcal
                 </MakroItem>
                 <MakroItem style={{ backgroundColor: "#FF9800" }}>
-                  carbs
+                  {totalCarbo}g carbs
                 </MakroItem>
                 <MakroItem style={{ backgroundColor: "#A5C882" }}>
-                  protein
+                  {totalProteins}g protein
                 </MakroItem>
                 <MakroItem style={{ backgroundColor: "#AF5D63" }}>
-                  fat
+                  {totalFat}g fat
                 </MakroItem>
               </MakroSection>
               <IngrediensSection>
                 <Title>Ingrediens (per serving)</Title>
-                {/* {ingredients.map(({ id, amount, name }: any) => (
+                {selectedIngredients.map((el: any) => (
                   <RecipeDetailsIngredient
-                    key={id}
-                    id={id}
-                    amount={amount}
-                    name={name}
-                    setIngredients={setIngredients}
-                    ingredients={ingredients}
+                    key={el.ingredientId}
+                    id={el.ingredientId}
+                    name={el.name}
+                    protein={el.protein}
+                    fat={el.fat}
+                    carbs={el.carbs}
+                    kcal={el.kcal}
+                    amount={el.amount}
+                    editPopup={true}
                   />
-                ))} */}
+                ))}
                 <Separator />
                 <AddIngredient
                   onClick={() => setShowRecipeIngredientsPopup(true)}
@@ -226,16 +221,6 @@ const Button = styled.button`
   }
 `;
 
-const ImageContainer = styled.label`
-  width: 50%;
-
-  & > input {
-    visibility: hidden;
-    width: 0;
-    height: 0;
-  }
-`;
-
 const Categories = styled.div`
   display: flex;
   justify-content: space-between;
@@ -281,6 +266,7 @@ const IngrediensSection = styled.div`
 const Title = styled.span`
   display: flex;
   margin-left: 3rem;
+  margin-bottom: 2rem;
   font-size: 2rem;
   font-weight: bold;
 `;
@@ -300,8 +286,8 @@ const MakroItem = styled.div`
   display: flex;
   justify-content: center;
   align-items: center;
-  width: 5rem;
-  height: 5rem;
+  width: 8rem;
+  height: 8rem;
   border-radius: 50%;
   color: white;
   font-weight: 550;
@@ -387,10 +373,6 @@ const Content = styled.div`
   overflow: hidden;
   padding: 30px;
   overflow-y: scroll;
-`;
-
-const Image = styled.img`
-  width: 100%;
 `;
 
 const ExitIcon = styled.img`

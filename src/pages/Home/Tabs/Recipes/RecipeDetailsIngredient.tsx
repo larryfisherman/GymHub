@@ -22,26 +22,38 @@ export const RecipeDetailsIngredient = ({
   fat,
   carbs,
   kcal,
-  amount,
-  setShowIngredientDetails,
-  setIngredientId,
+  editPopup,
   selectedIngredients,
   setSelectedIngredients,
+  ingredients,
 }: any) => {
   const [isActive, setIsActive] = useState(false);
 
-  const handleIngredientClick = (id: any) => {
-    if (selectedIngredients.includes(id)) {
+  const handleIngredientClick = (id: number) => {
+    if (
+      selectedIngredients.some(
+        (ingredient: any) => ingredient.ingredientId === id
+      )
+    ) {
       setSelectedIngredients((prevSelected: any) =>
-        prevSelected.filter((ingredientId: number) => ingredientId !== id)
+        prevSelected.filter((ingredient: any) => ingredient.ingredientId !== id)
       );
     } else {
-      setSelectedIngredients((prevSelected: any) => [...prevSelected, id]);
+      const clickedIngredient = ingredients.find(
+        (ingredient: any) => ingredient.ingredientId === id
+      );
+      if (clickedIngredient) {
+        setSelectedIngredients((prevSelected: any) => [
+          ...prevSelected,
+          clickedIngredient,
+        ]);
+      }
     }
   };
+
   return (
     <Container
-      style={isActive ? { border: "2px solid #FF9800" } : {}}
+      style={isActive || editPopup ? { border: "2px solid #FF9800" } : {}}
       onClick={() => {
         handleIngredientClick(id);
         setIsActive(!isActive);
@@ -55,14 +67,6 @@ export const RecipeDetailsIngredient = ({
           <IngredientMakroItem>{carbs}g carbs</IngredientMakroItem>
           <IngredientMakroItem>{kcal} kcal</IngredientMakroItem>
         </IngredientMakro>
-        <Button
-          onClick={() => {
-            setShowIngredientDetails(true);
-            setIngredientId(id);
-          }}
-        >
-          SEE MORE
-        </Button>
       </Content>
     </Container>
   );
@@ -71,18 +75,15 @@ export const RecipeDetailsIngredient = ({
 const IngredientMakro = styled.div`
   display: flex;
   justify-content: space-between;
-  flex-direction: column;
-  align-items: flex-end;
   padding-right: 5rem;
+  width: 70%;
 `;
-const IngredientMakroItem = styled.div``;
+const IngredientMakroItem = styled.span``;
 
 const Container = styled.div`
   width: 100%;
   background-color: white;
   margin-bottom: 2rem;
-  height: 15rem;
-  border-radius: 3%;
   border: 2px solid transparent;
 
   &:hover {
@@ -91,33 +92,14 @@ const Container = styled.div`
 `;
 const Content = styled.div`
   display: flex;
-  height: 100%;
   width: 100%;
-  flex-direction: column;
   justify-content: space-between;
   padding: 1rem;
-`;
-
-const Button = styled.button`
-  display: flex;
-  width: 7rem;
-  height: 3rem;
   align-items: center;
-  justify-content: center;
-  background-color: #ff9800;
-  font-size: 1rem;
-  color: white;
-  letter-spacing: 1px;
-  font-weight: 700;
-  border: 1px solid transparent;
-  border-radius: 5%;
-
-  &:hover {
-    cursor: pointer;
-  }
 `;
 
 const IngredientTitle = styled.h3`
   display: flex;
   font-size: 1.5rem;
+  flex: 1;
 `;
