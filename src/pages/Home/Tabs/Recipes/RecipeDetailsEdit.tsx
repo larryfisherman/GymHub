@@ -9,6 +9,7 @@ import { InfinitySpin } from "react-loader-spinner";
 import { useRecipeDetailsData } from "./hooks/useRecipeDetailsData";
 import { RecipeIngredientsPopup } from "./RecipeIngredientsPopup";
 import { sumMacroElements } from "./utils/sumMacroElements";
+import moment from "moment";
 
 interface Props {
   id: number;
@@ -59,10 +60,12 @@ export const RecipeDetailsEdit = ({
               onClick={() => {
                 if (id) {
                   return axios
-                    .put(
-                      `https://localhost:44390/api/recipes/${id}`,
-                      recipeData
-                    )
+                    .put(`https://localhost:44390/api/recipes/${id}`, {
+                      ...recipeData,
+                      // category:
+                      recipeSteps: steps,
+                      recipeIngredients: selectedIngredients,
+                    })
                     .finally(() => {
                       setShowRecipeDetails(false);
                       getRecipes();
@@ -70,7 +73,12 @@ export const RecipeDetailsEdit = ({
                 }
 
                 axios
-                  .post("https://localhost:44390/api/recipes", recipeData)
+                  .post("https://localhost:44390/api/recipes", {
+                    ...recipeData,
+                    // category: categories.find((el) => el.active)?.title,
+                    recipeSteps: steps,
+                    recipeIngredients: selectedIngredients,
+                  })
                   .finally(() => {
                     setShowRecipeDetails(false);
                     getRecipes();
@@ -87,7 +95,7 @@ export const RecipeDetailsEdit = ({
           <UpperSection>
             <RightSection>
               <DishNameInput
-                value={recipeData.title ? recipeData.title : ""}
+                value={recipeData?.title ? recipeData.title : ""}
                 placeholder="The name of the dish"
                 onChange={(e) =>
                   setRecipeData((prevState: any) => ({
@@ -99,25 +107,39 @@ export const RecipeDetailsEdit = ({
               <AuthorAndDateSection>
                 <AuthorInput
                   placeholder="Author"
-                  defaultValue={user && user.user.name}
+                  defaultValue={user ? user.user.name : "Unknown"}
                   disabled
                 />
-                <Date placeholder="Date" />
+                <Date
+                  placeholder="Date"
+                  defaultValue={
+                    recipeData?.createdDate
+                      ? moment(recipeData.createdDate).format(
+                          "MMMM Do YYYY, h:mm:ss a"
+                        )
+                      : "Unknown"
+                  }
+                  disabled
+                />
               </AuthorAndDateSection>
               <Categories>
-                {categories.map(({ id, title, active }: any) => (
-                  <RecipeDetailsCategories
-                    key={id}
-                    id={id}
-                    title={title}
-                    setCategories={setCategories}
-                    categories={categories}
-                    active={active}
-                  />
-                ))}
+                {categories
+                  .filter((category: any) => category.categoryId !== 1)
+                  .map(({ categoryId, name, active }: any) => (
+                    <RecipeDetailsCategories
+                      key={categoryId}
+                      id={categoryId}
+                      name={name}
+                      setCategories={setCategories}
+                      categories={categories}
+                      active={active}
+                    />
+                  ))}
               </Categories>
               <Description
-                value={recipeData.description}
+                value={
+                  recipeData?.description ? recipeData.recipe.description : ""
+                }
                 placeholder="Description"
                 onChange={(e) =>
                   setRecipeData((prevState: any) => ({
@@ -235,7 +257,7 @@ const Button = styled.button`
 const Categories = styled.div`
   display: flex;
   justify-content: space-between;
-  width: 55%;
+  width: 100%;
 `;
 
 const Description = styled.input`

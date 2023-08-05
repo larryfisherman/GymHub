@@ -48,7 +48,7 @@ const Text = styled.span`
 `;
 const Buttons = styled.div`
   display: flex;
-  width: 20%;
+  width: 40%;
   margin-top: 2rem;
   justify-content: space-between;
 `;

@@ -6,6 +6,7 @@ interface Props {
   title: string;
   image: string;
   setSelectedCategory: any;
+  isActive: boolean;
 }
 
 export const CategoriesItem = ({
@@ -13,10 +14,14 @@ export const CategoriesItem = ({
   title,
   image,
   setSelectedCategory,
+  isActive,
 }: Props) => {
   return (
     <Container onClick={() => setSelectedCategory(id)}>
-      <Content>{title}</Content>
+      <Image src={image} />
+      <Content style={isActive ? { backgroundColor: "#FF9800" } : {}}>
+        {title}
+      </Content>
     </Container>
   );
 };
@@ -28,6 +33,9 @@ const Container = styled.div`
   justify-content: space-between;
   align-items: center;
   margin-right: 10px;
+  &:hover {
+    cursor: pointer;
+  }
 `;
 
 const Content = styled.div`
@@ -40,4 +48,15 @@ const Content = styled.div`
   color: white;
   border-radius: 5%;
   padding-bottom: 1rem;
+`;
+
+const Image = styled.img`
+  position: relative;
+  top: 3rem;
+  width: 10rem;
+  border-radius: 50%;
+  border: 1px solid black;
+  @media (max-width: 768px) {
+    left: 0;
+  }
 `;

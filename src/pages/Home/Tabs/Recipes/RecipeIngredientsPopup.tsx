@@ -22,6 +22,8 @@ export const RecipeIngredientsPopup = ({
     el.name.toLowerCase().includes(filterValue.toLowerCase())
   );
 
+  console.log(filteredIngredients);
+
   return (
     <Container
       ref={popupRef}

@@ -14,6 +14,7 @@ export const Recipes = () => {
     categories,
     showRecipeDetails,
     recipeDetailsId,
+    selectedCategory,
     setShowRecipeDetails,
     setSelectedCategory,
     setRecipeDetailsId,
@@ -41,11 +42,12 @@ export const Recipes = () => {
             <CategoriesSection>
               {categories.map((el: any) => (
                 <CategoriesItem
-                  key={el.id}
-                  id={el.id}
-                  title={el.title}
-                  image={el.image}
+                  key={el.categoryId}
+                  id={el.categoryId}
+                  title={el.name}
                   setSelectedCategory={setSelectedCategory}
+                  isActive={selectedCategory === el.categoryId}
+                  image={`./assets/recipe-${el.categoryId}.svg`}
                 />
               ))}
             </CategoriesSection>
@@ -54,7 +56,12 @@ export const Recipes = () => {
                 <RecipeTitles>All items</RecipeTitles>
                 <AddRecipe>
                   <RecipeTitles>Add New Recipe</RecipeTitles>
-                  <AddRecipeButton onClick={() => setShowRecipeDetails(true)}>
+                  <AddRecipeButton
+                    onClick={() => {
+                      setRecipeDetailsId(0);
+                      setShowRecipeDetails(true);
+                    }}
+                  >
                     +
                   </AddRecipeButton>
                 </AddRecipe>

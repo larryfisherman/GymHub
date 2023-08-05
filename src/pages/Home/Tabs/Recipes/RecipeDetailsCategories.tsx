@@ -3,23 +3,15 @@ import styled from "styled-components";
 
 interface Props {
   id: number;
-  title: string;
-  setCategories: React.Dispatch<
-    React.SetStateAction<
-      {
-        id: number;
-        title: string;
-        active: boolean;
-      }[]
-    >
-  >;
+  name: string;
+  setCategories: any;
   categories: any;
   active: any;
 }
 
 export const RecipeDetailsCategories = ({
   id,
-  title,
+  name,
   setCategories,
   categories,
   active,
@@ -44,7 +36,7 @@ export const RecipeDetailsCategories = ({
       style={{ backgroundColor: `${active ? "orange" : "white"}` }}
       onClick={() => handleActiveChange(id)}
     >
-      {title}
+      {name}
     </Container>
   );
 };

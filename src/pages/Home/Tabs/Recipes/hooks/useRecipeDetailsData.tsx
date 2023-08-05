@@ -20,71 +20,42 @@ export const useRecipeDetailsData = (id: number) => {
   const [steps, setSteps] = useState<stepsStateProps[]>([]);
   const [ingredients, setIngredients] = useState<any>([]);
   const [selectedIngredients, setSelectedIngredients] = useState([]);
+  const [categories, setCategories] = useState([]);
+  const [activeCategory, setActiveCategory] = useState(0);
   const [loading, setLoading] = useState(false);
   const [showRecipeIngredientsPopup, setShowRecipeIngredientsPopup] =
     useState(false);
 
-  const [categories, setCategories] = useState([
-    {
-      id: 1,
-      title: "Breakfast",
-      active: false,
-    },
-    {
-      id: 2,
-      title: "Lunch",
-      active: false,
-    },
-    {
-      id: 3,
-      title: "Dinner",
-      active: false,
-    },
-    {
-      id: 4,
-      title: "Saper",
-      active: false,
-    },
-  ]);
-
   const user = useSelector(selectUser);
 
   useEffect(() => {
-    if (!id) return setRecipeData(null);
     setLoading(true);
+
+    if (!id) {
+      setRecipeData(null);
+      axios
+        .get("https://localhost:44390/api/ingredients")
+        .then((res) => setIngredients(res.data))
+        .finally(() => setLoading(false));
+      return;
+    }
     axios
       .get(`https://localhost:44390/api/recipes/${id}`)
       .then((res) => {
-        setRecipeData(res.data);
+        setRecipeData(res.data.recipe);
         setSteps(res.data.recipeSteps);
-
-        // const newCategories = categories.map((el) => {
-        //   if (el.title === res.data.category) {
-        //     return { ...el, active: true };
-        //   }
-        //   return el;
-        // });
-
-        // setCategories(newCategories);
+        setSelectedIngredients(res.data.recipeIngredients);
       })
       .then(() =>
         axios
           .get("https://localhost:44390/api/ingredients")
           .then((res) => setIngredients(res.data))
       )
+      .then(() => axios.get("https://localhost:44390/api/categories"))
+      .then((res) => setCategories(res.data))
       .finally(() => setLoading(false));
   }, []);
 
-  useEffect(
-    () =>
-      setRecipeData((prevState: any) => ({
-        ...prevState,
-        category: categories.find((el) => el.active)?.title,
-        recipeSteps: steps,
-        recipeIngredients: selectedIngredients,
-      })),
-    [steps, selectedIngredients, categories]
-  );
   return {
     recipeData,
     setRecipeData,

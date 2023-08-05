@@ -7,13 +7,15 @@ export const useRecipesData = () => {
   const [categories, setCategories] = useState([]);
   const [showRecipeDetails, setShowRecipeDetails] = useState(false);
   const [recipeDetailsId, setRecipeDetailsId] = useState(0);
-  const [selectedCategory, setSelectedCategory] = useState(0);
+  const [selectedCategory, setSelectedCategory] = useState(1);
 
   const getRecipes = () => {
     setLoading(true);
     axios
       .get("https://localhost:44390/api/recipes/")
       .then((res) => setRecipes(res.data))
+      .then(() => axios.get("https://localhost:44390/api/categories/"))
+      .then((res) => setCategories(res.data))
       .finally(() => setLoading(false));
   };
 
@@ -29,6 +31,6 @@ export const useRecipesData = () => {
     setShowRecipeDetails,
     setSelectedCategory,
     setRecipeDetailsId,
-    getRecipes
+    getRecipes,
   };
 };
