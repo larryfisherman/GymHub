@@ -45,21 +45,33 @@ export const RecipeIngredientsPopup = ({
       </Header>
       <Content>
         <IngredientsSection>
-          {filteredIngredients.map((el: any) => (
-            <RecipeDetailsIngredient
-              key={el.ingredientId}
-              id={el.ingredientId}
-              name={el.name}
-              protein={el.protein}
-              fat={el.fat}
-              carbs={el.carbs}
-              kcal={el.kcal}
-              amount={el.amount}
-              selectedIngredients={selectedIngredients}
-              setSelectedIngredients={setSelectedIngredients}
-              ingredients={ingredients}
-            />
-          ))}
+          {filteredIngredients.map((el: any) => {
+            const isActive = selectedIngredients.find(
+              (selectedIngredient: any) =>
+                selectedIngredient.ingredientId === el.ingredientId
+            );
+            return (
+              <RecipeDetailsIngredient
+                key={el.ingredientId}
+                id={el.ingredientId}
+                name={el.name}
+                protein={el.protein}
+                fat={el.fat}
+                carbs={el.carbs}
+                kcal={el.kcal}
+                amount={el.amount}
+                selectedIngredients={selectedIngredients}
+                setSelectedIngredients={setSelectedIngredients}
+                ingredients={ingredients}
+                style={{
+                  border: isActive
+                    ? "2px solid #FF9800"
+                    : "2px solid transparent",
+                  cursor: "pointer",
+                }}
+              />
+            );
+          })}
         </IngredientsSection>
       </Content>
     </Container>

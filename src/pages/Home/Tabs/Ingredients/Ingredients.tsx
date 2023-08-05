@@ -36,7 +36,7 @@ export const Ingredients = () => {
         <IngredientsSection>
           {filteredIngredients.map((el: any) => (
             <Ingredient
-              id={el.IngredientId}
+              id={el.id}
               name={el.name}
               protein={el.protein}
               fat={el.fat}

@@ -81,9 +81,9 @@ export const useRecipeDetailsData = (id: number) => {
         ...prevState,
         category: categories.find((el) => el.active)?.title,
         recipeSteps: steps,
-        recipeIngredients: ingredients,
+        recipeIngredients: selectedIngredients,
       })),
-    [steps, ingredients, categories]
+    [steps, selectedIngredients, categories]
   );
   return {
     recipeData,

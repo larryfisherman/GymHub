@@ -16,7 +16,6 @@ export const CategoriesItem = ({
 }: Props) => {
   return (
     <Container onClick={() => setSelectedCategory(id)}>
-      {/* <Image src={`./assets/${image}.svg`} />  */}
       <Content>{title}</Content>
     </Container>
   );
@@ -41,16 +40,4 @@ const Content = styled.div`
   color: white;
   border-radius: 5%;
   padding-bottom: 1rem;
-`;
-
-const Image = styled.img`
-  position: relative;
-  top: 3rem;
-  width: 10rem;
-  border-radius: 50%;
-  border: 1px solid black;
-
-  @media (max-width: 768px) {
-    left: 0;
-  }
 `;

@@ -146,19 +146,30 @@ export const RecipeDetailsEdit = ({
               </MakroSection>
               <IngrediensSection>
                 <Title>Ingrediens (per serving)</Title>
-                {selectedIngredients.map((el: any) => (
-                  <RecipeDetailsIngredient
-                    key={el.ingredientId}
-                    id={el.ingredientId}
-                    name={el.name}
-                    protein={el.protein}
-                    fat={el.fat}
-                    carbs={el.carbs}
-                    kcal={el.kcal}
-                    amount={el.amount}
-                    editPopup={true}
-                  />
-                ))}
+                {selectedIngredients.map((el: any) => {
+                  const isActive = selectedIngredients.find(
+                    (selectedIngredient: any) =>
+                      selectedIngredient.ingredientId === el.ingredientId
+                  );
+                  return (
+                    <RecipeDetailsIngredient
+                      key={el.ingredientId}
+                      id={el.ingredientId}
+                      name={el.name}
+                      protein={el.protein}
+                      fat={el.fat}
+                      carbs={el.carbs}
+                      kcal={el.kcal}
+                      amount={el.amount}
+                      style={{
+                        border: isActive
+                          ? "2px solid #FF9800"
+                          : "2px solid transparent",
+                        cursor: "pointer",
+                      }}
+                    />
+                  );
+                })}
                 <Separator />
                 <AddIngredient
                   onClick={() => setShowRecipeIngredientsPopup(true)}

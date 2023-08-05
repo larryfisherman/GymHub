@@ -22,13 +22,11 @@ export const RecipeDetailsIngredient = ({
   fat,
   carbs,
   kcal,
-  editPopup,
   selectedIngredients,
   setSelectedIngredients,
   ingredients,
+  style,
 }: any) => {
-  const [isActive, setIsActive] = useState(false);
-
   const handleIngredientClick = (id: number) => {
     if (
       selectedIngredients.some(
@@ -53,10 +51,9 @@ export const RecipeDetailsIngredient = ({
 
   return (
     <Container
-      style={isActive || editPopup ? { border: "2px solid #FF9800" } : {}}
+      style={style}
       onClick={() => {
         handleIngredientClick(id);
-        setIsActive(!isActive);
       }}
     >
       <Content>
