@@ -50,7 +50,7 @@ export const WorkoutDetailsEdit = ({
               onClick={() => {
                 if (id) {
                   return axios
-                    .put(`https://localhost:44390/api/workouts/${id}`, {
+                    .put(`http://gymhub.azurewebsites.net/api/workouts/${id}`, {
                       ...workoutData,
                       author: user && user.user.name,
                       workoutExercises: setsAndReps,
@@ -62,7 +62,7 @@ export const WorkoutDetailsEdit = ({
                     });
                 }
                 axios
-                  .post("https://localhost:44390/api/workouts", {
+                  .post("http://gymhub.azurewebsites.net/api/workouts", {
                     ...workoutData,
                     workoutExercises: setsAndReps,
                   })

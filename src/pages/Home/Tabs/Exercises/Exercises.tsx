@@ -12,7 +12,7 @@ export const Exercises = () => {
   const dispatch = useDispatch();
 
   useEffect(() => {
-    axios.get("https://localhost:44390/api/exercises").then((res) => {
+    axios.get("http://gymhub.azurewebsites.net/api/exercises").then((res) => {
       setExercises(res.data);
       dispatch(setExercisesStore(res.data));
     });

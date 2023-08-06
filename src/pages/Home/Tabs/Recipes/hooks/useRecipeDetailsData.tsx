@@ -32,19 +32,19 @@ export const useRecipeDetailsData = (id: number) => {
     setLoading(true);
 
     axios
-      .get("https://localhost:44390/api/categories")
+      .get("http://gymhub.azurewebsites.net/api/categories")
       .then((res) => setCategories(res.data));
 
     if (!id) {
       setRecipeData(null);
       axios
-        .get("https://localhost:44390/api/ingredients")
+        .get("http://gymhub.azurewebsites.net/api/ingredients")
         .then((res) => setIngredients(res.data))
         .finally(() => setLoading(false));
       return;
     }
     axios
-      .get(`https://localhost:44390/api/recipes/${id}`)
+      .get(`http://gymhub.azurewebsites.net/api/recipes/${id}`)
       .then((res) => {
         setRecipeData(res.data.recipe);
         setActiveCategory(res.data.recipe.categoryId);
@@ -53,7 +53,7 @@ export const useRecipeDetailsData = (id: number) => {
       })
       .then(() =>
         axios
-          .get("https://localhost:44390/api/ingredients")
+          .get("http://gymhub.azurewebsites.net/api/ingredients")
           .then((res) => setIngredients(res.data))
       )
       .finally(() => setLoading(false));

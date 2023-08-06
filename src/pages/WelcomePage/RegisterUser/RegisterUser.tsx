@@ -63,7 +63,7 @@ export const RegisterUser = ({
         <ConfirmButton
           onClick={() =>
             axios
-              .post("https://localhost:44390/api/user/register", {
+              .post("gymhub.azurewebsites.net/api/user/register", {
                 name: nameValue,
                 email: emailValue,
                 password: passwordValue,
@@ -89,7 +89,7 @@ export const RegisterUser = ({
             <span
               onClick={() =>
                 axios
-                  .post("https://localhost:44390/api/user/login", {
+                  .post("http://gymhub.azurewebsites.net/api/user/login", {
                     email: "test@test.com",
                     password: "test123",
                   })

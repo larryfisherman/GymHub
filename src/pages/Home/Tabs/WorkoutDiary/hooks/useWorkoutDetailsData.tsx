@@ -15,7 +15,7 @@ export const useWorkoutDetailsData = (id: number) => {
 
     setLoading(true);
     axios
-      .get(`https://localhost:44390/api/workouts/${id}`)
+      .get(`gymhub.azurewebsites.net/api/workouts/${id}`)
       .then((res) => {
         setWorkoutData(res.data.workout);
         setSetsAndReps(res.data.exercises);

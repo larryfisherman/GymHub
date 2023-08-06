@@ -37,7 +37,7 @@ export const Workout = ({
           onConfirm={() => {
             setLoading(true);
             axios
-              .delete(`https://localhost:44390/api/workouts/${id}`)
+              .delete(`http://gymhub.azurewebsites.net/api/workouts/${id}`)
               .finally(() => {
                 setLoading(false);
                 setShowConfirmationModal(false);

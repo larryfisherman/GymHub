@@ -16,7 +16,7 @@ export const Ingredients = () => {
 
   useEffect(() => {
     axios
-      .get("https://localhost:44390/api/ingredients")
+      .get("http://gymhub.azurewebsites.net/api/ingredients")
       .then((res) => setIngredients(res.data));
   }, []);
 
