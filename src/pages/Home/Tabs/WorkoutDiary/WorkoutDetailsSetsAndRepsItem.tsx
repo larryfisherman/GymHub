@@ -19,9 +19,10 @@ export const WorkoutDetailsSetsAndRepsItem = ({
   const [isEdit, setIsEdit] = useState(false);
 
   const handleInputChange = (id: number, property: string, value: string) => {
+    console.log(id, property, value);
     setSetsAndReps((prevData: any) =>
       prevData.map((item: any) =>
-        item.id === id ? { ...item, [property]: value } : item
+        item.exerciseId === id ? { ...item, [property]: value } : item
       )
     );
   };

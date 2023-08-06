@@ -91,7 +91,6 @@ const Container = styled.div`
   width: 100%;
   height: 100%;
   margin-top: 10rem;
-  background-color: white;
 `;
 const Content = styled.div`
   display: flex;

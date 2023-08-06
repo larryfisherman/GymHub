@@ -3,7 +3,9 @@ import { selectExercises } from "../../../../../store/exercisesSlice";
 
 const activeExercisesHandler = (arr1: any, arr2: any) => {
   const updatedArray = arr1.map((obj1: any) => {
-    const matchingObj = arr2.find((obj2: any) => obj2.id === obj1.id);
+    const matchingObj = arr2.find(
+      (obj2: any) => obj2.exerciseId === obj1.exerciseId
+    );
     if (matchingObj) {
       const mergedObj = { ...obj1 };
       matchingObj.title = mergedObj.title;
@@ -24,8 +26,10 @@ const activeExercisesHandler = (arr1: any, arr2: any) => {
 export const useActiveExercises = (activeExercises: any, setsAndReps: any) => {
   const exercises = useSelector(selectExercises);
 
-  const filteredExercises = exercises.filter((ex: any) =>
-    activeExercises.includes(ex.id)
+  const exercisesCopy = [...exercises];
+
+  const filteredExercises = exercisesCopy.filter((ex: any) =>
+    activeExercises.includes(ex.exerciseId)
   );
 
   return activeExercisesHandler(filteredExercises, setsAndReps);

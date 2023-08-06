@@ -4,38 +4,19 @@ import { Exercise } from "./Exercise";
 import { Category } from "./Category";
 import { useDispatch } from "react-redux";
 import { setExercisesStore } from "../../../../store/exercisesSlice";
+import axios from "axios";
 
 export const Exercises = () => {
-  const [exercises, setExercises] = useState([
-    {
-      id: 1,
-      title: "Miliatry press",
-      sets: 4,
-      repeats: 6,
-    },
-    {
-      id: 2,
-      title: "Standing dumbbell press",
-      sets: 3,
-      repeats: 10,
-    },
-    {
-      id: 3,
-      title: "Yoga",
-      sets: 2,
-      repeats: 4,
-    },
-    {
-      id: 4,
-      title: "Bench press",
-      sets: 4,
-      repeats: 6,
-    },
-  ]);
+  const [exercises, setExercises] = useState([]);
 
   const dispatch = useDispatch();
 
-  dispatch(setExercisesStore(exercises));
+  useEffect(() => {
+    axios.get("https://localhost:44390/api/exercises").then((res) => {
+      setExercises(res.data);
+      dispatch(setExercisesStore(JSON.parse(res.data)));
+    });
+  }, []);
 
   const [categories, setCategories] = useState([
     {
@@ -61,7 +42,7 @@ export const Exercises = () => {
         </Categories>
         <ExercisesSection>
           {exercises.map((el: any) => (
-            <Exercise key={el.id} id={el.id} title={el.title} />
+            <Exercise key={el.ExerciseId} id={el.ExerciseId} title={el.title} />
           ))}
         </ExercisesSection>
       </Content>

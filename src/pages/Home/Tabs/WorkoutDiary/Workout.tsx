@@ -46,18 +46,33 @@ export const Workout = ({
           }}
         />
       ) : (
-        <Content>
+        <Content
+          style={{
+            background: `url('./assets/workout-${
+              Math.floor(Math.random() * 8) + 1
+            }.svg') center center / cover`,
+          }}
+        >
           <TitleSection>
-            <span>{title}</span>
+            <Title>{title}</Title>
             <TrashIcon
               src="./assets/trash-icon.svg"
               onClick={() => setShowConfirmationModal(true)}
             />
           </TitleSection>
-          <DescriptionSection>
-            <span>{timeToBeDone ? `${timeToBeDone} minutes` : null}</span>
-            <span>{kcal ? `${kcal} kcal` : null}</span>
-          </DescriptionSection>
+          {timeToBeDone && kcal && (
+            <DescriptionSection>
+              <TimeAndKcal>
+                <Icon src="./assets/clock-icon.svg" />
+                <Text>{timeToBeDone} </Text>
+              </TimeAndKcal>
+              <TimeAndKcal>
+                <Icon src="./assets/fire-kcal-icon.svg" />
+                <Text>{kcal}</Text>
+              </TimeAndKcal>
+            </DescriptionSection>
+          )}
+
           <StartButton
             onClick={() => {
               setShowEditWorkoutDetails(true);
@@ -71,6 +86,22 @@ export const Workout = ({
     </Container>
   );
 };
+
+const Text = styled.span`
+  font-size: 1rem;
+  width: 30%;
+`;
+const Icon = styled.img`
+  width: 2.5rem;
+`;
+
+const TimeAndKcal = styled.div`
+  display: flex;
+  width: 50%;
+  align-items: center;
+`;
+
+const Title = styled.span``;
 
 const Container = styled.div`
   width: 39rem;
@@ -88,7 +119,6 @@ const Content = styled.div`
   color: white;
   background-color: white;
   padding: 30px;
-  background: url("./assets/workout-4.svg") center center / cover;
 
   @media (max-width: 768px) {
     width: 100%;
@@ -124,11 +154,7 @@ const TrashIcon = styled.img`
 const DescriptionSection = styled.div`
   display: flex;
   justify-content: space-between;
-  width: 25%;
-
-  span {
-    font-size: 0.8rem;
-  }
+  width: 35%;
 
   @media (max-width: 768px) {
     width: 80%;

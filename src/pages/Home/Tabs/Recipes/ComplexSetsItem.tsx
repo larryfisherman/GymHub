@@ -28,7 +28,7 @@ export const ComplexSetsItem = ({
           <Calories>{kcal} kcal</Calories>
           <Time>{time} minutes</Time>
         </CaloriesAndTimeSection>
-        <SeeMoreButton>SEE MORE</SeeMoreButton>
+        {/* <SeeMoreButton>SEE MORE</SeeMoreButton> */}
       </Content>
     </Container>
   );

@@ -19,12 +19,12 @@ export const NavSideBar = ({ setTabToggle, tab }: Props) => {
       <Logo src="./assets/biceps-icon.svg" />
       <Content>
         <NavItems>
-          <SideBarItem
+          {/* <SideBarItem
             itemImg="./assets/home-gray-icon.svg"
             itemName="Home"
             onClick={() => setTabToggle(1)}
             isActive={tab === 1}
-          />
+          /> */}
           <SideBarItem
             itemImg="./assets/diary-gray-icon.svg"
             itemName="Workout Diary"
@@ -61,6 +61,7 @@ export const NavSideBar = ({ setTabToggle, tab }: Props) => {
             onClick={() => {
               dispatch(logout);
               navigate("/");
+              localStorage.removeItem("persist:root");
               localStorage.removeItem("token");
             }}
           />

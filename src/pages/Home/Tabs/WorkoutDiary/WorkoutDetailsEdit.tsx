@@ -10,6 +10,7 @@ import { selectExercises } from "../../../../store/exercisesSlice";
 import { WorkoutExercise } from "./WorkoutExercise";
 import { InfinitySpin } from "react-loader-spinner";
 import { useWorkoutDetailsData } from "./hooks/useWorkoutDetailsData";
+import { WorkoutDetailsEditTimeAndKcal } from "./WorkoutDetailsEditTimeAndKcal";
 
 interface Props {
   id: number;
@@ -36,9 +37,6 @@ export const WorkoutDetailsEdit = ({
   const exercises = useSelector(selectExercises);
   const user = useSelector(selectUser);
 
-  const [isKcalEdit, setIsKcalEdit] = useState(false);
-  const [isTimeEdit, setIsTimeEdit] = useState(false);
-
   return (
     <Container>
       {loading ? (
@@ -54,6 +52,7 @@ export const WorkoutDetailsEdit = ({
                   return axios
                     .put(`https://localhost:44390/api/workouts/${id}`, {
                       ...workoutData,
+                      author: user && user.user.name,
                       workoutExercises: setsAndReps,
                     })
                     .then(() => setLoading(true))
@@ -82,19 +81,9 @@ export const WorkoutDetailsEdit = ({
             />
           </RecipeActions>
           <UpperSection>
-            <ImageContainer>
-              <Image
-              // src={
-              //   recipeData.imageSrc
-              //     ? recipeData.imageSrc
-              //     : "./assets/blank-recipe-photo.svg"
-              // }
-              />
-              {/* <input type="file" onChange={showPreview} /> */}
-            </ImageContainer>
             <RightSection>
               <DishNameInput
-                value={workoutData.title}
+                value={workoutData.title ? workoutData.title : ""}
                 placeholder="The name of the workout"
                 onChange={(e) =>
                   setWorkoutData((prevState: any) => ({
@@ -113,9 +102,11 @@ export const WorkoutDetailsEdit = ({
                   placeholder="Date"
                   disabled
                   value={
-                    id
-                      ? workoutData.createdDate
-                      : moment().format("MMMM Do YYYY, h:mm:ss a")
+                    workoutData.createdDate
+                      ? moment(workoutData.createdDate).format(
+                          "MMMM Do YYYY, h:mm:ss a"
+                        )
+                      : "Unknown"
                   }
                 />
               </AuthorAndDateSection>
@@ -135,10 +126,10 @@ export const WorkoutDetailsEdit = ({
             <BottomLeftSection>
               <ExercisesSection>
                 <Title>Exercises</Title>
-                {exercises.map(({ id, title }: any) => (
+                {exercises.map(({ exerciseId, title }: any) => (
                   <WorkoutExercise
-                    key={id}
-                    id={id}
+                    key={exerciseId}
+                    id={exerciseId}
                     title={title}
                     activeExercises={activeExercises}
                     setActiveExercises={setActiveExercises}
@@ -147,33 +138,17 @@ export const WorkoutDetailsEdit = ({
               </ExercisesSection>
             </BottomLeftSection>
             <BottomRightSection>
-              <TimeAndKcalSection>
-                <TimeAndKcalItem
-                  onClick={() => setIsTimeEdit(true)}
-                  style={{ backgroundColor: "#846075" }}
-                >
-                  <ClockIcon src="./assets/clock-icon.svg" />
-                  <TimeAndKcalItemText>
-                    {workoutData.timeToBeDone} min
-                  </TimeAndKcalItemText>
-                </TimeAndKcalItem>
-                <TimeAndKcalItem
-                  onClick={() => setIsKcalEdit(true)}
-                  style={{ backgroundColor: "#AF5D63" }}
-                >
-                  <ClockIcon src="./assets/fire-kcal-icon.svg" />
-                  <TimeAndKcalItemText>
-                    {workoutData.kcal} kcal
-                  </TimeAndKcalItemText>
-                </TimeAndKcalItem>
-              </TimeAndKcalSection>
+              <WorkoutDetailsEditTimeAndKcal
+                data={workoutData}
+                setData={setWorkoutData}
+              />
               <SetsAndRepsSection>
                 <SetsAndRepsTitle>Sets & Reps</SetsAndRepsTitle>
                 <SetsAndReps>
                   {setsAndReps.map((el: any) => (
                     <WorkoutDetailsSetsAndRepsItem
-                      key={el.id}
-                      id={el.id}
+                      key={el.exerciseId}
+                      id={el.exerciseId}
                       title={el.title}
                       sets={el.sets}
                       repeats={el.repeats}
@@ -189,12 +164,6 @@ export const WorkoutDetailsEdit = ({
     </Container>
   );
 };
-
-const ClockIcon = styled.img`
-  width: 2rem;
-`;
-
-const TimeAndKcalItemText = styled.span``;
 
 const SpinnerWrapper = styled.div`
   display: flex;
@@ -235,26 +204,6 @@ const RecipeActions = styled.div`
   margin-right: 2rem;
 `;
 
-const TimeAndKcalSection = styled.div`
-  width: 100%;
-  display: flex;
-  justify-content: center;
-  background-color: white;
-  padding: 30px;
-  margin-bottom: 1rem;
-  align-items: center;
-`;
-
-const TimeAndKcalItem = styled.span`
-  width: 9rem;
-  height: 9rem;
-  margin: 2rem;
-  border-radius: 50%;
-  display: flex;
-  align-items: center;
-  justify-content: center;
-`;
-
 const Button = styled.button`
   display: flex;
   align-self: flex-end;
@@ -274,22 +223,10 @@ const Button = styled.button`
   }
 `;
 
-const ImageContainer = styled.label`
-  width: 50%;
-
-  & > input {
-    visibility: hidden;
-    width: 0;
-    height: 0;
-  }
-`;
-
 const Description = styled.input`
   width: 100%;
   padding: 5px;
 `;
-
-// BOTTOM LOWER STYLES
 
 const BottomLeftSection = styled.div`
   display: flex;
@@ -385,10 +322,6 @@ const Content = styled.div`
   overflow: hidden;
   padding: 30px;
   overflow-y: scroll;
-`;
-
-const Image = styled.img`
-  width: 100%;
 `;
 
 const ExitIcon = styled.img`

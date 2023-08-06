@@ -6,12 +6,11 @@ interface Props {
   title: string;
 }
 
-export const Exercise = ({ title, id }: Props) => {
+export const Exercise = ({ title }: Props) => {
   return (
     <Container>
       <Content>
         <ExerciseTitle>{title}</ExerciseTitle>
-        <Button>SEE MORE</Button>
       </Content>
     </Container>
   );

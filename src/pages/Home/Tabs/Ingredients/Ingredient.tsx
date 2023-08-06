@@ -20,32 +20,29 @@ export const Ingredient = ({
   fat,
   carbs,
   kcal,
-  amount,
   setShowIngredientDetails,
   setIngredientId,
-}: Props) => {
-  return (
-    <Container>
-      <Content>
-        <IngredientTitle>{name}</IngredientTitle>
-        <IngredientMakro>
-          <IngredientMakroItem>{protein}g protein</IngredientMakroItem>
-          <IngredientMakroItem>{fat}g fat</IngredientMakroItem>
-          <IngredientMakroItem>{carbs}g carbs</IngredientMakroItem>
-          <IngredientMakroItem>{kcal} kcal</IngredientMakroItem>
-        </IngredientMakro>
-        <Button
-          onClick={() => {
-            setShowIngredientDetails(true);
-            setIngredientId(id);
-          }}
-        >
-          SEE MORE
-        </Button>
-      </Content>
-    </Container>
-  );
-};
+}: Props) => (
+  <Container>
+    <Content>
+      <IngredientTitle>{name}</IngredientTitle>
+      <IngredientMakro>
+        <IngredientMakroItem>{protein}g protein</IngredientMakroItem>
+        <IngredientMakroItem>{fat}g fat</IngredientMakroItem>
+        <IngredientMakroItem>{carbs}g carbs</IngredientMakroItem>
+        <IngredientMakroItem>{kcal} kcal</IngredientMakroItem>
+      </IngredientMakro>
+      <Button
+        onClick={() => {
+          setShowIngredientDetails(true);
+          setIngredientId(id);
+        }}
+      >
+        SEE MORE
+      </Button>
+    </Content>
+  </Container>
+);
 
 const IngredientMakro = styled.div`
   display: flex;

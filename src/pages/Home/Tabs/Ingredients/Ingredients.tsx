@@ -1,4 +1,4 @@
-import React, { useState } from "react";
+import React, { useState, useEffect } from "react";
 import styled from "styled-components";
 import axios from "axios";
 import { Ingredient } from "./Ingredient";
@@ -14,9 +14,11 @@ export const Ingredients = () => {
     el.name.toLowerCase().includes(filterValue.toLowerCase())
   );
 
-  axios
-    .get("https://localhost:44390/api/ingredients")
-    .then((res) => setIngredients(res.data));
+  useEffect(() => {
+    axios
+      .get("https://localhost:44390/api/ingredients")
+      .then((res) => setIngredients(res.data));
+  }, []);
 
   return (
     <Container>

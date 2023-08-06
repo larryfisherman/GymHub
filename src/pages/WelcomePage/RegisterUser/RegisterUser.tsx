@@ -2,6 +2,8 @@ import React, { useState } from "react";
 import styled from "styled-components";
 import axios from "axios";
 import { useNavigate } from "react-router-dom";
+import { useDispatch } from "react-redux";
+import { login } from "../../../store/userSlice";
 
 interface Props {
   setShowRegisterPopup: React.Dispatch<React.SetStateAction<boolean>>;
@@ -16,6 +18,8 @@ export const RegisterUser = ({
   const [nameValue, setNameValue] = useState("");
   const [passwordValue, setPasswordValue] = useState("");
   const [showPassword, setShowPassword] = useState(false);
+
+  const dispatch = useDispatch();
 
   const navigate = useNavigate();
 
@@ -69,19 +73,46 @@ export const RegisterUser = ({
         >
           CREATE ACCOUNT
         </ConfirmButton>
-        <LoginDescription
-          onClick={() => {
-            setShowRegisterPopup(false);
-            setShowLoginPopup(true);
-          }}
-        >
-          Already have account?&nbsp;
-          <span>Log in!</span>
-        </LoginDescription>
+        <Footer>
+          <LoginDescription
+            onClick={() => {
+              setShowRegisterPopup(false);
+              setShowLoginPopup(true);
+            }}
+          >
+            Already have account?&nbsp;
+            <span>Log in!</span>
+          </LoginDescription>
+          <GuestLogin>
+            Don't want to create an account? Use already created one and skip to
+            the good part!{" "}
+            <span
+              onClick={() =>
+                axios
+                  .post("https://localhost:44390/api/user/login", {
+                    email: "test@test.com",
+                    password: "test123",
+                  })
+                  .then((res) => {
+                    localStorage.setItem("token", res.data.token);
+                    dispatch(login(res.data));
+                    navigate("/home");
+                  })
+              }
+            >
+              Hop in!
+            </span>
+          </GuestLogin>
+        </Footer>
       </Content>
     </Container>
   );
 };
+
+const Footer = styled.div`
+  display: flex;
+  flex-direction: column;
+`;
 
 const CrossIcon = styled.img`
   width: 1rem;
@@ -201,6 +232,20 @@ const ConfirmButton = styled.button`
 `;
 
 const LoginDescription = styled.span`
+  color: black;
+  text-decoration: none;
+  width: 100%;
+  & > span {
+    font-weight: 600;
+    color: orange;
+  }
+
+  &:hover {
+    cursor: pointer;
+  }
+`;
+
+const GuestLogin = styled.span`
   color: black;
   text-decoration: none;
   width: 100%;
