@@ -19,7 +19,7 @@ export const useWorkoutDetailsData = (id: number) => {
       .then((res) => {
         setWorkoutData(res.data.workout);
         setSetsAndReps(res.data.exercises);
-        // setActiveExercises(res.data.exercises.map((el: any) => el.exerciseId));
+        setActiveExercises(res.data.exercises.map((el: any) => el.exerciseId));
       })
       .finally(() => setLoading(false));
   }, []);

@@ -14,20 +14,10 @@ export const Exercises = () => {
   useEffect(() => {
     axios.get("https://localhost:44390/api/exercises").then((res) => {
       setExercises(res.data);
-      dispatch(setExercisesStore(JSON.parse(res.data)));
+      dispatch(setExercisesStore(res.data));
     });
   }, []);
 
-  const [categories, setCategories] = useState([
-    {
-      id: 1,
-      title: "Arms",
-    },
-    { id: 2, title: "Chest" },
-    { id: 3, title: "Back" },
-    { id: 4, title: "Abs" },
-    { id: 5, title: "Endurance" },
-  ]);
   return (
     <Container>
       <Content>
@@ -35,11 +25,6 @@ export const Exercises = () => {
           <PreTitle>Explore</PreTitle>
           <Title>Exercise Library</Title>
         </TitleSection>
-        <Categories>
-          {categories.map((el: any) => (
-            <Category key={el.id} title={el.title} />
-          ))}
-        </Categories>
         <ExercisesSection>
           {exercises.map((el: any) => (
             <Exercise key={el.ExerciseId} id={el.ExerciseId} title={el.title} />

@@ -22,7 +22,7 @@ export const Ingredients = () => {
 
   return (
     <Container>
-      {showIngredientDetails && <IngredientDetails id={ingredientId} />}
+      {/* {showIngredientDetails && <IngredientDetails id={ingredientId} />} */}
       <Content>
         <TitleSection>
           <PreTitle>Explore</PreTitle>

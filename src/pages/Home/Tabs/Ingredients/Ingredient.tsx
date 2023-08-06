@@ -32,14 +32,14 @@ export const Ingredient = ({
         <IngredientMakroItem>{carbs}g carbs</IngredientMakroItem>
         <IngredientMakroItem>{kcal} kcal</IngredientMakroItem>
       </IngredientMakro>
-      <Button
+      {/* <Button
         onClick={() => {
           setShowIngredientDetails(true);
           setIngredientId(id);
         }}
       >
         SEE MORE
-      </Button>
+      </Button> */}
     </Content>
   </Container>
 );
@@ -57,13 +57,11 @@ const Container = styled.div`
   width: 49%;
   background-color: white;
   margin-bottom: 2rem;
-  height: 15rem;
   border-radius: 3%;
 `;
 const Content = styled.div`
   display: flex;
   height: 100%;
-  flex-direction: column;
   justify-content: space-between;
   padding: 1rem;
 `;
