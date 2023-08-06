@@ -21,6 +21,11 @@ export const Recipes = () => {
     getRecipes,
   } = useRecipesData();
 
+  const filteredRecipes =
+    selectedCategory === 1
+      ? recipes
+      : recipes.filter((recipe: any) => recipe.categoryId === selectedCategory);
+
   return (
     <>
       <Container>
@@ -66,7 +71,7 @@ export const Recipes = () => {
                   </AddRecipeButton>
                 </AddRecipe>
                 {recipes &&
-                  recipes.map((el: any) => {
+                  filteredRecipes.map((el: any) => {
                     return (
                       <Recipe
                         key={el.recipeId}

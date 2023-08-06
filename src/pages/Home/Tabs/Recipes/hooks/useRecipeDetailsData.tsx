@@ -31,6 +31,10 @@ export const useRecipeDetailsData = (id: number) => {
   useEffect(() => {
     setLoading(true);
 
+    axios
+      .get("https://localhost:44390/api/categories")
+      .then((res) => setCategories(res.data));
+
     if (!id) {
       setRecipeData(null);
       axios
@@ -43,6 +47,7 @@ export const useRecipeDetailsData = (id: number) => {
       .get(`https://localhost:44390/api/recipes/${id}`)
       .then((res) => {
         setRecipeData(res.data.recipe);
+        setActiveCategory(res.data.recipe.categoryId);
         setSteps(res.data.recipeSteps);
         setSelectedIngredients(res.data.recipeIngredients);
       })
@@ -51,8 +56,6 @@ export const useRecipeDetailsData = (id: number) => {
           .get("https://localhost:44390/api/ingredients")
           .then((res) => setIngredients(res.data))
       )
-      .then(() => axios.get("https://localhost:44390/api/categories"))
-      .then((res) => setCategories(res.data))
       .finally(() => setLoading(false));
   }, []);
 
