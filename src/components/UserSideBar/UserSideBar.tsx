@@ -1,6 +1,5 @@
 import React from "react";
 import styled from "styled-components";
-import { Avatar } from "@material-ui/core";
 import { Goal } from "./Goal";
 
 export const UserSideBar = () => {
@@ -8,7 +7,6 @@ export const UserSideBar = () => {
     <Container>
       <Content>
         <PersonalDataSection>
-          <Avatar sizes="large" variant="square" />
           <PersonalDataBottomSection>
             <h2>Albert Karkut</h2>
             <span>Krakow, Poland</span>

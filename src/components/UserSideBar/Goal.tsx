@@ -1,4 +1,3 @@
-import { Avatar } from "@material-ui/core";
 import React from "react";
 import styled from "styled-components";
 
@@ -13,7 +12,6 @@ export const Goal = ({ title, target, progress, icon }: Props) => {
   return (
     <Container>
       <Content>
-        <Avatar />
         <Details>
           <h4>{title}</h4>
           <span>
