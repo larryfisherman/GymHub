@@ -27,7 +27,6 @@ export const RecipeDetailsEdit = ({
     setRecipeData,
     loading,
     categories,
-    setCategories,
     steps,
     setSteps,
     ingredients,
@@ -36,6 +35,8 @@ export const RecipeDetailsEdit = ({
     setShowRecipeIngredientsPopup,
     selectedIngredients,
     setSelectedIngredients,
+    activeCategory,
+    setActiveCategory,
   } = useRecipeDetailsData(id);
 
   const { totalFat, totalCarbo, totalKcal, totalProteins } =
@@ -62,7 +63,7 @@ export const RecipeDetailsEdit = ({
                   return axios
                     .put(`https://localhost:44390/api/recipes/${id}`, {
                       ...recipeData,
-                      // category:
+                      categoryId: activeCategory,
                       recipeSteps: steps,
                       recipeIngredients: selectedIngredients,
                     })
@@ -75,7 +76,7 @@ export const RecipeDetailsEdit = ({
                 axios
                   .post("https://localhost:44390/api/recipes", {
                     ...recipeData,
-                    // category: categories.find((el) => el.active)?.title,
+                    categoryId: activeCategory,
                     recipeSteps: steps,
                     recipeIngredients: selectedIngredients,
                   })
@@ -130,9 +131,8 @@ export const RecipeDetailsEdit = ({
                       key={categoryId}
                       id={categoryId}
                       name={name}
-                      setCategories={setCategories}
-                      categories={categories}
-                      active={active}
+                      setActiveCategory={setActiveCategory}
+                      active={activeCategory === categoryId}
                     />
                   ))}
               </Categories>

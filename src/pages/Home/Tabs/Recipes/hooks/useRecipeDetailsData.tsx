@@ -72,5 +72,7 @@ export const useRecipeDetailsData = (id: number) => {
     setShowRecipeIngredientsPopup,
     selectedIngredients,
     setSelectedIngredients,
+    setActiveCategory,
+    activeCategory,
   };
 };

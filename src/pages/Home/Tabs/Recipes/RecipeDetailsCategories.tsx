@@ -4,37 +4,20 @@ import styled from "styled-components";
 interface Props {
   id: number;
   name: string;
-  setCategories: any;
-  categories: any;
   active: any;
+  setActiveCategory: any;
 }
 
 export const RecipeDetailsCategories = ({
   id,
   name,
-  setCategories,
-  categories,
+  setActiveCategory,
   active,
 }: Props) => {
-  const handleActiveChange = (id: number) => {
-    const updatedState = categories.map((el: any) => ({
-      ...el,
-      active: false,
-    }));
-
-    setCategories(updatedState);
-
-    setCategories((prevData: any) => {
-      return prevData.map((item: any) =>
-        item.id === id ? { ...item, active: true } : item
-      );
-    });
-  };
-
   return (
     <Container
       style={{ backgroundColor: `${active ? "orange" : "white"}` }}
-      onClick={() => handleActiveChange(id)}
+      onClick={() => setActiveCategory(id)}
     >
       {name}
     </Container>
