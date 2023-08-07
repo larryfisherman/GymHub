@@ -4,6 +4,7 @@ import axios from "axios";
 import { useNavigate } from "react-router-dom";
 import { useDispatch } from "react-redux";
 import { login } from "../../../store/userSlice";
+import { InfinitySpin } from "react-loader-spinner";
 
 interface Props {
   setShowRegisterPopup: React.Dispatch<React.SetStateAction<boolean>>;
@@ -18,6 +19,7 @@ export const RegisterUser = ({
   const [nameValue, setNameValue] = useState("");
   const [passwordValue, setPasswordValue] = useState("");
   const [showPassword, setShowPassword] = useState(false);
+  const [loading, setLoading] = useState(false);
 
   const dispatch = useDispatch();
 
@@ -25,89 +27,109 @@ export const RegisterUser = ({
 
   return (
     <Container>
-      <Content>
-        <UpperSection>
-          <CrossIcon
-            src="./assets/cross-icon.svg"
-            onClick={() => setShowRegisterPopup(false)}
+      {loading ? (
+        <SpinnerWrapper>
+          <InfinitySpin />
+        </SpinnerWrapper>
+      ) : (
+        <Content>
+          <UpperSection>
+            <CrossIcon
+              src="./assets/cross-icon.svg"
+              onClick={() => setShowRegisterPopup(false)}
+            />
+            <Logo src="./assets/logo.svg" />
+          </UpperSection>
+          <h1>Create Account</h1>
+          <FullNameInput
+            value={nameValue}
+            onChange={(e) => setNameValue(e.target.value)}
+            placeholder="Your name"
           />
-          <Logo src="./assets/logo.svg" />
-        </UpperSection>
-        <h1>Create Account</h1>
-        <FullNameInput
-          value={nameValue}
-          onChange={(e) => setNameValue(e.target.value)}
-          placeholder="Your name"
-        />
-        <EmailInput
-          value={emailValue}
-          onChange={(e) => setEmailValue(e.target.value)}
-          placeholder="Email"
-        />
-        <PasswordSection>
-          <PasswordInput
-            value={passwordValue}
-            onChange={(e) => setPasswordValue(e.target.value)}
-            placeholder="Password"
-            type={showPassword ? "text" : "password"}
+          <EmailInput
+            value={emailValue}
+            onChange={(e) => setEmailValue(e.target.value)}
+            placeholder="Email"
           />
-          <ShowPasswordIcon
-            src={
-              showPassword
-                ? "./assets/eye-opened-grey.svg"
-                : "./assets/eye-closed-grey.svg"
-            }
-            onClick={() => setShowPassword(!showPassword)}
-          />
-        </PasswordSection>
-        <ConfirmButton
-          onClick={() =>
-            axios
-              .post("https://gymhub.azurewebsites.net/api/user/register", {
-                name: nameValue,
-                email: emailValue,
-                password: passwordValue,
-              })
-              .then(() => navigate("/login"))
-          }
-        >
-          CREATE ACCOUNT
-        </ConfirmButton>
-        <Footer>
-          <LoginDescription
+          <PasswordSection>
+            <PasswordInput
+              value={passwordValue}
+              onChange={(e) => setPasswordValue(e.target.value)}
+              placeholder="Password"
+              type={showPassword ? "text" : "password"}
+            />
+            <ShowPasswordIcon
+              src={
+                showPassword
+                  ? "./assets/eye-opened-grey.svg"
+                  : "./assets/eye-closed-grey.svg"
+              }
+              onClick={() => setShowPassword(!showPassword)}
+            />
+          </PasswordSection>
+          <ConfirmButton
             onClick={() => {
-              setShowRegisterPopup(false);
-              setShowLoginPopup(true);
+              setLoading(true);
+              axios
+                .post("https://gymhub.azurewebsites.net/api/user/register", {
+                  name: nameValue,
+                  email: emailValue,
+                  password: passwordValue,
+                })
+                .then(() => {
+                  setLoading(false);
+                  navigate("/login");
+                });
             }}
           >
-            Already have account?&nbsp;
-            <span>Log in!</span>
-          </LoginDescription>
-          <GuestLogin>
-            Don't want to create an account? Use already created one and skip to
-            the good part!{" "}
-            <span
-              onClick={() =>
-                axios
-                  .post("https://gymhub.azurewebsites.net/api/user/login", {
-                    email: "test@test.com",
-                    password: "test123",
-                  })
-                  .then((res) => {
-                    localStorage.setItem("token", res.data.token);
-                    dispatch(login(res.data));
-                    navigate("/home");
-                  })
-              }
+            CREATE ACCOUNT
+          </ConfirmButton>
+          <Footer>
+            <LoginDescription
+              onClick={() => {
+                setShowRegisterPopup(false);
+                setShowLoginPopup(true);
+              }}
             >
-              Hop in!
-            </span>
-          </GuestLogin>
-        </Footer>
-      </Content>
+              Already have account?&nbsp;
+              <span>Log in!</span>
+            </LoginDescription>
+            <GuestLogin>
+              Don't want to create an account? Use already created one and skip
+              to the good part!{" "}
+              <span
+                onClick={() => {
+                  setLoading(true);
+                  axios
+                    .post("https://gymhub.azurewebsites.net/api/user/login", {
+                      email: "test@test.com",
+                      password: "test123",
+                    })
+                    .then((res) => {
+                      localStorage.setItem("token", res.data.token);
+                      dispatch(login(res.data));
+                      setLoading(false);
+                      navigate("/home");
+                    });
+                }}
+              >
+                Hop in!
+              </span>
+            </GuestLogin>
+          </Footer>
+        </Content>
+      )}
     </Container>
   );
 };
+
+const SpinnerWrapper = styled.div`
+  display: flex;
+  width: 100%;
+  height: 100%;
+  justify-content: center;
+  align-items: center;
+`;
 
 const Footer = styled.div`
   display: flex;

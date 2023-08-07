@@ -85,7 +85,7 @@ export const WorkoutDetailsEdit = ({
           </RecipeActions>
           <UpperSection>
             <RightSection>
-              <DishNameInput
+              <WorkoutNameInput
                 value={workoutData.title ? workoutData.title : ""}
                 placeholder="The name of the workout"
                 onChange={(e) =>
@@ -98,7 +98,7 @@ export const WorkoutDetailsEdit = ({
               <AuthorAndDateSection>
                 <AuthorInput
                   placeholder="Author"
-                  defaultValue={user && user.user.name}
+                  defaultValue={user.name ? user.user.name : "Unknown"}
                   disabled
                 />
                 <Date
@@ -226,8 +226,9 @@ const Button = styled.button`
   }
 `;
 
-const Description = styled.input`
+const Description = styled.textarea`
   width: 100%;
+  height: 5rem;
   padding: 5px;
 `;
 
@@ -240,6 +241,7 @@ const BottomLeftSection = styled.div`
 const ExercisesSection = styled.div`
   background-color: white;
   padding: 1rem;
+  overflow-y: scroll;
 `;
 
 const Title = styled.span`
@@ -284,7 +286,7 @@ const UpperSection = styled.div`
   justify-content: space-between;
 `;
 
-const DishNameInput = styled.input`
+const WorkoutNameInput = styled.input`
   width: 100%;
   padding: 5px;
   margin-bottom: 1rem;

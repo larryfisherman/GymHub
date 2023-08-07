@@ -37,71 +37,70 @@ export const Recipes = () => {
             getRecipes={getRecipes}
           />
         )}
-        {loading ? (
+        {/* {loading ? (
           <SpinnerWrapper>
             <InfinitySpin />
-          </SpinnerWrapper>
-        ) : (
-          <Content>
-            <PreTitle>Your Delicious</PreTitle>
-            <TopTitle>Recipes</TopTitle>
-            <CategoriesSection>
-              {categories.map((el: any) => (
-                <CategoriesItem
-                  key={el.categoryId}
-                  id={el.categoryId}
-                  title={el.name}
-                  setSelectedCategory={setSelectedCategory}
-                  isActive={selectedCategory === el.categoryId}
-                  image={`./assets/recipe-${el.categoryId}.svg`}
-                />
-              ))}
-            </CategoriesSection>
-            <AllItems>
-              <RecipesSection>
-                <RecipeTitles>All items</RecipeTitles>
-                <Scrollbar
-                  style={{
-                    display: filteredRecipes.length > 3 ? "flex" : "none",
-                  }}
-                >
-                  <AddRecipe>
-                    <RecipeTitles>Add New Recipe</RecipeTitles>
-                    <AddRecipeButton
-                      onClick={() => {
-                        setRecipeDetailsId(0);
-                        setShowRecipeDetails(true);
-                      }}
-                    >
-                      +
-                    </AddRecipeButton>
-                  </AddRecipe>
-                  {recipes &&
-                    filteredRecipes.map((el: any) => {
-                      return (
-                        <Recipe
-                          key={el.recipeId}
-                          id={el.recipeId}
-                          category={el.categoryId}
-                          title={el.title}
-                          description={el.description}
-                          kcal={el.kcal}
-                          time={el.timeToBeDone}
-                          setShowRecipeDetails={setShowRecipeDetails}
-                          setRecipeDetailsId={setRecipeDetailsId}
-                          getRecipes={getRecipes}
-                        />
-                      );
-                    })}
-                </Scrollbar>
-              </RecipesSection>
-              <ComplexSetsItems>
-                <ComplexSetsTitle>Complex sets</ComplexSetsTitle>
-                <ComplexSets />
-              </ComplexSetsItems>
-            </AllItems>
-          </Content>
-        )}
+          </SpinnerWrapper> */}
+
+        <Content>
+          <PreTitle>Your Delicious</PreTitle>
+          <TopTitle>Recipes</TopTitle>
+          <CategoriesSection>
+            {categories.map((el: any) => (
+              <CategoriesItem
+                key={el.categoryId}
+                id={el.categoryId}
+                title={el.name}
+                setSelectedCategory={setSelectedCategory}
+                isActive={selectedCategory === el.categoryId}
+                image={`./assets/recipe-${el.categoryId}.svg`}
+              />
+            ))}
+          </CategoriesSection>
+          <AllItems>
+            <RecipesSection>
+              <RecipeTitles>All items</RecipeTitles>
+              <Scrollbar
+                style={{
+                  display: filteredRecipes.length > 3 ? "flex" : "none",
+                }}
+              >
+                <AddRecipe>
+                  <RecipeTitles>Add New Recipe</RecipeTitles>
+                  <AddRecipeButton
+                    onClick={() => {
+                      setRecipeDetailsId(0);
+                      setShowRecipeDetails(true);
+                    }}
+                  >
+                    +
+                  </AddRecipeButton>
+                </AddRecipe>
+                {recipes &&
+                  filteredRecipes.map((el: any) => {
+                    return (
+                      <Recipe
+                        key={el.recipeId}
+                        id={el.recipeId}
+                        category={el.categoryId}
+                        title={el.title}
+                        description={el.description}
+                        kcal={el.kcal}
+                        time={el.timeToBeDone}
+                        setShowRecipeDetails={setShowRecipeDetails}
+                        setRecipeDetailsId={setRecipeDetailsId}
+                        getRecipes={getRecipes}
+                      />
+                    );
+                  })}
+              </Scrollbar>
+            </RecipesSection>
+            <ComplexSetsItems>
+              <ComplexSetsTitle>Complex sets</ComplexSetsTitle>
+              <ComplexSets />
+            </ComplexSetsItems>
+          </AllItems>
+        </Content>
       </Container>
     </>
   );
@@ -121,10 +120,10 @@ const PreTitle = styled.span`
 
 const SpinnerWrapper = styled.div`
   display: flex;
-  justify-content: center;
-  align-items: center;
-  width: 100%;
-  height: 100vh;
+  justify-self: center;
+  align-self: center;
+  position: relative;
+  background-color: black;
 `;
 
 const Container = styled.div`

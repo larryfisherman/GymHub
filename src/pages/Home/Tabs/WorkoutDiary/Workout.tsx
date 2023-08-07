@@ -17,7 +17,6 @@ interface Props {
 
 export const Workout = ({
   title,
-  favourite,
   timeToBeDone,
   kcal,
   setShowEditWorkoutDetails,
@@ -101,7 +100,9 @@ const TimeAndKcal = styled.div`
   align-items: center;
 `;
 
-const Title = styled.span``;
+const Title = styled.span`
+  text-align: left;
+`;
 
 const Container = styled.div`
   width: 39rem;

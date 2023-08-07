@@ -34,53 +34,47 @@ export const WorkoutDiary = () => {
           getWorkouts={getWorkouts}
         />
       )}
-      {loading ? (
-        <SpinnerWrapper>
-          <InfinitySpin />
-        </SpinnerWrapper>
-      ) : (
-        <Content>
-          <PreTitle>Let's get to</PreTitle>
-          <Title>Workout Diary</Title>
-          <Workouts>
-            <AddWorkout>
-              <TitleSection>
-                <span>Add Workout</span>
-              </TitleSection>
-              <AddWorkoutButton
-                onClick={() => {
-                  setWorkoutId(0);
-                  setShowEditWorkoutDetails(true);
-                }}
-              >
-                +
-              </AddWorkoutButton>
-            </AddWorkout>
-            {workouts.map(
-              ({
-                title,
-                favourite,
-                workoutId,
-                timeToBeDone,
-                kcal,
-              }: WorkoutProps) => (
-                <Workout
-                  key={workoutId}
-                  id={workoutId}
-                  title={title}
-                  favourite={favourite}
-                  kcal={kcal}
-                  timeToBeDone={timeToBeDone}
-                  setShowEditWorkoutDetails={setShowEditWorkoutDetails}
-                  setWorkoutId={setWorkoutId}
-                  getWorkouts={getWorkouts}
-                  setLoading={setLoading}
-                />
-              )
-            )}
-          </Workouts>
-        </Content>
-      )}
+      <Content>
+        <PreTitle>Let's get to</PreTitle>
+        <Title>Workout Diary</Title>
+        <Workouts>
+          <AddWorkout>
+            <TitleSection>
+              <span>Add Workout</span>
+            </TitleSection>
+            <AddWorkoutButton
+              onClick={() => {
+                setWorkoutId(0);
+                setShowEditWorkoutDetails(true);
+              }}
+            >
+              +
+            </AddWorkoutButton>
+          </AddWorkout>
+          {workouts.map(
+            ({
+              title,
+              favourite,
+              workoutId,
+              timeToBeDone,
+              kcal,
+            }: WorkoutProps) => (
+              <Workout
+                key={workoutId}
+                id={workoutId}
+                title={title}
+                favourite={favourite}
+                kcal={kcal}
+                timeToBeDone={timeToBeDone}
+                setShowEditWorkoutDetails={setShowEditWorkoutDetails}
+                setWorkoutId={setWorkoutId}
+                getWorkouts={getWorkouts}
+                setLoading={setLoading}
+              />
+            )
+          )}
+        </Workouts>
+      </Content>
     </Container>
   );
 };

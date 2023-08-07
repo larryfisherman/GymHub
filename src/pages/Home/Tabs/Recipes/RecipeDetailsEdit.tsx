@@ -45,7 +45,9 @@ export const RecipeDetailsEdit = ({
   return (
     <Container>
       {loading ? (
-        <InfinitySpin />
+        <SpinnerWrapper>
+          <InfinitySpin />
+        </SpinnerWrapper>
       ) : (
         <Content>
           {showRecipeIngredientsPopup && (
@@ -225,6 +227,14 @@ export const RecipeDetailsEdit = ({
     </Container>
   );
 };
+
+const SpinnerWrapper = styled.div`
+  display: flex;
+  width: 100%;
+  height: 100%;
+  justify-content: center;
+  align-items: center;
+`;
 const RecipeActions = styled.div`
   display: flex;
   width: 100%;
@@ -394,6 +404,7 @@ const Container = styled.div`
   height: 100%;
   z-index: 333;
   overflow: hidden;
+  background-color: #f8f8f8;
 `;
 const Content = styled.div`
   width: 88.5%;

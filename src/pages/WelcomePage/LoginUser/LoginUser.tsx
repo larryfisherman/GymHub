@@ -4,6 +4,7 @@ import axios from "axios";
 import { login } from "../../../store/userSlice";
 import { useDispatch } from "react-redux";
 import { useNavigate } from "react-router-dom";
+import { InfinitySpin } from "react-loader-spinner";
 
 interface Props {
   setShowLoginPopup: React.Dispatch<React.SetStateAction<boolean>>;
@@ -13,62 +14,79 @@ export const LoginUser = ({ setShowLoginPopup }: Props) => {
   const [emailValue, setEmailValue] = useState("");
   const [passwordValue, setPasswordValue] = useState("");
   const [showPassword, setShowPassword] = useState(false);
+  const [loading, setLoading] = useState(false);
 
   const dispatch = useDispatch();
   const navigate = useNavigate();
 
   return (
     <Container>
-      <Content>
-        <UpperSection>
-          <CrossIcon
-            src="./assets/cross-icon.svg"
-            onClick={() => setShowLoginPopup(false)}
+      {loading ? (
+        <SpinnerWrapper>
+          <InfinitySpin />
+        </SpinnerWrapper>
+      ) : (
+        <Content>
+          <UpperSection>
+            <CrossIcon
+              src="./assets/cross-icon.svg"
+              onClick={() => setShowLoginPopup(false)}
+            />
+            <Logo src="./assets/logo.svg" />
+          </UpperSection>
+          <h1>Log In</h1>
+          <EmailInput
+            value={emailValue}
+            onChange={(e) => setEmailValue(e.target.value)}
+            placeholder="Email"
           />
-          <Logo src="./assets/logo.svg" />
-        </UpperSection>
-        <h1>Log In</h1>
-        <EmailInput
-          value={emailValue}
-          onChange={(e) => setEmailValue(e.target.value)}
-          placeholder="Email"
-        />
-        <PasswordSection>
-          <PasswordInput
-            value={passwordValue}
-            onChange={(e) => setPasswordValue(e.target.value)}
-            placeholder="Password"
-            type={showPassword ? "text" : "password"}
-          />
-          <ShowPasswordIcon
-            src={
-              showPassword
-                ? "./assets/eye-opened-grey.svg"
-                : "./assets/eye-closed-grey.svg"
-            }
-            onClick={() => setShowPassword(!showPassword)}
-          />
-        </PasswordSection>
-        <ConfirmButton
-          onClick={() =>
-            axios
-              .post("https://gymhub.azurewebsites.net/api/user/login", {
-                email: emailValue,
-                password: passwordValue,
-              })
-              .then((res) => {
-                localStorage.setItem("token", res.data.token);
-                dispatch(login(res.data));
-                navigate("/home");
-              })
-          }
-        >
-          LOG IN
-        </ConfirmButton>
-      </Content>
+          <PasswordSection>
+            <PasswordInput
+              value={passwordValue}
+              onChange={(e) => setPasswordValue(e.target.value)}
+              placeholder="Password"
+              type={showPassword ? "text" : "password"}
+            />
+            <ShowPasswordIcon
+              src={
+                showPassword
+                  ? "./assets/eye-opened-grey.svg"
+                  : "./assets/eye-closed-grey.svg"
+              }
+              onClick={() => setShowPassword(!showPassword)}
+            />
+          </PasswordSection>
+          <ConfirmButton
+            onClick={() => {
+              setLoading(true);
+              axios
+                .post("https://gymhub.azurewebsites.net/api/user/login", {
+                  email: emailValue,
+                  password: passwordValue,
+                })
+                .then((res) => {
+                  localStorage.setItem("token", res.data.token);
+                  dispatch(login(res.data));
+                  setLoading(false);
+                  navigate("/home");
+                });
+            }}
+          >
+            LOG IN
+          </ConfirmButton>
+        </Content>
+      )}
     </Container>
   );
 };
+
+const SpinnerWrapper = styled.div`
+  display: flex;
+  width: 100%;
+  height: 100%;
+  justify-content: center;
+  align-items: center;
+`;
 
 const CrossIcon = styled.img`
   width: 1rem;
