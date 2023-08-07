@@ -61,7 +61,7 @@ export const RecipeDetailsEdit = ({
               onClick={() => {
                 if (id) {
                   return axios
-                    .put(`http://gymhub.azurewebsites.net/api/recipes/${id}`, {
+                    .put(`https://gymhub.azurewebsites.net/api/recipes/${id}`, {
                       ...recipeData,
                       categoryId: activeCategory,
                       recipeSteps: steps,
@@ -74,7 +74,7 @@ export const RecipeDetailsEdit = ({
                 }
 
                 axios
-                  .post("http://gymhub.azurewebsites.net/api/recipes", {
+                  .post("https://gymhub.azurewebsites.net/api/recipes", {
                     ...recipeData,
                     categoryId: activeCategory,
                     recipeSteps: steps,

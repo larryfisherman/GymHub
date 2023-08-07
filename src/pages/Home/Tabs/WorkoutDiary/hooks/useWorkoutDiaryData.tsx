@@ -10,7 +10,7 @@ export const useWorkoutDiaryData = () => {
   const getWorkouts = () => {
     setLoading(true);
     axios
-      .get("gymhub.azurewebsites.net/api/workouts")
+      .get("https://gymhub.azurewebsites.net/api/workouts")
       .then((res) => setWorkouts(res.data))
       .finally(() => setLoading(false));
   };
