@@ -3,14 +3,12 @@ import styled from "styled-components";
 import { Recipe } from "./Recipe";
 import { CategoriesItem } from "./CategoriesItem";
 import { ComplexSets } from "./ComplexSets";
-import { InfinitySpin } from "react-loader-spinner";
 import { RecipeDetailsEdit } from "./RecipeDetailsEdit";
 import { useRecipesData } from "./hooks/useRecipesData";
 import { Scrollbar } from "../../../../components/Scrollbar/Scrollbar";
 
 export const Recipes = () => {
   const {
-    loading,
     recipes,
     categories,
     showRecipeDetails,
@@ -37,10 +35,6 @@ export const Recipes = () => {
             getRecipes={getRecipes}
           />
         )}
-        {/* {loading ? (
-          <SpinnerWrapper>
-            <InfinitySpin />
-          </SpinnerWrapper> */}
 
         <Content>
           <PreTitle>Your Delicious</PreTitle>
@@ -116,14 +110,6 @@ const PreTitle = styled.span`
   font-size: 2rem;
   color: lightgray;
   font-weight: 500;
-`;
-
-const SpinnerWrapper = styled.div`
-  display: flex;
-  justify-self: center;
-  align-self: center;
-  position: relative;
-  background-color: black;
 `;
 
 const Container = styled.div`
