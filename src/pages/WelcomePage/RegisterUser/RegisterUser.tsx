@@ -63,7 +63,7 @@ export const RegisterUser = ({
         <ConfirmButton
           onClick={() =>
             axios
-              .post("http://gymhub.azurewebsites.net/api/user/register", {
+              .post("https://gymhub.azurewebsites.net/api/user/register", {
                 name: nameValue,
                 email: emailValue,
                 password: passwordValue,
