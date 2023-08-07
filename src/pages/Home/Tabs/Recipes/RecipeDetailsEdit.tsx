@@ -108,7 +108,7 @@ export const RecipeDetailsEdit = ({
               <AuthorAndDateSection>
                 <AuthorInput
                   placeholder="Author"
-                  defaultValue={user ? user.user.name : "Unknown"}
+                  defaultValue={user.name ? user.user.name : "Unknown"}
                   disabled
                 />
                 <Date
@@ -137,9 +137,7 @@ export const RecipeDetailsEdit = ({
                   ))}
               </Categories>
               <Description
-                value={
-                  recipeData?.description ? recipeData.recipe.description : ""
-                }
+                value={recipeData?.description ? recipeData.description : ""}
                 placeholder="Description"
                 onChange={(e) =>
                   setRecipeData((prevState: any) => ({
@@ -260,8 +258,9 @@ const Categories = styled.div`
   width: 100%;
 `;
 
-const Description = styled.input`
+const Description = styled.textarea`
   width: 100%;
+  height: 5rem;
   padding: 5px;
 `;
 

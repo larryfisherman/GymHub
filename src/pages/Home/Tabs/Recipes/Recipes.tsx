@@ -6,6 +6,7 @@ import { ComplexSets } from "./ComplexSets";
 import { InfinitySpin } from "react-loader-spinner";
 import { RecipeDetailsEdit } from "./RecipeDetailsEdit";
 import { useRecipesData } from "./hooks/useRecipesData";
+import { Scrollbar } from "../../../../components/Scrollbar/Scrollbar";
 
 export const Recipes = () => {
   const {
@@ -59,34 +60,40 @@ export const Recipes = () => {
             <AllItems>
               <RecipesSection>
                 <RecipeTitles>All items</RecipeTitles>
-                <AddRecipe>
-                  <RecipeTitles>Add New Recipe</RecipeTitles>
-                  <AddRecipeButton
-                    onClick={() => {
-                      setRecipeDetailsId(0);
-                      setShowRecipeDetails(true);
-                    }}
-                  >
-                    +
-                  </AddRecipeButton>
-                </AddRecipe>
-                {recipes &&
-                  filteredRecipes.map((el: any) => {
-                    return (
-                      <Recipe
-                        key={el.recipeId}
-                        id={el.recipeId}
-                        title={el.title}
-                        description={el.description}
-                        kcal={el.kcal}
-                        time={el.timeToBeDone}
-                        image={"./assets/recipe-3.svg"}
-                        setShowRecipeDetails={setShowRecipeDetails}
-                        setRecipeDetailsId={setRecipeDetailsId}
-                        getRecipes={getRecipes}
-                      />
-                    );
-                  })}
+                <Scrollbar
+                  style={{
+                    display: filteredRecipes.length > 3 ? "flex" : "none",
+                  }}
+                >
+                  <AddRecipe>
+                    <RecipeTitles>Add New Recipe</RecipeTitles>
+                    <AddRecipeButton
+                      onClick={() => {
+                        setRecipeDetailsId(0);
+                        setShowRecipeDetails(true);
+                      }}
+                    >
+                      +
+                    </AddRecipeButton>
+                  </AddRecipe>
+                  {recipes &&
+                    filteredRecipes.map((el: any) => {
+                      return (
+                        <Recipe
+                          key={el.recipeId}
+                          id={el.recipeId}
+                          category={el.categoryId}
+                          title={el.title}
+                          description={el.description}
+                          kcal={el.kcal}
+                          time={el.timeToBeDone}
+                          setShowRecipeDetails={setShowRecipeDetails}
+                          setRecipeDetailsId={setRecipeDetailsId}
+                          getRecipes={getRecipes}
+                        />
+                      );
+                    })}
+                </Scrollbar>
               </RecipesSection>
               <ComplexSetsItems>
                 <ComplexSetsTitle>Complex sets</ComplexSetsTitle>
@@ -140,10 +147,9 @@ const Content = styled.div`
 const AllItems = styled.div`
   display: flex;
   height: 100%;
+  width: 100%;
   justify-content: space-between;
   align-items: flex-start;
-  flex-wrap: wrap;
-  margin-right: 2rem;
 `;
 
 const ComplexSetsItems = styled.div`
@@ -186,9 +192,9 @@ const CategoriesSection = styled.div`
 
 const RecipesSection = styled.div`
   display: flex;
-  position: relative;
   justify-content: space-between;
-  width: 50%;
+  width: 60%;
+  height: 100vh;
   flex-wrap: wrap;
 
   @media (max-width: 768px) {
@@ -204,7 +210,7 @@ const RecipesSection = styled.div`
 
 const AddRecipe = styled.div`
   display: flex;
-  min-width: 20rem;
+  width: 20rem;
   height: 28rem;
   padding: 2rem;
   flex-direction: column;

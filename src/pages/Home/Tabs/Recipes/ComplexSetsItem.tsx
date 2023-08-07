@@ -21,18 +21,32 @@ export const ComplexSetsItem = ({
   return (
     <Container>
       <Image src={image} loading="lazy" />
-      <Content style={{ backgroundColor: color }}>
-        <Title>{title}</Title>
-        <Description>{description}</Description>
-        <CaloriesAndTimeSection>
-          <Calories>{kcal} kcal</Calories>
-          <Time>{time} minutes</Time>
-        </CaloriesAndTimeSection>
-        {/* <SeeMoreButton>SEE MORE</SeeMoreButton> */}
-      </Content>
+      <ContentWrapper style={{ backgroundColor: color }}>
+        <Content>
+          <Title>{title}</Title>
+          <Description>{description}</Description>
+          <CaloriesAndTimeSection>
+            <Calories>{kcal} kcal</Calories>
+            <Time>{time} minutes</Time>
+          </CaloriesAndTimeSection>
+          <SeeMoreButton>SEE MORE</SeeMoreButton>
+        </Content>
+      </ContentWrapper>
     </Container>
   );
 };
+
+const Content = styled.div`
+  display: flex;
+  flex-direction: column;
+  align-items: left;
+  text-align: left;
+  justify-content: space-between;
+  margin-left: 5rem;
+
+  min-height: 20rem;
+  padding: 1.875rem;
+`;
 
 const Container = styled.div`
   width: 100%;
@@ -42,18 +56,12 @@ const Container = styled.div`
   margin-bottom: 2rem;
 `;
 
-const Content = styled.div`
+const ContentWrapper = styled.div`
   display: flex;
   flex-direction: column;
-  justify-content: space-between;
   align-items: center;
-  padding: 1.875rem;
-  background-color: rgb(21, 34, 56);
   color: white;
-  border-radius: 3%;
-  min-height: 25rem;
   min-width: 20rem;
-  padding: 1.875rem;
 `;
 
 const Image = styled.img`
@@ -62,7 +70,7 @@ const Image = styled.img`
   border-radius: 50%;
   border: 1px solid black;
   z-index: 2;
-  left: 6rem;
+  left: 5rem;
 
   @media (max-width: 768px) {
     left: 0;
@@ -73,7 +81,7 @@ const Image = styled.img`
 const Title = styled.title`
   display: flex;
   justify-content: space-between;
-  font-size: 1.5rem;
+  font-size: 1.2rem;
   margin-bottom: 1rem;
 
   @media (max-width: 768px) {
@@ -90,20 +98,13 @@ const Title = styled.title`
 
 const Description = styled.span`
   display: flex;
-  justify-content: space-between;
-  width: 100%;
-  position: relative;
   overflow-wrap: break-word;
-  font-size: 1rem;
-  padding-left: 4.5rem;
   overflow-y: scroll;
+  font-size: 0.8rem;
+  margin-bottom: 1rem;
 
   ::-webkit-scrollbar {
     height: 10px;
-  }
-
-  span {
-    font-size: 0.8rem;
   }
 
   @media (max-width: 768px) {
@@ -116,7 +117,6 @@ const CaloriesAndTimeSection = styled.div`
   display: flex;
   justify-content: space-between;
   width: 12rem;
-  padding-left: 2rem;
 
   @media (max-width: 768px) {
     padding-left: 0;

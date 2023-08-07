@@ -23,6 +23,16 @@ export const ComplexSets = () => {
       image: "./assets/recipe-2.svg",
       color: "#A5C882",
     },
+    {
+      id: 3,
+      title: "Quinoa Salad with Roasted Vegetables",
+      description:
+        "A hearty and filling salad that is packed with protein and fiber",
+      kcal: 350,
+      time: 30,
+      color: "#AF5D63",
+      image: "./assets/recipe-3.svg",
+    },
   ];
   return (
     <Container>

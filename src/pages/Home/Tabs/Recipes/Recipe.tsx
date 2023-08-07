@@ -2,14 +2,15 @@ import React, { useState } from "react";
 import styled from "styled-components";
 import axios from "axios";
 import { ConfirmationModal } from "../../../../components/ConfirmationModal/ConfirmationModal";
+import { getRecipePath } from "./utils/getRecipePath";
 
 interface Props {
   title: string;
   description: string;
   kcal: number;
   time: number;
-  image: string;
   id: number;
+  category: number;
   setShowRecipeDetails: React.Dispatch<React.SetStateAction<boolean>>;
   setRecipeDetailsId: React.Dispatch<React.SetStateAction<number>>;
   getRecipes: () => void;
@@ -20,11 +21,11 @@ export const Recipe = ({
   description,
   kcal,
   time,
-  image,
   setShowRecipeDetails,
   setRecipeDetailsId,
   id,
   getRecipes,
+  category,
 }: Props) => {
   const [showConfirmationModal, setShowConfirmationModal] = useState(false);
 
@@ -49,7 +50,7 @@ export const Recipe = ({
             src="./assets/trash-icon.svg"
             onClick={() => setShowConfirmationModal(true)}
           />
-          <Image src={image} loading="lazy" />
+          <Image src={getRecipePath(category)} loading="lazy" />
           <Title>{title}</Title>
           <Description>{description}</Description>
           <CaloriesAndTimeSection>
@@ -142,10 +143,9 @@ const Title = styled.title`
   display: flex;
   justify-content: space-between;
   position: relative;
-  font-size: 1.5rem;
+  font-size: 1.2rem;
   top: -3rem;
   @media (max-width: 768px) {
-    font-size: 1.2rem;
     width: 100%;
 
     span {
@@ -160,7 +160,7 @@ const Description = styled.span`
   overflow-wrap: break-word;
   font-size: 0.8rem;
   max-height: 5rem;
-  min-height: 2rem;
+  min-height: 4rem;
   overflow-y: scroll;
   position: relative;
   top: -2rem;
@@ -187,7 +187,6 @@ const CaloriesAndTimeSection = styled.div`
 
 const SeeMoreButton = styled.button`
   display: flex;
-  margin-top: 1rem;
   min-width: 10rem;
   min-height: 4rem;
   justify-content: center;
