@@ -43,6 +43,7 @@ export const Recipe = ({
                 getRecipes();
               });
           }}
+          customStyling={{ width: "20rem", height: "28rem" }}
         />
       ) : (
         <Content>

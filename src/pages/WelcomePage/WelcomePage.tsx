@@ -4,9 +4,6 @@ import { HeaderSection } from "./HeaderSection/HeaderSection";
 import { MainContent } from "./MainContent/MainContent";
 import { LoginUser } from "./LoginUser/LoginUser";
 import { RegisterUser } from "./RegisterUser/RegisterUser";
-import { useSelector } from "react-redux";
-import { selectUser } from "../../store/userSlice";
-import { useNavigate } from "react-router-dom";
 import { Footer } from "./Footer/Footer";
 
 export const WelcomePage = () => {

@@ -2,7 +2,6 @@ import React from "react";
 import { WorkoutDiary } from "../pages/Home/Tabs/WorkoutDiary/WorkoutDiary";
 import { Recipes } from "../pages/Home/Tabs/Recipes/Recipes";
 import { Exercises } from "../pages/Home/Tabs/Exercises/Exercises";
-import { Progress } from "../pages/Home/Tabs/Progress/Progress";
 import { Ingredients } from "../pages/Home/Tabs/Ingredients/Ingredients";
 
 const tabs = [

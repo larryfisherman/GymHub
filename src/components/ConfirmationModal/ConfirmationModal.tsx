@@ -2,14 +2,20 @@ import React from "react";
 import styled from "styled-components";
 
 interface Props {
-  message?: string;
-  onConfirm?: any;
-  onCancel?: any;
+  message: string;
+  onConfirm: () => void;
+  onCancel: () => void;
+  customStyling?: any;
 }
 
-export const ConfirmationModal = ({ message, onConfirm, onCancel }: Props) => {
+export const ConfirmationModal = ({
+  message,
+  onConfirm,
+  onCancel,
+  customStyling,
+}: Props) => {
   return (
-    <Container>
+    <Container style={customStyling}>
       <Content>
         <Text>{message}</Text>
         <Buttons>
@@ -29,7 +35,6 @@ const Container = styled.div`
   align-items: center;
   justify-content: center;
 
-  bored-radius: 5%;
   background-color: rgba(255, 255, 255, 0.9);
 `;
 

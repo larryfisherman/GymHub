@@ -1,4 +1,4 @@
-import React from "react";
+import React, { useEffect } from "react";
 import styled from "styled-components";
 import { Recipe } from "./Recipe";
 import { CategoriesItem } from "./CategoriesItem";
@@ -19,6 +19,10 @@ export const Recipes = () => {
     setRecipeDetailsId,
     getRecipes,
   } = useRecipesData();
+
+  useEffect(() => {
+    getRecipes();
+  }, []);
 
   const filteredRecipes =
     selectedCategory === 1

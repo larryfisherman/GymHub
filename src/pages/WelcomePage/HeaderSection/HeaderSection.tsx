@@ -66,7 +66,7 @@ const Content = styled.div`
   display: flex;
   flex-direction: column;
   height: 100%;
-  background: url("../../assets/welcome-page.png") center center / cover;
+  background: url("./assets/welcome-page.png") center center / cover;
 `;
 
 const LoginButton = styled.button`

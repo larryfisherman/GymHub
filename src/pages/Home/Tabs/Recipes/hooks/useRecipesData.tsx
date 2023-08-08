@@ -19,8 +19,6 @@ export const useRecipesData = () => {
       .finally(() => setLoading(false));
   };
 
-  useEffect(() => getRecipes, []);
-
   return {
     loading,
     recipes,

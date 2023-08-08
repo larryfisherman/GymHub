@@ -129,6 +129,8 @@ const SpinnerWrapper = styled.div`
   height: 100%;
   justify-content: center;
   align-items: center;
+  position: relative;
+  z-index: 9999;
 `;
 
 const Footer = styled.div`
@@ -200,6 +202,7 @@ const Container = styled.div`
   justify-content: center;
   align-items: center;
   background-color: rgba(0, 0, 0, 0.7);
+  z-index: 9999;
 `;
 const Content = styled.div`
   background-color: white;
