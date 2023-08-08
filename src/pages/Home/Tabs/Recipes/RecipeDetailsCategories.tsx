@@ -4,8 +4,8 @@ import styled from "styled-components";
 interface Props {
   id: number;
   name: string;
-  active: any;
-  setActiveCategory: any;
+  active: boolean;
+  setActiveCategory: React.Dispatch<React.SetStateAction<number>>;
 }
 
 export const RecipeDetailsCategories = ({

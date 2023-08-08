@@ -1,9 +1,14 @@
 import React, { useRef } from "react";
 import styled from "styled-components";
 
-export const Scrollbar = ({ children, style }: any) => {
-  const contentRef = useRef<any>();
-  const scrollThumbRef = useRef<any>();
+interface ScrollbarProps {
+  children: any;
+  style?: React.CSSProperties;
+}
+
+export const Scrollbar = ({ children, style }: ScrollbarProps) => {
+  const contentRef = useRef<HTMLDivElement | null>(null);
+  const scrollThumbRef = useRef<any>(null);
 
   const handleScroll = () => {
     const contentElement = contentRef.current;

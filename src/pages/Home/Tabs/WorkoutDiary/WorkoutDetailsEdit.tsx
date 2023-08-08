@@ -14,8 +14,8 @@ import { WorkoutDetailsEditTimeAndKcal } from "./WorkoutDetailsEditTimeAndKcal";
 
 interface Props {
   id: number;
-  setShowWorkoutPopup: any;
-  getWorkouts: any;
+  setShowWorkoutPopup: React.Dispatch<React.SetStateAction<boolean>>;
+  getWorkouts: () => void;
 }
 
 export const WorkoutDetailsEdit = ({
@@ -129,7 +129,7 @@ export const WorkoutDetailsEdit = ({
             <BottomLeftSection>
               <ExercisesSection>
                 <Title>Exercises</Title>
-                {exercises.map(({ exerciseId, title }: any) => (
+                {exercises.map((exerciseId: number, title: string) => (
                   <WorkoutExercise
                     key={exerciseId}
                     id={exerciseId}

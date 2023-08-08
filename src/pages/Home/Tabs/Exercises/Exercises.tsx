@@ -6,8 +6,17 @@ import { useDispatch } from "react-redux";
 import { setExercisesStore } from "../../../../store/exercisesSlice";
 import axios from "axios";
 
+interface Exercise {
+  exerciseId: number;
+  title: string;
+  sets: number;
+  repeats: number;
+}
+
 export const Exercises = () => {
   const [exercises, setExercises] = useState([]);
+
+  console.log(exercises);
 
   const dispatch = useDispatch();
 
@@ -26,8 +35,8 @@ export const Exercises = () => {
           <Title>Exercise Library</Title>
         </TitleSection>
         <ExercisesSection>
-          {exercises.map((el: any) => (
-            <Exercise key={el.ExerciseId} id={el.ExerciseId} title={el.title} />
+          {exercises.map((el: Exercise) => (
+            <Exercise key={el.exerciseId} id={el.exerciseId} title={el.title} />
           ))}
         </ExercisesSection>
       </Content>

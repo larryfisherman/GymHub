@@ -5,7 +5,7 @@ interface Props {
   id: number;
   title: string;
   image: string;
-  setSelectedCategory: any;
+  setSelectedCategory: React.Dispatch<React.SetStateAction<number>>;
   isActive: boolean;
 }
 

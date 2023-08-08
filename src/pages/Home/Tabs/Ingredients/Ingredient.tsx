@@ -9,8 +9,8 @@ interface Props {
   kcal: number;
   amount: number;
   carbs: number;
-  setShowIngredientDetails?: any;
-  setIngredientId?: any;
+  setShowIngredientDetails?: React.Dispatch<React.SetStateAction<boolean>>;
+  setIngredientId?: React.Dispatch<React.SetStateAction<number>>;
 }
 
 export const Ingredient = ({

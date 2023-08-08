@@ -17,6 +17,38 @@ interface Props {
   getRecipes: () => void;
 }
 
+interface CategoryProps {
+  id: number;
+  name: string;
+  setActiveCategory: React.Dispatch<React.SetStateAction<number>>;
+  active: boolean;
+  categoryId: number;
+}
+
+interface IngredientsProps {
+  ingredientId: number;
+  name: string;
+  protein: number;
+  fat: number;
+  carbs: number;
+  kcal: number;
+  amount: number;
+}
+
+interface stepsStateProps {
+  id: number;
+  title: string;
+  description: string;
+}
+
+interface StepsProps {
+  title: string;
+  id: number;
+  description: string;
+  steps?: stepsStateProps;
+  setSteps?: any;
+}
+
 export const RecipeDetailsEdit = ({
   id,
   setShowRecipeDetails,
@@ -127,8 +159,10 @@ export const RecipeDetailsEdit = ({
               </AuthorAndDateSection>
               <Categories>
                 {categories
-                  .filter((category: any) => category.categoryId !== 1)
-                  .map(({ categoryId, name, active }: any) => (
+                  .filter(
+                    (category: CategoryProps) => category.categoryId !== 1
+                  )
+                  .map(({ categoryId, name, active }: CategoryProps) => (
                     <RecipeDetailsCategories
                       key={categoryId}
                       id={categoryId}
@@ -168,9 +202,9 @@ export const RecipeDetailsEdit = ({
               </MakroSection>
               <IngrediensSection>
                 <Title>Ingrediens (per serving)</Title>
-                {selectedIngredients.map((el: any) => {
+                {selectedIngredients.map((el: IngredientsProps) => {
                   const isActive = selectedIngredients.find(
-                    (selectedIngredient: any) =>
+                    (selectedIngredient: IngredientsProps) =>
                       selectedIngredient.ingredientId === el.ingredientId
                   );
                   return (
@@ -202,14 +236,14 @@ export const RecipeDetailsEdit = ({
               </IngrediensSection>
             </BottomLeftSection>
             <BottomRightSection>
-              {steps?.map(({ title, id, description }: any) => (
+              {steps?.map((el: StepsProps) => (
                 <RecipeDetailsStep
-                  key={id}
-                  title={title}
-                  id={id}
-                  description={description}
-                  steps={steps}
-                  setSteps={setSteps}
+                  key={el.id}
+                  title={el.title}
+                  id={el.id}
+                  description={el.description}
+                  steps={el.steps}
+                  setSteps={el.setSteps}
                 />
               ))}
               <AddStep

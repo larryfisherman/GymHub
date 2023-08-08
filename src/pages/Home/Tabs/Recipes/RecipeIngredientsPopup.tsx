@@ -3,12 +3,29 @@ import styled from "styled-components";
 import { RecipeDetailsIngredient } from "./RecipeDetailsIngredient";
 import { useRecipeIngredientsPopup } from "./hooks/useRecipeIngredientsPopup";
 
+interface IngredientsProps {
+  ingredientId: number;
+  name: string;
+  protein: number;
+  fat: number;
+  carbs: number;
+  kcal: number;
+  amount: number;
+}
+
+interface Props {
+  setShowRecipeIngredientsPopup: React.Dispatch<React.SetStateAction<boolean>>;
+  ingredients: any;
+  selectedIngredients: any;
+  setSelectedIngredients: React.Dispatch<React.SetStateAction<any>>;
+}
+
 export const RecipeIngredientsPopup = ({
   setShowRecipeIngredientsPopup,
   ingredients,
   selectedIngredients,
   setSelectedIngredients,
-}: any) => {
+}: Props) => {
   const {
     popupRef,
     handleMouseDown,
@@ -45,9 +62,9 @@ export const RecipeIngredientsPopup = ({
       </Header>
       <Content>
         <IngredientsSection>
-          {filteredIngredients.map((el: any) => {
+          {filteredIngredients.map((el: IngredientsProps) => {
             const isActive = selectedIngredients.find(
-              (selectedIngredient: any) =>
+              (selectedIngredient: IngredientsProps) =>
                 selectedIngredient.ingredientId === el.ingredientId
             );
             return (

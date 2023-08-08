@@ -11,8 +11,14 @@ interface Props {
   id: number;
   amount: number;
   name: string;
-  setIngredients: React.Dispatch<React.SetStateAction<ingrediensStateProps[]>>;
-  ingredients: any;
+  protein: number;
+  fat: number;
+  carbs: number;
+  kcal: number;
+  selectedIngredients?: any;
+  ingredients?: ingrediensStateProps[];
+  setSelectedIngredients?: any;
+  style: React.CSSProperties;
 }
 
 export const RecipeDetailsIngredient = ({
@@ -26,7 +32,7 @@ export const RecipeDetailsIngredient = ({
   setSelectedIngredients,
   ingredients,
   style,
-}: any) => {
+}: Props) => {
   const handleIngredientClick = (id: number) => {
     if (
       selectedIngredients.some(
@@ -37,7 +43,7 @@ export const RecipeDetailsIngredient = ({
         prevSelected.filter((ingredient: any) => ingredient.ingredientId !== id)
       );
     } else {
-      const clickedIngredient = ingredients.find(
+      const clickedIngredient = ingredients?.find(
         (ingredient: any) => ingredient.ingredientId === id
       );
       if (clickedIngredient) {

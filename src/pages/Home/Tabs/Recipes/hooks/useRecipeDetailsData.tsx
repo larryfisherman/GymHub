@@ -18,8 +18,8 @@ interface ingredientsStateProps {
 export const useRecipeDetailsData = (id: number) => {
   const [recipeData, setRecipeData] = useState<any>([]);
   const [steps, setSteps] = useState<stepsStateProps[]>([]);
-  const [ingredients, setIngredients] = useState<any>([]);
-  const [selectedIngredients, setSelectedIngredients] = useState([]);
+  const [ingredients, setIngredients] = useState<ingredientsStateProps[]>([]);
+  const [selectedIngredients, setSelectedIngredients] = useState<any>([]);
   const [categories, setCategories] = useState([]);
   const [activeCategory, setActiveCategory] = useState(0);
   const [loading, setLoading] = useState(false);
@@ -36,7 +36,7 @@ export const useRecipeDetailsData = (id: number) => {
       .then((res) => setCategories(res.data));
 
     if (!id) {
-      setRecipeData(null);
+      setRecipeData([]);
       axios
         .get("https://gymhub.azurewebsites.net/api/ingredients")
         .then((res) => setIngredients(res.data))

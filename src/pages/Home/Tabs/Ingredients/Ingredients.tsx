@@ -4,13 +4,24 @@ import axios from "axios";
 import { Ingredient } from "./Ingredient";
 import { IngredientDetails } from "./IngredientDetails";
 
+interface IngredientProps {
+  amount: number;
+  carbs: number;
+  fat: number;
+  ingerdientId: number;
+  name: string;
+  kcal: number;
+  id: number;
+  protein: number;
+}
+
 export const Ingredients = () => {
   const [ingredients, setIngredients] = useState([]);
   const [filterValue, setFilterValue] = useState("");
   const [showIngredientDetails, setShowIngredientDetails] = useState(false);
   const [ingredientId, setIngredientId] = useState(0);
 
-  const filteredIngredients = ingredients.filter((el: any) =>
+  const filteredIngredients = ingredients.filter((el: IngredientProps) =>
     el.name.toLowerCase().includes(filterValue.toLowerCase())
   );
 
@@ -36,7 +47,7 @@ export const Ingredients = () => {
           <SearchIcon src="./assets/magnifying-glass-icon.svg" />
         </SearchInputSection>
         <IngredientsSection>
-          {filteredIngredients.map((el: any) => (
+          {filteredIngredients.map((el: IngredientProps) => (
             <Ingredient
               id={el.id}
               name={el.name}

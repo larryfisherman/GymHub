@@ -20,7 +20,6 @@ export const WorkoutDiary = () => {
     setShowEditWorkoutDetails,
     workoutId,
     setWorkoutId,
-    loading,
     setLoading,
     getWorkouts,
   } = useWorkoutDiaryData();

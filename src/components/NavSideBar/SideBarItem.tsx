@@ -4,7 +4,7 @@ import styled from "styled-components";
 interface Props {
   itemImg: string;
   itemName: string;
-  onClick?: any;
+  onClick?: () => void;
   isActive?: boolean;
 }
 

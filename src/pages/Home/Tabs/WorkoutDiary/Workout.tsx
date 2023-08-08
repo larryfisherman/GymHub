@@ -9,10 +9,10 @@ interface Props {
   favourite: boolean;
   timeToBeDone: number;
   kcal: number;
-  setShowEditWorkoutDetails: any;
-  setWorkoutId: any;
-  setLoading: any;
-  getWorkouts: any;
+  setShowEditWorkoutDetails: React.Dispatch<React.SetStateAction<boolean>>;
+  setWorkoutId: React.Dispatch<React.SetStateAction<number>>;
+  setLoading: React.Dispatch<React.SetStateAction<boolean>>;
+  getWorkouts: () => void;
 }
 
 export const Workout = ({

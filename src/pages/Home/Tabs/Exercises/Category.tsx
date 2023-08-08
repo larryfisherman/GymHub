@@ -1,7 +1,7 @@
 import React from "react";
 import styled from "styled-components";
 
-export const Category = ({ title }: any) => {
+export const Category = (title: string) => {
   return <Content>{title.toUpperCase()}</Content>;
 };
 

@@ -3,9 +3,9 @@ import styled from "styled-components";
 
 interface Props {
   message: string;
-  onConfirm: () => void;
   onCancel: () => void;
-  customStyling?: any;
+  onConfirm: () => void;
+  customStyling?: React.CSSProperties;
 }
 
 export const ConfirmationModal = ({

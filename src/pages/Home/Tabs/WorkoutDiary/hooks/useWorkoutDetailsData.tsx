@@ -10,6 +10,8 @@ export const useWorkoutDetailsData = (id: number) => {
 
   const filteredExercises = useActiveExercises(activeExercises, setsAndReps);
 
+  console.log(workoutData);
+
   useEffect(() => {
     if (!id) return;
 
