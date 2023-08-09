@@ -129,11 +129,11 @@ export const WorkoutDetailsEdit = ({
             <BottomLeftSection>
               <ExercisesSection>
                 <Title>Exercises</Title>
-                {exercises.map((exerciseId: number, title: string) => (
+                {exercises.map((el: any) => (
                   <WorkoutExercise
-                    key={exerciseId}
-                    id={exerciseId}
-                    title={title}
+                    key={el.exerciseId}
+                    id={el.exerciseId}
+                    title={el.title}
                     activeExercises={activeExercises}
                     setActiveExercises={setActiveExercises}
                   />
