@@ -201,40 +201,41 @@ export const RecipeDetailsEdit = ({
                   {totalFat}g fat
                 </MakroItem>
               </MakroSection>
-              <IngrediensSection>
-                <Title>Ingrediens (per serving)</Title>
-                {selectedIngredients.map((el: IngredientsProps) => {
-                  const isActive = selectedIngredients.find(
-                    (selectedIngredient: IngredientsProps) =>
-                      selectedIngredient.ingredientId === el.ingredientId
-                  );
-                  return (
-                    <RecipeDetailsIngredient
-                      key={el.ingredientId}
-                      id={el.ingredientId}
-                      name={el.name}
-                      protein={el.protein}
-                      fat={el.fat}
-                      carbs={el.carbs}
-                      kcal={el.kcal}
-                      amount={el.amount}
-                      style={{
-                        border: isActive
-                          ? "2px solid #FF9800"
-                          : "2px solid transparent",
-                        cursor: "pointer",
-                      }}
-                    />
-                  );
-                })}
+              <IngredientsSection>
+                <Title>Ingredients (per serving)</Title>
+                <IngredientsItems>
+                  {selectedIngredients.map((el: IngredientsProps) => {
+                    const isActive = selectedIngredients.find(
+                      (selectedIngredient: IngredientsProps) =>
+                        selectedIngredient.ingredientId === el.ingredientId
+                    );
+                    return (
+                      <RecipeDetailsIngredient
+                        key={el.ingredientId}
+                        id={el.ingredientId}
+                        name={el.name}
+                        protein={el.protein}
+                        fat={el.fat}
+                        carbs={el.carbs}
+                        kcal={el.kcal}
+                        amount={el.amount}
+                        style={{
+                          border: isActive
+                            ? "2px solid #FF9800"
+                            : "2px solid transparent",
+                          cursor: "pointer",
+                        }}
+                      />
+                    );
+                  })}
+                </IngredientsItems>
                 <Separator />
                 <AddIngredient
                   onClick={() => setShowRecipeIngredientsPopup(true)}
                 >
                   + Add Ingredient
                 </AddIngredient>
-                <Separator />
-              </IngrediensSection>
+              </IngredientsSection>
             </BottomLeftSection>
             <BottomRightSection>
               {steps.map((el: StepsProps) => (
@@ -261,6 +262,12 @@ export const RecipeDetailsEdit = ({
     </Container>
   );
 };
+
+const IngredientsItems = styled.div`
+  padding: 1rem;
+  overflow-y: scroll;
+  max-height: 30rem;
+`;
 
 const SpinnerWrapper = styled.div`
   display: flex;
@@ -311,8 +318,6 @@ const Description = styled.textarea`
 const Separator = styled.hr`
   margin-top: 1rem;
   margin-bottom: 1rem;
-  margin-left: 3rem;
-  margin-right: 3rem;
   opacity: 0.6;
 `;
 
@@ -333,10 +338,10 @@ const MakroSection = styled.div`
   margin-bottom: 1rem;
 `;
 
-const IngrediensSection = styled.div`
+const IngredientsSection = styled.div`
   background-color: white;
-  padding: 1rem;
-  overflow-y: scroll;
+  padding-top: 1rem;
+  padding-bottom: 2rem;
 `;
 
 const Title = styled.span`
