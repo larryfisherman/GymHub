@@ -1,12 +1,11 @@
 import React, { useState, useEffect } from "react";
 import styled from "styled-components";
 import { Exercise } from "./Exercise";
-import { Category } from "./Category";
 import { useDispatch } from "react-redux";
 import { setExercisesStore } from "../../../../store/exercisesSlice";
 import axios from "axios";
 
-interface Exercise {
+interface ExerciseProps {
   exerciseId: number;
   title: string;
   sets: number;
@@ -33,7 +32,7 @@ export const Exercises = () => {
           <Title>Exercise Library</Title>
         </TitleSection>
         <ExercisesSection>
-          {exercises.map((el: Exercise) => (
+          {exercises.map((el: ExerciseProps) => (
             <Exercise key={el.exerciseId} id={el.exerciseId} title={el.title} />
           ))}
         </ExercisesSection>
