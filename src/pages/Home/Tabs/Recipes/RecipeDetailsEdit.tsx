@@ -96,7 +96,7 @@ export const RecipeDetailsEdit = ({
               onClick={() => {
                 if (id) {
                   return axios
-                    .put(`https://localhost:44390/api/recipes/${id}`, {
+                    .put(`https://gymhub.azurewebsites.net/api/recipes/${id}`, {
                       ...recipeData,
                       categoryId: activeCategory,
                       recipeSteps: prepareStepsBeforeSend(steps, id),
@@ -109,7 +109,7 @@ export const RecipeDetailsEdit = ({
                 }
 
                 axios
-                  .post("https://localhost:44390/api/recipes", {
+                  .post("https://gymhub.azurewebsites.net/api/recipes", {
                     ...recipeData,
                     categoryId: activeCategory,
                     recipeSteps: prepareStepsBeforeSend(steps, id),

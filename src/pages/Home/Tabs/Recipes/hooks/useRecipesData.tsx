@@ -12,7 +12,7 @@ export const useRecipesData = () => {
   const getRecipes = () => {
     setLoading(true);
     axios
-      .get("https://localhost:44390/api/recipes/")
+      .get("https://gymhub.azurewebsites.net/api/recipes/")
       .then((res) => setRecipes(res.data))
       .then(() => axios.get("https://gymhub.azurewebsites.net/api/categories/"))
       .then((res) => setCategories(res.data))
