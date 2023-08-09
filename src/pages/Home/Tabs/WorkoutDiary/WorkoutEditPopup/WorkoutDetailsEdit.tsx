@@ -32,10 +32,9 @@ export const WorkoutDetailsEdit = ({
     setWorkoutData,
     setSetsAndReps,
     setActiveExercises,
+    user,
+    exercisesList,
   } = useWorkoutDetailsData(id);
-
-  const exercises = useSelector(selectExercises);
-  const user = useSelector(selectUser);
 
   return (
     <Container>
@@ -129,7 +128,7 @@ export const WorkoutDetailsEdit = ({
             <BottomLeftSection>
               <ExercisesSection>
                 <Title>Exercises</Title>
-                {exercises.map((el: any) => (
+                {exercisesList.map((el: any) => (
                   <WorkoutExercise
                     key={el.exerciseId}
                     id={el.exerciseId}

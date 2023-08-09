@@ -1,6 +1,9 @@
 import { useEffect, useState } from "react";
 import axios from "axios";
 import { useActiveExercises } from "./useActiveExercises";
+import { useSelector } from "react-redux";
+import { selectExercises } from "../../../../../store/exercisesSlice";
+import { selectUser } from "../../../../../store/userSlice";
 
 export const useWorkoutDetailsData = (id: number) => {
   const [loading, setLoading] = useState(false);
@@ -8,12 +11,20 @@ export const useWorkoutDetailsData = (id: number) => {
   const [setsAndReps, setSetsAndReps] = useState<any>([]);
   const [activeExercises, setActiveExercises] = useState<any>([]);
 
+  const exercises = useSelector(selectExercises);
+  const [exercisesList, setExercisesList] = useState<any>(exercises);
+
   const filteredExercises = useActiveExercises(activeExercises, setsAndReps);
 
-  console.log(workoutData);
+  const user = useSelector(selectUser);
 
   useEffect(() => {
     if (!id) return;
+
+    if (!exercisesList)
+      axios
+        .get(`https://gymhub.azurewebsites.net/api/exercises`)
+        .then((res) => setExercisesList(res.data));
 
     setLoading(true);
     axios
@@ -39,5 +50,7 @@ export const useWorkoutDetailsData = (id: number) => {
     setSetsAndReps,
     setWorkoutData,
     setActiveExercises,
+    user,
+    exercisesList,
   };
 };

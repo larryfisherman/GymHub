@@ -16,8 +16,6 @@ interface Exercise {
 export const Exercises = () => {
   const [exercises, setExercises] = useState([]);
 
-  console.log(exercises);
-
   const dispatch = useDispatch();
 
   useEffect(() => {
@@ -44,10 +42,6 @@ export const Exercises = () => {
   );
 };
 
-const Categories = styled.div`
-  display: flex;
-  width: 100%;
-`;
 const ExercisesSection = styled.div`
   display: flex;
   justify-content: space-between;
