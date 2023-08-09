@@ -1,15 +1,15 @@
-import React, { useState } from "react";
+import React from "react";
 import styled from "styled-components";
 import axios from "axios";
 import moment from "moment";
 
 import { useSelector } from "react-redux";
-import { selectUser } from "../../../../store/userSlice";
+import { selectUser } from "../../../../../store/userSlice";
 import { WorkoutDetailsSetsAndRepsItem } from "./WorkoutDetailsSetsAndRepsItem";
-import { selectExercises } from "../../../../store/exercisesSlice";
-import { WorkoutExercise } from "./WorkoutExercise";
+import { selectExercises } from "../../../../../store/exercisesSlice";
+import { WorkoutExercise } from "../WorkoutExercise";
 import { InfinitySpin } from "react-loader-spinner";
-import { useWorkoutDetailsData } from "./hooks/useWorkoutDetailsData";
+import { useWorkoutDetailsData } from "../hooks/useWorkoutDetailsData";
 import { WorkoutDetailsEditTimeAndKcal } from "./WorkoutDetailsEditTimeAndKcal";
 
 interface Props {

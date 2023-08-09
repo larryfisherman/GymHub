@@ -1,7 +1,7 @@
 import React from "react";
 import styled from "styled-components";
 import { RecipeDetailsIngredient } from "./RecipeDetailsIngredient";
-import { useRecipeIngredientsPopup } from "./hooks/useRecipeIngredientsPopup";
+import { useRecipeIngredientsPopup } from "../hooks/useRecipeIngredientsPopup";
 
 interface IngredientsProps {
   ingredientId: number;

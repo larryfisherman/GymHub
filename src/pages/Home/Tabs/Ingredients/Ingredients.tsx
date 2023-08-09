@@ -2,7 +2,6 @@ import React, { useState, useEffect } from "react";
 import styled from "styled-components";
 import axios from "axios";
 import { Ingredient } from "./Ingredient";
-import { IngredientDetails } from "./IngredientDetails";
 
 interface IngredientProps {
   amount: number;
@@ -18,8 +17,6 @@ interface IngredientProps {
 export const Ingredients = () => {
   const [ingredients, setIngredients] = useState([]);
   const [filterValue, setFilterValue] = useState("");
-  const [showIngredientDetails, setShowIngredientDetails] = useState(false);
-  const [ingredientId, setIngredientId] = useState(0);
 
   const filteredIngredients = ingredients.filter((el: IngredientProps) =>
     el.name.toLowerCase().includes(filterValue.toLowerCase())
@@ -33,7 +30,6 @@ export const Ingredients = () => {
 
   return (
     <Container>
-      {/* {showIngredientDetails && <IngredientDetails id={ingredientId} />} */}
       <Content>
         <TitleSection>
           <PreTitle>Explore</PreTitle>
@@ -56,8 +52,6 @@ export const Ingredients = () => {
               carbs={el.carbs}
               kcal={el.kcal}
               amount={el.amount}
-              setShowIngredientDetails={setShowIngredientDetails}
-              setIngredientId={setIngredientId}
             />
           ))}
         </IngredientsSection>

@@ -9,20 +9,9 @@ interface Props {
   kcal: number;
   amount: number;
   carbs: number;
-  setShowIngredientDetails?: React.Dispatch<React.SetStateAction<boolean>>;
-  setIngredientId?: React.Dispatch<React.SetStateAction<number>>;
 }
 
-export const Ingredient = ({
-  name,
-  id,
-  protein,
-  fat,
-  carbs,
-  kcal,
-  setShowIngredientDetails,
-  setIngredientId,
-}: Props) => (
+export const Ingredient = ({ name, protein, fat, carbs, kcal }: Props) => (
   <Container>
     <Content>
       <IngredientTitle>{name}</IngredientTitle>
@@ -32,14 +21,6 @@ export const Ingredient = ({
         <IngredientMakroItem>{carbs}g carbs</IngredientMakroItem>
         <IngredientMakroItem>{kcal} kcal</IngredientMakroItem>
       </IngredientMakro>
-      {/* <Button
-        onClick={() => {
-          setShowIngredientDetails(true);
-          setIngredientId(id);
-        }}
-      >
-        SEE MORE
-      </Button> */}
     </Content>
   </Container>
 );

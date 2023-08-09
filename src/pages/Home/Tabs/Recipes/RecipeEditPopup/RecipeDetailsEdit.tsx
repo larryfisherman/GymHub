@@ -3,14 +3,14 @@ import styled from "styled-components";
 import axios from "axios";
 import { RecipeDetailsStep } from "./RecipeDetailsStep";
 import { RecipeDetailsIngredient } from "./RecipeDetailsIngredient";
-import { addStep } from "./utils/addStep";
+import { addStep } from "../utils/addStep";
 import { RecipeDetailsCategories } from "./RecipeDetailsCategories";
 import { InfinitySpin } from "react-loader-spinner";
-import { useRecipeDetailsData } from "./hooks/useRecipeDetailsData";
+import { useRecipeDetailsData } from "../hooks/useRecipeDetailsData";
 import { RecipeIngredientsPopup } from "./RecipeIngredientsPopup";
-import { sumMacroElements } from "./utils/sumMacroElements";
+import { sumMacroElements } from "../utils/sumMacroElements";
 import moment from "moment";
-import { prepareStepsBeforeSend } from "./utils/prepareStepsBeforeSend";
+import { prepareStepsBeforeSend } from "../utils/prepareStepsBeforeSend";
 
 interface Props {
   id: number;

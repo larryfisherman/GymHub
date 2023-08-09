@@ -3,7 +3,7 @@ import styled from "styled-components";
 import { Recipe } from "./Recipe";
 import { CategoriesItem } from "./CategoriesItem";
 import { ComplexSets } from "./ComplexSets";
-import { RecipeDetailsEdit } from "./RecipeDetailsEdit";
+import { RecipeDetailsEdit } from "./RecipeEditPopup/RecipeDetailsEdit";
 import { useRecipesData } from "./hooks/useRecipesData";
 import { Scrollbar } from "../../../../components/Scrollbar/Scrollbar";
 
@@ -18,16 +18,12 @@ export const Recipes = () => {
     setSelectedCategory,
     setRecipeDetailsId,
     getRecipes,
+    filteredRecipes,
   } = useRecipesData();
 
   useEffect(() => {
     getRecipes();
   }, []);
-
-  const filteredRecipes =
-    selectedCategory === 1
-      ? recipes
-      : recipes.filter((recipe: any) => recipe.categoryId === selectedCategory);
 
   return (
     <>
@@ -74,23 +70,22 @@ export const Recipes = () => {
                     +
                   </AddRecipeButton>
                 </AddRecipe>
-                {recipes &&
-                  filteredRecipes.map((el: any) => {
-                    return (
-                      <Recipe
-                        key={el.recipeId}
-                        id={el.recipeId}
-                        category={el.categoryId}
-                        title={el.title}
-                        description={el.description}
-                        kcal={el.kcal}
-                        time={el.timeToBeDone}
-                        setShowRecipeDetails={setShowRecipeDetails}
-                        setRecipeDetailsId={setRecipeDetailsId}
-                        getRecipes={getRecipes}
-                      />
-                    );
-                  })}
+                {filteredRecipes?.map((el: any) => {
+                  return (
+                    <Recipe
+                      key={el.recipeId}
+                      id={el.recipeId}
+                      category={el.categoryId}
+                      title={el.title}
+                      description={el.description}
+                      kcal={el.kcal}
+                      time={el.timeToBeDone}
+                      setShowRecipeDetails={setShowRecipeDetails}
+                      setRecipeDetailsId={setRecipeDetailsId}
+                      getRecipes={getRecipes}
+                    />
+                  );
+                })}
               </Scrollbar>
             </RecipesSection>
             <ComplexSetsItems>

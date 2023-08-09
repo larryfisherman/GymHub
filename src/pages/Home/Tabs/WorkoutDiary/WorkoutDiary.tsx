@@ -1,8 +1,7 @@
 import React from "react";
 import styled from "styled-components";
 import { Workout } from "./Workout";
-import { WorkoutDetailsEdit } from "./WorkoutDetailsEdit";
-import { InfinitySpin } from "react-loader-spinner";
+import { WorkoutDetailsEdit } from "./WorkoutEditPopup/WorkoutDetailsEdit";
 import { useWorkoutDiaryData } from "./hooks/useWorkoutDiaryData";
 
 interface WorkoutProps {

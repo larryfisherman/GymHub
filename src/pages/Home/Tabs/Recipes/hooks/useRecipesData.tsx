@@ -9,6 +9,11 @@ export const useRecipesData = () => {
   const [recipeDetailsId, setRecipeDetailsId] = useState(0);
   const [selectedCategory, setSelectedCategory] = useState(1);
 
+  const filteredRecipes =
+    selectedCategory === 1
+      ? recipes
+      : recipes.filter((recipe: any) => recipe.categoryId === selectedCategory);
+
   const getRecipes = () => {
     setLoading(true);
     axios
@@ -30,5 +35,6 @@ export const useRecipesData = () => {
     setSelectedCategory,
     setRecipeDetailsId,
     getRecipes,
+    filteredRecipes,
   };
 };
