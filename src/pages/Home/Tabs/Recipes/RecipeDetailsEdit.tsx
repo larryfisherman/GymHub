@@ -10,6 +10,7 @@ import { useRecipeDetailsData } from "./hooks/useRecipeDetailsData";
 import { RecipeIngredientsPopup } from "./RecipeIngredientsPopup";
 import { sumMacroElements } from "./utils/sumMacroElements";
 import moment from "moment";
+import { prepareStepsBeforeSend } from "./utils/prepareStepsBeforeSend";
 
 interface Props {
   id: number;
@@ -95,10 +96,10 @@ export const RecipeDetailsEdit = ({
               onClick={() => {
                 if (id) {
                   return axios
-                    .put(`https://gymhub.azurewebsites.net/api/recipes/${id}`, {
+                    .put(`https://localhost:44390/api/recipes/${id}`, {
                       ...recipeData,
                       categoryId: activeCategory,
-                      recipeSteps: steps,
+                      recipeSteps: prepareStepsBeforeSend(steps, id),
                       recipeIngredients: selectedIngredients,
                     })
                     .finally(() => {
@@ -108,10 +109,10 @@ export const RecipeDetailsEdit = ({
                 }
 
                 axios
-                  .post("https://gymhub.azurewebsites.net/api/recipes", {
+                  .post("https://localhost:44390/api/recipes", {
                     ...recipeData,
                     categoryId: activeCategory,
-                    recipeSteps: steps,
+                    recipeSteps: prepareStepsBeforeSend(steps, id),
                     recipeIngredients: selectedIngredients,
                   })
                   .finally(() => {
@@ -236,14 +237,13 @@ export const RecipeDetailsEdit = ({
               </IngrediensSection>
             </BottomLeftSection>
             <BottomRightSection>
-              {steps?.map((el: StepsProps) => (
+              {steps.map((el: StepsProps) => (
                 <RecipeDetailsStep
                   key={el.id}
-                  title={el.title}
                   id={el.id}
                   description={el.description}
-                  steps={el.steps}
-                  setSteps={el.setSteps}
+                  steps={steps}
+                  setSteps={setSteps}
                 />
               ))}
               <AddStep

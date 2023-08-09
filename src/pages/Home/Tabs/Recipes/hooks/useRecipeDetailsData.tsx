@@ -17,7 +17,7 @@ interface ingredientsStateProps {
 
 export const useRecipeDetailsData = (id: number) => {
   const [recipeData, setRecipeData] = useState<any>([]);
-  const [steps, setSteps] = useState<stepsStateProps[]>([]);
+  const [steps, setSteps] = useState<any>([]);
   const [ingredients, setIngredients] = useState<ingredientsStateProps[]>([]);
   const [selectedIngredients, setSelectedIngredients] = useState<any>([]);
   const [categories, setCategories] = useState([]);
@@ -38,13 +38,13 @@ export const useRecipeDetailsData = (id: number) => {
     if (!id) {
       setRecipeData([]);
       axios
-        .get("https://gymhub.azurewebsites.net/api/ingredients")
+        .get("https://localhost:44390/api/ingredients")
         .then((res) => setIngredients(res.data))
         .finally(() => setLoading(false));
       return;
     }
     axios
-      .get(`https://gymhub.azurewebsites.net/api/recipes/${id}`)
+      .get(`https://localhost:44390/api/recipes/${id}`)
       .then((res) => {
         setRecipeData(res.data.recipe);
         setActiveCategory(res.data.recipe.categoryId);
@@ -53,7 +53,7 @@ export const useRecipeDetailsData = (id: number) => {
       })
       .then(() =>
         axios
-          .get("https://gymhub.azurewebsites.net/api/ingredients")
+          .get("https://localhost:44390/api/ingredients")
           .then((res) => setIngredients(res.data))
       )
       .finally(() => setLoading(false));

@@ -9,7 +9,6 @@ interface stepsStateProps {
 
 interface Props {
   id: number;
-  title: string;
   description: string;
   steps: any;
   setSteps: React.Dispatch<React.SetStateAction<stepsStateProps[]>>;
@@ -17,7 +16,6 @@ interface Props {
 
 export const RecipeDetailsStep = ({
   id,
-  title,
   description,
   steps,
   setSteps,
@@ -32,7 +30,6 @@ export const RecipeDetailsStep = ({
 
   return (
     <Container>
-      <StepTitle>{title}</StepTitle>
       <Content>
         <StepDescription
           placeholder="Description"

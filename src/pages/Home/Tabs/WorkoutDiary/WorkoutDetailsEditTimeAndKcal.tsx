@@ -63,7 +63,9 @@ const EditInput = styled.input`
   text-align: center;
 `;
 
-const Text = styled.span``;
+const Text = styled.span`
+  color: #f8f8f8;
+`;
 const Icon = styled.img`
   width: 2rem;
   margin-right: 1rem;
