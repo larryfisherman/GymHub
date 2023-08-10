@@ -103,7 +103,7 @@ export const RegisterUser = ({
                 onClick={() => {
                   setLoading(true);
                   axios
-                    .post("test/api/user/login", {
+                    .post("https://gymhub.azurewebsites.net/api/user/login", {
                       email: "test@test.com",
                       password: "test123",
                     })
