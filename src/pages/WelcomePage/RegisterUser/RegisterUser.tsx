@@ -79,10 +79,12 @@ export const RegisterUser = ({
                   email: emailValue,
                   password: passwordValue,
                 })
-                .then(() => {
-                  setLoading(false);
+                .then((res) => {
                   navigate("/login");
-                });
+                  NotifyUser(res);
+                })
+                .catch((err) => NotifyUser(err))
+                .finally(() => setLoading(false));
             }}
           >
             CREATE ACCOUNT

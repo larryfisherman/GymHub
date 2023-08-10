@@ -5,6 +5,8 @@ import { login } from "../../../store/userSlice";
 import { useDispatch } from "react-redux";
 import { useNavigate } from "react-router-dom";
 import { InfinitySpin } from "react-loader-spinner";
+import { NotifyUser } from "../../../helpers/NotifyUser/NotifyUser";
+import { ToastContainer } from "react-toastify";
 
 interface Props {
   setShowLoginPopup: React.Dispatch<React.SetStateAction<boolean>>;
@@ -67,15 +69,18 @@ export const LoginUser = ({ setShowLoginPopup }: Props) => {
                 .then((res) => {
                   localStorage.setItem("token", res.data.token);
                   dispatch(login(res.data));
-                  setLoading(false);
                   navigate("/home");
-                });
+                  NotifyUser(res);
+                })
+                .catch((err) => NotifyUser(err))
+                .finally(() => setLoading(false));
             }}
           >
             LOG IN
           </ConfirmButton>
         </Content>
       )}
+      <ToastContainer />
     </Container>
   );
 };
