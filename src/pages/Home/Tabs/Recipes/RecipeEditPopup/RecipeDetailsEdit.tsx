@@ -11,6 +11,7 @@ import { RecipeIngredientsPopup } from "./RecipeIngredientsPopup";
 import { sumMacroElements } from "../utils/sumMacroElements";
 import moment from "moment";
 import { prepareStepsBeforeSend } from "../utils/prepareStepsBeforeSend";
+import { NotifyUser } from "../../../../../helpers/NotifyUser/NotifyUser";
 
 interface Props {
   id: number;
@@ -102,6 +103,8 @@ export const RecipeDetailsEdit = ({
                       recipeSteps: prepareStepsBeforeSend(steps, id),
                       recipeIngredients: selectedIngredients,
                     })
+                    .then((res) => NotifyUser(res))
+                    .catch((err) => NotifyUser(err))
                     .finally(() => {
                       setShowRecipeDetails(false);
                       getRecipes();
@@ -115,6 +118,8 @@ export const RecipeDetailsEdit = ({
                     recipeSteps: prepareStepsBeforeSend(steps, id),
                     recipeIngredients: selectedIngredients,
                   })
+                  .then((res) => NotifyUser(res))
+                  .catch((err) => NotifyUser(err))
                   .finally(() => {
                     setShowRecipeDetails(false);
                     getRecipes();

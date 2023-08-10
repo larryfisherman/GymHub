@@ -11,6 +11,7 @@ import { WorkoutExercise } from "../WorkoutExercise";
 import { InfinitySpin } from "react-loader-spinner";
 import { useWorkoutDetailsData } from "../hooks/useWorkoutDetailsData";
 import { WorkoutDetailsEditTimeAndKcal } from "./WorkoutDetailsEditTimeAndKcal";
+import { NotifyUser } from "../../../../../helpers/NotifyUser/NotifyUser";
 
 interface Props {
   id: number;
@@ -32,9 +33,12 @@ export const WorkoutDetailsEdit = ({
     setWorkoutData,
     setSetsAndReps,
     setActiveExercises,
-    user,
-    exercisesList,
+    exercises,
   } = useWorkoutDetailsData(id);
+
+  const user = useSelector(selectUser);
+
+  console.log(user);
 
   return (
     <Container>
@@ -53,11 +57,12 @@ export const WorkoutDetailsEdit = ({
                       `https://gymhub.azurewebsites.net/api/workouts/${id}`,
                       {
                         ...workoutData,
-                        author: user && user.user.name,
+                        author: user?.name ? user.user.name : null,
                         workoutExercises: setsAndReps,
                       }
                     )
-                    .then(() => setLoading(true))
+                    .then((res) => NotifyUser(res))
+                    .catch((err) => NotifyUser(err))
                     .finally(() => {
                       getWorkouts();
                       setShowWorkoutPopup(false);
@@ -68,7 +73,8 @@ export const WorkoutDetailsEdit = ({
                     ...workoutData,
                     workoutExercises: setsAndReps,
                   })
-                  .then(() => setLoading(true))
+                  .then((res) => NotifyUser(res))
+                  .catch((err) => NotifyUser(err))
                   .finally(() => {
                     setShowWorkoutPopup(false);
                     getWorkouts();
@@ -97,7 +103,7 @@ export const WorkoutDetailsEdit = ({
               <AuthorAndDateSection>
                 <AuthorInput
                   placeholder="Author"
-                  defaultValue={user.name ? user.user.name : "Unknown"}
+                  defaultValue={user?.name ? user.user.name : "Unknown"}
                   disabled
                 />
                 <Date
@@ -128,7 +134,7 @@ export const WorkoutDetailsEdit = ({
             <BottomLeftSection>
               <ExercisesSection>
                 <Title>Exercises</Title>
-                {exercisesList.map((el: any) => (
+                {exercises.map((el: any) => (
                   <WorkoutExercise
                     key={el.exerciseId}
                     id={el.exerciseId}

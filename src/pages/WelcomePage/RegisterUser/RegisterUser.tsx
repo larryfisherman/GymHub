@@ -5,6 +5,8 @@ import { useNavigate } from "react-router-dom";
 import { useDispatch } from "react-redux";
 import { login } from "../../../store/userSlice";
 import { InfinitySpin } from "react-loader-spinner";
+import { NotifyUser } from "../../../helpers/NotifyUser/NotifyUser";
+import { ToastContainer } from "react-toastify";
 
 interface Props {
   setShowRegisterPopup: React.Dispatch<React.SetStateAction<boolean>>;
@@ -101,7 +103,7 @@ export const RegisterUser = ({
                 onClick={() => {
                   setLoading(true);
                   axios
-                    .post("https://gymhub.azurewebsites.net/api/user/login", {
+                    .post("test/api/user/login", {
                       email: "test@test.com",
                       password: "test123",
                     })
@@ -110,6 +112,10 @@ export const RegisterUser = ({
                       dispatch(login(res.data));
                       setLoading(false);
                       navigate("/home");
+                    })
+                    .catch((err) => {
+                      NotifyUser(err);
+                      setLoading(false);
                     });
                 }}
               >
@@ -119,6 +125,7 @@ export const RegisterUser = ({
           </Footer>
         </Content>
       )}
+      <ToastContainer />
     </Container>
   );
 };

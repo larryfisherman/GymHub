@@ -3,6 +3,7 @@ import styled from "styled-components";
 import { Workout } from "./Workout";
 import { WorkoutDetailsEdit } from "./WorkoutEditPopup/WorkoutDetailsEdit";
 import { useWorkoutDiaryData } from "./hooks/useWorkoutDiaryData";
+import { ToastContainer } from "react-toastify";
 
 interface WorkoutProps {
   title: string;
@@ -73,6 +74,7 @@ export const WorkoutDiary = () => {
           )}
         </Workouts>
       </Content>
+      <ToastContainer />
     </Container>
   );
 };

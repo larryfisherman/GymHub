@@ -6,10 +6,10 @@ import { ComplexSets } from "./ComplexSets";
 import { RecipeDetailsEdit } from "./RecipeEditPopup/RecipeDetailsEdit";
 import { useRecipesData } from "./hooks/useRecipesData";
 import { Scrollbar } from "../../../../components/Scrollbar/Scrollbar";
+import { ToastContainer } from "react-toastify";
 
 export const Recipes = () => {
   const {
-    recipes,
     categories,
     showRecipeDetails,
     recipeDetailsId,
@@ -94,6 +94,7 @@ export const Recipes = () => {
             </ComplexSetsItems>
           </AllItems>
         </Content>
+        <ToastContainer />
       </Container>
     </>
   );

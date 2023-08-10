@@ -2,6 +2,8 @@ import React, { useState } from "react";
 import styled from "styled-components";
 import { ConfirmationModal } from "../../../../components/ConfirmationModal/ConfirmationModal";
 import axios from "axios";
+import { NotifyUser } from "../../../../helpers/NotifyUser/NotifyUser";
+import { ToastContainer } from "react-toastify";
 
 interface Props {
   title: string;
@@ -37,11 +39,13 @@ export const Workout = ({
             setLoading(true);
             axios
               .delete(`https://gymhub.azurewebsites.net/api/workouts/${id}`)
+              .then((res) => NotifyUser(res, "Workout removed"))
               .finally(() => {
                 setLoading(false);
                 setShowConfirmationModal(false);
                 getWorkouts();
-              });
+              })
+              .catch((err) => NotifyUser(err));
           }}
         />
       ) : (
@@ -118,6 +122,7 @@ const Content = styled.div`
   display: flex;
   flex-direction: column;
   color: white;
+  justify-content: space-between;
   background-color: white;
   padding: 30px;
 
@@ -164,9 +169,8 @@ const DescriptionSection = styled.div`
 
 const StartButton = styled.button`
   display: flex;
-  margin-top: 5rem;
   width: 12rem;
-  height: 5rem;
+  min-height: 5rem;
   justify-content: center;
   align-items: center;
   font-size: 2rem;

@@ -1,8 +1,6 @@
 import React, { useState, useEffect } from "react";
 import styled from "styled-components";
 import { Exercise } from "./Exercise";
-import { useDispatch } from "react-redux";
-import { setExercisesStore } from "../../../../store/exercisesSlice";
 import axios from "axios";
 
 interface ExerciseProps {
@@ -15,12 +13,9 @@ interface ExerciseProps {
 export const Exercises = () => {
   const [exercises, setExercises] = useState([]);
 
-  const dispatch = useDispatch();
-
   useEffect(() => {
     axios.get("https://gymhub.azurewebsites.net/api/exercises").then((res) => {
       setExercises(res.data);
-      dispatch(setExercisesStore(res.data));
     });
   }, []);
 

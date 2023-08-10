@@ -3,6 +3,7 @@ import styled from "styled-components";
 import axios from "axios";
 import { ConfirmationModal } from "../../../../components/ConfirmationModal/ConfirmationModal";
 import { getRecipePath } from "./utils/getRecipePath";
+import { NotifyUser } from "../../../../helpers/NotifyUser/NotifyUser";
 
 interface Props {
   title: string;
@@ -38,6 +39,8 @@ export const Recipe = ({
           onConfirm={() => {
             axios
               .delete(`https://gymhub.azurewebsites.net/api/recipes/${id}`)
+              .then((res) => NotifyUser(res, "Recipe removed"))
+              .catch((err) => NotifyUser(err))
               .finally(() => {
                 setShowConfirmationModal(false);
                 getRecipes();
