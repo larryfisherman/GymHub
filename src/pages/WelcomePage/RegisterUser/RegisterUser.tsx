@@ -7,6 +7,7 @@ import { login } from "../../../store/userSlice";
 import { InfinitySpin } from "react-loader-spinner";
 import { NotifyUser } from "../../../helpers/NotifyUser/NotifyUser";
 import { ToastContainer } from "react-toastify";
+import { config } from "../../../config";
 
 interface Props {
   setShowRegisterPopup: React.Dispatch<React.SetStateAction<boolean>>;
@@ -104,8 +105,8 @@ export const RegisterUser = ({
                   setLoading(true);
                   axios
                     .post("https://gymhub.azurewebsites.net/api/user/login", {
-                      email: "test@test.com",
-                      password: "test123",
+                      email: config.defaultEmail,
+                      password: config.defaultPassword,
                     })
                     .then((res) => {
                       localStorage.setItem("token", res.data.token);
