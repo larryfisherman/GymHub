@@ -2,6 +2,8 @@ import React, { useState, useEffect } from "react";
 import styled from "styled-components";
 import axios from "axios";
 import { Ingredient } from "./Ingredient";
+import { NotifyUser } from "../../../../helpers/NotifyUser/NotifyUser";
+import { InfinitySpin } from "react-loader-spinner";
 
 interface IngredientProps {
   amount: number;
@@ -17,48 +19,67 @@ interface IngredientProps {
 export const Ingredients = () => {
   const [ingredients, setIngredients] = useState([]);
   const [filterValue, setFilterValue] = useState("");
+  const [loading, setLoading] = useState(false);
 
   const filteredIngredients = ingredients.filter((el: IngredientProps) =>
     el.name.toLowerCase().includes(filterValue.toLowerCase())
   );
 
   useEffect(() => {
+    setLoading(true);
     axios
       .get("https://gymhub.azurewebsites.net/api/ingredients")
-      .then((res) => setIngredients(res.data));
+      .then((res) => setIngredients(res.data))
+      .catch((err) => NotifyUser(err))
+      .finally(() => setLoading(false));
   }, []);
 
   return (
     <Container>
-      <Content>
-        <TitleSection>
-          <PreTitle>Explore</PreTitle>
-          <Title>Ingredients Library</Title>
-        </TitleSection>
-        <SearchInputSection>
-          <SearchInput
-            value={filterValue}
-            onChange={(e) => setFilterValue(e.target.value)}
-          />
-          <SearchIcon src="./assets/magnifying-glass-icon.svg" />
-        </SearchInputSection>
-        <IngredientsSection>
-          {filteredIngredients.map((el: IngredientProps) => (
-            <Ingredient
-              id={el.id}
-              name={el.name}
-              protein={el.protein}
-              fat={el.fat}
-              carbs={el.carbs}
-              kcal={el.kcal}
-              amount={el.amount}
+      {loading ? (
+        <SpinnerWrapper>
+          <InfinitySpin />
+        </SpinnerWrapper>
+      ) : (
+        <Content>
+          <TitleSection>
+            <PreTitle>Explore</PreTitle>
+            <Title>Ingredients Library</Title>
+          </TitleSection>
+          <SearchInputSection>
+            <SearchInput
+              value={filterValue}
+              onChange={(e) => setFilterValue(e.target.value)}
             />
-          ))}
-        </IngredientsSection>
-      </Content>
+            <SearchIcon src="./assets/magnifying-glass-icon.svg" />
+          </SearchInputSection>
+          <IngredientsSection>
+            {filteredIngredients.map((el: IngredientProps) => (
+              <Ingredient
+                id={el.id}
+                name={el.name}
+                protein={el.protein}
+                fat={el.fat}
+                carbs={el.carbs}
+                kcal={el.kcal}
+                amount={el.amount}
+              />
+            ))}
+          </IngredientsSection>
+        </Content>
+      )}
     </Container>
   );
 };
+
+const SpinnerWrapper = styled.div`
+  display: flex;
+  width: 100%;
+  height: 100vh;
+  justify-content: center;
+  align-items: center;
+  background-color: #f8f8f8;
+`;
 
 const SearchIcon = styled.img`
   fill: #999;

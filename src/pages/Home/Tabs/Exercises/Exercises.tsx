@@ -2,6 +2,8 @@ import React, { useState, useEffect } from "react";
 import styled from "styled-components";
 import { Exercise } from "./Exercise";
 import axios from "axios";
+import { NotifyUser } from "../../../../helpers/NotifyUser/NotifyUser";
+import { InfinitySpin } from "react-loader-spinner";
 
 interface ExerciseProps {
   exerciseId: number;
@@ -12,29 +14,52 @@ interface ExerciseProps {
 
 export const Exercises = () => {
   const [exercises, setExercises] = useState([]);
+  const [loading, setLoading] = useState(false);
 
   useEffect(() => {
-    axios.get("https://gymhub.azurewebsites.net/api/exercises").then((res) => {
-      setExercises(res.data);
-    });
+    setLoading(true);
+    axios
+      .get("https://gymhub.azurewebsites.net/api/exercises")
+      .then((res) => setExercises(res.data))
+      .catch((err) => NotifyUser(err))
+      .finally(() => setLoading(false));
   }, []);
 
   return (
     <Container>
-      <Content>
-        <TitleSection>
-          <PreTitle>Explore</PreTitle>
-          <Title>Exercise Library</Title>
-        </TitleSection>
-        <ExercisesSection>
-          {exercises.map((el: ExerciseProps) => (
-            <Exercise key={el.exerciseId} id={el.exerciseId} title={el.title} />
-          ))}
-        </ExercisesSection>
-      </Content>
+      {loading ? (
+        <SpinnerWrapper>
+          <InfinitySpin />
+        </SpinnerWrapper>
+      ) : (
+        <Content>
+          <TitleSection>
+            <PreTitle>Explore</PreTitle>
+            <Title>Exercise Library</Title>
+          </TitleSection>
+          <ExercisesSection>
+            {exercises.map((el: ExerciseProps) => (
+              <Exercise
+                key={el.exerciseId}
+                id={el.exerciseId}
+                title={el.title}
+              />
+            ))}
+          </ExercisesSection>
+        </Content>
+      )}
     </Container>
   );
 };
+
+const SpinnerWrapper = styled.div`
+  display: flex;
+  width: 100%;
+  height: 100vh;
+  justify-content: center;
+  align-items: center;
+  background-color: #f8f8f8;
+`;
 
 const ExercisesSection = styled.div`
   display: flex;

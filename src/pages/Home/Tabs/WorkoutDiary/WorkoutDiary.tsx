@@ -4,6 +4,7 @@ import { Workout } from "./Workout";
 import { WorkoutDetailsEdit } from "./WorkoutEditPopup/WorkoutDetailsEdit";
 import { useWorkoutDiaryData } from "./hooks/useWorkoutDiaryData";
 import { ToastContainer } from "react-toastify";
+import { InfinitySpin } from "react-loader-spinner";
 
 interface WorkoutProps {
   title: string;
@@ -22,6 +23,7 @@ export const WorkoutDiary = () => {
     setWorkoutId,
     setLoading,
     getWorkouts,
+    loading,
   } = useWorkoutDiaryData();
 
   return (
@@ -33,51 +35,66 @@ export const WorkoutDiary = () => {
           getWorkouts={getWorkouts}
         />
       )}
-      <Content>
-        <PreTitle>Let's get to</PreTitle>
-        <Title>Workout Diary</Title>
-        <Workouts>
-          <AddWorkout>
-            <TitleSection>
-              <span>Add Workout</span>
-            </TitleSection>
-            <AddWorkoutButton
-              onClick={() => {
-                setWorkoutId(0);
-                setShowEditWorkoutDetails(true);
-              }}
-            >
-              +
-            </AddWorkoutButton>
-          </AddWorkout>
-          {workouts.map(
-            ({
-              title,
-              favourite,
-              workoutId,
-              timeToBeDone,
-              kcal,
-            }: WorkoutProps) => (
-              <Workout
-                key={workoutId}
-                id={workoutId}
-                title={title}
-                favourite={favourite}
-                kcal={kcal}
-                timeToBeDone={timeToBeDone}
-                setShowEditWorkoutDetails={setShowEditWorkoutDetails}
-                setWorkoutId={setWorkoutId}
-                getWorkouts={getWorkouts}
-                setLoading={setLoading}
-              />
-            )
-          )}
-        </Workouts>
-      </Content>
+      {loading ? (
+        <SpinnerWrapper>
+          <InfinitySpin />
+        </SpinnerWrapper>
+      ) : (
+        <Content>
+          <PreTitle>Let's get to</PreTitle>
+          <Title>Workout Diary</Title>
+          <Workouts>
+            <AddWorkout>
+              <TitleSection>
+                <span>Add Workout</span>
+              </TitleSection>
+              <AddWorkoutButton
+                onClick={() => {
+                  setWorkoutId(0);
+                  setShowEditWorkoutDetails(true);
+                }}
+              >
+                +
+              </AddWorkoutButton>
+            </AddWorkout>
+            {workouts.map(
+              ({
+                title,
+                favourite,
+                workoutId,
+                timeToBeDone,
+                kcal,
+              }: WorkoutProps) => (
+                <Workout
+                  key={workoutId}
+                  id={workoutId}
+                  title={title}
+                  favourite={favourite}
+                  kcal={kcal}
+                  timeToBeDone={timeToBeDone}
+                  setShowEditWorkoutDetails={setShowEditWorkoutDetails}
+                  setWorkoutId={setWorkoutId}
+                  getWorkouts={getWorkouts}
+                  setLoading={setLoading}
+                />
+              )
+            )}
+          </Workouts>
+        </Content>
+      )}
       <ToastContainer />
     </Container>
   );
 };
+
+const SpinnerWrapper = styled.div`
+  display: flex;
+  width: 100%;
+  height: 100vh;
+  justify-content: center;
+  align-items: center;
+  background-color: #f8f8f8;
+`;
 
 const Title = styled.span`
   display: flex;
@@ -102,14 +119,6 @@ const Content = styled.div`
   width: 100%;
   height: 100vh;
   padding: 30px;
-`;
-
-const SpinnerWrapper = styled.div`
-  display: flex;
-  justify-content: center;
-  align-items: center;
-  width: 100%;
-  height: 100vh;
 `;
 
 const Workouts = styled.div`

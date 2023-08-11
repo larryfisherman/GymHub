@@ -1,5 +1,6 @@
-import { useEffect, useState } from "react";
+import { useState } from "react";
 import axios from "axios";
+import { NotifyUser } from "../../../../../helpers/NotifyUser/NotifyUser";
 
 export const useRecipesData = () => {
   const [loading, setLoading] = useState(false);
@@ -21,6 +22,7 @@ export const useRecipesData = () => {
       .then((res) => setRecipes(res.data))
       .then(() => axios.get("https://gymhub.azurewebsites.net/api/categories/"))
       .then((res) => setCategories(res.data))
+      .catch((err) => NotifyUser(err))
       .finally(() => setLoading(false));
   };
 
