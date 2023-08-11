@@ -1,7 +1,8 @@
 import { toast } from "react-toastify";
 
 export const NotifyUser = (res: any, customMessage?: string) => {
-  const { status } = res.request;
+  const { status } = res.response;
+  const { message } = res.response.data;
 
   const toastProps: object = {
     position: "top-right",
@@ -15,7 +16,10 @@ export const NotifyUser = (res: any, customMessage?: string) => {
   };
 
   if (status === 404 || status === 500 || status === 400)
-    return toast.error("Something went wrong..", toastProps);
+    return toast.error(
+      message ? message : "Something went wrong..",
+      toastProps
+    );
 
   return toast.success(customMessage ? customMessage : "Success!", toastProps);
 };

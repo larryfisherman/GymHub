@@ -242,6 +242,10 @@ const FullNameInput = styled.input`
   padding-bottom: 5px;
   width: 50%;
 
+  &:focus {
+    outline: none;
+  }
+
   @media (max-width: 768px) {
     width: 100%;
   }

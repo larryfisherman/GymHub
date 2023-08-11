@@ -24,7 +24,7 @@ export const useWorkoutDetailsData = (id: number) => {
       })
       .then(() => axios.get(`https://gymhub.azurewebsites.net/api/exercises`))
       .then((res) => setExercises(res.data))
-      .catch((err) => NotifyUser(err))
+      .catch((err) => NotifyUser(err, err.message))
       .finally(() => setLoading(false));
   }, []);
 
