@@ -10,7 +10,11 @@ export const useWorkoutDetailsData = (id: number) => {
   const [activeExercises, setActiveExercises] = useState<any>([]);
   const [exercises, setExercises] = useState<any>([]);
 
-  const filteredExercises = useActiveExercises(activeExercises, setsAndReps);
+  const filteredExercises = useActiveExercises(
+    exercises,
+    activeExercises,
+    setsAndReps
+  );
 
   useEffect(() => {
     if (!id) return;

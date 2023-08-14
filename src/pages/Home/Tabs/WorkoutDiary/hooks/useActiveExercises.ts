@@ -1,6 +1,3 @@
-import { useSelector } from "react-redux";
-import { selectExercises } from "../../../../../store/exercisesSlice";
-
 const activeExercisesHandler = (arr1: any, arr2: any) => {
   const updatedArray = arr1.map((obj1: any) => {
     const matchingObj = arr2.find(
@@ -23,12 +20,12 @@ const activeExercisesHandler = (arr1: any, arr2: any) => {
   return updatedArray;
 };
 
-export const useActiveExercises = (activeExercises: any, setsAndReps: any) => {
-  const exercises = useSelector(selectExercises);
-
-  const exercisesCopy = [...exercises];
-
-  const filteredExercises = exercisesCopy.filter((ex: any) =>
+export const useActiveExercises = (
+  exercises: any,
+  activeExercises: any,
+  setsAndReps: any
+) => {
+  const filteredExercises = exercises.filter((ex: any) =>
     activeExercises.includes(ex.exerciseId)
   );
 

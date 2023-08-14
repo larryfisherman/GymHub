@@ -26,7 +26,6 @@ export const WorkoutDetailsEdit = ({
 }: Props) => {
   const {
     loading,
-    setLoading,
     workoutData,
     setsAndReps,
     activeExercises,
@@ -37,8 +36,6 @@ export const WorkoutDetailsEdit = ({
   } = useWorkoutDetailsData(id);
 
   const user = useSelector(selectUser);
-
-  console.log(user);
 
   return (
     <Container>
