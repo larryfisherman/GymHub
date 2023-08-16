@@ -3,22 +3,10 @@ import { useSelector } from "react-redux";
 import { selectUser } from "../../../../../store/userSlice";
 import axios from "axios";
 
-interface stepsStateProps {
-  id: number;
-  title: string;
-  description: string;
-}
-
-interface ingredientsStateProps {
-  id?: number;
-  name: string;
-  amount: number;
-}
-
 export const useRecipeDetailsData = (id: number) => {
   const [recipeData, setRecipeData] = useState<any>([]);
   const [steps, setSteps] = useState<any>([]);
-  const [ingredients, setIngredients] = useState<ingredientsStateProps[]>([]);
+  const [ingredients, setIngredients] = useState<any[]>([]);
   const [selectedIngredients, setSelectedIngredients] = useState<any>([]);
   const [categories, setCategories] = useState([]);
   const [activeCategory, setActiveCategory] = useState(0);

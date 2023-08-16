@@ -4,13 +4,21 @@ import styled from "styled-components";
 interface Props {
   id: number;
   title: string;
+  setShowExerciseDetails: React.Dispatch<React.SetStateAction<boolean>>;
+  setExerciseId: React.Dispatch<React.SetStateAction<number>>;
 }
 
-export const Exercise = ({ title }: Props) => {
+export const Exercise = ({
+  id,
+  title,
+  setShowExerciseDetails,
+  setExerciseId,
+}: Props) => {
   return (
-    <Container>
+    <Container onClick={() => setExerciseId(id)}>
       <Content>
         <ExerciseTitle>{title}</ExerciseTitle>
+        <Button onClick={() => setShowExerciseDetails(true)}>SEE MORE</Button>
       </Content>
     </Container>
   );

@@ -6,7 +6,6 @@ import moment from "moment";
 import { useSelector } from "react-redux";
 import { selectUser } from "../../../../../store/userSlice";
 import { WorkoutDetailsSetsAndRepsItem } from "./WorkoutDetailsSetsAndRepsItem";
-import { selectExercises } from "../../../../../store/exercisesSlice";
 import { WorkoutExercise } from "../WorkoutExercise";
 import { InfinitySpin } from "react-loader-spinner";
 import { useWorkoutDetailsData } from "../hooks/useWorkoutDetailsData";

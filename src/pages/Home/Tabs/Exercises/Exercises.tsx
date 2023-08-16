@@ -4,6 +4,7 @@ import { Exercise } from "./Exercise";
 import axios from "axios";
 import { NotifyUser } from "../../../../helpers/NotifyUser/NotifyUser";
 import { InfinitySpin } from "react-loader-spinner";
+import { ExerciseDetailsPopup } from "./ExerciseDetailsPopup/ExerciseDetailsPopup";
 
 interface ExerciseProps {
   exerciseId: number;
@@ -15,6 +16,8 @@ interface ExerciseProps {
 export const Exercises = () => {
   const [exercises, setExercises] = useState([]);
   const [loading, setLoading] = useState(false);
+  const [showExerciseDetails, setShowExerciseDetails] = useState(true);
+  const [exerciseId, setExerciseId] = useState(0);
 
   useEffect(() => {
     setLoading(true);
@@ -27,6 +30,12 @@ export const Exercises = () => {
 
   return (
     <Container>
+      {showExerciseDetails && (
+        <ExerciseDetailsPopup
+          id={exerciseId}
+          setShowExerciseDetails={setShowExerciseDetails}
+        />
+      )}
       {loading ? (
         <SpinnerWrapper>
           <InfinitySpin />
@@ -43,6 +52,8 @@ export const Exercises = () => {
                 key={el.exerciseId}
                 id={el.exerciseId}
                 title={el.title}
+                setShowExerciseDetails={setShowExerciseDetails}
+                setExerciseId={setExerciseId}
               />
             ))}
           </ExercisesSection>
