@@ -1,7 +1,7 @@
-import React from "react";
+import React, { useState, useEffect } from "react";
 import styled from "styled-components";
 import axios from "axios";
-import YouTube from "react-youtube";
+
 import { useExerciseVideo } from "./hooks/useExerciseVideo";
 
 interface Props {
@@ -10,11 +10,18 @@ interface Props {
 }
 
 export const ExerciseDetailsPopup = ({ id, setShowExerciseDetails }: Props) => {
+  const [data, setData] = useState<any>([]);
+
+  useEffect(() => {
+    axios
+      .get(`https://localhost:44390/api/exercises/${id}`)
+      .then((res: any) => setData(res.data));
+  }, []);
+
   return (
     <Container>
       <Content>
         <PopupActions>
-          <Button onClick={() => () => console.log("klik")}>SAVE</Button>
           <ExitIcon
             src="./assets/cross-icon.svg"
             onClick={() => setShowExerciseDetails(false)}
@@ -22,25 +29,36 @@ export const ExerciseDetailsPopup = ({ id, setShowExerciseDetails }: Props) => {
         </PopupActions>
         <UpperSection>
           <VideoSection>{useExerciseVideo("F3QY5vMz_6I")}</VideoSection>
-          <DetailsSection></DetailsSection>
+          <DetailsSection>
+            <Title>{data.title}</Title>
+            <Description>
+              Lorem ipsum dolor sit amet consectetur adipisicing elit.
+              Perspiciatis suscipit beatae dicta deserunt odit, voluptatibus ea
+              itaque unde odio rem quisquam, dolor possimus ad. Maxime id at
+              similique facere laborum?
+            </Description>
+          </DetailsSection>
         </UpperSection>
       </Content>
     </Container>
   );
 };
 
-const Video = styled.video`
-  width: 100%;
-  height: 100%;
-`;
-const VideoSource = styled.source``;
-
-const YouTubeContainer = styled.div`
-  position: relative;
+const Description = styled.span`
+  display: flex;
+  flex: 1;
 `;
 
-const ExitIcon = styled.img``;
-const Button = styled.button``;
+const Title = styled.span`
+  font-size: 2rem;
+  margin-bottom: 2rem;
+`;
+
+const ExitIcon = styled.img`
+  &:hover {
+    cursor: pointer;
+  }
+`;
 const PopupActions = styled.div`
   display: flex;
   width: 100%;
@@ -49,7 +67,6 @@ const PopupActions = styled.div`
   margin-right: 2rem;
 `;
 const UpperSection = styled.div`
-  background-color: red;
   display: flex;
   justify-content: space-between;
   width: 100%;
@@ -62,9 +79,14 @@ const VideoSection = styled.div`
   width: 40%;
 `;
 const DetailsSection = styled.div`
+  display: flex;
+  flex-direction: column;
+  justify-content: space-between;
+  padding: 2rem;
   background-color: white;
   height: 100%;
   width: 55%;
+  text-align: left;
 `;
 
 const Container = styled.div`

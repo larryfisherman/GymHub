@@ -16,7 +16,7 @@ interface ExerciseProps {
 export const Exercises = () => {
   const [exercises, setExercises] = useState([]);
   const [loading, setLoading] = useState(false);
-  const [showExerciseDetails, setShowExerciseDetails] = useState(true);
+  const [showExerciseDetails, setShowExerciseDetails] = useState(false);
   const [exerciseId, setExerciseId] = useState(0);
 
   useEffect(() => {
