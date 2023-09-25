@@ -74,16 +74,26 @@ export const RegisterUser = ({
             onClick={() => {
               setLoading(true);
               axios
-                .post("https://gymhub.azurewebsites.net/api/user/register", {
-                  name: nameValue,
-                  email: emailValue,
-                  password: passwordValue,
-                })
+                .post(
+                  "https://gymhub.azurewebsites.net/api/user/register",
+                  {
+                    name: nameValue,
+                    email: emailValue,
+                    password: passwordValue,
+                  },
+                  { timeout: 5000 }
+                )
                 .then((res) => {
                   navigate("/login");
                   NotifyUser(res);
                 })
-                .catch((err) => NotifyUser(err))
+                .catch((err) => {
+                  if (axios.isCancel(err)) {
+                    NotifyUser("Request was canceled due to timeout.");
+                  } else {
+                    NotifyUser(err);
+                  }
+                })
                 .finally(() => setLoading(false));
             }}
           >
@@ -107,7 +117,7 @@ export const RegisterUser = ({
                   setLoading(true);
                   axios
                     .post(
-                      "https://localhost:44390/api/user/login",
+                      "https://gymhub.azurewebsites.net/api/user/register",
                       {
                         email: config.defaultEmail,
                         password: config.defaultPassword,
@@ -128,8 +138,8 @@ export const RegisterUser = ({
                       } else {
                         NotifyUser(err);
                       }
-                      setLoading(false);
-                    });
+                    })
+                    .finally(() => setLoading(false));
                 }}
               >
                 Hop in!

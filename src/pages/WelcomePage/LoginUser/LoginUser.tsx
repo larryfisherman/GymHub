@@ -62,17 +62,27 @@ export const LoginUser = ({ setShowLoginPopup }: Props) => {
             onClick={() => {
               setLoading(true);
               axios
-                .post("https://gymhub.azurewebsites.net/api/user/login", {
-                  email: emailValue,
-                  password: passwordValue,
-                })
+                .post(
+                  "https://gymhub.azurewebsites.net/api/user/login",
+                  {
+                    email: emailValue,
+                    password: passwordValue,
+                  },
+                  { timeout: 5000 }
+                )
                 .then((res) => {
                   localStorage.setItem("token", res.data.token);
                   dispatch(login(res.data));
                   navigate("/home");
                   NotifyUser(res);
                 })
-                .catch((err) => NotifyUser(err))
+                .catch((err) => {
+                  if (axios.isCancel(err)) {
+                    NotifyUser("Request was canceled due to timeout.");
+                  } else {
+                    NotifyUser(err);
+                  }
+                })
                 .finally(() => setLoading(false));
             }}
           >
