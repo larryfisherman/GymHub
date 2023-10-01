@@ -1,14 +1,14 @@
 {
   "files": {
     "main.css": "/GymHub/static/css/main.eeb216b7.css",
-    "main.js": "/GymHub/static/js/main.2ca0737e.js",
+    "main.js": "/GymHub/static/js/main.80b0cd49.js",
     "static/media/Poppins-Regular.ttf": "/GymHub/static/media/Poppins-Regular.35d26b781dc5fda684cc.ttf",
     "index.html": "/GymHub/index.html",
     "main.eeb216b7.css.map": "/GymHub/static/css/main.eeb216b7.css.map",
-    "main.2ca0737e.js.map": "/GymHub/static/js/main.2ca0737e.js.map"
+    "main.80b0cd49.js.map": "/GymHub/static/js/main.80b0cd49.js.map"
   },
   "entrypoints": [
     "static/css/main.eeb216b7.css",
-    "static/js/main.2ca0737e.js"
+    "static/js/main.80b0cd49.js"
   ]
 }
