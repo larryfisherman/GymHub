@@ -43,8 +43,9 @@ export const useRecipeDetailsData = (id: number) => {
         .finally(() => setLoading(false));
       return;
     }
+
     axios
-      .get(`https://gymhubb.azurewebsites.net/api/${id}`)
+      .get(`https://gymhubb.azurewebsites.net/api/recipes/${id}`)
       .then((res) => {
         setRecipeData(res.data.recipe);
         setActiveCategory(res.data.recipe.categoryId);

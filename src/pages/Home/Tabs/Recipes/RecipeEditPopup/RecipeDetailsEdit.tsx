@@ -76,6 +76,8 @@ export const RecipeDetailsEdit = ({
   const { totalFat, totalCarbo, totalKcal, totalProteins } =
     sumMacroElements(selectedIngredients);
 
+  console.log(id);
+
   return (
     <Container>
       {loading ? (
