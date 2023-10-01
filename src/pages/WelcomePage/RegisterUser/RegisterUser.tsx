@@ -117,7 +117,7 @@ export const RegisterUser = ({
                   setLoading(true);
                   axios
                     .post(
-                      "https://gymhubb.azurewebsites.net/api/user/register",
+                      "https://gymhubb.azurewebsites.net/api/user/login",
                       {
                         email: config.defaultEmail,
                         password: config.defaultPassword,
