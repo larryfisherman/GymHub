@@ -3,7 +3,6 @@ import styled from "styled-components";
 import { ConfirmationModal } from "../../../../components/ConfirmationModal/ConfirmationModal";
 import axios from "axios";
 import { NotifyUser } from "../../../../helpers/NotifyUser/NotifyUser";
-import { ToastContainer } from "react-toastify";
 
 interface Props {
   title: string;

@@ -17,8 +17,18 @@ export const useWorkoutDetailsData = (id: number) => {
   );
 
   useEffect(() => {
-    if (!id) return;
     setLoading(true);
+
+    if (!id) {
+      axios
+        .get(`https://gymhubb.azurewebsites.net/api/exercises`)
+        .then((res) => setExercises(res.data))
+        .catch((err) => NotifyUser(err, err.message))
+        .finally(() => setLoading(false));
+
+      return;
+    }
+
     axios
       .get(`https://gymhubb.azurewebsites.net/api/workouts/${id}`)
       .then((res) => {
@@ -26,9 +36,12 @@ export const useWorkoutDetailsData = (id: number) => {
         setSetsAndReps(res.data.exercises);
         setActiveExercises(res.data.exercises.map((el: any) => el.exerciseId));
       })
-      .then(() => axios.get(`https://gymhubb.azurewebsites.net/api/exercises`))
-      .then((res) => setExercises(res.data))
-      .catch((err) => NotifyUser(err, err.message))
+      .then(() =>
+        axios
+          .get(`https://gymhubb.azurewebsites.net/api/exercises`)
+          .then((res) => setExercises(res.data))
+          .catch((err) => NotifyUser(err, err.message))
+      )
       .finally(() => setLoading(false));
   }, []);
 
