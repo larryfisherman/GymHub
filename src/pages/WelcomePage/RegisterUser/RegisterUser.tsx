@@ -75,7 +75,7 @@ export const RegisterUser = ({
               setLoading(true);
               axios
                 .post(
-                  "https://gymhub.azurewebsites.net/api/user/register",
+                  "https://gymhubb.azurewebsites.net/api/user/register",
                   {
                     name: nameValue,
                     email: emailValue,
@@ -117,7 +117,7 @@ export const RegisterUser = ({
                   setLoading(true);
                   axios
                     .post(
-                      "https://gymhub.azurewebsites.net/api/user/register",
+                      "https://gymhubb.azurewebsites.net/api/user/register",
                       {
                         email: config.defaultEmail,
                         password: config.defaultPassword,

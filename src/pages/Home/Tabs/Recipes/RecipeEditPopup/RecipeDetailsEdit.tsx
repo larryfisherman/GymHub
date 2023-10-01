@@ -97,12 +97,15 @@ export const RecipeDetailsEdit = ({
               onClick={() => {
                 if (id) {
                   return axios
-                    .put(`https://gymhub.azurewebsites.net/api/recipes/${id}`, {
-                      ...recipeData,
-                      categoryId: activeCategory,
-                      recipeSteps: prepareStepsBeforeSend(steps, id),
-                      recipeIngredients: selectedIngredients,
-                    })
+                    .put(
+                      `https://gymhubb.azurewebsites.net/api/recipes/${id}`,
+                      {
+                        ...recipeData,
+                        categoryId: activeCategory,
+                        recipeSteps: prepareStepsBeforeSend(steps, id),
+                        recipeIngredients: selectedIngredients,
+                      }
+                    )
                     .then((res) => NotifyUser(res))
                     .catch((err) => NotifyUser(err))
                     .finally(() => {
@@ -112,7 +115,7 @@ export const RecipeDetailsEdit = ({
                 }
 
                 axios
-                  .post("https://gymhub.azurewebsites.net/api/recipes", {
+                  .post("https://gymhubb.azurewebsites.net/api/recipes", {
                     ...recipeData,
                     categoryId: activeCategory,
                     recipeSteps: prepareStepsBeforeSend(steps, id),

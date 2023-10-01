@@ -63,7 +63,7 @@ export const LoginUser = ({ setShowLoginPopup }: Props) => {
               setLoading(true);
               axios
                 .post(
-                  "https://gymhub.azurewebsites.net/api/user/login",
+                  "https://gymhubb.azurewebsites.net/api/user/login",
                   {
                     email: emailValue,
                     password: passwordValue,

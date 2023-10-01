@@ -18,7 +18,7 @@ export const useIngredientData = (id: number) => {
   useEffect(() => {
     setLoading(true);
     axios
-      .get(`https://gymhub.azurewebsites.net/api/ingredients/${id}`)
+      .get(`https://gymhubb.azurewebsites.net/api/ingredients/${id}`)
       .then((res) => setIngredientData(res.data))
       .finally(() => setLoading(false));
   }, []);

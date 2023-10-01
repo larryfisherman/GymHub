@@ -19,7 +19,7 @@ export const Exercises = () => {
   useEffect(() => {
     setLoading(true);
     axios
-      .get("https://gymhub.azurewebsites.net/api/exercises")
+      .get("https://gymhubb.azurewebsites.net/api/exercises")
       .then((res) => setExercises(res.data))
       .catch((err) => NotifyUser(err))
       .finally(() => setLoading(false));

@@ -51,7 +51,7 @@ export const WorkoutDetailsEdit = ({
                 if (id) {
                   return axios
                     .put(
-                      `https://gymhub.azurewebsites.net/api/workouts/${id}`,
+                      `https://gymhubb.azurewebsites.net/api/workouts/${id}`,
                       {
                         ...workoutData,
                         author: user?.name ? user.user.name : null,
@@ -66,7 +66,7 @@ export const WorkoutDetailsEdit = ({
                     });
                 }
                 axios
-                  .post("https://gymhub.azurewebsites.net/api/workouts", {
+                  .post("https://gymhubb.azurewebsites.net/api/workouts", {
                     ...workoutData,
                     workoutExercises: setsAndReps,
                   })

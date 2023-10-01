@@ -38,7 +38,7 @@ export const Recipe = ({
           onCancel={() => setShowConfirmationModal(false)}
           onConfirm={() => {
             axios
-              .delete(`https://gymhub.azurewebsites.net/api/recipes/${id}`)
+              .delete(`https://gymhubb.azurewebsites.net/api/recipes/${id}`)
               .then((res) => NotifyUser(res, "Recipe removed"))
               .catch((err) => NotifyUser(err))
               .finally(() => {

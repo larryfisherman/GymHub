@@ -20,13 +20,13 @@ export const useWorkoutDetailsData = (id: number) => {
     if (!id) return;
     setLoading(true);
     axios
-      .get(`https://gymhub.azurewebsites.net/api/workouts/${id}`)
+      .get(`https://gymhubb.azurewebsites.net/api/workouts/${id}`)
       .then((res) => {
         setWorkoutData(res.data.workout);
         setSetsAndReps(res.data.exercises);
         setActiveExercises(res.data.exercises.map((el: any) => el.exerciseId));
       })
-      .then(() => axios.get(`https://gymhub.azurewebsites.net/api/exercises`))
+      .then(() => axios.get(`https://gymhubb.azurewebsites.net/api/exercises`))
       .then((res) => setExercises(res.data))
       .catch((err) => NotifyUser(err, err.message))
       .finally(() => setLoading(false));
