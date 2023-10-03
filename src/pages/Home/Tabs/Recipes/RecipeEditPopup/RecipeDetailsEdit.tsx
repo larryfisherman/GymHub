@@ -12,6 +12,7 @@ import { sumMacroElements } from "../utils/sumMacroElements";
 import moment from "moment";
 import { prepareStepsBeforeSend } from "../utils/prepareStepsBeforeSend";
 import { NotifyUser } from "../../../../../helpers/NotifyUser/NotifyUser";
+import { CrossIconImg } from "assets";
 
 interface Props {
   id: number;
@@ -76,8 +77,6 @@ export const RecipeDetailsEdit = ({
   const { totalFat, totalCarbo, totalKcal, totalProteins } =
     sumMacroElements(selectedIngredients);
 
-  console.log(id);
-
   return (
     <Container>
       {loading ? (
@@ -134,7 +133,7 @@ export const RecipeDetailsEdit = ({
               SAVE
             </Button>
             <ExitIcon
-              src="./assets/cross-icon.svg"
+              src={CrossIconImg}
               onClick={() => setShowRecipeDetails(false)}
             />
           </RecipeActions>

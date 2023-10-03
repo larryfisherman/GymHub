@@ -1,5 +1,6 @@
 import React from "react";
 import styled, { keyframes } from "styled-components";
+import { LogoImg, WelcomePagePNG, ArrowIcon } from "assets/index";
 
 interface Props {
   setShowRegisterPopup: any;
@@ -9,7 +10,7 @@ export const HeaderSection = ({ setShowRegisterPopup }: Props) => {
   return (
     <Container>
       <Content>
-        <Logo src="./assets/logo.svg" loading="lazy" />
+        <Logo src={LogoImg} />
         <MainContent>
           <h3>TRANSFORM YOUR BODY</h3>
           <h1>DOMINATE YOUR GOALS</h1>
@@ -20,7 +21,7 @@ export const HeaderSection = ({ setShowRegisterPopup }: Props) => {
             JOIN US
           </LoginButton>
         </MainContent>
-        <ScrollDownIcon src="./assets/arrow-icon.svg" />
+        <ScrollDownIcon src={ArrowIcon} />
       </Content>
     </Container>
   );
@@ -66,7 +67,7 @@ const Content = styled.div`
   display: flex;
   flex-direction: column;
   height: 100%;
-  background: url("./assets/welcome-page.png") center center / cover;
+  background: url(${WelcomePagePNG}) center center / cover;
 `;
 
 const LoginButton = styled.button`

@@ -1,6 +1,7 @@
 import React from "react";
 import styled from "styled-components";
 import { ComplexSetsItem } from "./ComplexSetsItem";
+import { Recipe1, Recipe2, Recipe3 } from "assets";
 
 export const ComplexSets = () => {
   const complexSetsItems = [
@@ -11,7 +12,7 @@ export const ComplexSets = () => {
         "A lean protein and veggie-packed meal that is perfect for a post-workout dinner",
       kcal: 400,
       time: 20,
-      image: "./assets/recipe-1.svg",
+      image: Recipe1,
       color: "#846075",
     },
     {
@@ -20,7 +21,7 @@ export const ComplexSets = () => {
       description: "A quick and easy meal that is high protein and fiber.",
       kcal: 400,
       time: 20,
-      image: "./assets/recipe-2.svg",
+      image: Recipe2,
       color: "#A5C882",
     },
     {
@@ -31,7 +32,7 @@ export const ComplexSets = () => {
       kcal: 350,
       time: 30,
       color: "#AF5D63",
-      image: "./assets/recipe-3.svg",
+      image: Recipe3,
     },
   ];
   return (

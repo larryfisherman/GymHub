@@ -1,6 +1,7 @@
 import React from "react";
 import styled from "styled-components";
 import { useIngredientData } from "./hooks/useIngredientData";
+import { CrossIconImg, FireKcalIcon } from "assets";
 
 interface Props {
   id: number;
@@ -14,7 +15,7 @@ export const IngredientDetails = ({ id }: Props) => {
       <Content>
         <RecipeActions>
           <Button>SAVE</Button>
-          <ExitIcon src="./assets/cross-icon.svg" />
+          <ExitIcon src={CrossIconImg} />
         </RecipeActions>
         <UpperSection>
           <ImageContainer>
@@ -32,11 +33,11 @@ export const IngredientDetails = ({ id }: Props) => {
           <BottomRightSection>
             <TimeAndKcalSection>
               <TimeAndKcalItem>
-                <ClockIcon src="./assets/clock-icon.svg" />
+                <ClockIcon src={ClockIcon} />
                 <TimeAndKcalItemText></TimeAndKcalItemText>
               </TimeAndKcalItem>
               <TimeAndKcalItem>
-                <ClockIcon src="./assets/fire-kcal-icon.svg" />
+                <ClockIcon src={FireKcalIcon} />
                 <TimeAndKcalItemText></TimeAndKcalItemText>
               </TimeAndKcalItem>
             </TimeAndKcalSection>

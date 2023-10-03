@@ -2,8 +2,9 @@ import React, { useState } from "react";
 import styled from "styled-components";
 import axios from "axios";
 import { ConfirmationModal } from "../../../../components/ConfirmationModal/ConfirmationModal";
-import { getRecipePath } from "./utils/getRecipePath";
+import { generateRecipeImage } from "./utils/generateRecipeImage";
 import { NotifyUser } from "../../../../helpers/NotifyUser/NotifyUser";
+import { TrashIconImg, FireKcalIcon, ClockIcon } from "assets";
 
 interface Props {
   title: string;
@@ -51,22 +52,22 @@ export const Recipe = ({
       ) : (
         <Content>
           <TrashIcon
-            src="./assets/trash-icon.svg"
+            src={TrashIconImg}
             onClick={() => setShowConfirmationModal(true)}
           />
-          <Image src={getRecipePath(category)} loading="lazy" />
+          <Image src={generateRecipeImage(category)} loading="lazy" />
           <Title>{title}</Title>
           <Description>{description}</Description>
           <CaloriesAndTimeSection>
             {kcal && (
               <CaloriesAndTimeItem>
-                <CaloriesAndTimeItemIcon src="./assets/fire-kcal-icon.svg" />
+                <CaloriesAndTimeItemIcon src={FireKcalIcon} />
                 <CaloriesAndTimeItemText>{kcal} kcal</CaloriesAndTimeItemText>
               </CaloriesAndTimeItem>
             )}
             {time && (
               <CaloriesAndTimeItem>
-                <CaloriesAndTimeItemIcon src="./assets/clock-icon.svg" />
+                <CaloriesAndTimeItemIcon src={ClockIcon} />
                 <CaloriesAndTimeItemText>
                   {time ? ` ${time} minutes` : null}
                 </CaloriesAndTimeItemText>

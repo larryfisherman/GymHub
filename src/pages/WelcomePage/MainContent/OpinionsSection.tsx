@@ -1,7 +1,8 @@
-import React, { useState } from "react";
+import React from "react";
 import styled from "styled-components";
 import { Review } from "./Review";
 import { useReviews } from "./hooks/useReviews";
+import { LeftArrowIcon, RightArrowIcon } from "assets/index";
 
 export const OpinionsSection = () => {
   const reviews = useReviews();
@@ -12,8 +13,8 @@ export const OpinionsSection = () => {
         <TitleSection>
           <Title>What everyone says</Title>
           <Arrows>
-            <LeftArrow src="./assets/left-arrow.svg" />
-            <RightArrow src="./assets/right-arrow.svg" />
+            <LeftArrow src={LeftArrowIcon} />
+            <RightArrow src={RightArrowIcon} />
           </Arrows>
         </TitleSection>
         <ReviewsSection>

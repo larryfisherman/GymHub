@@ -1,12 +1,14 @@
 import React from "react";
 import styled from "styled-components";
 
+import { LogoImg, FbIcon, YtIcon, TwitterIcon, IgIcon } from "assets/index";
+
 export const Footer = () => {
   return (
     <Container>
       <Content>
         <LeftSide>
-          <Logo src="./assets/logo.svg" />
+          <Logo src={LogoImg} />
           <Text>
             GymHUB is mre than just a fitness dashboard, it's a community of
             fittness enthusiasts and professionals. Join us in our mission to
@@ -14,10 +16,10 @@ export const Footer = () => {
             lifystyles.
           </Text>
           <SocialMedia>
-            <Link src="./assets/fb-icon.svg" />
-            <Link src="./assets/yt-icon.svg" />
-            <Link src="./assets/twitter-icon.svg" />
-            <Link src="./assets/ig-icon.svg" />
+            <Link src={FbIcon} />
+            <Link src={YtIcon} />
+            <Link src={TwitterIcon} />
+            <Link src={IgIcon} />
           </SocialMedia>
         </LeftSide>
         <RightSide>

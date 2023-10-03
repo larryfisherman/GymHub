@@ -1,5 +1,6 @@
 import React, { useState } from "react";
 import styled from "styled-components";
+import { ClockIcon, FireKcalIcon, PencilIconImg } from "assets";
 
 export const WorkoutDetailsEditTimeAndKcal = ({ data, setData }: any) => {
   const [timeAndKcalEdit, setTimeAndKcalEdit] = useState(false);
@@ -8,14 +9,14 @@ export const WorkoutDetailsEditTimeAndKcal = ({ data, setData }: any) => {
     <Container>
       <Header>
         <EditIcon
-          src="./assets/pencil-icon.svg"
+          src={PencilIconImg}
           onClick={() => setTimeAndKcalEdit(!timeAndKcalEdit)}
         />
       </Header>
 
       <Content>
         <Item style={{ backgroundColor: "#846075" }}>
-          <Icon src="./assets/clock-icon.svg" />
+          <Icon src={ClockIcon} />
           {timeAndKcalEdit ? (
             <>
               <EditInput
@@ -34,7 +35,7 @@ export const WorkoutDetailsEditTimeAndKcal = ({ data, setData }: any) => {
           )}
         </Item>
         <Item style={{ backgroundColor: "#AF5D63" }}>
-          <Icon src="./assets/fire-kcal-icon.svg" />
+          <Icon src={FireKcalIcon} />
           {timeAndKcalEdit ? (
             <>
               <EditInput

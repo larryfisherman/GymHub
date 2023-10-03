@@ -1,5 +1,6 @@
 import React, { useState } from "react";
 import styled from "styled-components";
+import { PencilIconImg } from "assets";
 
 interface Props {
   id: number;
@@ -43,18 +44,12 @@ export const WorkoutDetailsSetsAndRepsItem = ({
             />
           </ValuesSection>
           <Title>{title}</Title>
-          <PencilIcon
-            src="./assets/pencil-icon.svg"
-            onClick={() => setIsEdit(!isEdit)}
-          />
+          <PencilIcon src={PencilIconImg} onClick={() => setIsEdit(!isEdit)} />
         </Content>
       ) : (
         <Content>
           {sets}x{repeats} {title}
-          <PencilIcon
-            src="./assets/pencil-icon.svg"
-            onClick={() => setIsEdit(!isEdit)}
-          />
+          <PencilIcon src={PencilIconImg} onClick={() => setIsEdit(!isEdit)} />
         </Content>
       )}
 

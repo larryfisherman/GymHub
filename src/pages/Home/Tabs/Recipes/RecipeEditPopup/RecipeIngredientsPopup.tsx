@@ -2,6 +2,7 @@ import React from "react";
 import styled from "styled-components";
 import { RecipeDetailsIngredient } from "./RecipeDetailsIngredient";
 import { useRecipeIngredientsPopup } from "../hooks/useRecipeIngredientsPopup";
+import { CrossIconImg, MagnifyingGlassIcon } from "assets";
 
 interface IngredientsProps {
   ingredientId: number;
@@ -48,7 +49,7 @@ export const RecipeIngredientsPopup = ({
     >
       <Header>
         <ExitButton
-          src="./assets/cross-icon.svg"
+          src={CrossIconImg}
           onClick={() => setShowRecipeIngredientsPopup(false)}
         />
         <Title>Add your ingredients!</Title>
@@ -57,7 +58,7 @@ export const RecipeIngredientsPopup = ({
             value={filterValue}
             onChange={(e) => setFilterValue(e.target.value)}
           />
-          <SearchIcon src="./assets/magnifying-glass-icon.svg" />
+          <SearchIcon src={MagnifyingGlassIcon} />
         </SearchInputSection>
       </Header>
       <Content>

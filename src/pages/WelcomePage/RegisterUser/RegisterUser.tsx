@@ -8,6 +8,12 @@ import { InfinitySpin } from "react-loader-spinner";
 import { NotifyUser } from "../../../helpers/NotifyUser/NotifyUser";
 import { ToastContainer } from "react-toastify";
 import { config } from "../../../config";
+import {
+  CrossIconImg,
+  LogoImg,
+  EyeOpenedGrey,
+  EyeClosedGrey,
+} from "assets/index";
 
 interface Props {
   setShowRegisterPopup: React.Dispatch<React.SetStateAction<boolean>>;
@@ -38,10 +44,10 @@ export const RegisterUser = ({
         <Content>
           <UpperSection>
             <CrossIcon
-              src="./assets/cross-icon.svg"
+              src={CrossIconImg}
               onClick={() => setShowRegisterPopup(false)}
             />
-            <Logo src="./assets/logo.svg" />
+            <Logo src={LogoImg} />
           </UpperSection>
           <h1>Create Account</h1>
           <FullNameInput
@@ -62,11 +68,7 @@ export const RegisterUser = ({
               type={showPassword ? "text" : "password"}
             />
             <ShowPasswordIcon
-              src={
-                showPassword
-                  ? "./assets/eye-opened-grey.svg"
-                  : "./assets/eye-closed-grey.svg"
-              }
+              src={showPassword ? EyeOpenedGrey : EyeClosedGrey}
               onClick={() => setShowPassword(!showPassword)}
             />
           </PasswordSection>

@@ -2,16 +2,15 @@ import React from "react";
 import styled from "styled-components";
 import axios from "axios";
 import moment from "moment";
-
 import { useSelector } from "react-redux";
 import { selectUser } from "../../../../../store/userSlice";
 import { WorkoutDetailsSetsAndRepsItem } from "./WorkoutDetailsSetsAndRepsItem";
-import { selectExercises } from "../../../../../store/exercisesSlice";
 import { WorkoutExercise } from "../WorkoutExercise";
 import { InfinitySpin } from "react-loader-spinner";
 import { useWorkoutDetailsData } from "../hooks/useWorkoutDetailsData";
 import { WorkoutDetailsEditTimeAndKcal } from "./WorkoutDetailsEditTimeAndKcal";
 import { NotifyUser } from "../../../../../helpers/NotifyUser/NotifyUser";
+import { CrossIconImg } from "assets";
 
 interface Props {
   id: number;
@@ -81,7 +80,7 @@ export const WorkoutDetailsEdit = ({
               SAVE
             </Button>
             <ExitIcon
-              src="./assets/cross-icon.svg"
+              src={CrossIconImg}
               onClick={() => setShowWorkoutPopup(false)}
             />
           </RecipeActions>

@@ -1,11 +1,12 @@
 import React from "react";
 import styled from "styled-components";
+import { WelcomePageCommunity } from "assets/index";
 
 export const CommunitySection = () => {
   return (
     <Container>
       <Content>
-        <Image src="./assets/welcome-page-community.svg" />
+        <Image src={WelcomePageCommunity} />
         <Description>
           <Title>Join our community!</Title>
           <Text>

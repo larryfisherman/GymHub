@@ -8,6 +8,7 @@ import { useRecipesData } from "./hooks/useRecipesData";
 import { Scrollbar } from "../../../../components/Scrollbar/Scrollbar";
 import { ToastContainer } from "react-toastify";
 import { InfinitySpin } from "react-loader-spinner";
+import { generateCategoryImage } from "./utils/generateCategoryImage";
 
 export const Recipes = () => {
   const {
@@ -53,7 +54,7 @@ export const Recipes = () => {
                   title={el.name}
                   setSelectedCategory={setSelectedCategory}
                   isActive={selectedCategory === el.categoryId}
-                  image={`./assets/recipe-${el.categoryId}.svg`}
+                  image={generateCategoryImage(el)}
                 />
               ))}
             </CategoriesSection>

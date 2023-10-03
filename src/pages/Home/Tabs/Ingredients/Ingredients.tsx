@@ -4,6 +4,7 @@ import axios from "axios";
 import { Ingredient } from "./Ingredient";
 import { NotifyUser } from "../../../../helpers/NotifyUser/NotifyUser";
 import { InfinitySpin } from "react-loader-spinner";
+import { MagnifyingGlassIcon } from "assets";
 
 interface IngredientProps {
   amount: number;
@@ -51,7 +52,7 @@ export const Ingredients = () => {
               value={filterValue}
               onChange={(e) => setFilterValue(e.target.value)}
             />
-            <SearchIcon src="./assets/magnifying-glass-icon.svg" />
+            <SearchIcon src={MagnifyingGlassIcon} />
           </SearchInputSection>
           <IngredientsSection>
             {filteredIngredients.map((el: IngredientProps) => (

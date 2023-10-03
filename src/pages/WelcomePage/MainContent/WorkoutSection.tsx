@@ -1,5 +1,10 @@
 import React from "react";
 import styled from "styled-components";
+import {
+  CheckIcon,
+  WorkoutSectionScreen,
+  WorkoutSectionScreenBackground,
+} from "assets/index";
 
 export const WorkoutSection = () => {
   return (
@@ -15,24 +20,24 @@ export const WorkoutSection = () => {
           </Title>
           <Text>
             <Item>
-              <CheckedIcon src="./assets/check-icon.svg" />
+              <CheckedIcon src={CheckIcon} />
               <ItemText>
                 A fitness tool with the greatest customization possibilities
               </ItemText>
             </Item>
             <Item>
-              <CheckedIcon src="./assets/check-icon.svg" />
+              <CheckedIcon src={CheckIcon} />
               <ItemText>You decide how you train and how you eat</ItemText>
             </Item>
             <Item>
-              <CheckedIcon src="./assets/check-icon.svg" />
+              <CheckedIcon src={CheckIcon} />
               <ItemText>With our support, you can achieve anything</ItemText>
             </Item>
           </Text>
         </Description>
         <Images>
-          <WorkoutImage src="./assets/workout-section-screen.svg" />
-          <WorkoutImageBackground src="./assets/workout-section-screen-background.svg" />
+          <WorkoutImage src={WorkoutSectionScreen} />
+          <WorkoutImageBackground src={WorkoutSectionScreenBackground} />
         </Images>
       </Content>
     </Container>

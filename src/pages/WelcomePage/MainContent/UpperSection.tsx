@@ -1,5 +1,6 @@
 import React from "react";
 import styled from "styled-components";
+import { ProgressScreen, WelcomePageTitleSection } from "assets/index";
 
 export const UpperSection = () => {
   return (
@@ -18,7 +19,7 @@ export const UpperSection = () => {
             achieve your health and fitness goals! Our project was born out of a
             passion for fitness and a desire to make it accessible to everyone.
           </Description>
-          <BackgroundImage src="./assets/progress-screen.svg" />
+          <BackgroundImage src={ProgressScreen} />
         </TitleSection>
       </Content>
     </Container>
@@ -32,8 +33,7 @@ const TitleSection = styled.div`
   flex-direction: column;
   align-items: center;
   justify-content: space-between;
-  background: url("./assets/welcome-page-title-section.svg") center center /
-    cover;
+  background: url(${WelcomePageTitleSection}) center center / cover;
   padding: 10rem;
 `;
 

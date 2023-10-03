@@ -5,6 +5,7 @@ import { WorkoutDetailsEdit } from "./WorkoutEditPopup/WorkoutDetailsEdit";
 import { useWorkoutDiaryData } from "./hooks/useWorkoutDiaryData";
 import { ToastContainer } from "react-toastify";
 import { InfinitySpin } from "react-loader-spinner";
+import { Workout4 } from "assets";
 
 interface WorkoutProps {
   title: string;
@@ -136,7 +137,7 @@ const AddWorkout = styled.div`
   width: 39rem;
   height: 20rem;
   padding: 30px;
-  background: url("./assets/workout-4.svg") center center / cover;
+  background: url(${Workout4}) center center / cover;
   color: white;
   margin-bottom: 2rem;
 

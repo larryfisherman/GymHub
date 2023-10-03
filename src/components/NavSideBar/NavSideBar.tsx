@@ -4,6 +4,15 @@ import { SideBarItem } from "./SideBarItem";
 import { useDispatch } from "react-redux";
 import { logout } from "../../store/userSlice";
 import { useNavigate } from "react-router-dom";
+import {
+  BicepsIcon,
+  DiaryGrayIcon,
+  RecipeGrayIcon,
+  ExcerciseGrayIcon,
+  SettingsGrayIcon,
+  LogoutGrayIcon,
+  HomeGrayIcon,
+} from "assets/index";
 
 interface Props {
   setTabToggle: React.Dispatch<React.SetStateAction<number>>;
@@ -16,47 +25,44 @@ export const NavSideBar = ({ setTabToggle, tab }: Props) => {
 
   return (
     <Nav>
-      <Logo src="./assets/biceps-icon.svg" />
+      <Logo src={BicepsIcon} />
       <Content>
         <NavItems>
           {/* <SideBarItem
-            itemImg="./assets/home-gray-icon.svg"
+            itemImg={HomeGrayIcon}
             itemName="Home"
             onClick={() => setTabToggle(1)}
             isActive={tab === 1}
           /> */}
           <SideBarItem
-            itemImg="./assets/diary-gray-icon.svg"
+            itemImg={DiaryGrayIcon}
             itemName="Workout Diary"
             onClick={() => setTabToggle(2)}
             isActive={tab === 2}
           />
           <SideBarItem
-            itemImg="./assets/recipe-gray-icon.svg"
+            itemImg={RecipeGrayIcon}
             itemName="Recipes"
             onClick={() => setTabToggle(3)}
             isActive={tab === 3}
           />
           <SideBarItem
-            itemImg="./assets/excercise-gray-icon.svg"
+            itemImg={ExcerciseGrayIcon}
             itemName="Exercises"
             onClick={() => setTabToggle(4)}
             isActive={tab === 4}
           />
           <SideBarItem
-            itemImg="./assets/recipe-gray-icon.svg"
+            itemImg={RecipeGrayIcon}
             itemName="Ingredients"
             onClick={() => setTabToggle(5)}
             isActive={tab === 5}
           />
         </NavItems>
         <UserSection>
+          <SideBarItem itemImg={SettingsGrayIcon} itemName="Settings" />
           <SideBarItem
-            itemImg="./assets/settings-gray-icon.svg"
-            itemName="Settings"
-          />
-          <SideBarItem
-            itemImg="./assets/logout-gray-icon.svg"
+            itemImg={LogoutGrayIcon}
             itemName="Logout"
             onClick={() => {
               dispatch(logout);

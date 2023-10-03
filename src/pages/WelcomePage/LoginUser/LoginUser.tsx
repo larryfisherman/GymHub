@@ -7,6 +7,12 @@ import { useNavigate } from "react-router-dom";
 import { InfinitySpin } from "react-loader-spinner";
 import { NotifyUser } from "../../../helpers/NotifyUser/NotifyUser";
 import { ToastContainer } from "react-toastify";
+import {
+  CrossIconImg,
+  LogoImg,
+  EyeClosedGrey,
+  EyeOpenedGrey,
+} from "assets/index";
 
 interface Props {
   setShowLoginPopup: React.Dispatch<React.SetStateAction<boolean>>;
@@ -31,10 +37,10 @@ export const LoginUser = ({ setShowLoginPopup }: Props) => {
         <Content>
           <UpperSection>
             <CrossIcon
-              src="./assets/cross-icon.svg"
+              src={CrossIconImg}
               onClick={() => setShowLoginPopup(false)}
             />
-            <Logo src="./assets/logo.svg" />
+            <Logo src={LogoImg} />
           </UpperSection>
           <h1>Log In</h1>
           <EmailInput
@@ -50,11 +56,7 @@ export const LoginUser = ({ setShowLoginPopup }: Props) => {
               type={showPassword ? "text" : "password"}
             />
             <ShowPasswordIcon
-              src={
-                showPassword
-                  ? "./assets/eye-opened-grey.svg"
-                  : "./assets/eye-closed-grey.svg"
-              }
+              src={showPassword ? EyeOpenedGrey : EyeClosedGrey}
               onClick={() => setShowPassword(!showPassword)}
             />
           </PasswordSection>

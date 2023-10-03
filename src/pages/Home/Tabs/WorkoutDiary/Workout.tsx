@@ -3,6 +3,8 @@ import styled from "styled-components";
 import { ConfirmationModal } from "../../../../components/ConfirmationModal/ConfirmationModal";
 import axios from "axios";
 import { NotifyUser } from "../../../../helpers/NotifyUser/NotifyUser";
+import { generateRandomWorkoutImage } from "./utils/generateRandomWorkoutImage";
+import { TrashIconImg, ClockIcon, FireKcalIcon } from "assets";
 
 interface Props {
   title: string;
@@ -50,26 +52,24 @@ export const Workout = ({
       ) : (
         <Content
           style={{
-            background: `url('./assets/workout-${
-              Math.floor(Math.random() * 8) + 1
-            }.svg') center center / cover`,
+            background: `url(${generateRandomWorkoutImage()}) center center / cover`,
           }}
         >
           <TitleSection>
             <Title>{title}</Title>
             <TrashIcon
-              src="./assets/trash-icon.svg"
+              src={TrashIconImg}
               onClick={() => setShowConfirmationModal(true)}
             />
           </TitleSection>
           {timeToBeDone && kcal && (
             <DescriptionSection>
               <TimeAndKcal>
-                <Icon src="./assets/clock-icon.svg" />
+                <Icon src={ClockIcon} />
                 <Text>{timeToBeDone} </Text>
               </TimeAndKcal>
               <TimeAndKcal>
-                <Icon src="./assets/fire-kcal-icon.svg" />
+                <Icon src={FireKcalIcon} />
                 <Text>{kcal}</Text>
               </TimeAndKcal>
             </DescriptionSection>
